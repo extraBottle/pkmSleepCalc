@@ -48,7 +48,7 @@ jobs:
       # - name: Setup Pages
       #   uses: actions/configure-pages@v5
       - name: Print contents of dist directory
-        run: ls -la /home/runner/work/pkmSleepCalc/pkmSleepCalc/dist
+        run: ls -la ./dist/spa
       - name: Deploy to GitHub Pages
         id: deployment
         uses: peaceiris/actions-gh-pages@v3
