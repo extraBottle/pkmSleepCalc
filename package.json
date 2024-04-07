@@ -1,7 +1,7 @@
 {
-  "name": "myquasartest",
+  "name": "pkmsleepcalc",
   "version": "0.0.1",
-  "description": "myQuasarDescription",
+  "description": "pkmSleepCalcDescription",
   "productName": "포슬립 계산기",
   "author": "extraBottle",
   "private": true,
