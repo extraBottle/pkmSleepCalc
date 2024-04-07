@@ -1,0 +1,5139 @@
+{
+    "data": [
+    {
+    "Ndex": "25-halloween",
+    "en": "PIKACHU_HALLOWEEN",
+    "kor": "피카츄(핼러윈)"
+    },
+    {
+    "Ndex": "25-holiday",
+    "en": "PIKACHU_CHRISTMAS",
+    "kor": "피카츄(홀리데이)"
+    },
+    {
+    "Ndex": 1,
+    "en": "BULBASAUR",
+    "kor": "이상해씨"
+    },
+    {
+    "Ndex": 2,
+    "en": "IVYSAUR",
+    "kor": "이상해풀"
+    },
+    {
+    "Ndex": 3,
+    "en": "VENUSAUR",
+    "kor": "이상해꽃"
+    },
+    {
+    "Ndex": 4,
+    "en": "CHARMANDER",
+    "kor": "파이리"
+    },
+    {
+    "Ndex": 5,
+    "en": "CHARMELEON",
+    "kor": "리자드"
+    },
+    {
+    "Ndex": 6,
+    "en": "CHARIZARD",
+    "kor": "리자몽"
+    },
+    {
+    "Ndex": 7,
+    "en": "SQUIRTLE",
+    "kor": "꼬부기"
+    },
+    {
+    "Ndex": 8,
+    "en": "WARTORTLE",
+    "kor": "어니부기"
+    },
+    {
+    "Ndex": 9,
+    "en": "BLASTOISE",
+    "kor": "거북왕"
+    },
+    {
+    "Ndex": 10,
+    "en": "CATERPIE",
+    "kor": "캐터피"
+    },
+    {
+    "Ndex": 11,
+    "en": "METAPOD",
+    "kor": "단데기"
+    },
+    {
+    "Ndex": 12,
+    "en": "BUTTERFREE",
+    "kor": "버터플"
+    },
+    {
+    "Ndex": 13,
+    "en": "WEEDLE",
+    "kor": "뿔충이"
+    },
+    {
+    "Ndex": 14,
+    "en": "KAKUNA",
+    "kor": "딱충이"
+    },
+    {
+    "Ndex": 15,
+    "en": "BEEDRILL",
+    "kor": "독침붕"
+    },
+    {
+    "Ndex": 16,
+    "en": "PIDGEY",
+    "kor": "구구"
+    },
+    {
+    "Ndex": 17,
+    "en": "PIDGEOTTO",
+    "kor": "피죤"
+    },
+    {
+    "Ndex": 18,
+    "en": "PIDGEOT",
+    "kor": "피죤투"
+    },
+    {
+    "Ndex": 19,
+    "en": "RATTATA",
+    "kor": "꼬렛"
+    },
+    {
+    "Ndex": 20,
+    "en": "RATICATE",
+    "kor": "레트라"
+    },
+    {
+    "Ndex": 21,
+    "en": "SPEAROW",
+    "kor": "깨비참"
+    },
+    {
+    "Ndex": 22,
+    "en": "FEAROW",
+    "kor": "깨비드릴조"
+    },
+    {
+    "Ndex": 23,
+    "en": "EKANS",
+    "kor": "아보"
+    },
+    {
+    "Ndex": 24,
+    "en": "ARBOK",
+    "kor": "아보크"
+    },
+    {
+    "Ndex": 25,
+    "en": "PIKACHU",
+    "kor": "피카츄"
+    },
+    {
+    "Ndex": 26,
+    "en": "RAICHU",
+    "kor": "라이츄"
+    },
+    {
+    "Ndex": 27,
+    "en": "SANDSHREW",
+    "kor": "모래두지"
+    },
+    {
+    "Ndex": 28,
+    "en": "SANDSLASH",
+    "kor": "고지"
+    },
+    {
+    "Ndex": 29,
+    "en": "NIDORAN♀",
+    "kor": "니드런♀"
+    },
+    {
+    "Ndex": 30,
+    "en": "NIDORINA",
+    "kor": "니드리나"
+    },
+    {
+    "Ndex": 31,
+    "en": "NIDOQUEEN",
+    "kor": "니드퀸"
+    },
+    {
+    "Ndex": 32,
+    "en": "NIDORAN♂",
+    "kor": "니드런♂"
+    },
+    {
+    "Ndex": 33,
+    "en": "NIDORINO",
+    "kor": "니드리노"
+    },
+    {
+    "Ndex": 34,
+    "en": "NIDOKING",
+    "kor": "니드킹"
+    },
+    {
+    "Ndex": 35,
+    "en": "CLEFAIRY",
+    "kor": "삐삐"
+    },
+    {
+    "Ndex": 36,
+    "en": "CLEFABLE",
+    "kor": "픽시"
+    },
+    {
+    "Ndex": 37,
+    "en": "VULPIX",
+    "kor": "식스테일"
+    },
+    {
+    "Ndex": 38,
+    "en": "NINETALES",
+    "kor": "나인테일"
+    },
+    {
+    "Ndex": 39,
+    "en": "JIGGLYPUFF",
+    "kor": "푸린"
+    },
+    {
+    "Ndex": 40,
+    "en": "WIGGLYTUFF",
+    "kor": "푸크린"
+    },
+    {
+    "Ndex": 41,
+    "en": "ZUBAT",
+    "kor": "주뱃"
+    },
+    {
+    "Ndex": 42,
+    "en": "GOLBAT",
+    "kor": "골뱃"
+    },
+    {
+    "Ndex": 43,
+    "en": "ODDISH",
+    "kor": "뚜벅쵸"
+    },
+    {
+    "Ndex": 44,
+    "en": "GLOOM",
+    "kor": "냄새꼬"
+    },
+    {
+    "Ndex": 45,
+    "en": "VILEPLUME",
+    "kor": "라플레시아"
+    },
+    {
+    "Ndex": 46,
+    "en": "PARAS",
+    "kor": "파라스"
+    },
+    {
+    "Ndex": 47,
+    "en": "PARASECT",
+    "kor": "파라섹트"
+    },
+    {
+    "Ndex": 48,
+    "en": "VENONAT",
+    "kor": "콘팡"
+    },
+    {
+    "Ndex": 49,
+    "en": "VENOMOTH",
+    "kor": "도나리"
+    },
+    {
+    "Ndex": 50,
+    "en": "DIGLETT",
+    "kor": "디그다"
+    },
+    {
+    "Ndex": 51,
+    "en": "DUGTRIO",
+    "kor": "닥트리오"
+    },
+    {
+    "Ndex": 52,
+    "en": "MEOWTH",
+    "kor": "나옹"
+    },
+    {
+    "Ndex": 53,
+    "en": "PERSIAN",
+    "kor": "페르시온"
+    },
+    {
+    "Ndex": 54,
+    "en": "PSYDUCK",
+    "kor": "고라파덕"
+    },
+    {
+    "Ndex": 55,
+    "en": "GOLDUCK",
+    "kor": "골덕"
+    },
+    {
+    "Ndex": 56,
+    "en": "MANKEY",
+    "kor": "망키"
+    },
+    {
+    "Ndex": 57,
+    "en": "PRIMEAPE",
+    "kor": "성원숭"
+    },
+    {
+    "Ndex": 58,
+    "en": "GROWLITHE",
+    "kor": "가디"
+    },
+    {
+    "Ndex": 59,
+    "en": "ARCANINE",
+    "kor": "윈디"
+    },
+    {
+    "Ndex": 60,
+    "en": "POLIWAG",
+    "kor": "발챙이"
+    },
+    {
+    "Ndex": 61,
+    "en": "POLIWHIRL",
+    "kor": "슈륙챙이"
+    },
+    {
+    "Ndex": 62,
+    "en": "POLIWRATH",
+    "kor": "강챙이"
+    },
+    {
+    "Ndex": 63,
+    "en": "ABRA",
+    "kor": "캐이시"
+    },
+    {
+    "Ndex": 64,
+    "en": "KADABRA",
+    "kor": "윤겔라"
+    },
+    {
+    "Ndex": 65,
+    "en": "ALAKAZAM",
+    "kor": "후딘"
+    },
+    {
+    "Ndex": 66,
+    "en": "MACHOP",
+    "kor": "알통몬"
+    },
+    {
+    "Ndex": 67,
+    "en": "MACHOKE",
+    "kor": "근육몬"
+    },
+    {
+    "Ndex": 68,
+    "en": "MACHAMP",
+    "kor": "괴력몬"
+    },
+    {
+    "Ndex": 69,
+    "en": "BELLSPROUT",
+    "kor": "모다피"
+    },
+    {
+    "Ndex": 70,
+    "en": "WEEPINBELL",
+    "kor": "우츠동"
+    },
+    {
+    "Ndex": 71,
+    "en": "VICTREEBEL",
+    "kor": "우츠보트"
+    },
+    {
+    "Ndex": 72,
+    "en": "TENTACOOL",
+    "kor": "왕눈해"
+    },
+    {
+    "Ndex": 73,
+    "en": "TENTACRUEL",
+    "kor": "독파리"
+    },
+    {
+    "Ndex": 74,
+    "en": "GEODUDE",
+    "kor": "꼬마돌"
+    },
+    {
+    "Ndex": 75,
+    "en": "GRAVELER",
+    "kor": "데구리"
+    },
+    {
+    "Ndex": 76,
+    "en": "GOLEM",
+    "kor": "딱구리"
+    },
+    {
+    "Ndex": 77,
+    "en": "PONYTA",
+    "kor": "포니타"
+    },
+    {
+    "Ndex": 78,
+    "en": "RAPIDASH",
+    "kor": "날쌩마"
+    },
+    {
+    "Ndex": 79,
+    "en": "SLOWPOKE",
+    "kor": "야돈"
+    },
+    {
+    "Ndex": 80,
+    "en": "SLOWBRO",
+    "kor": "야도란"
+    },
+    {
+    "Ndex": 81,
+    "en": "MAGNEMITE",
+    "kor": "코일"
+    },
+    {
+    "Ndex": 82,
+    "en": "MAGNETON",
+    "kor": "레어코일"
+    },
+    {
+    "Ndex": 83,
+    "en": "FARFETCH'D",
+    "kor": "파오리"
+    },
+    {
+    "Ndex": 84,
+    "en": "DODUO",
+    "kor": "두두"
+    },
+    {
+    "Ndex": 85,
+    "en": "DODRIO",
+    "kor": "두트리오"
+    },
+    {
+    "Ndex": 86,
+    "en": "SEEL",
+    "kor": "쥬쥬"
+    },
+    {
+    "Ndex": 87,
+    "en": "DEWGONG",
+    "kor": "쥬레곤"
+    },
+    {
+    "Ndex": 88,
+    "en": "GRIMER",
+    "kor": "질퍽이"
+    },
+    {
+    "Ndex": 89,
+    "en": "MUK",
+    "kor": "질뻐기"
+    },
+    {
+    "Ndex": 90,
+    "en": "SHELLDER",
+    "kor": "셀러"
+    },
+    {
+    "Ndex": 91,
+    "en": "CLOYSTER",
+    "kor": "파르셀"
+    },
+    {
+    "Ndex": 92,
+    "en": "GASTLY",
+    "kor": "고오스"
+    },
+    {
+    "Ndex": 93,
+    "en": "HAUNTER",
+    "kor": "고우스트"
+    },
+    {
+    "Ndex": 94,
+    "en": "GENGAR",
+    "kor": "팬텀"
+    },
+    {
+    "Ndex": 95,
+    "en": "ONIX",
+    "kor": "롱스톤"
+    },
+    {
+    "Ndex": 96,
+    "en": "DROWZEE",
+    "kor": "슬리프"
+    },
+    {
+    "Ndex": 97,
+    "en": "HYPNO",
+    "kor": "슬리퍼"
+    },
+    {
+    "Ndex": 98,
+    "en": "KRABBY",
+    "kor": "크랩"
+    },
+    {
+    "Ndex": 99,
+    "en": "KINGLER",
+    "kor": "킹크랩"
+    },
+    {
+    "Ndex": 100,
+    "en": "VOLTORB",
+    "kor": "찌리리공"
+    },
+    {
+    "Ndex": 101,
+    "en": "ELECTRODE",
+    "kor": "붐볼"
+    },
+    {
+    "Ndex": 102,
+    "en": "EXEGGCUTE",
+    "kor": "아라리"
+    },
+    {
+    "Ndex": 103,
+    "en": "EXEGGUTOR",
+    "kor": "나시"
+    },
+    {
+    "Ndex": 104,
+    "en": "CUBONE",
+    "kor": "탕구리"
+    },
+    {
+    "Ndex": 105,
+    "en": "MAROWAK",
+    "kor": "텅구리"
+    },
+    {
+    "Ndex": 106,
+    "en": "HITMONLEE",
+    "kor": "시라소몬"
+    },
+    {
+    "Ndex": 107,
+    "en": "HITMONCHAN",
+    "kor": "홍수몬"
+    },
+    {
+    "Ndex": 108,
+    "en": "LICKITUNG",
+    "kor": "내루미"
+    },
+    {
+    "Ndex": 109,
+    "en": "KOFFING",
+    "kor": "또가스"
+    },
+    {
+    "Ndex": 110,
+    "en": "WEEZING",
+    "kor": "또도가스"
+    },
+    {
+    "Ndex": 111,
+    "en": "RHYHORN",
+    "kor": "뿔카노"
+    },
+    {
+    "Ndex": 112,
+    "en": "RHYDON",
+    "kor": "코뿌리"
+    },
+    {
+    "Ndex": 113,
+    "en": "CHANSEY",
+    "kor": "럭키"
+    },
+    {
+    "Ndex": 114,
+    "en": "TANGELA",
+    "kor": "덩쿠리"
+    },
+    {
+    "Ndex": 115,
+    "en": "KANGASKHAN",
+    "kor": "캥카"
+    },
+    {
+    "Ndex": 116,
+    "en": "HORSEA",
+    "kor": "쏘드라"
+    },
+    {
+    "Ndex": 117,
+    "en": "SEADRA",
+    "kor": "시드라"
+    },
+    {
+    "Ndex": 118,
+    "en": "GOLDEEN",
+    "kor": "콘치"
+    },
+    {
+    "Ndex": 119,
+    "en": "SEAKING",
+    "kor": "왕콘치"
+    },
+    {
+    "Ndex": 120,
+    "en": "STARYU",
+    "kor": "별가사리"
+    },
+    {
+    "Ndex": 121,
+    "en": "STARMIE",
+    "kor": "아쿠스타"
+    },
+    {
+    "Ndex": 122,
+    "en": "MR_MIME",
+    "kor": "마임맨"
+    },
+    {
+    "Ndex": 123,
+    "en": "SCYTHER",
+    "kor": "스라크"
+    },
+    {
+    "Ndex": 124,
+    "en": "JYNX",
+    "kor": "루주라"
+    },
+    {
+    "Ndex": 125,
+    "en": "ELECTABUZZ",
+    "kor": "에레브"
+    },
+    {
+    "Ndex": 126,
+    "en": "MAGMAR",
+    "kor": "마그마"
+    },
+    {
+    "Ndex": 127,
+    "en": "PINSIR",
+    "kor": "쁘사이저"
+    },
+    {
+    "Ndex": 128,
+    "en": "TAUROS",
+    "kor": "켄타로스"
+    },
+    {
+    "Ndex": 129,
+    "en": "MAGIKARP",
+    "kor": "잉어킹"
+    },
+    {
+    "Ndex": 130,
+    "en": "GYARADOS",
+    "kor": "갸라도스"
+    },
+    {
+    "Ndex": 131,
+    "en": "LAPRAS",
+    "kor": "라프라스"
+    },
+    {
+    "Ndex": 132,
+    "en": "DITTO",
+    "kor": "메타몽"
+    },
+    {
+    "Ndex": 133,
+    "en": "EEVEE",
+    "kor": "이브이"
+    },
+    {
+    "Ndex": 134,
+    "en": "VAPOREON",
+    "kor": "샤미드"
+    },
+    {
+    "Ndex": 135,
+    "en": "JOLTEON",
+    "kor": "쥬피썬더"
+    },
+    {
+    "Ndex": 136,
+    "en": "FLAREON",
+    "kor": "부스터"
+    },
+    {
+    "Ndex": 137,
+    "en": "PORYGON",
+    "kor": "폴리곤"
+    },
+    {
+    "Ndex": 138,
+    "en": "OMANYTE",
+    "kor": "암나이트"
+    },
+    {
+    "Ndex": 139,
+    "en": "OMASTAR",
+    "kor": "암스타"
+    },
+    {
+    "Ndex": 140,
+    "en": "KABUTO",
+    "kor": "투구"
+    },
+    {
+    "Ndex": 141,
+    "en": "KABUTOPS",
+    "kor": "투구푸스"
+    },
+    {
+    "Ndex": 142,
+    "en": "AERODACTYL",
+    "kor": "프테라"
+    },
+    {
+    "Ndex": 143,
+    "en": "SNORLAX",
+    "kor": "잠만보"
+    },
+    {
+    "Ndex": 144,
+    "en": "ARTICUNO",
+    "kor": "프리져"
+    },
+    {
+    "Ndex": 145,
+    "en": "ZAPDOS",
+    "kor": "썬더"
+    },
+    {
+    "Ndex": 146,
+    "en": "MOLTRES",
+    "kor": "파이어"
+    },
+    {
+    "Ndex": 147,
+    "en": "DRATINI",
+    "kor": "미뇽"
+    },
+    {
+    "Ndex": 148,
+    "en": "DRAGONAIR",
+    "kor": "신뇽"
+    },
+    {
+    "Ndex": 149,
+    "en": "DRAGONITE",
+    "kor": "망나뇽"
+    },
+    {
+    "Ndex": 150,
+    "en": "MEWTWO",
+    "kor": "뮤츠"
+    },
+    {
+    "Ndex": 151,
+    "en": "MEW",
+    "kor": "뮤"
+    },
+    {
+    "Ndex": 152,
+    "en": "CHIKORITA",
+    "kor": "치코리타"
+    },
+    {
+    "Ndex": 153,
+    "en": "BAYLEEF",
+    "kor": "베이리프"
+    },
+    {
+    "Ndex": 154,
+    "en": "MEGANIUM",
+    "kor": "메가니움"
+    },
+    {
+    "Ndex": 155,
+    "en": "CYNDAQUIL",
+    "kor": "브케인"
+    },
+    {
+    "Ndex": 156,
+    "en": "QUILAVA",
+    "kor": "마그케인"
+    },
+    {
+    "Ndex": 157,
+    "en": "TYPHLOSION",
+    "kor": "블레이범"
+    },
+    {
+    "Ndex": 158,
+    "en": "TOTODILE",
+    "kor": "리아코"
+    },
+    {
+    "Ndex": 159,
+    "en": "CROCONAW",
+    "kor": "엘리게이"
+    },
+    {
+    "Ndex": 160,
+    "en": "FERALIGATR",
+    "kor": "장크로다일"
+    },
+    {
+    "Ndex": 161,
+    "en": "SENTRET",
+    "kor": "꼬리선"
+    },
+    {
+    "Ndex": 162,
+    "en": "FURRET",
+    "kor": "다꼬리"
+    },
+    {
+    "Ndex": 163,
+    "en": "HOOTHOOT",
+    "kor": "부우부"
+    },
+    {
+    "Ndex": 164,
+    "en": "NOCTOWL",
+    "kor": "야부엉"
+    },
+    {
+    "Ndex": 165,
+    "en": "LEDYBA",
+    "kor": "레디바"
+    },
+    {
+    "Ndex": 166,
+    "en": "LEDIAN",
+    "kor": "레디안"
+    },
+    {
+    "Ndex": 167,
+    "en": "SPINARAK",
+    "kor": "페이검"
+    },
+    {
+    "Ndex": 168,
+    "en": "ARIADOS",
+    "kor": "아리아도스"
+    },
+    {
+    "Ndex": 169,
+    "en": "CROBAT",
+    "kor": "크로뱃"
+    },
+    {
+    "Ndex": 170,
+    "en": "CHINCHOU",
+    "kor": "초라기"
+    },
+    {
+    "Ndex": 171,
+    "en": "LANTURN",
+    "kor": "랜턴"
+    },
+    {
+    "Ndex": 172,
+    "en": "PICHU",
+    "kor": "피츄"
+    },
+    {
+    "Ndex": 173,
+    "en": "CLEFFA",
+    "kor": "삐"
+    },
+    {
+    "Ndex": 174,
+    "en": "IGGLYBUFF",
+    "kor": "푸푸린"
+    },
+    {
+    "Ndex": 175,
+    "en": "TOGEPI",
+    "kor": "토게피"
+    },
+    {
+    "Ndex": 176,
+    "en": "TOGETIC",
+    "kor": "토게틱"
+    },
+    {
+    "Ndex": 177,
+    "en": "NATU",
+    "kor": "네이티"
+    },
+    {
+    "Ndex": 178,
+    "en": "XATU",
+    "kor": "네이티오"
+    },
+    {
+    "Ndex": 179,
+    "en": "MAREEP",
+    "kor": "메리프"
+    },
+    {
+    "Ndex": 180,
+    "en": "FLAAFFY",
+    "kor": "보송송"
+    },
+    {
+    "Ndex": 181,
+    "en": "AMPHAROS",
+    "kor": "전룡"
+    },
+    {
+    "Ndex": 182,
+    "en": "BELLOSSOM",
+    "kor": "아르코"
+    },
+    {
+    "Ndex": 183,
+    "en": "MARILL",
+    "kor": "마릴"
+    },
+    {
+    "Ndex": 184,
+    "en": "AZUMARILL",
+    "kor": "마릴리"
+    },
+    {
+    "Ndex": 185,
+    "en": "SUDOWOODO",
+    "kor": "꼬지모"
+    },
+    {
+    "Ndex": 186,
+    "en": "POLITOED",
+    "kor": "왕구리"
+    },
+    {
+    "Ndex": 187,
+    "en": "HOPPIP",
+    "kor": "통통코"
+    },
+    {
+    "Ndex": 188,
+    "en": "SKIPLOOM",
+    "kor": "두코"
+    },
+    {
+    "Ndex": 189,
+    "en": "JUMPLUFF",
+    "kor": "솜솜코"
+    },
+    {
+    "Ndex": 190,
+    "en": "AIPOM",
+    "kor": "에이팜"
+    },
+    {
+    "Ndex": 191,
+    "en": "SUNKERN",
+    "kor": "해너츠"
+    },
+    {
+    "Ndex": 192,
+    "en": "SUNFLORA",
+    "kor": "해루미"
+    },
+    {
+    "Ndex": 193,
+    "en": "YANMA",
+    "kor": "왕자리"
+    },
+    {
+    "Ndex": 194,
+    "en": "WOOPER",
+    "kor": "우파"
+    },
+    {
+    "Ndex": 195,
+    "en": "QUAGSIRE",
+    "kor": "누오"
+    },
+    {
+    "Ndex": 196,
+    "en": "ESPEON",
+    "kor": "에브이"
+    },
+    {
+    "Ndex": 197,
+    "en": "UMBREON",
+    "kor": "블래키"
+    },
+    {
+    "Ndex": 198,
+    "en": "MURKROW",
+    "kor": "니로우"
+    },
+    {
+    "Ndex": 199,
+    "en": "SLOWKING",
+    "kor": "야도킹"
+    },
+    {
+    "Ndex": 200,
+    "en": "MISDREAVUS",
+    "kor": "무우마"
+    },
+    {
+    "Ndex": 201,
+    "en": "UNOWN",
+    "kor": "안농"
+    },
+    {
+    "Ndex": 202,
+    "en": "WOBBUFFET",
+    "kor": "마자용"
+    },
+    {
+    "Ndex": 203,
+    "en": "GIRAFARIG",
+    "kor": "키링키"
+    },
+    {
+    "Ndex": 204,
+    "en": "PINECO",
+    "kor": "피콘"
+    },
+    {
+    "Ndex": 205,
+    "en": "FORRETRESS",
+    "kor": "쏘콘"
+    },
+    {
+    "Ndex": 206,
+    "en": "DUNSPARCE",
+    "kor": "노고치"
+    },
+    {
+    "Ndex": 207,
+    "en": "GLIGAR",
+    "kor": "글라이거"
+    },
+    {
+    "Ndex": 208,
+    "en": "STEELIX",
+    "kor": "강철톤"
+    },
+    {
+    "Ndex": 209,
+    "en": "SNUBBULL",
+    "kor": "블루"
+    },
+    {
+    "Ndex": 210,
+    "en": "GRANBULL",
+    "kor": "그랑블루"
+    },
+    {
+    "Ndex": 211,
+    "en": "QWILFISH",
+    "kor": "침바루"
+    },
+    {
+    "Ndex": 212,
+    "en": "SCIZOR",
+    "kor": "핫삼"
+    },
+    {
+    "Ndex": 213,
+    "en": "SHUCKLE",
+    "kor": "단단지"
+    },
+    {
+    "Ndex": 214,
+    "en": "HERACROSS",
+    "kor": "헤라크로스"
+    },
+    {
+    "Ndex": 215,
+    "en": "SNEASEL",
+    "kor": "포푸니"
+    },
+    {
+    "Ndex": 216,
+    "en": "TEDDIURSA",
+    "kor": "깜지곰"
+    },
+    {
+    "Ndex": 217,
+    "en": "URSARING",
+    "kor": "링곰"
+    },
+    {
+    "Ndex": 218,
+    "en": "SLUGMA",
+    "kor": "마그마그"
+    },
+    {
+    "Ndex": 219,
+    "en": "MAGCARGO",
+    "kor": "마그카르고"
+    },
+    {
+    "Ndex": 220,
+    "en": "SWINUB",
+    "kor": "꾸꾸리"
+    },
+    {
+    "Ndex": 221,
+    "en": "PILOSWINE",
+    "kor": "메꾸리"
+    },
+    {
+    "Ndex": 222,
+    "en": "CORSOLA",
+    "kor": "코산호"
+    },
+    {
+    "Ndex": 223,
+    "en": "REMORAID",
+    "kor": "총어"
+    },
+    {
+    "Ndex": 224,
+    "en": "OCTILLERY",
+    "kor": "대포무노"
+    },
+    {
+    "Ndex": 225,
+    "en": "DELIBIRD",
+    "kor": "딜리버드"
+    },
+    {
+    "Ndex": 226,
+    "en": "MANTINE",
+    "kor": "만타인"
+    },
+    {
+    "Ndex": 227,
+    "en": "SKARMORY",
+    "kor": "무장조"
+    },
+    {
+    "Ndex": 228,
+    "en": "HOUNDOUR",
+    "kor": "델빌"
+    },
+    {
+    "Ndex": 229,
+    "en": "HOUNDOOM",
+    "kor": "헬가"
+    },
+    {
+    "Ndex": 230,
+    "en": "KINGDRA",
+    "kor": "킹드라"
+    },
+    {
+    "Ndex": 231,
+    "en": "PHANPY",
+    "kor": "코코리"
+    },
+    {
+    "Ndex": 232,
+    "en": "DONPHAN",
+    "kor": "코리갑"
+    },
+    {
+    "Ndex": 233,
+    "en": "PORYGON2",
+    "kor": "폴리곤2"
+    },
+    {
+    "Ndex": 234,
+    "en": "STANTLER",
+    "kor": "노라키"
+    },
+    {
+    "Ndex": 235,
+    "en": "SMEARGLE",
+    "kor": "루브도"
+    },
+    {
+    "Ndex": 236,
+    "en": "TYROGUE",
+    "kor": "배루키"
+    },
+    {
+    "Ndex": 237,
+    "en": "HITMONTOP",
+    "kor": "카포에라"
+    },
+    {
+    "Ndex": 238,
+    "en": "SMOOCHUM",
+    "kor": "뽀뽀라"
+    },
+    {
+    "Ndex": 239,
+    "en": "ELEKID",
+    "kor": "에레키드"
+    },
+    {
+    "Ndex": 240,
+    "en": "MAGBY",
+    "kor": "마그비"
+    },
+    {
+    "Ndex": 241,
+    "en": "MILTANK",
+    "kor": "밀탱크"
+    },
+    {
+    "Ndex": 242,
+    "en": "BLISSEY",
+    "kor": "해피너스"
+    },
+    {
+    "Ndex": 243,
+    "en": "RAIKOU",
+    "kor": "라이코"
+    },
+    {
+    "Ndex": 244,
+    "en": "ENTEI",
+    "kor": "앤테이"
+    },
+    {
+    "Ndex": 245,
+    "en": "SUICUNE",
+    "kor": "스이쿤"
+    },
+    {
+    "Ndex": 246,
+    "en": "LARVITAR",
+    "kor": "애버라스"
+    },
+    {
+    "Ndex": 247,
+    "en": "PUPITAR",
+    "kor": "데기라스"
+    },
+    {
+    "Ndex": 248,
+    "en": "TYRANITAR",
+    "kor": "마기라스"
+    },
+    {
+    "Ndex": 249,
+    "en": "LUGIA",
+    "kor": "루기아"
+    },
+    {
+    "Ndex": 250,
+    "en": "HO-OH",
+    "kor": "칠색조"
+    },
+    {
+    "Ndex": 251,
+    "en": "CELEBI",
+    "kor": "세레비"
+    },
+    {
+    "Ndex": 252,
+    "en": "TREECKO",
+    "kor": "나무지기"
+    },
+    {
+    "Ndex": 253,
+    "en": "GROVYLE",
+    "kor": "나무돌이"
+    },
+    {
+    "Ndex": 254,
+    "en": "SCEPTILE",
+    "kor": "나무킹"
+    },
+    {
+    "Ndex": 255,
+    "en": "TORCHIC",
+    "kor": "아차모"
+    },
+    {
+    "Ndex": 256,
+    "en": "COMBUSKEN",
+    "kor": "영치코"
+    },
+    {
+    "Ndex": 257,
+    "en": "BLAZIKEN",
+    "kor": "번치코"
+    },
+    {
+    "Ndex": 258,
+    "en": "MUDKIP",
+    "kor": "물짱이"
+    },
+    {
+    "Ndex": 259,
+    "en": "MARSHTOMP",
+    "kor": "늪짱이"
+    },
+    {
+    "Ndex": 260,
+    "en": "SWAMPERT",
+    "kor": "대짱이"
+    },
+    {
+    "Ndex": 261,
+    "en": "POOCHYENA",
+    "kor": "포챠나"
+    },
+    {
+    "Ndex": 262,
+    "en": "MIGHTYENA",
+    "kor": "그라에나"
+    },
+    {
+    "Ndex": 263,
+    "en": "ZIGZAGOON",
+    "kor": "지그제구리"
+    },
+    {
+    "Ndex": 264,
+    "en": "LINOONE",
+    "kor": "직구리"
+    },
+    {
+    "Ndex": 265,
+    "en": "WURMPLE",
+    "kor": "개무소"
+    },
+    {
+    "Ndex": 266,
+    "en": "SILCOON",
+    "kor": "실쿤"
+    },
+    {
+    "Ndex": 267,
+    "en": "BEAUTIFLY",
+    "kor": "뷰티플라이"
+    },
+    {
+    "Ndex": 268,
+    "en": "CASCOON",
+    "kor": "카스쿤"
+    },
+    {
+    "Ndex": 269,
+    "en": "DUSTOX",
+    "kor": "독케일"
+    },
+    {
+    "Ndex": 270,
+    "en": "LOTAD",
+    "kor": "연꽃몬"
+    },
+    {
+    "Ndex": 271,
+    "en": "LOMBRE",
+    "kor": "로토스"
+    },
+    {
+    "Ndex": 272,
+    "en": "LUDICOLO",
+    "kor": "로파파"
+    },
+    {
+    "Ndex": 273,
+    "en": "SEEDOT",
+    "kor": "도토링"
+    },
+    {
+    "Ndex": 274,
+    "en": "NUZLEAF",
+    "kor": "잎새코"
+    },
+    {
+    "Ndex": 275,
+    "en": "SHIFTRY",
+    "kor": "다탱구"
+    },
+    {
+    "Ndex": 276,
+    "en": "TAILLOW",
+    "kor": "테일로"
+    },
+    {
+    "Ndex": 277,
+    "en": "SWELLOW",
+    "kor": "스왈로"
+    },
+    {
+    "Ndex": 278,
+    "en": "WINGULL",
+    "kor": "갈모매"
+    },
+    {
+    "Ndex": 279,
+    "en": "PELIPPER",
+    "kor": "패리퍼"
+    },
+    {
+    "Ndex": 280,
+    "en": "RALTS",
+    "kor": "랄토스"
+    },
+    {
+    "Ndex": 281,
+    "en": "KIRLIA",
+    "kor": "킬리아"
+    },
+    {
+    "Ndex": 282,
+    "en": "GARDEVOIR",
+    "kor": "가디안"
+    },
+    {
+    "Ndex": 283,
+    "en": "SURSKIT",
+    "kor": "비구술"
+    },
+    {
+    "Ndex": 284,
+    "en": "MASQUERAIN",
+    "kor": "비나방"
+    },
+    {
+    "Ndex": 285,
+    "en": "SHROOMISH",
+    "kor": "버섯꼬"
+    },
+    {
+    "Ndex": 286,
+    "en": "BRELOOM",
+    "kor": "버섯모"
+    },
+    {
+    "Ndex": 287,
+    "en": "SLAKOTH",
+    "kor": "게을로"
+    },
+    {
+    "Ndex": 288,
+    "en": "VIGOROTH",
+    "kor": "발바로"
+    },
+    {
+    "Ndex": 289,
+    "en": "SLAKING",
+    "kor": "게을킹"
+    },
+    {
+    "Ndex": 290,
+    "en": "NINCADA",
+    "kor": "토중몬"
+    },
+    {
+    "Ndex": 291,
+    "en": "NINJASK",
+    "kor": "아이스크"
+    },
+    {
+    "Ndex": 292,
+    "en": "SHEDINJA",
+    "kor": "껍질몬"
+    },
+    {
+    "Ndex": 293,
+    "en": "WHISMUR",
+    "kor": "소곤룡"
+    },
+    {
+    "Ndex": 294,
+    "en": "LOUDRED",
+    "kor": "노공룡"
+    },
+    {
+    "Ndex": 295,
+    "en": "EXPLOUD",
+    "kor": "폭음룡"
+    },
+    {
+    "Ndex": 296,
+    "en": "MAKUHITA",
+    "kor": "마크탕"
+    },
+    {
+    "Ndex": 297,
+    "en": "HARIYAMA",
+    "kor": "하리뭉"
+    },
+    {
+    "Ndex": 298,
+    "en": "AZURILL",
+    "kor": "루리리"
+    },
+    {
+    "Ndex": 299,
+    "en": "NOSEPASS",
+    "kor": "코코파스"
+    },
+    {
+    "Ndex": 300,
+    "en": "SKITTY",
+    "kor": "에나비"
+    },
+    {
+    "Ndex": 301,
+    "en": "DELCATTY",
+    "kor": "델케티"
+    },
+    {
+    "Ndex": 302,
+    "en": "SABLEYE",
+    "kor": "깜까미"
+    },
+    {
+    "Ndex": 303,
+    "en": "MAWILE",
+    "kor": "입치트"
+    },
+    {
+    "Ndex": 304,
+    "en": "ARON",
+    "kor": "가보리"
+    },
+    {
+    "Ndex": 305,
+    "en": "LAIRON",
+    "kor": "갱도라"
+    },
+    {
+    "Ndex": 306,
+    "en": "AGGRON",
+    "kor": "보스로라"
+    },
+    {
+    "Ndex": 307,
+    "en": "MEDITITE",
+    "kor": "요가랑"
+    },
+    {
+    "Ndex": 308,
+    "en": "MEDICHAM",
+    "kor": "요가램"
+    },
+    {
+    "Ndex": 309,
+    "en": "ELECTRIKE",
+    "kor": "썬더라이"
+    },
+    {
+    "Ndex": 310,
+    "en": "MANECTRIC",
+    "kor": "썬더볼트"
+    },
+    {
+    "Ndex": 311,
+    "en": "PLUSLE",
+    "kor": "플러시"
+    },
+    {
+    "Ndex": 312,
+    "en": "MINUN",
+    "kor": "마이농"
+    },
+    {
+    "Ndex": 313,
+    "en": "VOLBEAT",
+    "kor": "볼비트"
+    },
+    {
+    "Ndex": 314,
+    "en": "ILLUMISE",
+    "kor": "네오비트"
+    },
+    {
+    "Ndex": 315,
+    "en": "ROSELIA",
+    "kor": "로젤리아"
+    },
+    {
+    "Ndex": 316,
+    "en": "GULPIN",
+    "kor": "꼴깍몬"
+    },
+    {
+    "Ndex": 317,
+    "en": "SWALOT",
+    "kor": "꿀꺽몬"
+    },
+    {
+    "Ndex": 318,
+    "en": "CARVANHA",
+    "kor": "샤프니아"
+    },
+    {
+    "Ndex": 319,
+    "en": "SHARPEDO",
+    "kor": "샤크니아"
+    },
+    {
+    "Ndex": 320,
+    "en": "WAILMER",
+    "kor": "고래왕자"
+    },
+    {
+    "Ndex": 321,
+    "en": "WAILORD",
+    "kor": "고래왕"
+    },
+    {
+    "Ndex": 322,
+    "en": "NUMEL",
+    "kor": "둔타"
+    },
+    {
+    "Ndex": 323,
+    "en": "CAMERUPT",
+    "kor": "폭타"
+    },
+    {
+    "Ndex": 324,
+    "en": "TORKOAL",
+    "kor": "코터스"
+    },
+    {
+    "Ndex": 325,
+    "en": "SPOINK",
+    "kor": "피그점프"
+    },
+    {
+    "Ndex": 326,
+    "en": "GRUMPIG",
+    "kor": "피그킹"
+    },
+    {
+    "Ndex": 327,
+    "en": "SPINDA",
+    "kor": "얼루기"
+    },
+    {
+    "Ndex": 328,
+    "en": "TRAPINCH",
+    "kor": "톱치"
+    },
+    {
+    "Ndex": 329,
+    "en": "VIBRAVA",
+    "kor": "비브라바"
+    },
+    {
+    "Ndex": 330,
+    "en": "FLYGON",
+    "kor": "플라이곤"
+    },
+    {
+    "Ndex": 331,
+    "en": "CACNEA",
+    "kor": "선인왕"
+    },
+    {
+    "Ndex": 332,
+    "en": "CACTURNE",
+    "kor": "밤선인"
+    },
+    {
+    "Ndex": 333,
+    "en": "SWABLU",
+    "kor": "파비코"
+    },
+    {
+    "Ndex": 334,
+    "en": "ALTARIA",
+    "kor": "파비코리"
+    },
+    {
+    "Ndex": 335,
+    "en": "ZANGOOSE",
+    "kor": "쟝고"
+    },
+    {
+    "Ndex": 336,
+    "en": "SEVIPER",
+    "kor": "세비퍼"
+    },
+    {
+    "Ndex": 337,
+    "en": "LUNATONE",
+    "kor": "루나톤"
+    },
+    {
+    "Ndex": 338,
+    "en": "SOLROCK",
+    "kor": "솔록"
+    },
+    {
+    "Ndex": 339,
+    "en": "BARBOACH",
+    "kor": "미꾸리"
+    },
+    {
+    "Ndex": 340,
+    "en": "WHISCASH",
+    "kor": "메깅"
+    },
+    {
+    "Ndex": 341,
+    "en": "CORPHISH",
+    "kor": "가재군"
+    },
+    {
+    "Ndex": 342,
+    "en": "CRAWDAUNT",
+    "kor": "가재장군"
+    },
+    {
+    "Ndex": 343,
+    "en": "BALTOY",
+    "kor": "오뚝군"
+    },
+    {
+    "Ndex": 344,
+    "en": "CLAYDOL",
+    "kor": "점토도리"
+    },
+    {
+    "Ndex": 345,
+    "en": "LILEEP",
+    "kor": "릴링"
+    },
+    {
+    "Ndex": 346,
+    "en": "CRADILY",
+    "kor": "릴리요"
+    },
+    {
+    "Ndex": 347,
+    "en": "ANORITH",
+    "kor": "아노딥스"
+    },
+    {
+    "Ndex": 348,
+    "en": "ARMALDO",
+    "kor": "아말도"
+    },
+    {
+    "Ndex": 349,
+    "en": "FEEBAS",
+    "kor": "빈티나"
+    },
+    {
+    "Ndex": 350,
+    "en": "MILOTIC",
+    "kor": "밀로틱"
+    },
+    {
+    "Ndex": 351,
+    "en": "CASTFORM",
+    "kor": "캐스퐁"
+    },
+    {
+    "Ndex": 352,
+    "en": "KECLEON",
+    "kor": "켈리몬"
+    },
+    {
+    "Ndex": 353,
+    "en": "SHUPPET",
+    "kor": "어둠대신"
+    },
+    {
+    "Ndex": 354,
+    "en": "BANETTE",
+    "kor": "다크펫"
+    },
+    {
+    "Ndex": 355,
+    "en": "DUSKULL",
+    "kor": "해골몽"
+    },
+    {
+    "Ndex": 356,
+    "en": "DUSCLOPS",
+    "kor": "미라몽"
+    },
+    {
+    "Ndex": 357,
+    "en": "TROPIUS",
+    "kor": "트로피우스"
+    },
+    {
+    "Ndex": 358,
+    "en": "CHIMECHO",
+    "kor": "치렁"
+    },
+    {
+    "Ndex": 359,
+    "en": "ABSOL",
+    "kor": "앱솔"
+    },
+    {
+    "Ndex": 360,
+    "en": "WYNAUT",
+    "kor": "마자"
+    },
+    {
+    "Ndex": 361,
+    "en": "SNORUNT",
+    "kor": "눈꼬마"
+    },
+    {
+    "Ndex": 362,
+    "en": "GLALIE",
+    "kor": "얼음귀신"
+    },
+    {
+    "Ndex": 363,
+    "en": "SPHEAL",
+    "kor": "대굴레오"
+    },
+    {
+    "Ndex": 364,
+    "en": "SEALEO",
+    "kor": "씨레오"
+    },
+    {
+    "Ndex": 365,
+    "en": "WALREIN",
+    "kor": "씨카이저"
+    },
+    {
+    "Ndex": 366,
+    "en": "CLAMPERL",
+    "kor": "진주몽"
+    },
+    {
+    "Ndex": 367,
+    "en": "HUNTAIL",
+    "kor": "헌테일"
+    },
+    {
+    "Ndex": 368,
+    "en": "GOREBYSS",
+    "kor": "분홍장이"
+    },
+    {
+    "Ndex": 369,
+    "en": "RELICANTH",
+    "kor": "시라칸"
+    },
+    {
+    "Ndex": 370,
+    "en": "LUVDISC",
+    "kor": "사랑동이"
+    },
+    {
+    "Ndex": 371,
+    "en": "BAGON",
+    "kor": "아공이"
+    },
+    {
+    "Ndex": 372,
+    "en": "SHELGON",
+    "kor": "쉘곤"
+    },
+    {
+    "Ndex": 373,
+    "en": "SALAMENCE",
+    "kor": "보만다"
+    },
+    {
+    "Ndex": 374,
+    "en": "BELDUM",
+    "kor": "메탕"
+    },
+    {
+    "Ndex": 375,
+    "en": "METANG",
+    "kor": "메탕구"
+    },
+    {
+    "Ndex": 376,
+    "en": "METAGROSS",
+    "kor": "메타그로스"
+    },
+    {
+    "Ndex": 377,
+    "en": "REGIROCK",
+    "kor": "레지락"
+    },
+    {
+    "Ndex": 378,
+    "en": "REGICE",
+    "kor": "레지아이스"
+    },
+    {
+    "Ndex": 379,
+    "en": "REGISTEEL",
+    "kor": "레지스틸"
+    },
+    {
+    "Ndex": 380,
+    "en": "LATIAS",
+    "kor": "라티아스"
+    },
+    {
+    "Ndex": 381,
+    "en": "LATIOS",
+    "kor": "라티오스"
+    },
+    {
+    "Ndex": 382,
+    "en": "KYOGRE",
+    "kor": "가이오가"
+    },
+    {
+    "Ndex": 383,
+    "en": "GROUDON",
+    "kor": "그란돈"
+    },
+    {
+    "Ndex": 384,
+    "en": "RAYQUAZA",
+    "kor": "레쿠쟈"
+    },
+    {
+    "Ndex": 385,
+    "en": "JIRACHI",
+    "kor": "지라치"
+    },
+    {
+    "Ndex": 386,
+    "en": "DEOXYS",
+    "kor": "테오키스"
+    },
+    {
+    "Ndex": 387,
+    "en": "TURTWIG",
+    "kor": "모부기"
+    },
+    {
+    "Ndex": 388,
+    "en": "GROTLE",
+    "kor": "수풀부기"
+    },
+    {
+    "Ndex": 389,
+    "en": "TORTERRA",
+    "kor": "토대부기"
+    },
+    {
+    "Ndex": 390,
+    "en": "CHIMCHAR",
+    "kor": "불꽃숭이"
+    },
+    {
+    "Ndex": 391,
+    "en": "MONFERNO",
+    "kor": "파이숭이"
+    },
+    {
+    "Ndex": 392,
+    "en": "INFERNAPE",
+    "kor": "초염몽"
+    },
+    {
+    "Ndex": 393,
+    "en": "PIPLUP",
+    "kor": "팽도리"
+    },
+    {
+    "Ndex": 394,
+    "en": "PRINPLUP",
+    "kor": "팽태자"
+    },
+    {
+    "Ndex": 395,
+    "en": "EMPOLEON",
+    "kor": "엠페르트"
+    },
+    {
+    "Ndex": 396,
+    "en": "STARLY",
+    "kor": "찌르꼬"
+    },
+    {
+    "Ndex": 397,
+    "en": "STARAVIA",
+    "kor": "찌르버드"
+    },
+    {
+    "Ndex": 398,
+    "en": "STARAPTOR",
+    "kor": "찌르호크"
+    },
+    {
+    "Ndex": 399,
+    "en": "BIDOOF",
+    "kor": "비버니"
+    },
+    {
+    "Ndex": 400,
+    "en": "BIBAREL",
+    "kor": "비버통"
+    },
+    {
+    "Ndex": 401,
+    "en": "KRICKETOT",
+    "kor": "귀뚤뚜기"
+    },
+    {
+    "Ndex": 402,
+    "en": "KRICKETUNE",
+    "kor": "귀뚤톡크"
+    },
+    {
+    "Ndex": 403,
+    "en": "SHINX",
+    "kor": "꼬링크"
+    },
+    {
+    "Ndex": 404,
+    "en": "LUXIO",
+    "kor": "럭시오"
+    },
+    {
+    "Ndex": 405,
+    "en": "LUXRAY",
+    "kor": "렌트라"
+    },
+    {
+    "Ndex": 406,
+    "en": "BUDEW",
+    "kor": "꼬몽울"
+    },
+    {
+    "Ndex": 407,
+    "en": "ROSERADE",
+    "kor": "로즈레이드"
+    },
+    {
+    "Ndex": 408,
+    "en": "CRANIDOS",
+    "kor": "두개도스"
+    },
+    {
+    "Ndex": 409,
+    "en": "RAMPARDOS",
+    "kor": "램펄드"
+    },
+    {
+    "Ndex": 410,
+    "en": "SHIELDON",
+    "kor": "방패톱스"
+    },
+    {
+    "Ndex": 411,
+    "en": "BASTIODON",
+    "kor": "바리톱스"
+    },
+    {
+    "Ndex": 412,
+    "en": "BURMY",
+    "kor": "도롱충이"
+    },
+    {
+    "Ndex": 413,
+    "en": "WORMADAM",
+    "kor": "도롱마담"
+    },
+    {
+    "Ndex": 414,
+    "en": "MOTHIM",
+    "kor": "나메일"
+    },
+    {
+    "Ndex": 415,
+    "en": "COMBEE",
+    "kor": "세꿀버리"
+    },
+    {
+    "Ndex": 416,
+    "en": "VESPIQUEN",
+    "kor": "비퀸"
+    },
+    {
+    "Ndex": 417,
+    "en": "PACHIRISU",
+    "kor": "파치리스"
+    },
+    {
+    "Ndex": 418,
+    "en": "BUIZEL",
+    "kor": "브이젤"
+    },
+    {
+    "Ndex": 419,
+    "en": "FLOATZEL",
+    "kor": "플로젤"
+    },
+    {
+    "Ndex": 420,
+    "en": "CHERUBI",
+    "kor": "체리버"
+    },
+    {
+    "Ndex": 421,
+    "en": "CHERRIM",
+    "kor": "체리꼬"
+    },
+    {
+    "Ndex": 422,
+    "en": "SHELLOS",
+    "kor": "깝질무"
+    },
+    {
+    "Ndex": 423,
+    "en": "GASTRODON",
+    "kor": "트리토돈"
+    },
+    {
+    "Ndex": 424,
+    "en": "AMBIPOM",
+    "kor": "겟핸보숭"
+    },
+    {
+    "Ndex": 425,
+    "en": "DRIFLOON",
+    "kor": "흔들풍손"
+    },
+    {
+    "Ndex": 426,
+    "en": "DRIFBLIM",
+    "kor": "둥실라이드"
+    },
+    {
+    "Ndex": 427,
+    "en": "BUNEARY",
+    "kor": "이어롤"
+    },
+    {
+    "Ndex": 428,
+    "en": "LOPUNNY",
+    "kor": "이어롭"
+    },
+    {
+    "Ndex": 429,
+    "en": "MISMAGIUS",
+    "kor": "무우마직"
+    },
+    {
+    "Ndex": 430,
+    "en": "HONCHKROW",
+    "kor": "돈크로우"
+    },
+    {
+    "Ndex": 431,
+    "en": "GLAMEOW",
+    "kor": "나옹마"
+    },
+    {
+    "Ndex": 432,
+    "en": "PURUGLY",
+    "kor": "몬냥이"
+    },
+    {
+    "Ndex": 433,
+    "en": "CHINGLING",
+    "kor": "랑딸랑"
+    },
+    {
+    "Ndex": 434,
+    "en": "STUNKY",
+    "kor": "스컹뿡"
+    },
+    {
+    "Ndex": 435,
+    "en": "SKUNTANK",
+    "kor": "스컹탱크"
+    },
+    {
+    "Ndex": 436,
+    "en": "BRONZOR",
+    "kor": "동미러"
+    },
+    {
+    "Ndex": 437,
+    "en": "BRONZONG",
+    "kor": "동탁군"
+    },
+    {
+    "Ndex": 438,
+    "en": "BONSLY",
+    "kor": "꼬지지"
+    },
+    {
+    "Ndex": 439,
+    "en": "MIME_JR",
+    "kor": "흉내내"
+    },
+    {
+    "Ndex": 440,
+    "en": "HAPPINY",
+    "kor": "핑복"
+    },
+    {
+    "Ndex": 441,
+    "en": "CHATOT",
+    "kor": "페라페"
+    },
+    {
+    "Ndex": 442,
+    "en": "SPIRITOMB",
+    "kor": "화강돌"
+    },
+    {
+    "Ndex": 443,
+    "en": "GIBLE",
+    "kor": "딥상어동"
+    },
+    {
+    "Ndex": 444,
+    "en": "GABITE",
+    "kor": "한바이트"
+    },
+    {
+    "Ndex": 445,
+    "en": "GARCHOMP",
+    "kor": "한카리아스"
+    },
+    {
+    "Ndex": 446,
+    "en": "MUNCHLAX",
+    "kor": "먹고자"
+    },
+    {
+    "Ndex": 447,
+    "en": "RIOLU",
+    "kor": "리오르"
+    },
+    {
+    "Ndex": 448,
+    "en": "LUCARIO",
+    "kor": "루카리오"
+    },
+    {
+    "Ndex": 449,
+    "en": "HIPPOPOTAS",
+    "kor": "히포포타스"
+    },
+    {
+    "Ndex": 450,
+    "en": "HIPPOWDON",
+    "kor": "하마돈"
+    },
+    {
+    "Ndex": 451,
+    "en": "SKORUPI",
+    "kor": "스콜피"
+    },
+    {
+    "Ndex": 452,
+    "en": "DRAPION",
+    "kor": "드래피온"
+    },
+    {
+    "Ndex": 453,
+    "en": "CROAGUNK",
+    "kor": "삐딱구리"
+    },
+    {
+    "Ndex": 454,
+    "en": "TOXICROAK",
+    "kor": "독개굴"
+    },
+    {
+    "Ndex": 455,
+    "en": "CARNIVINE",
+    "kor": "무스틈니"
+    },
+    {
+    "Ndex": 456,
+    "en": "FINNEON",
+    "kor": "형광어"
+    },
+    {
+    "Ndex": 457,
+    "en": "LUMINEON",
+    "kor": "네오라이트"
+    },
+    {
+    "Ndex": 458,
+    "en": "MANTYKE",
+    "kor": "타만타"
+    },
+    {
+    "Ndex": 459,
+    "en": "SNOVER",
+    "kor": "눈쓰개"
+    },
+    {
+    "Ndex": 460,
+    "en": "ABOMASNOW",
+    "kor": "눈설왕"
+    },
+    {
+    "Ndex": 461,
+    "en": "WEAVILE",
+    "kor": "포푸니라"
+    },
+    {
+    "Ndex": 462,
+    "en": "MAGNEZONE",
+    "kor": "자포코일"
+    },
+    {
+    "Ndex": 463,
+    "en": "LICKILICKY",
+    "kor": "내룸벨트"
+    },
+    {
+    "Ndex": 464,
+    "en": "RHYPERIOR",
+    "kor": "거대코뿌리"
+    },
+    {
+    "Ndex": 465,
+    "en": "TANGROWTH",
+    "kor": "덩쿠림보"
+    },
+    {
+    "Ndex": 466,
+    "en": "ELECTIVIRE",
+    "kor": "에레키블"
+    },
+    {
+    "Ndex": 467,
+    "en": "MAGMORTAR",
+    "kor": "마그마번"
+    },
+    {
+    "Ndex": 468,
+    "en": "TOGEKISS",
+    "kor": "토게키스"
+    },
+    {
+    "Ndex": 469,
+    "en": "YANMEGA",
+    "kor": "메가자리"
+    },
+    {
+    "Ndex": 470,
+    "en": "LEAFEON",
+    "kor": "리피아"
+    },
+    {
+    "Ndex": 471,
+    "en": "GLACEON",
+    "kor": "글레이시아"
+    },
+    {
+    "Ndex": 472,
+    "en": "GLISCOR",
+    "kor": "글라이온"
+    },
+    {
+    "Ndex": 473,
+    "en": "MAMOSWINE",
+    "kor": "맘모꾸리"
+    },
+    {
+    "Ndex": 474,
+    "en": "PORYGON-Z",
+    "kor": "폴리곤Z"
+    },
+    {
+    "Ndex": 475,
+    "en": "GALLADE",
+    "kor": "엘레이드"
+    },
+    {
+    "Ndex": 476,
+    "en": "PROBOPASS",
+    "kor": "대코파스"
+    },
+    {
+    "Ndex": 477,
+    "en": "DUSKNOIR",
+    "kor": "야느와르몽"
+    },
+    {
+    "Ndex": 478,
+    "en": "FROSLASS",
+    "kor": "눈여아"
+    },
+    {
+    "Ndex": 479,
+    "en": "ROTOM",
+    "kor": "로토무"
+    },
+    {
+    "Ndex": 480,
+    "en": "UXIE",
+    "kor": "유크시"
+    },
+    {
+    "Ndex": 481,
+    "en": "MESPRIT",
+    "kor": "엠라이트"
+    },
+    {
+    "Ndex": 482,
+    "en": "AZELF",
+    "kor": "아그놈"
+    },
+    {
+    "Ndex": 483,
+    "en": "DIALGA",
+    "kor": "디아루가"
+    },
+    {
+    "Ndex": 484,
+    "en": "PALKIA",
+    "kor": "펄기아"
+    },
+    {
+    "Ndex": 485,
+    "en": "HEATRAN",
+    "kor": "히드런"
+    },
+    {
+    "Ndex": 486,
+    "en": "REGIGIGAS",
+    "kor": "레지기가스"
+    },
+    {
+    "Ndex": 487,
+    "en": "GIRATINA",
+    "kor": "기라티나"
+    },
+    {
+    "Ndex": 488,
+    "en": "CRESSELIA",
+    "kor": "크레세리아"
+    },
+    {
+    "Ndex": 489,
+    "en": "PHIONE",
+    "kor": "피오네"
+    },
+    {
+    "Ndex": 490,
+    "en": "MANAPHY",
+    "kor": "마나피"
+    },
+    {
+    "Ndex": 491,
+    "en": "DARKRAI",
+    "kor": "다크라이"
+    },
+    {
+    "Ndex": 492,
+    "en": "SHAYMIN",
+    "kor": "쉐이미"
+    },
+    {
+    "Ndex": 493,
+    "en": "ARCEUS",
+    "kor": "아르세우스"
+    },
+    {
+    "Ndex": 494,
+    "en": "VICTINI",
+    "kor": "비크티니"
+    },
+    {
+    "Ndex": 495,
+    "en": "SNIVY",
+    "kor": "주리비얀"
+    },
+    {
+    "Ndex": 496,
+    "en": "SERVINE",
+    "kor": "샤비"
+    },
+    {
+    "Ndex": 497,
+    "en": "SERPERIOR",
+    "kor": "샤로다"
+    },
+    {
+    "Ndex": 498,
+    "en": "TEPIG",
+    "kor": "뚜꾸리"
+    },
+    {
+    "Ndex": 499,
+    "en": "PIGNITE",
+    "kor": "챠오꿀"
+    },
+    {
+    "Ndex": 500,
+    "en": "EMBOAR",
+    "kor": "염무왕"
+    },
+    {
+    "Ndex": 501,
+    "en": "OSHAWOTT",
+    "kor": "수댕이"
+    },
+    {
+    "Ndex": 502,
+    "en": "DEWOTT",
+    "kor": "쌍검자비"
+    },
+    {
+    "Ndex": 503,
+    "en": "SAMUROTT",
+    "kor": "대검귀"
+    },
+    {
+    "Ndex": 504,
+    "en": "PATRAT",
+    "kor": "보르쥐"
+    },
+    {
+    "Ndex": 505,
+    "en": "WATCHOG",
+    "kor": "보르그"
+    },
+    {
+    "Ndex": 506,
+    "en": "LILLIPUP",
+    "kor": "요테리"
+    },
+    {
+    "Ndex": 507,
+    "en": "HERDIER",
+    "kor": "하데리어"
+    },
+    {
+    "Ndex": 508,
+    "en": "STOUTLAND",
+    "kor": "바랜드"
+    },
+    {
+    "Ndex": 509,
+    "en": "PURRLOIN",
+    "kor": "쌔비냥"
+    },
+    {
+    "Ndex": 510,
+    "en": "LIEPARD",
+    "kor": "레파르다스"
+    },
+    {
+    "Ndex": 511,
+    "en": "PANSAGE",
+    "kor": "야나프"
+    },
+    {
+    "Ndex": 512,
+    "en": "SIMISAGE",
+    "kor": "야나키"
+    },
+    {
+    "Ndex": 513,
+    "en": "PANSEAR",
+    "kor": "바오프"
+    },
+    {
+    "Ndex": 514,
+    "en": "SIMISEAR",
+    "kor": "바오키"
+    },
+    {
+    "Ndex": 515,
+    "en": "PANPOUR",
+    "kor": "앗차프"
+    },
+    {
+    "Ndex": 516,
+    "en": "SIMIPOUR",
+    "kor": "앗차키"
+    },
+    {
+    "Ndex": 517,
+    "en": "MUNNA",
+    "kor": "몽나"
+    },
+    {
+    "Ndex": 518,
+    "en": "MUSHARNA",
+    "kor": "몽얌나"
+    },
+    {
+    "Ndex": 519,
+    "en": "PIDOVE",
+    "kor": "콩둘기"
+    },
+    {
+    "Ndex": 520,
+    "en": "TRANQUILL",
+    "kor": "유토브"
+    },
+    {
+    "Ndex": 521,
+    "en": "UNFEZANT",
+    "kor": "켄호로우"
+    },
+    {
+    "Ndex": 522,
+    "en": "BLITZLE",
+    "kor": "줄뮤마"
+    },
+    {
+    "Ndex": 523,
+    "en": "ZEBSTRIKA",
+    "kor": "제브라이카"
+    },
+    {
+    "Ndex": 524,
+    "en": "ROGGENROLA",
+    "kor": "단굴"
+    },
+    {
+    "Ndex": 525,
+    "en": "BOLDORE",
+    "kor": "암트르"
+    },
+    {
+    "Ndex": 526,
+    "en": "GIGALITH",
+    "kor": "기가이어스"
+    },
+    {
+    "Ndex": 527,
+    "en": "WOOBAT",
+    "kor": "또르박쥐"
+    },
+    {
+    "Ndex": 528,
+    "en": "SWOOBAT",
+    "kor": "맘박쥐"
+    },
+    {
+    "Ndex": 529,
+    "en": "DRILBUR",
+    "kor": "두더류"
+    },
+    {
+    "Ndex": 530,
+    "en": "EXCADRILL",
+    "kor": "몰드류"
+    },
+    {
+    "Ndex": 531,
+    "en": "AUDINO",
+    "kor": "다부니"
+    },
+    {
+    "Ndex": 532,
+    "en": "TIMBURR",
+    "kor": "으랏차"
+    },
+    {
+    "Ndex": 533,
+    "en": "GURDURR",
+    "kor": "토쇠골"
+    },
+    {
+    "Ndex": 534,
+    "en": "CONKELDURR",
+    "kor": "노보청"
+    },
+    {
+    "Ndex": 535,
+    "en": "TYMPOLE",
+    "kor": "동챙이"
+    },
+    {
+    "Ndex": 536,
+    "en": "PALPITOAD",
+    "kor": "두까비"
+    },
+    {
+    "Ndex": 537,
+    "en": "SEISMITOAD",
+    "kor": "두빅굴"
+    },
+    {
+    "Ndex": 538,
+    "en": "THROH",
+    "kor": "던지미"
+    },
+    {
+    "Ndex": 539,
+    "en": "SAWK",
+    "kor": "타격귀"
+    },
+    {
+    "Ndex": 540,
+    "en": "SEWADDLE",
+    "kor": "두르보"
+    },
+    {
+    "Ndex": 541,
+    "en": "SWADLOON",
+    "kor": "두르쿤"
+    },
+    {
+    "Ndex": 542,
+    "en": "LEAVANNY",
+    "kor": "모아머"
+    },
+    {
+    "Ndex": 543,
+    "en": "VENIPEDE",
+    "kor": "마디네"
+    },
+    {
+    "Ndex": 544,
+    "en": "WHIRLIPEDE",
+    "kor": "휠구"
+    },
+    {
+    "Ndex": 545,
+    "en": "SCOLIPEDE",
+    "kor": "펜드라"
+    },
+    {
+    "Ndex": 546,
+    "en": "COTTONEE",
+    "kor": "소미안"
+    },
+    {
+    "Ndex": 547,
+    "en": "WHIMSICOTT",
+    "kor": "엘풍"
+    },
+    {
+    "Ndex": 548,
+    "en": "PETILIL",
+    "kor": "치릴리"
+    },
+    {
+    "Ndex": 549,
+    "en": "LILLIGANT",
+    "kor": "드레디어"
+    },
+    {
+    "Ndex": 550,
+    "en": "BASCULIN",
+    "kor": "배쓰나이"
+    },
+    {
+    "Ndex": 551,
+    "en": "SANDILE",
+    "kor": "깜눈크"
+    },
+    {
+    "Ndex": 552,
+    "en": "KROKOROK",
+    "kor": "악비르"
+    },
+    {
+    "Ndex": 553,
+    "en": "KROOKODILE",
+    "kor": "악비아르"
+    },
+    {
+    "Ndex": 554,
+    "en": "DARUMAKA",
+    "kor": "달막화"
+    },
+    {
+    "Ndex": 555,
+    "en": "DARMANITAN",
+    "kor": "불비달마"
+    },
+    {
+    "Ndex": 556,
+    "en": "MARACTUS",
+    "kor": "마라카치"
+    },
+    {
+    "Ndex": 557,
+    "en": "DWEBBLE",
+    "kor": "돌살이"
+    },
+    {
+    "Ndex": 558,
+    "en": "CRUSTLE",
+    "kor": "암팰리스"
+    },
+    {
+    "Ndex": 559,
+    "en": "SCRAGGY",
+    "kor": "곤율랭"
+    },
+    {
+    "Ndex": 560,
+    "en": "SCRAFTY",
+    "kor": "곤율거니"
+    },
+    {
+    "Ndex": 561,
+    "en": "SIGILYPH",
+    "kor": "심보러"
+    },
+    {
+    "Ndex": 562,
+    "en": "YAMASK",
+    "kor": "데스마스"
+    },
+    {
+    "Ndex": 563,
+    "en": "COFAGRIGUS",
+    "kor": "데스니칸"
+    },
+    {
+    "Ndex": 564,
+    "en": "TIRTOUGA",
+    "kor": "프로토가"
+    },
+    {
+    "Ndex": 565,
+    "en": "CARRACOSTA",
+    "kor": "늑골라"
+    },
+    {
+    "Ndex": 566,
+    "en": "ARCHEN",
+    "kor": "아켄"
+    },
+    {
+    "Ndex": 567,
+    "en": "ARCHEOPS",
+    "kor": "아케오스"
+    },
+    {
+    "Ndex": 568,
+    "en": "TRUBBISH",
+    "kor": "깨봉이"
+    },
+    {
+    "Ndex": 569,
+    "en": "GARBODOR",
+    "kor": "더스트나"
+    },
+    {
+    "Ndex": 570,
+    "en": "ZORUA",
+    "kor": "조로아"
+    },
+    {
+    "Ndex": 571,
+    "en": "ZOROARK",
+    "kor": "조로아크"
+    },
+    {
+    "Ndex": 572,
+    "en": "MINCCINO",
+    "kor": "치라미"
+    },
+    {
+    "Ndex": 573,
+    "en": "CINCCINO",
+    "kor": "치라치노"
+    },
+    {
+    "Ndex": 574,
+    "en": "GOTHITA",
+    "kor": "고디탱"
+    },
+    {
+    "Ndex": 575,
+    "en": "GOTHORITA",
+    "kor": "고디보미"
+    },
+    {
+    "Ndex": 576,
+    "en": "GOTHITELLE",
+    "kor": "고디모아젤"
+    },
+    {
+    "Ndex": 577,
+    "en": "SOLOSIS",
+    "kor": "유니란"
+    },
+    {
+    "Ndex": 578,
+    "en": "DUOSION",
+    "kor": "듀란"
+    },
+    {
+    "Ndex": 579,
+    "en": "REUNICLUS",
+    "kor": "란쿨루스"
+    },
+    {
+    "Ndex": 580,
+    "en": "DUCKLETT",
+    "kor": "꼬지보리"
+    },
+    {
+    "Ndex": 581,
+    "en": "SWANNA",
+    "kor": "스완나"
+    },
+    {
+    "Ndex": 582,
+    "en": "VANILLITE",
+    "kor": "바닐프티"
+    },
+    {
+    "Ndex": 583,
+    "en": "VANILLISH",
+    "kor": "바닐리치"
+    },
+    {
+    "Ndex": 584,
+    "en": "VANILLUXE",
+    "kor": "배바닐라"
+    },
+    {
+    "Ndex": 585,
+    "en": "DEERLING",
+    "kor": "사철록"
+    },
+    {
+    "Ndex": 586,
+    "en": "SAWSBUCK",
+    "kor": "바라철록"
+    },
+    {
+    "Ndex": 587,
+    "en": "EMOLGA",
+    "kor": "에몽가"
+    },
+    {
+    "Ndex": 588,
+    "en": "KARRABLAST",
+    "kor": "딱정곤"
+    },
+    {
+    "Ndex": 589,
+    "en": "ESCAVALIER",
+    "kor": "슈바르고"
+    },
+    {
+    "Ndex": 590,
+    "en": "FOONGUS",
+    "kor": "깜놀버슬"
+    },
+    {
+    "Ndex": 591,
+    "en": "AMOONGUSS",
+    "kor": "뽀록나"
+    },
+    {
+    "Ndex": 592,
+    "en": "FRILLISH",
+    "kor": "탱그릴"
+    },
+    {
+    "Ndex": 593,
+    "en": "JELLICENT",
+    "kor": "탱탱겔"
+    },
+    {
+    "Ndex": 594,
+    "en": "ALOMOMOLA",
+    "kor": "맘복치"
+    },
+    {
+    "Ndex": 595,
+    "en": "JOLTIK",
+    "kor": "파쪼옥"
+    },
+    {
+    "Ndex": 596,
+    "en": "GALVANTULA",
+    "kor": "전툴라"
+    },
+    {
+    "Ndex": 597,
+    "en": "FERROSEED",
+    "kor": "철시드"
+    },
+    {
+    "Ndex": 598,
+    "en": "FERROTHORN",
+    "kor": "너트령"
+    },
+    {
+    "Ndex": 599,
+    "en": "KLINK",
+    "kor": "기어르"
+    },
+    {
+    "Ndex": 600,
+    "en": "KLANG",
+    "kor": "기기어르"
+    },
+    {
+    "Ndex": 601,
+    "en": "KLINKLANG",
+    "kor": "기기기어르"
+    },
+    {
+    "Ndex": 602,
+    "en": "TYNAMO",
+    "kor": "저리어"
+    },
+    {
+    "Ndex": 603,
+    "en": "EELEKTRIK",
+    "kor": "저리릴"
+    },
+    {
+    "Ndex": 604,
+    "en": "EELEKTROSS",
+    "kor": "저리더프"
+    },
+    {
+    "Ndex": 605,
+    "en": "ELGYEM",
+    "kor": "리그레"
+    },
+    {
+    "Ndex": 606,
+    "en": "BEHEEYEM",
+    "kor": "벰크"
+    },
+    {
+    "Ndex": 607,
+    "en": "LITWICK",
+    "kor": "불켜미"
+    },
+    {
+    "Ndex": 608,
+    "en": "LAMPENT",
+    "kor": "램프라"
+    },
+    {
+    "Ndex": 609,
+    "en": "CHANDELURE",
+    "kor": "샹델라"
+    },
+    {
+    "Ndex": 610,
+    "en": "AXEW",
+    "kor": "터검니"
+    },
+    {
+    "Ndex": 611,
+    "en": "FRAXURE",
+    "kor": "액슨도"
+    },
+    {
+    "Ndex": 612,
+    "en": "HAXORUS",
+    "kor": "액스라이즈"
+    },
+    {
+    "Ndex": 613,
+    "en": "CUBCHOO",
+    "kor": "코고미"
+    },
+    {
+    "Ndex": 614,
+    "en": "BEARTIC",
+    "kor": "툰베어"
+    },
+    {
+    "Ndex": 615,
+    "en": "CRYOGONAL",
+    "kor": "프리지오"
+    },
+    {
+    "Ndex": 616,
+    "en": "SHELMET",
+    "kor": "쪼마리"
+    },
+    {
+    "Ndex": 617,
+    "en": "ACCELGOR",
+    "kor": "어지리더"
+    },
+    {
+    "Ndex": 618,
+    "en": "STUNFISK",
+    "kor": "메더"
+    },
+    {
+    "Ndex": 619,
+    "en": "MIENFOO",
+    "kor": "비조푸"
+    },
+    {
+    "Ndex": 620,
+    "en": "MIENSHAO",
+    "kor": "비조도"
+    },
+    {
+    "Ndex": 621,
+    "en": "DRUDDIGON",
+    "kor": "크리만"
+    },
+    {
+    "Ndex": 622,
+    "en": "GOLETT",
+    "kor": "골비람"
+    },
+    {
+    "Ndex": 623,
+    "en": "GOLURK",
+    "kor": "골루그"
+    },
+    {
+    "Ndex": 624,
+    "en": "PAWNIARD",
+    "kor": "자망칼"
+    },
+    {
+    "Ndex": 625,
+    "en": "BISHARP",
+    "kor": "절각참"
+    },
+    {
+    "Ndex": 626,
+    "en": "BOUFFALANT",
+    "kor": "버프론"
+    },
+    {
+    "Ndex": 627,
+    "en": "RUFFLET",
+    "kor": "수리둥보"
+    },
+    {
+    "Ndex": 628,
+    "en": "BRAVIARY",
+    "kor": "워글"
+    },
+    {
+    "Ndex": 629,
+    "en": "VULLABY",
+    "kor": "벌차이"
+    },
+    {
+    "Ndex": 630,
+    "en": "MANDIBUZZ",
+    "kor": "버랜지나"
+    },
+    {
+    "Ndex": 631,
+    "en": "HEATMOR",
+    "kor": "앤티골"
+    },
+    {
+    "Ndex": 632,
+    "en": "DURANT",
+    "kor": "아이앤트"
+    },
+    {
+    "Ndex": 633,
+    "en": "DEINO",
+    "kor": "모노두"
+    },
+    {
+    "Ndex": 634,
+    "en": "ZWEILOUS",
+    "kor": "디헤드"
+    },
+    {
+    "Ndex": 635,
+    "en": "HYDREIGON",
+    "kor": "삼삼드래"
+    },
+    {
+    "Ndex": 636,
+    "en": "LARVESTA",
+    "kor": "활화르바"
+    },
+    {
+    "Ndex": 637,
+    "en": "VOLCARONA",
+    "kor": "불카모스"
+    },
+    {
+    "Ndex": 638,
+    "en": "COBALION",
+    "kor": "코바르온"
+    },
+    {
+    "Ndex": 639,
+    "en": "TERRAKION",
+    "kor": "테라키온"
+    },
+    {
+    "Ndex": 640,
+    "en": "VIRIZION",
+    "kor": "비리디온"
+    },
+    {
+    "Ndex": 641,
+    "en": "TORNADUS",
+    "kor": "토네로스"
+    },
+    {
+    "Ndex": 642,
+    "en": "THUNDURUS",
+    "kor": "볼트로스"
+    },
+    {
+    "Ndex": 643,
+    "en": "RESHIRAM",
+    "kor": "레시라무"
+    },
+    {
+    "Ndex": 644,
+    "en": "ZEKROM",
+    "kor": "제크로무"
+    },
+    {
+    "Ndex": 645,
+    "en": "LANDORUS",
+    "kor": "랜드로스"
+    },
+    {
+    "Ndex": 646,
+    "en": "KYUREM",
+    "kor": "큐레무"
+    },
+    {
+    "Ndex": 647,
+    "en": "KELDEO",
+    "kor": "케르디오"
+    },
+    {
+    "Ndex": 648,
+    "en": "MELOETTA",
+    "kor": "메로엣타"
+    },
+    {
+    "Ndex": 649,
+    "en": "GENESECT",
+    "kor": "게노세크트"
+    },
+    {
+    "Ndex": 650,
+    "en": "CHESPIN",
+    "kor": "도치마론"
+    },
+    {
+    "Ndex": 651,
+    "en": "QUILLADIN",
+    "kor": "도치보구"
+    },
+    {
+    "Ndex": 652,
+    "en": "CHESNAUGHT",
+    "kor": "브리가론"
+    },
+    {
+    "Ndex": 653,
+    "en": "FENNEKIN",
+    "kor": "푸호꼬"
+    },
+    {
+    "Ndex": 654,
+    "en": "BRAIXEN",
+    "kor": "테르나"
+    },
+    {
+    "Ndex": 655,
+    "en": "DELPHOX",
+    "kor": "마폭시"
+    },
+    {
+    "Ndex": 656,
+    "en": "FROAKIE",
+    "kor": "개구마르"
+    },
+    {
+    "Ndex": 657,
+    "en": "FROGADIER",
+    "kor": "개굴반장"
+    },
+    {
+    "Ndex": 658,
+    "en": "GRENINJA",
+    "kor": "개굴닌자"
+    },
+    {
+    "Ndex": 659,
+    "en": "BUNNELBY",
+    "kor": "파르빗"
+    },
+    {
+    "Ndex": 660,
+    "en": "DIGGERSBY",
+    "kor": "파르토"
+    },
+    {
+    "Ndex": 661,
+    "en": "FLETCHLING",
+    "kor": "화살꼬빈"
+    },
+    {
+    "Ndex": 662,
+    "en": "FLETCHINDER",
+    "kor": "불화살빈"
+    },
+    {
+    "Ndex": 663,
+    "en": "TALONFLAME",
+    "kor": "파이어로"
+    },
+    {
+    "Ndex": 664,
+    "en": "SCATTERBUG",
+    "kor": "분이벌레"
+    },
+    {
+    "Ndex": 665,
+    "en": "SPEWPA",
+    "kor": "분떠도리"
+    },
+    {
+    "Ndex": 666,
+    "en": "VIVILLON",
+    "kor": "비비용"
+    },
+    {
+    "Ndex": 667,
+    "en": "LITLEO",
+    "kor": "레오꼬"
+    },
+    {
+    "Ndex": 668,
+    "en": "PYROAR",
+    "kor": "화염레오"
+    },
+    {
+    "Ndex": 669,
+    "en": "FLABÉBÉ",
+    "kor": "플라베베"
+    },
+    {
+    "Ndex": 670,
+    "en": "FLOETTE",
+    "kor": "플라엣테"
+    },
+    {
+    "Ndex": 671,
+    "en": "FLORGES",
+    "kor": "플라제스"
+    },
+    {
+    "Ndex": 672,
+    "en": "SKIDDO",
+    "kor": "메이클"
+    },
+    {
+    "Ndex": 673,
+    "en": "GOGOAT",
+    "kor": "고고트"
+    },
+    {
+    "Ndex": 674,
+    "en": "PANCHAM",
+    "kor": "판짱"
+    },
+    {
+    "Ndex": 675,
+    "en": "PANGORO",
+    "kor": "부란다"
+    },
+    {
+    "Ndex": 676,
+    "en": "FURFROU",
+    "kor": "트리미앙"
+    },
+    {
+    "Ndex": 677,
+    "en": "ESPURR",
+    "kor": "냐스퍼"
+    },
+    {
+    "Ndex": 678,
+    "en": "MEOWSTIC",
+    "kor": "냐오닉스"
+    },
+    {
+    "Ndex": 679,
+    "en": "HONEDGE",
+    "kor": "단칼빙"
+    },
+    {
+    "Ndex": 680,
+    "en": "DOUBLADE",
+    "kor": "쌍검킬"
+    },
+    {
+    "Ndex": 681,
+    "en": "AEGISLASH",
+    "kor": "킬가르도"
+    },
+    {
+    "Ndex": 682,
+    "en": "SPRITZEE",
+    "kor": "슈쁘"
+    },
+    {
+    "Ndex": 683,
+    "en": "AROMATISSE",
+    "kor": "프레프티르"
+    },
+    {
+    "Ndex": 684,
+    "en": "SWIRLIX",
+    "kor": "나룸퍼프"
+    },
+    {
+    "Ndex": 685,
+    "en": "SLURPUFF",
+    "kor": "나루림"
+    },
+    {
+    "Ndex": 686,
+    "en": "INKAY",
+    "kor": "오케이징"
+    },
+    {
+    "Ndex": 687,
+    "en": "MALAMAR",
+    "kor": "칼라마네로"
+    },
+    {
+    "Ndex": 688,
+    "en": "BINACLE",
+    "kor": "거북손손"
+    },
+    {
+    "Ndex": 689,
+    "en": "BARBARACLE",
+    "kor": "거북손데스"
+    },
+    {
+    "Ndex": 690,
+    "en": "SKRELP",
+    "kor": "수레기"
+    },
+    {
+    "Ndex": 691,
+    "en": "DRAGALGE",
+    "kor": "드래캄"
+    },
+    {
+    "Ndex": 692,
+    "en": "CLAUNCHER",
+    "kor": "완철포"
+    },
+    {
+    "Ndex": 693,
+    "en": "CLAWITZER",
+    "kor": "블로스터"
+    },
+    {
+    "Ndex": 694,
+    "en": "HELIOPTILE",
+    "kor": "목도리키텔"
+    },
+    {
+    "Ndex": 695,
+    "en": "HELIOLISK",
+    "kor": "일레도리자드"
+    },
+    {
+    "Ndex": 696,
+    "en": "TYRUNT",
+    "kor": "티고라스"
+    },
+    {
+    "Ndex": 697,
+    "en": "TYRANTRUM",
+    "kor": "견고라스"
+    },
+    {
+    "Ndex": 698,
+    "en": "AMAURA",
+    "kor": "아마루스"
+    },
+    {
+    "Ndex": 699,
+    "en": "AURORUS",
+    "kor": "아마루르가"
+    },
+    {
+    "Ndex": 700,
+    "en": "SYLVEON",
+    "kor": "님피아"
+    },
+    {
+    "Ndex": 701,
+    "en": "HAWLUCHA",
+    "kor": "루차불"
+    },
+    {
+    "Ndex": 702,
+    "en": "DEDENNE",
+    "kor": "데덴네"
+    },
+    {
+    "Ndex": 703,
+    "en": "CARBINK",
+    "kor": "멜리시"
+    },
+    {
+    "Ndex": 704,
+    "en": "GOOMY",
+    "kor": "미끄메라"
+    },
+    {
+    "Ndex": 705,
+    "en": "SLIGGOO",
+    "kor": "미끄네일"
+    },
+    {
+    "Ndex": 706,
+    "en": "GOODRA",
+    "kor": "미끄래곤"
+    },
+    {
+    "Ndex": 707,
+    "en": "KLEFKI",
+    "kor": "클레피"
+    },
+    {
+    "Ndex": 708,
+    "en": "PHANTUMP",
+    "kor": "나목령"
+    },
+    {
+    "Ndex": 709,
+    "en": "TREVENANT",
+    "kor": "대로트"
+    },
+    {
+    "Ndex": 710,
+    "en": "PUMPKABOO",
+    "kor": "호바귀"
+    },
+    {
+    "Ndex": 711,
+    "en": "GOURGEIST",
+    "kor": "펌킨인"
+    },
+    {
+    "Ndex": 712,
+    "en": "BERGMITE",
+    "kor": "꽁어름"
+    },
+    {
+    "Ndex": 713,
+    "en": "AVALUGG",
+    "kor": "크레베이스"
+    },
+    {
+    "Ndex": 714,
+    "en": "NOIBAT",
+    "kor": "음뱃"
+    },
+    {
+    "Ndex": 715,
+    "en": "NOIVERN",
+    "kor": "음번"
+    },
+    {
+    "Ndex": 716,
+    "en": "XERNEAS",
+    "kor": "제르네아스"
+    },
+    {
+    "Ndex": 717,
+    "en": "YVELTAL",
+    "kor": "이벨타르"
+    },
+    {
+    "Ndex": 718,
+    "en": "ZYGARDE",
+    "kor": "지가르데"
+    },
+    {
+    "Ndex": 719,
+    "en": "DIANCIE",
+    "kor": "디안시"
+    },
+    {
+    "Ndex": 720,
+    "en": "HOOPA",
+    "kor": "후파"
+    },
+    {
+    "Ndex": 721,
+    "en": "VOLCANION",
+    "kor": "볼케니온"
+    },
+    {
+    "Ndex": 722,
+    "en": "ROWLET",
+    "kor": "나몰빼미"
+    },
+    {
+    "Ndex": 723,
+    "en": "DARTRIX",
+    "kor": "빼미스로우"
+    },
+    {
+    "Ndex": 724,
+    "en": "DECIDUEYE",
+    "kor": "모크나이퍼"
+    },
+    {
+    "Ndex": 725,
+    "en": "LITTEN",
+    "kor": "냐오불"
+    },
+    {
+    "Ndex": 726,
+    "en": "TORRACAT",
+    "kor": "냐오히트"
+    },
+    {
+    "Ndex": 727,
+    "en": "INCINEROAR",
+    "kor": "어흥염"
+    },
+    {
+    "Ndex": 728,
+    "en": "POPPLIO",
+    "kor": "누리공"
+    },
+    {
+    "Ndex": 729,
+    "en": "BRIONNE",
+    "kor": "키요공"
+    },
+    {
+    "Ndex": 730,
+    "en": "PRIMARINA",
+    "kor": "누리레느"
+    },
+    {
+    "Ndex": 731,
+    "en": "PIKIPEK",
+    "kor": "콕코구리"
+    },
+    {
+    "Ndex": 732,
+    "en": "TRUMBEAK",
+    "kor": "크라파"
+    },
+    {
+    "Ndex": 733,
+    "en": "TOUCANNON",
+    "kor": "왕큰부리"
+    },
+    {
+    "Ndex": 734,
+    "en": "YUNGOOS",
+    "kor": "영구스"
+    },
+    {
+    "Ndex": 735,
+    "en": "GUMSHOOS",
+    "kor": "형사구스"
+    },
+    {
+    "Ndex": 736,
+    "en": "GRUBBIN",
+    "kor": "턱지충이"
+    },
+    {
+    "Ndex": 737,
+    "en": "CHARJABUG",
+    "kor": "전지충이"
+    },
+    {
+    "Ndex": 738,
+    "en": "VIKAVOLT",
+    "kor": "투구뿌논"
+    },
+    {
+    "Ndex": 739,
+    "en": "CRABRAWLER",
+    "kor": "오기지게"
+    },
+    {
+    "Ndex": 740,
+    "en": "CRABOMINABLE",
+    "kor": "모단단게"
+    },
+    {
+    "Ndex": 741,
+    "en": "ORICORIO",
+    "kor": "춤추새"
+    },
+    {
+    "Ndex": 742,
+    "en": "CUTIEFLY",
+    "kor": "에블리"
+    },
+    {
+    "Ndex": 743,
+    "en": "RIBOMBEE",
+    "kor": "에리본"
+    },
+    {
+    "Ndex": 744,
+    "en": "ROCKRUFF",
+    "kor": "암멍이"
+    },
+    {
+    "Ndex": 745,
+    "en": "LYCANROC",
+    "kor": "루가루암"
+    },
+    {
+    "Ndex": 746,
+    "en": "WISHIWASHI",
+    "kor": "약어리"
+    },
+    {
+    "Ndex": 747,
+    "en": "MAREANIE",
+    "kor": "시마사리"
+    },
+    {
+    "Ndex": 748,
+    "en": "TOXAPEX",
+    "kor": "더시마사리"
+    },
+    {
+    "Ndex": 749,
+    "en": "MUDBRAY",
+    "kor": "머드나기"
+    },
+    {
+    "Ndex": 750,
+    "en": "MUDSDALE",
+    "kor": "만마드"
+    },
+    {
+    "Ndex": 751,
+    "en": "DEWPIDER",
+    "kor": "물거미"
+    },
+    {
+    "Ndex": 752,
+    "en": "ARAQUANID",
+    "kor": "깨비물거미"
+    },
+    {
+    "Ndex": 753,
+    "en": "FOMANTIS",
+    "kor": "짜랑랑"
+    },
+    {
+    "Ndex": 754,
+    "en": "LURANTIS",
+    "kor": "라란티스"
+    },
+    {
+    "Ndex": 755,
+    "en": "MORELULL",
+    "kor": "자마슈"
+    },
+    {
+    "Ndex": 756,
+    "en": "SHIINOTIC",
+    "kor": "마셰이드"
+    },
+    {
+    "Ndex": 757,
+    "en": "SALANDIT",
+    "kor": "야도뇽"
+    },
+    {
+    "Ndex": 758,
+    "en": "SALAZZLE",
+    "kor": "염뉴트"
+    },
+    {
+    "Ndex": 759,
+    "en": "STUFFUL",
+    "kor": "포곰곰"
+    },
+    {
+    "Ndex": 760,
+    "en": "BEWEAR",
+    "kor": "이븐곰"
+    },
+    {
+    "Ndex": 761,
+    "en": "BOUNSWEET",
+    "kor": "달콤아"
+    },
+    {
+    "Ndex": 762,
+    "en": "STEENEE",
+    "kor": "달무리나"
+    },
+    {
+    "Ndex": 763,
+    "en": "TSAREENA",
+    "kor": "달코퀸"
+    },
+    {
+    "Ndex": 764,
+    "en": "COMFEY",
+    "kor": "큐아링"
+    },
+    {
+    "Ndex": 765,
+    "en": "ORANGURU",
+    "kor": "하랑우탄"
+    },
+    {
+    "Ndex": 766,
+    "en": "PASSIMIAN",
+    "kor": "내던숭이"
+    },
+    {
+    "Ndex": 767,
+    "en": "WIMPOD",
+    "kor": "꼬시레"
+    },
+    {
+    "Ndex": 768,
+    "en": "GOLISOPOD",
+    "kor": "갑주무사"
+    },
+    {
+    "Ndex": 769,
+    "en": "SANDYGAST",
+    "kor": "모래꿍"
+    },
+    {
+    "Ndex": 770,
+    "en": "PALOSSAND",
+    "kor": "모래성이당"
+    },
+    {
+    "Ndex": 771,
+    "en": "PYUKUMUKU",
+    "kor": "해무기"
+    },
+    {
+    "Ndex": 772,
+    "en": "TYPE: NULL",
+    "kor": "타입:널"
+    },
+    {
+    "Ndex": 773,
+    "en": "SILVALLY",
+    "kor": "실버디"
+    },
+    {
+    "Ndex": 774,
+    "en": "MINIOR",
+    "kor": "메테노"
+    },
+    {
+    "Ndex": 775,
+    "en": "KOMALA",
+    "kor": "자말라"
+    },
+    {
+    "Ndex": 776,
+    "en": "TURTONATOR",
+    "kor": "폭거북스"
+    },
+    {
+    "Ndex": 777,
+    "en": "TOGEDEMARU",
+    "kor": "토게데마루"
+    },
+    {
+    "Ndex": 778,
+    "en": "MIMIKYU",
+    "kor": "따라큐"
+    },
+    {
+    "Ndex": 779,
+    "en": "BRUXISH",
+    "kor": "치갈기"
+    },
+    {
+    "Ndex": 780,
+    "en": "DRAMPA",
+    "kor": "할비롱"
+    },
+    {
+    "Ndex": 781,
+    "en": "DHELMISE",
+    "kor": "타타륜"
+    },
+    {
+    "Ndex": 782,
+    "en": "JANGMO-O",
+    "kor": "짜랑꼬"
+    },
+    {
+    "Ndex": 783,
+    "en": "HAKAMO-O",
+    "kor": "짜랑고우"
+    },
+    {
+    "Ndex": 784,
+    "en": "KOMMO-O",
+    "kor": "짜랑고우거"
+    },
+    {
+    "Ndex": 785,
+    "en": "TAPU KOKO",
+    "kor": "카푸꼬꼬꼭"
+    },
+    {
+    "Ndex": 786,
+    "en": "TAPU LELE",
+    "kor": "카푸나비나"
+    },
+    {
+    "Ndex": 787,
+    "en": "TAPU BULU",
+    "kor": "카푸브루루"
+    },
+    {
+    "Ndex": 788,
+    "en": "TAPU FINI",
+    "kor": "카푸느지느"
+    },
+    {
+    "Ndex": 789,
+    "en": "COSMOG",
+    "kor": "코스모그"
+    },
+    {
+    "Ndex": 790,
+    "en": "COSMOEM",
+    "kor": "코스모움"
+    },
+    {
+    "Ndex": 791,
+    "en": "SOLGALEO",
+    "kor": "솔가레오"
+    },
+    {
+    "Ndex": 792,
+    "en": "LUNALA",
+    "kor": "루나아라"
+    },
+    {
+    "Ndex": 793,
+    "en": "NIHILEGO",
+    "kor": "텅비드"
+    },
+    {
+    "Ndex": 794,
+    "en": "BUZZWOLE",
+    "kor": "매시붕"
+    },
+    {
+    "Ndex": 795,
+    "en": "PHEROMOSA",
+    "kor": "페로코체"
+    },
+    {
+    "Ndex": 796,
+    "en": "XURKITREE",
+    "kor": "전수목"
+    },
+    {
+    "Ndex": 797,
+    "en": "CELESTEELA",
+    "kor": "철화구야"
+    },
+    {
+    "Ndex": 798,
+    "en": "KARTANA",
+    "kor": "종이신도"
+    },
+    {
+    "Ndex": 799,
+    "en": "GUZZLORD",
+    "kor": "악식킹"
+    },
+    {
+    "Ndex": 800,
+    "en": "NECROZMA",
+    "kor": "네크로즈마"
+    },
+    {
+    "Ndex": 801,
+    "en": "MAGEARNA",
+    "kor": "마기아나"
+    },
+    {
+    "Ndex": 802,
+    "en": "MARSHADOW",
+    "kor": "마샤도"
+    },
+    {
+    "Ndex": 803,
+    "en": "POIPOLE",
+    "kor": "베베놈"
+    },
+    {
+    "Ndex": 804,
+    "en": "NAGANADEL",
+    "kor": "아고용"
+    },
+    {
+    "Ndex": 805,
+    "en": "STAKATAKA",
+    "kor": "차곡차곡"
+    },
+    {
+    "Ndex": 806,
+    "en": "BLACEPHALON",
+    "kor": "두파팡"
+    },
+    {
+    "Ndex": 807,
+    "en": "ZERAORA",
+    "kor": "제라오라"
+    },
+    {
+    "Ndex": 808,
+    "en": "MELTAN",
+    "kor": "멜탄"
+    },
+    {
+    "Ndex": 809,
+    "en": "MELMETAL",
+    "kor": "멜메탈"
+    },
+    {
+    "Ndex": 810,
+    "en": "GROOKEY",
+    "kor": "흥나숭"
+    },
+    {
+    "Ndex": 811,
+    "en": "THWACKEY",
+    "kor": "채키몽"
+    },
+    {
+    "Ndex": 812,
+    "en": "RILLABOOM",
+    "kor": "고릴타"
+    },
+    {
+    "Ndex": 813,
+    "en": "SCORBUNNY",
+    "kor": "염버니"
+    },
+    {
+    "Ndex": 814,
+    "en": "RABOOT",
+    "kor": "래비풋"
+    },
+    {
+    "Ndex": 815,
+    "en": "CINDERACE",
+    "kor": "에이스번"
+    },
+    {
+    "Ndex": 816,
+    "en": "SOBBLE",
+    "kor": "울머기"
+    },
+    {
+    "Ndex": 817,
+    "en": "DRIZZILE",
+    "kor": "누겔레온"
+    },
+    {
+    "Ndex": 818,
+    "en": "INTELEON",
+    "kor": "인텔리레온"
+    },
+    {
+    "Ndex": 819,
+    "en": "SKWOVET",
+    "kor": "탐리스"
+    },
+    {
+    "Ndex": 820,
+    "en": "GREEDENT",
+    "kor": "요씽리스"
+    },
+    {
+    "Ndex": 821,
+    "en": "ROOKIDEE",
+    "kor": "파라꼬"
+    },
+    {
+    "Ndex": 822,
+    "en": "CORVISQUIRE",
+    "kor": "파크로우"
+    },
+    {
+    "Ndex": 823,
+    "en": "CORVIKNIGHT",
+    "kor": "아머까오"
+    },
+    {
+    "Ndex": 824,
+    "en": "BLIPBUG",
+    "kor": "두루지벌레"
+    },
+    {
+    "Ndex": 825,
+    "en": "DOTTLER",
+    "kor": "레돔벌레"
+    },
+    {
+    "Ndex": 826,
+    "en": "ORBEETLE",
+    "kor": "이올브"
+    },
+    {
+    "Ndex": 827,
+    "en": "NICKIT",
+    "kor": "훔처우"
+    },
+    {
+    "Ndex": 828,
+    "en": "THIEVUL",
+    "kor": "폭슬라이"
+    },
+    {
+    "Ndex": 829,
+    "en": "GOSSIFLEUR",
+    "kor": "꼬모카"
+    },
+    {
+    "Ndex": 830,
+    "en": "ELDEGOSS",
+    "kor": "백솜모카"
+    },
+    {
+    "Ndex": 831,
+    "en": "WOOLOO",
+    "kor": "우르"
+    },
+    {
+    "Ndex": 832,
+    "en": "DUBWOOL",
+    "kor": "배우르"
+    },
+    {
+    "Ndex": 833,
+    "en": "CHEWTLE",
+    "kor": "깨물부기"
+    },
+    {
+    "Ndex": 834,
+    "en": "DREDNAW",
+    "kor": "갈가부기"
+    },
+    {
+    "Ndex": 835,
+    "en": "YAMPER",
+    "kor": "멍파치"
+    },
+    {
+    "Ndex": 836,
+    "en": "BOLTUND",
+    "kor": "펄스멍"
+    },
+    {
+    "Ndex": 837,
+    "en": "ROLYCOLY",
+    "kor": "탄동"
+    },
+    {
+    "Ndex": 838,
+    "en": "CARKOL",
+    "kor": "탄차곤"
+    },
+    {
+    "Ndex": 839,
+    "en": "COALOSSAL",
+    "kor": "석탄산"
+    },
+    {
+    "Ndex": 840,
+    "en": "APPLIN",
+    "kor": "과사삭벌레"
+    },
+    {
+    "Ndex": 841,
+    "en": "FLAPPLE",
+    "kor": "애프룡"
+    },
+    {
+    "Ndex": 842,
+    "en": "APPLETUN",
+    "kor": "단지래플"
+    },
+    {
+    "Ndex": 843,
+    "en": "SILICOBRA",
+    "kor": "모래뱀"
+    },
+    {
+    "Ndex": 844,
+    "en": "SANDACONDA",
+    "kor": "사다이사"
+    },
+    {
+    "Ndex": 845,
+    "en": "CRAMORANT",
+    "kor": "윽우지"
+    },
+    {
+    "Ndex": 846,
+    "en": "ARROKUDA",
+    "kor": "찌로꼬치"
+    },
+    {
+    "Ndex": 847,
+    "en": "BARRASKEWDA",
+    "kor": "꼬치조"
+    },
+    {
+    "Ndex": 848,
+    "en": "TOXEL",
+    "kor": "일레즌"
+    },
+    {
+    "Ndex": 849,
+    "en": "TOXTRICITY",
+    "kor": "스트린더"
+    },
+    {
+    "Ndex": 850,
+    "en": "SIZZLIPEDE",
+    "kor": "태우지네"
+    },
+    {
+    "Ndex": 851,
+    "en": "CENTISKORCH",
+    "kor": "다태우지네"
+    },
+    {
+    "Ndex": 852,
+    "en": "CLOBBOPUS",
+    "kor": "때때무노"
+    },
+    {
+    "Ndex": 853,
+    "en": "GRAPPLOCT",
+    "kor": "케오퍼스"
+    },
+    {
+    "Ndex": 854,
+    "en": "SINISTEA",
+    "kor": "데인차"
+    },
+    {
+    "Ndex": 855,
+    "en": "POLTEAGEIST",
+    "kor": "포트데스"
+    },
+    {
+    "Ndex": 856,
+    "en": "HATENNA",
+    "kor": "몸지브림"
+    },
+    {
+    "Ndex": 857,
+    "en": "HATTREM",
+    "kor": "손지브림"
+    },
+    {
+    "Ndex": 858,
+    "en": "HATTERENE",
+    "kor": "브리무음"
+    },
+    {
+    "Ndex": 859,
+    "en": "IMPIDIMP",
+    "kor": "메롱꿍"
+    },
+    {
+    "Ndex": 860,
+    "en": "MORGREM",
+    "kor": "쏘겨모"
+    },
+    {
+    "Ndex": 861,
+    "en": "GRIMMSNARL",
+    "kor": "오롱털"
+    },
+    {
+    "Ndex": 862,
+    "en": "OBSTAGOON",
+    "kor": "가로막구리"
+    },
+    {
+    "Ndex": 863,
+    "en": "PERRSERKER",
+    "kor": "나이킹"
+    },
+    {
+    "Ndex": 864,
+    "en": "CURSOLA",
+    "kor": "산호르곤"
+    },
+    {
+    "Ndex": 865,
+    "en": "SIRFETCH'D",
+    "kor": "창파나이트"
+    },
+    {
+    "Ndex": 866,
+    "en": "MR_RIME",
+    "kor": "마임꽁꽁"
+    },
+    {
+    "Ndex": 867,
+    "en": "RUNERIGUS",
+    "kor": "데스판"
+    },
+    {
+    "Ndex": 868,
+    "en": "MILCERY",
+    "kor": "마빌크"
+    },
+    {
+    "Ndex": 869,
+    "en": "ALCREMIE",
+    "kor": "마휘핑"
+    },
+    {
+    "Ndex": 870,
+    "en": "FALINKS",
+    "kor": "대여르"
+    },
+    {
+    "Ndex": 871,
+    "en": "PINCURCHIN",
+    "kor": "찌르성게"
+    },
+    {
+    "Ndex": 872,
+    "en": "SNOM",
+    "kor": "누니머기"
+    },
+    {
+    "Ndex": 873,
+    "en": "FROSMOTH",
+    "kor": "모스노우"
+    },
+    {
+    "Ndex": 874,
+    "en": "STONJOURNER",
+    "kor": "돌헨진"
+    },
+    {
+    "Ndex": 875,
+    "en": "EISCUE",
+    "kor": "빙큐보"
+    },
+    {
+    "Ndex": 876,
+    "en": "INDEEDEE",
+    "kor": "에써르"
+    },
+    {
+    "Ndex": 877,
+    "en": "MORPEKO",
+    "kor": "모르페코"
+    },
+    {
+    "Ndex": 878,
+    "en": "CUFANT",
+    "kor": "끼리동"
+    },
+    {
+    "Ndex": 879,
+    "en": "COPPERAJAH",
+    "kor": "대왕끼리동"
+    },
+    {
+    "Ndex": 880,
+    "en": "DRACOZOLT",
+    "kor": "파치래곤"
+    },
+    {
+    "Ndex": 881,
+    "en": "ARCTOZOLT",
+    "kor": "파치르돈"
+    },
+    {
+    "Ndex": 882,
+    "en": "DRACOVISH",
+    "kor": "어래곤"
+    },
+    {
+    "Ndex": 883,
+    "en": "ARCTOVISH",
+    "kor": "어치르돈"
+    },
+    {
+    "Ndex": 884,
+    "en": "DURALUDON",
+    "kor": "두랄루돈"
+    },
+    {
+    "Ndex": 885,
+    "en": "DREEPY",
+    "kor": "드라꼰"
+    },
+    {
+    "Ndex": 886,
+    "en": "DRAKLOAK",
+    "kor": "드래런치"
+    },
+    {
+    "Ndex": 887,
+    "en": "DRAGAPULT",
+    "kor": "드래펄트"
+    },
+    {
+    "Ndex": 888,
+    "en": "ZACIAN",
+    "kor": "자시안"
+    },
+    {
+    "Ndex": 889,
+    "en": "ZAMAZENTA",
+    "kor": "자마젠타"
+    },
+    {
+    "Ndex": 890,
+    "en": "ETERNATUS",
+    "kor": "무한다이노"
+    },
+    {
+    "Ndex": 891,
+    "en": "KUBFU",
+    "kor": "치고마"
+    },
+    {
+    "Ndex": 892,
+    "en": "URSHIFU",
+    "kor": "우라오스"
+    },
+    {
+    "Ndex": 893,
+    "en": "ZARUDE",
+    "kor": "자루도"
+    },
+    {
+    "Ndex": 894,
+    "en": "REGIELEKI",
+    "kor": "레지에레키"
+    },
+    {
+    "Ndex": 895,
+    "en": "REGIDRAGO",
+    "kor": "레지드래고"
+    },
+    {
+    "Ndex": 896,
+    "en": "GLASTRIER",
+    "kor": "블리자포스"
+    },
+    {
+    "Ndex": 897,
+    "en": "SPECTRIER",
+    "kor": "레이스포스"
+    },
+    {
+    "Ndex": 898,
+    "en": "CALYREX",
+    "kor": "버드렉스"
+    },
+    {
+    "Ndex": 899,
+    "en": "WYRDEER",
+    "kor": "신비록"
+    },
+    {
+    "Ndex": 900,
+    "en": "KLEAVOR",
+    "kor": "사마자르"
+    },
+    {
+    "Ndex": 901,
+    "en": "URSALUNA",
+    "kor": "다투곰"
+    },
+    {
+    "Ndex": 902,
+    "en": "BASCULEGION",
+    "kor": "대쓰여너"
+    },
+    {
+    "Ndex": 903,
+    "en": "SNEASLER",
+    "kor": "포푸니크"
+    },
+    {
+    "Ndex": 904,
+    "en": "OVERQWIL",
+    "kor": "장침바루"
+    },
+    {
+    "Ndex": 905,
+    "en": "ENAMORUS",
+    "kor": "러브로스"
+    },
+    {
+    "Ndex": 906,
+    "en": "SPRIGATITO",
+    "kor": "나오하"
+    },
+    {
+    "Ndex": 907,
+    "en": "FLORAGATO",
+    "kor": "나로테"
+    },
+    {
+    "Ndex": 908,
+    "en": "MEOWSCARADA",
+    "kor": "마스카나"
+    },
+    {
+    "Ndex": 909,
+    "en": "FUECOCO",
+    "kor": "뜨아거"
+    },
+    {
+    "Ndex": 910,
+    "en": "CROCALOR",
+    "kor": "악뜨거"
+    },
+    {
+    "Ndex": 911,
+    "en": "SKELEDIRGE",
+    "kor": "라우드본"
+    },
+    {
+    "Ndex": 912,
+    "en": "QUAXLY",
+    "kor": "꾸왁스"
+    },
+    {
+    "Ndex": 913,
+    "en": "QUAXWELL",
+    "kor": "아꾸왁"
+    },
+    {
+    "Ndex": 914,
+    "en": "QUAQUAVAL",
+    "kor": "웨이니발"
+    },
+    {
+    "Ndex": 915,
+    "en": "LECHONK",
+    "kor": "맛보돈"
+    },
+    {
+    "Ndex": 916,
+    "en": "OINKOLOGNE",
+    "kor": "퍼퓨돈"
+    },
+    {
+    "Ndex": 917,
+    "en": "TAROUNTULA",
+    "kor": "타랜툴라"
+    },
+    {
+    "Ndex": 918,
+    "en": "SPIDOPS",
+    "kor": "트래피더"
+    },
+    {
+    "Ndex": 919,
+    "en": "NYMBLE",
+    "kor": "콩알뚜기"
+    },
+    {
+    "Ndex": 920,
+    "en": "LOKIX",
+    "kor": "엑스레그"
+    },
+    {
+    "Ndex": 921,
+    "en": "PAWMI",
+    "kor": "빠모"
+    },
+    {
+    "Ndex": 922,
+    "en": "PAWMO",
+    "kor": "빠모트"
+    },
+    {
+    "Ndex": 923,
+    "en": "PAWMOT",
+    "kor": "빠르모트"
+    },
+    {
+    "Ndex": 924,
+    "en": "TANDEMAUS",
+    "kor": "두리쥐"
+    },
+    {
+    "Ndex": 925,
+    "en": "MAUSHOLD",
+    "kor": "파밀리쥐"
+    },
+    {
+    "Ndex": 926,
+    "en": "FIDOUGH",
+    "kor": "쫀도기"
+    },
+    {
+    "Ndex": 927,
+    "en": "DACHSBUN",
+    "kor": "바우첼"
+    },
+    {
+    "Ndex": 928,
+    "en": "SMOLIV",
+    "kor": "미니브"
+    },
+    {
+    "Ndex": 929,
+    "en": "DOLLIV",
+    "kor": "올리뇨"
+    },
+    {
+    "Ndex": 930,
+    "en": "ARBOLIVA",
+    "kor": "올리르바"
+    },
+    {
+    "Ndex": 931,
+    "en": "SQUAWKABILLY",
+    "kor": "시비꼬"
+    },
+    {
+    "Ndex": 932,
+    "en": "NACLI",
+    "kor": "베베솔트"
+    },
+    {
+    "Ndex": 933,
+    "en": "NACLSTACK",
+    "kor": "스태솔트"
+    },
+    {
+    "Ndex": 934,
+    "en": "GARGANACL",
+    "kor": "콜로솔트"
+    },
+    {
+    "Ndex": 935,
+    "en": "CHARCADET",
+    "kor": "카르본"
+    },
+    {
+    "Ndex": 936,
+    "en": "ARMAROUGE",
+    "kor": "카디나르마"
+    },
+    {
+    "Ndex": 937,
+    "en": "CERULEDGE",
+    "kor": "파라블레이즈"
+    },
+    {
+    "Ndex": 938,
+    "en": "TADBULB",
+    "kor": "빈나두"
+    },
+    {
+    "Ndex": 939,
+    "en": "BELLIBOLT",
+    "kor": "찌리배리"
+    },
+    {
+    "Ndex": 940,
+    "en": "WATTREL",
+    "kor": "찌리비"
+    },
+    {
+    "Ndex": 941,
+    "en": "KILOWATTREL",
+    "kor": "찌리비크"
+    },
+    {
+    "Ndex": 942,
+    "en": "MASCHIFF",
+    "kor": "오라티프"
+    },
+    {
+    "Ndex": 943,
+    "en": "MABOSSTIFF",
+    "kor": "마피티프"
+    },
+    {
+    "Ndex": 944,
+    "en": "SHROODLE",
+    "kor": "땃쭈르"
+    },
+    {
+    "Ndex": 945,
+    "en": "GRAFAIAI",
+    "kor": "태깅구르"
+    },
+    {
+    "Ndex": 946,
+    "en": "BRAMBLIN",
+    "kor": "그푸리"
+    },
+    {
+    "Ndex": 947,
+    "en": "BRAMBLEGHAST",
+    "kor": "공푸리"
+    },
+    {
+    "Ndex": 948,
+    "en": "TOEDSCOOL",
+    "kor": "들눈해"
+    },
+    {
+    "Ndex": 949,
+    "en": "TOEDSCRUEL",
+    "kor": "육파리"
+    },
+    {
+    "Ndex": 950,
+    "en": "KLAWF",
+    "kor": "절벼게"
+    },
+    {
+    "Ndex": 951,
+    "en": "CAPSAKID",
+    "kor": "캡싸이"
+    },
+    {
+    "Ndex": 952,
+    "en": "SCOVILLAIN",
+    "kor": "스코빌런"
+    },
+    {
+    "Ndex": 953,
+    "en": "RELLOR",
+    "kor": "구르데"
+    },
+    {
+    "Ndex": 954,
+    "en": "RABSCA",
+    "kor": "베라카스"
+    },
+    {
+    "Ndex": 955,
+    "en": "FLITTLE",
+    "kor": "하느라기"
+    },
+    {
+    "Ndex": 956,
+    "en": "ESPATHRA",
+    "kor": "클레스퍼트라"
+    },
+    {
+    "Ndex": 957,
+    "en": "TINKATINK",
+    "kor": "어리짱"
+    },
+    {
+    "Ndex": 958,
+    "en": "TINKATUFF",
+    "kor": "벼리짱"
+    },
+    {
+    "Ndex": 959,
+    "en": "TINKATON",
+    "kor": "두드리짱"
+    },
+    {
+    "Ndex": 960,
+    "en": "WIGLETT",
+    "kor": "바다그다"
+    },
+    {
+    "Ndex": 961,
+    "en": "WUGTRIO",
+    "kor": "바닥트리오"
+    },
+    {
+    "Ndex": 962,
+    "en": "BOMBIRDIER",
+    "kor": "떨구새"
+    },
+    {
+    "Ndex": 963,
+    "en": "FINIZEN",
+    "kor": "맨돌핀"
+    },
+    {
+    "Ndex": 964,
+    "en": "PALAFIN",
+    "kor": "돌핀맨"
+    },
+    {
+    "Ndex": 965,
+    "en": "VAROOM",
+    "kor": "부르롱"
+    },
+    {
+    "Ndex": 966,
+    "en": "REVAVROOM",
+    "kor": "부르르룸"
+    },
+    {
+    "Ndex": 967,
+    "en": "CYCLIZAR",
+    "kor": "모토마"
+    },
+    {
+    "Ndex": 968,
+    "en": "ORTHWORM",
+    "kor": "꿈트렁"
+    },
+    {
+    "Ndex": 969,
+    "en": "GLIMMET",
+    "kor": "초롱순"
+    },
+    {
+    "Ndex": 970,
+    "en": "GLIMMORA",
+    "kor": "킬라플로르"
+    },
+    {
+    "Ndex": 971,
+    "en": "GREAVARD",
+    "kor": "망망이"
+    },
+    {
+    "Ndex": 972,
+    "en": "HOUNDSTONE",
+    "kor": "묘두기"
+    },
+    {
+    "Ndex": 973,
+    "en": "FLAMIGO",
+    "kor": "꼬이밍고"
+    },
+    {
+    "Ndex": 974,
+    "en": "CETODDLE",
+    "kor": "터벅고래"
+    },
+    {
+    "Ndex": 975,
+    "en": "CETITAN",
+    "kor": "우락고래"
+    },
+    {
+    "Ndex": 976,
+    "en": "VELUZA",
+    "kor": "가비루사"
+    },
+    {
+    "Ndex": 977,
+    "en": "DONDOZO",
+    "kor": "어써러셔"
+    },
+    {
+    "Ndex": 978,
+    "en": "TATSUGIRI",
+    "kor": "싸리용"
+    },
+    {
+    "Ndex": 979,
+    "en": "ANNIHILAPE",
+    "kor": "저승갓숭"
+    },
+    {
+    "Ndex": 980,
+    "en": "CLODSIRE",
+    "kor": "토오"
+    },
+    {
+    "Ndex": 981,
+    "en": "FARIGIRAF",
+    "kor": "키키링"
+    },
+    {
+    "Ndex": 982,
+    "en": "DUDUNSPARCE",
+    "kor": "노고고치"
+    },
+    {
+    "Ndex": 983,
+    "en": "KINGAMBIT",
+    "kor": "대도각참"
+    },
+    {
+    "Ndex": 984,
+    "en": "GREAT TUSK",
+    "kor": "위대한엄니"
+    },
+    {
+    "Ndex": 985,
+    "en": "SCREAM TAIL",
+    "kor": "우렁찬꼬리"
+    },
+    {
+    "Ndex": 986,
+    "en": "BRUTE BONNET",
+    "kor": "사나운버섯"
+    },
+    {
+    "Ndex": 987,
+    "en": "FLUTTER MANE",
+    "kor": "날개치는머리"
+    },
+    {
+    "Ndex": 988,
+    "en": "SLITHER WING",
+    "kor": "땅을기는날개"
+    },
+    {
+    "Ndex": 989,
+    "en": "SANDY SHOCKS",
+    "kor": "모래털가죽"
+    },
+    {
+    "Ndex": 990,
+    "en": "IRON TREADS",
+    "kor": "무쇠바퀴"
+    },
+    {
+    "Ndex": 991,
+    "en": "IRON BUNDLE",
+    "kor": "무쇠보따리"
+    },
+    {
+    "Ndex": 992,
+    "en": "IRON HANDS",
+    "kor": "무쇠손"
+    },
+    {
+    "Ndex": 993,
+    "en": "IRON JUGULIS",
+    "kor": "무쇠머리"
+    },
+    {
+    "Ndex": 994,
+    "en": "IRON MOTH",
+    "kor": "무쇠독나방"
+    },
+    {
+    "Ndex": 995,
+    "en": "IRON THORNS",
+    "kor": "무쇠가시"
+    },
+    {
+    "Ndex": 996,
+    "en": "FRIGIBAX",
+    "kor": "드니차"
+    },
+    {
+    "Ndex": 997,
+    "en": "ARCTIBAX",
+    "kor": "드니꽁"
+    },
+    {
+    "Ndex": 998,
+    "en": "BAXCALIBUR",
+    "kor": "드닐레이브"
+    },
+    {
+    "Ndex": 999,
+    "en": "GIMMIGHOUL",
+    "kor": "모으령"
+    },
+    {
+    "Ndex": 1000,
+    "en": "GHOLDENGO",
+    "kor": "타부자고"
+    },
+    {
+    "Ndex": 1001,
+    "en": "WO-CHIEN",
+    "kor": "총지엔"
+    },
+    {
+    "Ndex": 1002,
+    "en": "CHIEN-PAO",
+    "kor": "파오젠"
+    },
+    {
+    "Ndex": 1003,
+    "en": "TING-LU",
+    "kor": "딩루"
+    },
+    {
+    "Ndex": 1004,
+    "en": "CHI-YU",
+    "kor": "위유이"
+    },
+    {
+    "Ndex": 1005,
+    "en": "ROARING MOON",
+    "kor": "고동치는달"
+    },
+    {
+    "Ndex": 1006,
+    "en": "IRON VALIANT",
+    "kor": "무쇠무인"
+    },
+    {
+    "Ndex": 1007,
+    "en": "KORAIDON",
+    "kor": "코라이돈"
+    },
+    {
+    "Ndex": 1008,
+    "en": "MIRAIDON",
+    "kor": "미라이돈"
+    },
+    {
+    "Ndex": 1009,
+    "en": "WALKING WAKE",
+    "kor": "굽이치는물결"
+    },
+    {
+    "Ndex": 1010,
+    "en": "IRON LEAVES",
+    "kor": "무쇠잎새"
+    },
+    {
+    "Ndex": 1011,
+    "en": "DIPPLIN",
+    "kor": "과미르"
+    },
+    {
+    "Ndex": 1012,
+    "en": "POLTCHAGEIST",
+    "kor": "차데스"
+    },
+    {
+    "Ndex": 1013,
+    "en": "SINISTCHA",
+    "kor": "그우린차"
+    },
+    {
+    "Ndex": 1014,
+    "en": "OKIDOGI",
+    "kor": "조타구"
+    },
+    {
+    "Ndex": 1015,
+    "en": "MUNKIDORI",
+    "kor": "이야후"
+    },
+    {
+    "Ndex": 1016,
+    "en": "FEZANDIPITI",
+    "kor": "기로치"
+    },
+    {
+    "Ndex": 1017,
+    "en": "OGERPON",
+    "kor": "오거폰"
+    },
+    {
+    "Ndex": 1018,
+    "en": "ARCHALUDON",
+    "kor": "브리두라스"
+    },
+    {
+    "Ndex": 1019,
+    "en": "HYDRAPPLE",
+    "kor": "과미드라"
+    },
+    {
+    "Ndex": 1020,
+    "en": "GOUGING FIRE",
+    "kor": "꿰뚫는화염"
+    },
+    {
+    "Ndex": 1021,
+    "en": "RAGING BOLT",
+    "kor": "날뛰는우레"
+    },
+    {
+    "Ndex": 1022,
+    "en": "IRON BOULDER",
+    "kor": "무쇠암석"
+    },
+    {
+    "Ndex": 1023,
+    "en": "IRON CROWN",
+    "kor": "무쇠감투"
+    },
+    {
+    "Ndex": 1024,
+    "en": "TERAPAGOS",
+    "kor": "테라파고스"
+    },
+    {
+    "Ndex": 1025,
+    "en": "PECHARUNT",
+    "kor": "복숭악동"
+    }
+    ]
+    }
