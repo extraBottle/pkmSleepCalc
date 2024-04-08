@@ -91,7 +91,7 @@
         <q-checkbox v-model="useGoodCamp">
           <template v-slot:default>
             좋은 캠프 적용
-            <q-icon size="xl" name="img:src/assets/goodcampticket.png" />
+            <q-icon size="xl" name="img:images/goodcampticket.png" />
           </template>
         </q-checkbox>
       </q-card-section>

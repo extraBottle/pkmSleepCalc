@@ -12,7 +12,7 @@
         <q-card bordered class="full-width bg-googleBack">
             <q-card-section>                
                 <div class="full-width row justify-between">
-                    <q-icon :class="cssGoodCamp" size="xl" name="img:src/assets/goodcampticket.png">
+                    <q-icon :class="cssGoodCamp" size="xl" name="img:images/goodcampticket.png">
                         <q-tooltip>
                             좋은 캠프 적용 중!
                         </q-tooltip>
@@ -56,7 +56,7 @@
                 <div v-if="myProdCalcStore.checkIngSkillDisplay" class="col">
                     <q-card>
                         <q-card-section class="row bg-sSkill">
-                            <q-avatar class="shadow-1" color="ingCircle" icon="img:/ingall.png" />
+                            <q-avatar class="shadow-1" color="ingCircle" icon="img:images/ingall.png" />
                             <q-separator vertical class="q-mx-md"/>
                             <span class="text-h5 q-py-sm">{{ amountIngSkill }} 개<span class="text-subtitle1"> (나머지 모든 식재료)</span></span>
                         </q-card-section>

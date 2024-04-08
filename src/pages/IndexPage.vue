@@ -3,24 +3,24 @@
     <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 bg-googleBack relative-position">
       <q-img
         class="floating1 absolute"
-        src="/fancyapple.png"
+        src="images/fancyapple.png"
         fit="scale-down"
         style="max-height: 300px;"></q-img>
         <q-img
         class="floating2 absolute"
-        src="/warmingginger.png"
+        src="images/warmingginger.png"
         fit="scale-down"
         position="left center"
         style="max-height: 370px;"></q-img>
         <q-img
         class="floating2 absolute"
-        src="/fancyegg.png"
+        src="images/fancyegg.png"
         fit="scale-down"
         position="right center"
         style="max-height: 370px;"></q-img>
       <q-img
       class="absolute-bottom"
-      src="/doorimage.png"></q-img>
+      src="images/doorimage.png"></q-img>
       <q-btn push class="absolute-bottom-right text-h6" color="primary" label="시작하기" @click="startProdCalc" padding="md lg"></q-btn>
     </div>
   </q-page>

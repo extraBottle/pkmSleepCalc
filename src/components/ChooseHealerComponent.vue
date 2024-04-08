@@ -40,7 +40,7 @@
       <div class="column items-center" style="visibility: hidden; height: 5vh;">
         <q-img
           alt="Healer image"
-          src="/sylveonStanding.png"
+          src="images/sylveonStanding.png"
           fit="scale-down"
           no-spinner
           style="max-width: 300px;" />
@@ -131,7 +131,7 @@
       <div class="column items-center" style="visibility: hidden; height: 5vh;">
         <q-img
           alt="Hidden image"
-          src="/sylveonStanding.png"
+          src="images/sylveonStanding.png"
           fit="scale-down"
           no-spinner
           style="max-width: 300px;" />

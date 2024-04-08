@@ -60,19 +60,19 @@ const linksList = [
   {
     title: 'exp 계산기',
     caption: '렙업에 필요한 사탕 & 꿈조량을 알아보세요',
-    icon: '/pikachucandy.png',
+    icon: 'images/pikachucandy.png',
     link: 'https://extrabottle.github.io/pkmSleepExpCalc/'
   },
   {
     title: '이브이 최적 진화 찾기',
     caption: '이브이 진로상담 해드립니다',
-    icon: '/eeveeLink.png',
+    icon: 'images/eeveeLink.png',
     link: 'https://extrabottle.github.io/pkmSleepEevelution/'
   },
   {
     title: '식재료 생산량 계산기',
     caption: '내 포켓몬은 식재료를 얼마나 모아올까?',
-    icon: '/fancyapple.png',
+    icon: 'images/fancyapple.png',
     link: 'https://extrabottle.github.io/pkmSleepCalc/'
   }
 ]
