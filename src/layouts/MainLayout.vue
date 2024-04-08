@@ -15,7 +15,7 @@
           포켓몬 슬립 생산량 계산기
         </q-toolbar-title>
 
-        <div>v0.0.0<br>@두번째유리병</div>
+        <div>v{{ myVersion }}<br>@두번째유리병</div>
       </q-toolbar>
     </q-header>
 
@@ -51,11 +51,13 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import VersionInfo from '../../package.json'
 
 defineOptions({
   name: 'MainLayout'
 })
 
+const myVersion = VersionInfo.version
 const linksList = [
   {
     title: 'exp 계산기',

@@ -16,7 +16,7 @@
         <q-radio v-model="calcVer" val="proVer" color="secondary" />
       </q-item-section>
       <q-item-section>
-        <q-item-label>프로</q-item-label>
+        <q-item-label>프로 (오래 걸림 주의)</q-item-label>
       </q-item-section>
     </q-item>
     <q-item tag="label" v-ripple>
@@ -35,7 +35,7 @@
       </div>
       <div>
         메인 스킬 레벨: {{ mainSkillLevel }}
-        <q-slider color="secondary" v-model="mainSkillLevel" :min="1" :max="6"/>
+        <q-slider color="secondary" v-model="mainSkillLevel" :min="1" :max="maxSkillLevel"/>
       </div>
       <div class="column items-center" style="visibility: hidden; height: 5vh;">
         <q-img
@@ -140,7 +140,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeUnmount, computed } from 'vue'
+import { ref, onBeforeMount, onBeforeUnmount, computed } from 'vue'
 import { useDownloadStore } from 'src/stores/downloadStore';
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { useHealerInputStore } from 'src/stores/inputStore';
@@ -176,11 +176,21 @@ const calcVer = ref(myHealerInputStore.calcVer)
 const healSkillCount = ref(myHealerInputStore.healSkillCount)
 // 힐러 메인 스킬 레벨
 const mainSkillLevel = ref(myHealerInputStore.mainSkillLevel)
+const maxSkillLevel = ref(6)
 // 이름
 const pkmName = ref(myHealerInputStore.pkmName)
 const evoCount = ref(myHealerInputStore.evoCount)
-// 강제로 힐러 포켓몬 정보 저장
-myPkmDBStore.fetchPkmData(myPkmDBStore.convertKorEn(pkmName.value))
+onBeforeMount(async()=>{
+  try{
+    // 처음엔 님피아가 기본 힐러로 설정돼있다
+    await myPkmDBStore.fetchPkmData(myPkmDBStore.convertKorEn(pkmName.value))  
+    maxSkillLevel.value = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill.maxLevel
+  }
+  catch(e){
+    console.log('healer fetch error', e)
+  }
+})
+
 // 선택한 힐러 도감번호
 const selectedHealerDex = ref(myHealerInputStore.selectedHealerDex)
 // 선택한 힐러 이미지
@@ -218,8 +228,6 @@ const fetchingApi = ref(false)
 const nameEmptyMsg = ref('힐러 포켓몬을 선택해주세요')
 const wrongUpMsg = ref('상승 성격을 다시 입력해주세요')
 const wrongDownMsg = ref('하락 성격을 다시 입력해주세요')
-// 선택한 포켓몬의 최대 메인 스킬 레벨
-const maxSkillLevel = ref(6)
 
 // 포켓몬을 선택하면 데이터 불러오기 + 식재료 목록 출력 + 이미지 불러오기
 const mysteryVar = computed(() => {

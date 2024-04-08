@@ -12,7 +12,7 @@
             <q-card-section class="row bg-sSkill">
               <q-avatar size="md" class="shadow-1" color="secondary" text-color="white" icon="priority_high" />
               <div class="q-mx-sm"></div>
-              <span class="text-caption q-py-sm">위 그래프는 {{ myProdCalcStore.simulationCount }}번 모의실험의 기댓값입니다.<br>매 시행마다 결과가 달라질 수 있습니다.</span>
+              <span class="text-caption q-py-sm">위 그래프는 {{ myProdCalcStore.simulationCount }}회 모의시행의 기댓값입니다.<br>매 시행마다 결과가 달라질 수 있습니다.</span>
             </q-card-section>
         </q-card>
     </div>
