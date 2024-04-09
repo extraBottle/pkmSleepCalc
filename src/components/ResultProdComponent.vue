@@ -13,7 +13,7 @@
             <q-card-section>                
                 <div class="full-width row justify-between">
                     <q-icon :class="cssGoodCamp" size="xl" name="img:images/goodcampticket.png">
-                        <q-tooltip>
+                        <q-tooltip :hide-delay="tooltipMobile()">
                             좋은 캠프 적용 중!
                         </q-tooltip>
                     </q-icon>
@@ -73,6 +73,7 @@ import { usePkmDBStore } from 'src/stores/pkmDBStore'
 import { useDownloadStore } from 'src/stores/downloadStore'
 import { useInputStore, useSleepTimeInputStore, useHealerInputStore } from 'src/stores/inputStore'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
+import { tooltipMobile } from 'src/utils/tooltip'
 
 defineOptions({
     name: "IngResult"
@@ -82,7 +83,6 @@ const prop = defineProps({
         type: Boolean
     }
 })
-
 
 const myPkmDBStore = usePkmDBStore()
 const myDownloadStore = useDownloadStore()

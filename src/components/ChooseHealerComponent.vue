@@ -71,11 +71,9 @@
       <q-slider color="secondary" v-model="pkmLevel" :min="1" :max="100"/>
     </div>
     <div class="row justify-center q-gutter-x-md">
-      <q-fab color="ingCircle" :icon="firstIng" direction="up">
-        <q-fab-action color="ingCircle" :icon="firstIng" />
-      </q-fab>
+      <q-btn fab color="ingCircle" :icon="firstIng" />
       <div>
-        <q-tooltip>
+        <q-tooltip :hide-delay="tooltipMobile()">
           레벨 30
         </q-tooltip>
         <q-fab v-if="pkmLevel < 30" color="ingCircle" icon="lock" text-color="teal" :disable= true direction="up" />
@@ -85,7 +83,7 @@
         </q-fab>
       </div>
       <div>
-        <q-tooltip>
+        <q-tooltip :hide-delay="tooltipMobile()">
           레벨 60
         </q-tooltip>
         <q-fab v-if="pkmLevel < 60" color="ingCircle" icon="lock" text-color="teal" :disable= true direction="up" />
@@ -143,6 +141,7 @@ import { useDownloadStore } from 'src/stores/downloadStore';
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { useHealerInputStore } from 'src/stores/inputStore';
 import { loadingCalc, stopLoading } from 'src/utils/loading';
+import { tooltipMobile } from 'src/utils/tooltip';
 
 defineOptions({
   name: 'ChooseHealerComponent'
@@ -164,7 +163,7 @@ onBeforeUnmount(()=>{
     fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
     selectedHealerDex.value, mainSkillLevel.value,)
 })
-
+const $q = useQuasar()
 const myDownloadStore = useDownloadStore()
 const myPkmDBStore = usePkmDBStore()
 const myHealerInputStore = useHealerInputStore()

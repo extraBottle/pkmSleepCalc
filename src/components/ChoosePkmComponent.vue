@@ -28,11 +28,9 @@
       <q-slider color="secondary" v-model="pkmLevel" :min="1" :max="100"/>
     </div>
     <div class="row justify-center q-gutter-x-md">
-      <q-fab color="ingCircle" :icon="firstIng" direction="up">
-        <q-fab-action color="ingCircle" :icon="firstIng" />
-      </q-fab>
+      <q-btn fab color="ingCircle" :icon="firstIng" />
       <div>
-        <q-tooltip>
+        <q-tooltip :hide-delay="tooltipMobile()">
           레벨 30
         </q-tooltip>
         <q-fab v-if="pkmLevel < 30" color="ingCircle" icon="lock" text-color="teal" :disable= true direction="up" />
@@ -42,7 +40,7 @@
         </q-fab>
       </div>
       <div>
-        <q-tooltip>
+        <q-tooltip :hide-delay="tooltipMobile()">
           레벨 60
         </q-tooltip>
         <q-fab v-if="pkmLevel < 60" color="ingCircle" icon="lock" text-color="teal" :disable= true direction="up" />
@@ -108,10 +106,12 @@ import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { useDownloadStore } from 'src/stores/downloadStore'
 import { useInputStore } from 'src/stores/inputStore'
 import { loadingCalc, stopLoading } from 'src/utils/loading';
+import { tooltipMobile } from 'src/utils/tooltip'
 
 defineOptions({
   name: 'ChoosePkmComponent'
 })
+
 const myPkmDBStore = usePkmDBStore()
 myPkmDBStore.loadKorPkmName()
   
