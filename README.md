@@ -18,3 +18,9 @@
 
 **v1.0.1**
 - meta tag OG 추가
+
+**v1.0.2**
+- q-select dialog UI 개선
+- 처음 로딩시 불러오는 이미지를 public에서 불러오게 수정
+- quasar loading plugin으로 전부 변경
+- 손가락 흔들기 스킬 계산에 반영

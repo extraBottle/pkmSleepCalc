@@ -19,7 +19,7 @@
                     </q-icon>
                     <q-select outlined dense v-model="chooseRange" :options="options" />
                 </div>
-                <div class="text-h5 text-center text-weight-bold">
+                <div class="text-h5 text-center text-weight-bold clean-wrap">
                     {{ dishOrDaily }}
                     <span class="text-subtitle2">(기댓값)</span>
                 </div>
@@ -172,20 +172,20 @@ onMounted(()=>{
             if(calcVer === 'proVer'){
                 myProdCalcStore.onlyBaseSpeedH = myProdCalcStore.calcBaseSpeed(pkmLevelH, upNatureH, downNatureH, upMult, downMult, hBonus, hbMult, mySubH, allDataH, maxHS, useGoodCamp.value)
                 myProdCalcStore.finalSkillProcH = myProdCalcStore.calcSkillProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
-                myProdCalcStore.calcEnergyCurve(pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                myProdCalcStore.calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
                 allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
                 // 힐러 식재료 확률
                 myProdCalcStore.finalIngProcH = myProdCalcStore.calcIngProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
             }
             else{
-                myProdCalcStore.calcEnergyCurve(pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)            
+                myProdCalcStore.calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)            
             }
             // 기력 적용 도우미 속도
             myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)
             // 식재료 확률
             myProdCalcStore.finalIngProc = myProdCalcStore.calcIngProc(allData, upNature, downNature, upMult, downMult, mySub)
             // 식재료 종류별 생산량
-            myProdCalcStore.calcLeveLIng(false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+            myProdCalcStore.calcLeveLIng(totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
         }, 30)
     }
 })

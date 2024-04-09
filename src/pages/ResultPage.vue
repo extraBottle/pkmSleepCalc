@@ -35,26 +35,23 @@
                     <q-btn push icon="refresh" color="primary" @click="redo" label="다시하기" text-color="white" />
                     <div>
                         <q-btn v-if="step > 1" flat color="primary" @click="stepper.previous()" label="뒤로" class="q-ml-sm" />
-                        <q-btn v-if="step < 3" @click="stepper.next()" color="primary" label='다음' />
+                        <q-btn v-if="step < 2" @click="stepper.next()" color="primary" label='다음' />
                     </div>
                 </q-stepper-navigation>
             </template>
         </q-stepper>
-        <q-inner-loading :showing="myProdCalcStore.calcLoading" >
-            <q-spinner-hourglass size="3em"/>
-            계산 중...
-        </q-inner-loading>
     </q-page>
 </template>
   
 <script setup>
-import { ref, onBeforeMount } from 'vue'
+import { ref, onBeforeMount, onBeforeUnmount, watchEffect } from 'vue'
 import ResultProdComponent from 'src/components/ResultProdComponent.vue'
 import ResultEnergyComponent from 'src/components/ResultEnergyComponent.vue'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
 import { useInputStore } from 'src/stores/inputStore'
 import { useRouter } from 'vue-router'
 import { popupFail } from 'src/utils/popup'
+import { loadingCalc, stopLoading } from 'src/utils/loading'
 
 defineOptions({
     name: 'ResultPage'
@@ -68,6 +65,19 @@ onBeforeMount(()=>{
     if(!myInputStore.hasEssential()){
         useRouter().push('/prodcalc')
         popupFail('포켓몬 정보를 입력해주세요')
+    }
+    else{
+        // loading screen 등장
+        loadingCalc('계산 중...')
+    }
+})
+onBeforeUnmount(()=>{
+    myProdCalcStore.clearCalc()
+})
+watchEffect(()=>{
+    if(!myProdCalcStore.calcLoading){
+        // 계산 완료시 로딩 종료
+        stopLoading()
     }
 })
 

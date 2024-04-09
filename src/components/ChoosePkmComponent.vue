@@ -8,15 +8,14 @@
         :src="selectPkmImage"
         fit="scale-down"
         style="max-width: 300px;"
+        no-spinner
+        @load="stopLoading()"
         >
-      <!-- <template v-slot:loading>
-        <q-spinner-hourglass
-          color="primary"/>
-      </template> -->
     </q-img>
-    <q-select class="full-width q-mt-none" filled color="secondary" v-model="pkmName" :options="pkmNameList" label="포켓몬 이름"
-    :error="props.nameValid" :error-message="nameEmptyMsg" @filter="searchName"
-    use-input hide-selected fill-input input-debounce="0" 
+    <q-select class="full-width q-mt-none" filled color="secondary" v-model="pkmName" :options="pkmNameList" 
+    label="포켓몬 이름"
+    :error="props.nameValid" :error-message="nameEmptyMsg" @filter="searchName" @add="fetchApiIng()"
+    use-input hide-selected fill-input input-debounce="0"
     hint="입력하고 엔터를 눌러서 검색" hide-bottom-space />
     <div class="text-center">
       직접 진화시킨 횟수: {{ evoCount }} 회
@@ -66,7 +65,8 @@
       <q-chip square class="bg-goldSkill">기력 회복 보너스</q-chip> 개수: {{ erbCount }}
       <q-slider color="secondary" v-model="erbCount" :min="0" :max="5"/>
     </div>
-    <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.subSkillList" label="서브 스킬 (최대 6개)" behavior="dialog" max-values="6">
+    <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.subSkillList"
+     label="서브 스킬 (최대 6개)" behavior="dialog" max-values="6">
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps" :class="scope.opt.bg">
           <q-item-section>
@@ -84,8 +84,10 @@
           >{{ scope.opt.label }}</q-chip>
       </template>
     </q-select>
-    <q-select class="full-width" filled color="secondary" v-model="upNature" :options="myPkmDBStore.upNatureList" label="상승 성격" behavior="dialog" :error="props.upValid" :error-message="wrongUpMsg" hide-bottom-space />
-    <q-select class="full-width" filled color="secondary" v-model="downNature" :options="myPkmDBStore.downNatureList" label="하락 성격" behavior="dialog" :error="props.downValid" :error-message="wrongDownMsg" hide-bottom-space />
+    <q-select class="full-width" filled color="secondary" v-model="upNature" :options="myPkmDBStore.upNatureList" 
+    label="상승 성격" behavior="dialog" :error="props.upValid" :error-message="wrongUpMsg" hide-bottom-space />
+    <q-select class="full-width" filled color="secondary" v-model="downNature" :options="myPkmDBStore.downNatureList" 
+    label="하락 성격" behavior="dialog" :error="props.downValid" :error-message="wrongDownMsg" hide-bottom-space />
     <q-card class="bg-sSkill">
       <q-card-section>
         <q-checkbox v-model="useGoodCamp">
@@ -96,15 +98,16 @@
         </q-checkbox>
       </q-card-section>
     </q-card>
+    <span class="hidden">{{ mysteryVar }}</span>
   </div>
-    <span style="display: none;">{{ mysteryVar }}</span>
 </template>
 
 <script setup>
-import { ref, onBeforeUnmount, computed } from 'vue'
+import { ref, onBeforeMount, onBeforeUnmount, computed } from 'vue'
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { useDownloadStore } from 'src/stores/downloadStore'
 import { useInputStore } from 'src/stores/inputStore'
+import { loadingCalc, stopLoading } from 'src/utils/loading';
 
 defineOptions({
   name: 'ChoosePkmComponent'
@@ -177,7 +180,7 @@ const downNature = ref(myInputStore.downNature)
 // 선택한 포켓몬 도감번호
 const selectedPkmDex = ref(myInputStore.selectedPkmDex)
 // 선택한 포켓몬 이미지
-const selectPkmImage = ref(myDownloadStore.fetchImage('pkm', selectedPkmDex.value))
+const selectPkmImage = ref()
 // 선택한 포켓몬의 최대 메인 스킬 레벨
 const maxSkillLevel = ref(6)
 const mainSkillLevel = ref(myInputStore.mainSkillLevel)
@@ -219,11 +222,8 @@ function chooseIng(location, ingNum){
   }
 }
 // 포켓몬을 선택하면 데이터 불러오기 + 식재료 목록 출력 + 이미지 불러오기
-const mysteryVar = computed(() => {
-  return pkmName.value.length > 0 ? fetchApiIng() : 0
-})
 async function fetchApiIng(){
-  
+  loadingCalc('불러오는 중...')
   await myPkmDBStore.fetchPkmData(myPkmDBStore.convertKorEn(pkmName.value))
   firstIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 0))
   fixedSecondIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 1))
@@ -253,6 +253,20 @@ function searchName (val, update, abort) {
   })
 }
 
+onBeforeMount(()=>{
+  // 첫 로딩때 미리 저장해둔 이미지 불러와야 로딩 빠름
+  if(pkmName.value.length > 0){
+    selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)
+  }
+  else{
+    selectPkmImage.value = 'images/pikachuStanding.png'
+  }
+})
+
+const mysteryVar = computed(() => {
+  return pkmName.value.length > 0 ? fetchApiIng() : 0
+})
+
 // 부모 컴포넌트에서 입력했는지 확인
 defineExpose({
   pkmName,
@@ -261,3 +275,4 @@ defineExpose({
 })
 
 </script>
+

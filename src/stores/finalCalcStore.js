@@ -103,7 +103,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         return allData.frequency * multSpeed * convertS * goodCampBoost
     }
 
-    function calcEnergyCurve(pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+    function calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
         allDataH, evoCountH = 0, mySubH = [], pkmLevelH = 0, secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = ''){
         // maxE = 150
         // mainSkillLevel = myHealerInputStore.mainSkillLevel
@@ -156,6 +156,10 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         else if(allData.skill.name.includes('Energizing Cheer')){
             hasSelfHeal = true
             strangeHeal = 5
+        }
+        else if(allData.skill.name.includes('Metronome')){
+            hasSelfHeal = true
+            strangeHeal = (totalMainSkill - 1) / (6/5)
         }
         function limitE(ee){
             // 최대 기력 제한
@@ -462,7 +466,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                             const totalCountHelpS = calcSleepSpeedCount(sleepTime, trySkillE,
                                 speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
                             // 기상 직후 스킬 발동률 업데이트
-                            morningProcS = 1 - Math.pow((1 - finalSkillProc.value), totalCountHelpS)
+                            morningProcS = 1 - Math.pow((1 - finalSkillProc.value / strangeHeal), totalCountHelpS)
                         }                        
                         // 힐러 수면 중 전체 도우미 횟수 기댓값
                         const totalCountHelpH = calcSleepSpeedCount(sleepTime, beforeSleepH,
@@ -560,7 +564,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         console.log('머무르는 시간', timeStaying.value)
     }
     // 식재료 종류별 생산량 계산
-    function calcLeveLIng(inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){
+    function calcLeveLIng(totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){
         
         // 수면 중에 물어오는 식재료 구하기용 수면 도우미 횟수 (최대 소지 수 안에서)
         const helpCountSleep = calcSleepSpeedCount(sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)
@@ -636,17 +640,18 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             }
         }
         // 메인 스킬 식재 스킬일 경우 식재량에 추가
-        if(allData.skill.unit === 'ingredients'){
+        if(allData.skill.unit === 'ingredients' || allData.skill.name === "Metronome"){
             // 총 식재료 종류
             (async()=>{
                 try{
                     const response = await fetch('https://api.sleepapi.net/api/ingredient')
-                    const json = await response.json()  
+                    const json = await response.json() 
+                    const divideExpect = allData.skill.name === "Metronome" ? (totalMainSkill - 1) : 1
                     // 스킬 한번당 가져오는 종류당 식재료량                  
                     const ingPerSkill = Math.ceil(allData.skill.amount[mainSkillLevel - 1] / 3)
                     // 특정 식재료가 스킬 한번에 나올 확률
                     const expectOne = 1 - (1 - 1/json.length) * (1 - 1/(json.length - 1)) * (1 - 1/(json.length - 2))
-                    const addIngSkill = (finalSpeedCount.value + helpCountSleep) * finalSkillProc.value * ingPerSkill * expectOne              
+                    const addIngSkill = (finalSpeedCount.value + helpCountSleep) * finalSkillProc.value * ingPerSkill * expectOne / divideExpect            
                     checkIngSkillDisplay.value = true
                     // 식재 메인 스킬 발동만큼 식재량 증가                    
                     totalIngCalc.value[firstIng] += addIngSkill

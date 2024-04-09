@@ -17,3 +17,12 @@
 .bg-googleDark {
     background: #e6e3e3 !important;
 }
+.q-select__dialog{
+    @media(max-width: $breakpoint-sm-max){
+        max-width: 70% !important;
+        max-height: 50vh !important;
+    }
+}
+.clean-wrap{
+    word-break: keep-all !important;
+}

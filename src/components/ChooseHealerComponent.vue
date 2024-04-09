@@ -53,11 +53,12 @@
         style="max-width: 300px"
         fit="scale-down"
         no-spinner
-        @load="fetchingApi = false" />
+        @load="stopLoading()"/>
     <q-select class="full-width q-mt-none" filled color="secondary" v-model="pkmName"
-    :options="pkmNameList" label="포켓몬 이름"
+    :options="pkmNameList" 
+    label="포켓몬 이름"
     :error="props.nameValid" :error-message="nameEmptyMsg"
-    hint="입력하고 엔터를 눌러서 검색" @filter="searchName" 
+    hint="입력하고 엔터를 눌러서 검색" @filter="searchName" @add="fetchApiIng()"
     use-input hide-selected fill-input input-debounce="0" hide-bottom-space/>
     <div class="text-center">
       직접 진화시킨 횟수: {{ evoCount }} 회
@@ -99,7 +100,8 @@
       메인 스킬 레벨: {{ mainSkillLevel }}
       <q-slider color="secondary" v-model="mainSkillLevel" :min="1" :max="maxSkillLevel"/>
     </div>
-    <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.subSkillList" label="서브 스킬 (최대 6개)" behavior="dialog" max-values="6">
+    <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.subSkillList"
+    label="서브 스킬 (최대 6개)" behavior="dialog" max-values="6">
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps" :class="scope.opt.bg">
           <q-item-section>
@@ -117,15 +119,11 @@
           >{{ scope.opt.label }}</q-chip>
       </template>
     </q-select>
-    <q-select class="full-width" filled color="secondary" v-model="upNature" :options="myPkmDBStore.upNatureList" label="상승 성격" behavior="dialog" :error="props.upValid" :error-message="wrongUpMsg" hide-bottom-space></q-select>
-    <q-select class="full-width" filled color="secondary" v-model="downNature" :options="myPkmDBStore.downNatureList" label="하락 성격" behavior="dialog" :error="props.downValid" :error-message="wrongDownMsg" hide-bottom-space></q-select>
-    <span style="display: none;">{{ mysteryVar }}</span>
-    <q-spinner-hourglass
-      v-if="fetchingApi"
-      color="primary"
-      size="4em"
-      class="absolute-center"
-    />
+    <q-select class="full-width" filled color="secondary" v-model="upNature" :options="myPkmDBStore.upNatureList" 
+    label="상승 성격" behavior="dialog" :error="props.upValid" :error-message="wrongUpMsg" hide-bottom-space></q-select>
+    <q-select class="full-width" filled color="secondary" v-model="downNature" :options="myPkmDBStore.downNatureList" 
+    label="하락 성격" behavior="dialog" :error="props.downValid" :error-message="wrongDownMsg" hide-bottom-space></q-select>
+    <span class="hidden">{{ mysteryVar }}</span>
     </div>
     <div v-else>
       <div class="column items-center" style="visibility: hidden; height: 5vh;">
@@ -144,6 +142,7 @@ import { ref, onBeforeMount, onBeforeUnmount, computed } from 'vue'
 import { useDownloadStore } from 'src/stores/downloadStore';
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { useHealerInputStore } from 'src/stores/inputStore';
+import { loadingCalc, stopLoading } from 'src/utils/loading';
 
 defineOptions({
   name: 'ChooseHealerComponent'
@@ -223,18 +222,14 @@ const fixedThirdIngName = ref(myHealerInputStore.fixedThirdIng)
 const fixedSecondIng = ref(myDownloadStore.fetchIcon('ing', fixedSecondIngName.value.replace(/\s/g, "").toLowerCase()))
 // 세번째 식재료
 const fixedThirdIng = ref(myDownloadStore.fetchIcon('ing', fixedThirdIngName.value.replace(/\s/g, "").toLowerCase()))
-// api 불러올때 로딩중 아이콘
-const fetchingApi = ref(false)
+
 const nameEmptyMsg = ref('힐러 포켓몬을 선택해주세요')
 const wrongUpMsg = ref('상승 성격을 다시 입력해주세요')
 const wrongDownMsg = ref('하락 성격을 다시 입력해주세요')
 
 // 포켓몬을 선택하면 데이터 불러오기 + 식재료 목록 출력 + 이미지 불러오기
-const mysteryVar = computed(() => {
-  return pkmName.value.length > 0 ? fetchApiIng() : 0
-})
 async function fetchApiIng(){
-  fetchingApi.value = true
+  loadingCalc('불러오는 중...')
   await myPkmDBStore.fetchPkmData(myPkmDBStore.convertKorEn(pkmName.value))
   firstIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 0))
   fixedSecondIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 1))
@@ -261,6 +256,10 @@ function searchName(val, update, abort) {
     pkmNameList.value = myPkmDBStore.korPkmName.filter(v => v.indexOf(val) > -1)
   })
 }
+const mysteryVar = computed(() => {
+  return pkmName.value.length > 0 ? fetchApiIng() : 0
+})
+
 defineExpose({
   calcVer,
   pkmName,

@@ -5,18 +5,21 @@
         class="floating1 absolute"
         src="images/fancyapple.png"
         fit="scale-down"
+        no-spinner
         style="max-height: 300px;"></q-img>
         <q-img
         class="floating2 absolute"
         src="images/warmingginger.png"
         fit="scale-down"
         position="left center"
+        no-spinner
         style="max-height: 370px;"></q-img>
         <q-img
         class="floating2 absolute"
         src="images/fancyegg.png"
         fit="scale-down"
         position="right center"
+        no-spinner
         style="max-height: 370px;"></q-img>
       <q-img
       class="absolute-bottom"
