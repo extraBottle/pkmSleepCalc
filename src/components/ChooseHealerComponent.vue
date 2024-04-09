@@ -163,7 +163,6 @@ onBeforeUnmount(()=>{
     fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
     selectedHealerDex.value, mainSkillLevel.value,)
 })
-const $q = useQuasar()
 const myDownloadStore = useDownloadStore()
 const myPkmDBStore = usePkmDBStore()
 const myHealerInputStore = useHealerInputStore()

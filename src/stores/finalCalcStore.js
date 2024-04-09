@@ -52,7 +52,6 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 ingSub += mySub[i].mult
             }
         }
-        console.log('calcIngProc', baseProc, ingNature, ingSub)
         return (baseProc * ingNature * ingSub / 100)
     }
     // 스킬 확률 계산 return
@@ -68,7 +67,6 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 skillSub += mySub[i].mult
             }
         }
-        console.log('calcsKillProc', baseProc, skillNature, skillSub)
         return (baseProc * skillNature * skillSub / 100)
     }
 
@@ -97,8 +95,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         speedSub = speedSub + totalHB >= maxHS ? maxHS : speedSub + totalHB
 
         // 포켓몬의 기본 도우미 속도 계산 (기력 제외)
-        const multSpeed = (((501 - level) / 500) * speedNature  * (1 - speedSub))
-        console.log('calcBaseSpeed')
+        const multSpeed = (((501 - level) / 500) * speedNature  * (1 - speedSub))    
         const goodCampBoost = useGoodCamp ? 0.8 : 1.0
         return allData.frequency * multSpeed * convertS * goodCampBoost
     }
@@ -180,7 +177,6 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             if(hasSelfHeal){
                 selfHealCount = Math.round(skillCount * (allData.skillPercentage / allDataH.skillPercentage) * (allDataH.frequency / allData.frequency) / strangeHeal)
             }
-            console.log('자힐 횟수', selfHealCount)
             const timePerSelf = Math.floor(activeTime / selfHealCount)
             function energyCurve(z, s = 1, eSkill = enerPerSkill){
                 let energyValue = 0;                
@@ -220,15 +216,13 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 })
                 if(i === 0){
                     skillLeft -= 1
-                }
-                console.log('밥시간', breakfastX, lunchX, dinnerX)
+                }                
                 if(i === breakfastX || i === lunchX || i === dinnerX){
                     // 식사 기력 회복                                                                           
                     energyAxis.value.push({
                         'x': i,
                         'y': limitE(beforeE + calcMeal(beforeE))
-                    })
-                    console.log('밥먹자')
+                    })                    
                 }     
                 if(calcVer === 'lightVer' && i > 0){
                     if(hasSelfHeal && i % timePerSelf === 0 && selfHealCount > 0){
@@ -316,8 +310,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 }
                 if(energyValue < 0){
                     return 0
-                }
-                console.log('계산 결과 기력=', energyValue)
+                }                
                 return energyValue;
             }
         
@@ -476,12 +469,9 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         morningProc = 1 - Math.pow((1 - finalSkillProcH.value), totalCountHelpH)
                         
                     }  
-                }
-                // console.log('simulation count =', z)
-            }
-            // console.log('all axis', energyAxis.value)
-        }
-        console.log('calcEnergyCurve')
+                }                
+            }            
+        }        
     }
     // 기력을 도우미 속도에 대입해서 총 도우미 횟수 계산
     function calcSpeedWithEner(speedEnerMultList = [], calcVer="target", enerPerHour){
@@ -511,8 +501,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         // 주어진 에너지 구간의 경계선에 있는 시간대 x값 찾기
         function findTimeStamp(start, end, targetE){
             return (targetE - energyAxis.value[start].y) / ((energyAxis.value[start].y - energyAxis.value[end].y) / (energyAxis.value[start].x - energyAxis.value[end].x)) + energyAxis.value[start].x
-        }
-        // console.log('axis', energyAxis.value)
+        }        
         // 에너지 그래프를 구간별로 쪼개서 머무르는 시간 계산
         for(let i = 0; i < energyAxis.value.length - 1; i++){
             // 양끝점이 같은 에너지 구간에 있는지 확인하고
@@ -559,17 +548,13 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             addAllTime += timeStaying.value[key] / parseFloat(key)
         }
         finalSpeedCount.value = Math.floor(addAllTime / onlyBaseSpeed.value)
-        calcLoading.value = false
-        console.log('calcSpeedWithEner')
-        console.log('머무르는 시간', timeStaying.value)
+        calcLoading.value = false        
     }
     // 식재료 종류별 생산량 계산
     function calcLeveLIng(totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){
         
         // 수면 중에 물어오는 식재료 구하기용 수면 도우미 횟수 (최대 소지 수 안에서)
-        const helpCountSleep = calcSleepSpeedCount(sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)
-        console.log('count', helpCountSleep)
-        console.log('총 도우미 회ㅓㅅㅅ', finalSpeedCount.value)
+        const helpCountSleep = calcSleepSpeedCount(sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)        
         // 특정 레벨 식재량 찾기 30렙 이상만
         function findAmount(n, l){
             let levAmount= 0
@@ -578,9 +563,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             }
             else{
                 levAmount = allData[`ingredient${l}`].find(obj => obj.ingredient.longName === n).amount
-            }
-            console.log('levamount', levAmount, finalIngProc.value)
-            console.log('식재 개수 계산', (finalSpeedCount.value + helpCountSleep) * finalIngProc.value * levAmount)
+            }            
             if(inSleep){
                 return (helpCountSleep * finalIngProc.value * levAmount)
             }
@@ -667,10 +650,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     console.log('ing Fetch problem: ' + err.message)
                 }
             })()
-        }
-        
-        
-        console.log('calcLevelIng')
+        }        
     }
     // 잘때 도우미 횟수 return (단, 소지수 초과한 열매 only 도우미는 계산 X)
     function calcSleepSpeedCount(sleepTime, energyBeforeSleep, speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, target='target', useGoodCamp){
@@ -786,8 +766,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         if(Math.ceil(inventorySize / (berryRatio + firstIngRatio + secondIngRatio + thirdIngRatio)) > miniSpeedCount){
             return miniSpeedCount
         }
-        else{
-            console.log('nan???', inventorySize, typeof(berryRatio), typeof(firstIngRatio), typeof(secondIngRatio), typeof(thirdIngRatio))
+        else{            
             return  Math.ceil(inventorySize / (berryRatio + firstIngRatio + secondIngRatio + thirdIngRatio))
         }
     }
