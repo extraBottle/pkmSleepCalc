@@ -55,10 +55,13 @@
                 </div>
                 <div v-if="myProdCalcStore.checkIngSkillDisplay" class="col">
                     <q-card>
-                        <q-card-section class="row bg-sSkill">
+                        <q-card-section class="row bg-sSkill no-wrap">
                             <q-avatar class="shadow-1" color="ingCircle" icon="img:images/ingall.png" />
                             <q-separator vertical class="q-mx-md"/>
-                            <span class="text-h5 q-py-sm">{{ amountIngSkill }} 개<span class="text-subtitle1"> (나머지 모든 식재료)</span></span>
+                            <div class="row q-py-sm">
+                                <div class="text-h5 no-wrap">{{ amountIngSkill }} 개&nbsp;</div>
+                                <div class="text-subtitle1 no-wrap">(나머지 모든 식재료)</div>
+                            </div>
                         </q-card-section>
                     </q-card>
                 </div>
