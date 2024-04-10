@@ -24,11 +24,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
 
 defineOptions({
     name: "EnerResult"
+})
+const prop = defineProps({
+    startLoad: {
+        type: Boolean
+    }
 })
 
 const myProdCalcStore = useProdCalcStore()
@@ -38,7 +43,9 @@ function restartCalc(){
   energyChartRef.value.updateSeries([])
   // loading start
   myProdCalcStore.calcLoading = true
-  setTimeout(async()=>{
+}
+watchEffect(async()=>{
+  if(prop.startLoad){
     const pkmDB = await import('src/stores/pkmDBStore')
     const inp = await import('src/stores/inputStore')
 
@@ -99,8 +106,8 @@ function restartCalc(){
       name: '남은 기력량',
       data: myProdCalcStore.energyAxis
     }])
-  }, 30)
-}
+  }
+})
 
 const chartOptions = {
   chart : {

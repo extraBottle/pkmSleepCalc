@@ -14,14 +14,14 @@
                 title="생산량 보고서"
                 icon="assignment"
             >
-            <ResultProdComponent />
+            <ResultProdComponent :start-load="handleStartLoad" />
             </q-step>
             <q-step
                 :name="2"
                 title="기력 그래프"
                 icon="favorite"
             >
-            <ResultEnergyComponent />
+            <ResultEnergyComponent :start-load="handleStartLoad" />
             </q-step>            
             <!-- <q-step
                 :name="3"
@@ -52,6 +52,7 @@ import { useInputStore } from 'src/stores/inputStore'
 import { useRouter } from 'vue-router'
 import { popupFail } from 'src/utils/popup'
 import { loadingCalc, stopLoading } from 'src/utils/loading'
+import { useQuasar } from 'quasar'
 
 defineOptions({
     name: 'ResultPage'
@@ -61,6 +62,9 @@ defineOptions({
 const myInputStore = useInputStore()
 const myProdCalcStore = useProdCalcStore()
 const router = useRouter()
+const $q = useQuasar()
+// 이거 플래그가 켜지면 계산 시작
+const handleStartLoad = ref(false)
 onBeforeMount(()=>{
     if(!myInputStore.hasEssential()){
         useRouter().push('/prodcalc')
@@ -75,19 +79,25 @@ watchEffect(()=>{
     if(myInputStore.hasEssential()){
         if(myProdCalcStore.calcLoading){
             // loading screen 등장
-            loadingCalc('계산 중...')
+            loadingCalc('계산 중...')            
             timerForLoad = setTimeout(()=>{
                 // 로딩하고 2분 지나도 결과 안나오면 강제종료
                 if(myProdCalcStore.calcLoading){
                     stopLoading()
+                    handleStartLoad.value = false
                     router.push('prodCalc')
                     popupFail('오류가 발생했습니다. 잠시 후 다시 시도해주세요')
                 }
-            }, 120000)            
+            }, 120000)
+            const speedTimer = $q.platform.is.mobile ? 100 : 30
+            setTimeout(()=>{
+                handleStartLoad.value = true   
+            }, speedTimer)   
         }
         else{
             // 계산 완료시 로딩 종료
             clearTimeout(timerForLoad)
+            handleStartLoad.value = false
             stopLoading()
         }
     }
