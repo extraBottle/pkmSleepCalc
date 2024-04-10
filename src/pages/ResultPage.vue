@@ -98,8 +98,8 @@ const step = ref(1)
 const stepper = ref()
 
 function redo(){
-    router.push('/prodcalc')
     myProdCalcStore.clearCalc()
+    router.push('/prodcalc')
 }
 </script>
   
