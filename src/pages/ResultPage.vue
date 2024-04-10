@@ -73,12 +73,7 @@ onBeforeUnmount(()=>{
 let timerForLoad = null
 watchEffect(()=>{
     if(myInputStore.hasEssential()){
-        if(!myProdCalcStore.calcLoading){
-            // 계산 완료시 로딩 종료
-            clearTimeout(timerForLoad)
-            stopLoading()
-        }
-        else{
+        if(myProdCalcStore.calcLoading){
             // loading screen 등장
             loadingCalc('계산 중...')
             timerForLoad = setTimeout(()=>{
@@ -88,7 +83,12 @@ watchEffect(()=>{
                     router.push('prodCalc')
                     popupFail('오류가 발생했습니다. 잠시 후 다시 시도해주세요')
                 }
-            }, 120000)
+            }, 120000)            
+        }
+        else{
+            // 계산 완료시 로딩 종료
+            clearTimeout(timerForLoad)
+            stopLoading()
         }
     }
 })

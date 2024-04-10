@@ -25,7 +25,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
     // 각 구간별 머무르는 시간 { '0.45' : 500 } 꼴 (sec)
     const timeStaying = ref({})
     // 로딩 화면 관리
-    const calcLoading = ref(true)
+    const calcLoading = ref(false)
     // 시간 단위 쪼개기 범위 (지금은 30분 단위) -> 이걸 해당 시간에 곱하면 자동 변환
     const convertH = 2
     const convertM = 1 / 30
@@ -784,7 +784,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         checkSecondDisplay.value = false
         checkThirdDisplay.value = false
         checkIngSkillDisplay.value = false
-        calcLoading.value = true
+        calcLoading.value = false
         totalIngCalc.value = {}
         timeStaying.value = {}
     }
