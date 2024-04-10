@@ -166,6 +166,8 @@ const dishOrDaily = computed(()=>{
 
 onMounted(()=>{
     if(myInputStore.hasEssential() && myProdCalcStore.onlyBaseSpeed === 0){
+        // loading start
+        myProdCalcStore.calcLoading = true
         setTimeout(function(){
             // 기력 제외 도우미 속도
             myProdCalcStore.onlyBaseSpeed = myProdCalcStore.calcBaseSpeed(pkmLevel, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub, allData, maxHS, useGoodCamp.value)
