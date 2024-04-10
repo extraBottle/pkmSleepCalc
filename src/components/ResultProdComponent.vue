@@ -97,7 +97,6 @@ const myProdCalcStore = useProdCalcStore()
 // 선택한 포켓몬 이미지
 const selectPkmImage = ref(myDownloadStore.fetchImage('pkm', myInputStore.selectedPkmDex))
 const pkmName = ref(myInputStore.pkmName)
-
 const pkmLevel = myInputStore.pkmLevel
 const upNature = myInputStore.upNature
 const downNature = myInputStore.downNature
@@ -171,22 +170,22 @@ onMounted(()=>{
             // 기력 제외 도우미 속도
             myProdCalcStore.onlyBaseSpeed = myProdCalcStore.calcBaseSpeed(pkmLevel, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub, allData, maxHS, useGoodCamp.value)
             myProdCalcStore.finalSkillProc = myProdCalcStore.calcSkillProc(allData, upNature, downNature, upMult, downMult, mySub)
+            // 식재료 확률
+            myProdCalcStore.finalIngProc = myProdCalcStore.calcIngProc(allData, upNature, downNature, upMult, downMult, mySub)
             // 기력 그래프
             if(calcVer === 'proVer'){
                 myProdCalcStore.onlyBaseSpeedH = myProdCalcStore.calcBaseSpeed(pkmLevelH, upNatureH, downNatureH, upMult, downMult, hBonus, hbMult, mySubH, allDataH, maxHS, useGoodCamp.value)
                 myProdCalcStore.finalSkillProcH = myProdCalcStore.calcSkillProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
-                myProdCalcStore.calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-                allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
                 // 힐러 식재료 확률
                 myProdCalcStore.finalIngProcH = myProdCalcStore.calcIngProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
+                myProdCalcStore.calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)               
             }
             else{
                 myProdCalcStore.calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)            
             }
             // 기력 적용 도우미 속도
-            myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)
-            // 식재료 확률
-            myProdCalcStore.finalIngProc = myProdCalcStore.calcIngProc(allData, upNature, downNature, upMult, downMult, mySub)
+            myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)            
             // 식재료 종류별 생산량
             myProdCalcStore.calcLeveLIng(totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
         }, 30)

@@ -23,6 +23,12 @@
         max-height: 50vh !important;
     }
 }
+.apexchart_width{
+    width: 80% !important;
+    @media(max-width: $breakpoint-sm-max){
+        width: 100% !important;
+    }
+}
 .clean-wrap{
     word-break: keep-all !important;
 }

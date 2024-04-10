@@ -109,6 +109,9 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         // skillCount = myHealerInputStore.healSkillCount
         // timeForFull = 디비 스토어에서, 100% 기력 회복에 필요한 수면 시간 (h)
         // erbCount = myInputStore.erbCount
+
+        // 혹시 몰라서 좌표값 초기화
+        energyAxis.value = []
         let enerPerSkill = allDataH.skill.amount[mainSkillLevel - 1]
         let selfPerSkill = allData.skill.amount[selfSkillLevel - 1]
         let splitSleep = sleepTime.split(':')
@@ -246,9 +249,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 }
             }
         }
-        else if(calcVer === 'proVer'){
-            // 혹시 몰라서 좌표값 초기화
-            energyAxis.value = []
+        else if(calcVer === 'proVer'){            
             // timeStaying.value = {}
 
             // 힐러 본인의 기력 회복량 구하기

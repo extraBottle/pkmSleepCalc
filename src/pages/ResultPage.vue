@@ -66,30 +66,36 @@ onBeforeMount(()=>{
         useRouter().push('/prodcalc')
         popupFail('포켓몬 정보를 입력해주세요')
     }
-    else{
-        // loading screen 등장
-        loadingCalc('계산 중...')
-    }
 })
 onBeforeUnmount(()=>{
     myProdCalcStore.clearCalc()
 })
+let timerForLoad = null
 watchEffect(()=>{
-    if(!myProdCalcStore.calcLoading){
-        // 계산 완료시 로딩 종료
-        stopLoading()
+    if(myInputStore.hasEssential()){
+        if(!myProdCalcStore.calcLoading){
+            // 계산 완료시 로딩 종료
+            clearTimeout(timerForLoad)
+            stopLoading()
+        }
+        else{
+            // loading screen 등장
+            loadingCalc('계산 중...')
+            timerForLoad = setTimeout(()=>{
+                // 로딩하고 2분 지나도 결과 안나오면 강제종료
+                if(myProdCalcStore.calcLoading){
+                    stopLoading()
+                    router.push('prodCalc')
+                    popupFail('오류가 발생했습니다. 잠시 후 다시 시도해주세요')
+                }
+            }, 120000)
+        }
     }
 })
 
 // for q-stepper
 const step = ref(1)
 const stepper = ref()
-
-// watch(myProdCalcStore.finalSpeedCount, (newCount) => {
-//     if(newCount > 0){
-//         startCalc.value = false
-//     }
-// })
 
 function redo(){
     router.push('/prodcalc')
