@@ -100,7 +100,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         return allData.frequency * multSpeed * convertS * goodCampBoost
     }
 
-    function calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+    function calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
         allDataH, evoCountH = 0, mySubH = [], pkmLevelH = 0, secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = ''){
         // maxE = 150
         // mainSkillLevel = myHealerInputStore.mainSkillLevel
@@ -112,8 +112,36 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
 
         // 혹시 몰라서 좌표값 초기화
         energyAxis.value = []
+        // 힐러 스킬 당 타겟 포켓몬 회복량
         let enerPerSkill = allDataH.skill.amount[mainSkillLevel - 1]
+        // 타겟 포켓몬 자체 스킬 당 자체 회복량
         let selfPerSkill = allData.skill.amount[selfSkillLevel - 1]
+        // 자힐몬인지 여부
+        let hasSelfHeal = false
+        // 순수 자힐 아닌 확률적 자힐은 그만큼 감점
+        let strangeHeal = 1
+        if(allData.skill.name.includes('Charge Energy')){
+            hasSelfHeal = true
+            strangeHeal = 1
+        }
+        else if(allData.skill.name.includes('Energizing Cheer')){
+            hasSelfHeal = true
+            strangeHeal = 5
+        }
+        else if(allData.skill.name.includes('Metronome')){            
+            hasSelfHeal = true
+            strangeHeal = 1
+            // 자힐 & 랜덤힐으로 자힐하는 기댓값
+            if(calcVer !== 'proVer'){
+                selfPerSkill = (selfHealSkillData.amount[selfSkillLevel - 1] 
+                    + randHealSkillData.amount[selfSkillLevel - 1] / 5
+                    + allHealSkillData.amount[selfSkillLevel - 1]) / (totalMainSkill - 1)
+            }
+            else{
+                // 프로 버전은 각 힐 스킬 확률 직접 계산
+                selfPerSkill = 10000
+            }            
+        }        
         let splitSleep = sleepTime.split(':')
         const sleepH = parseInt(splitSleep[0], 10)
         const sleepM = parseInt(splitSleep[1], 10)
@@ -145,22 +173,6 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         const recoverSub = (erbCount * erbMult) + 1
         let morningEner = (100 / (timeForFull / convertH)) * (sleepH * convertH + sleepM * convertM) * recoverNature * recoverSub
         morningEner = morningEner > 100 ? 100 : Math.floor(morningEner)
-        // 자힐몬인지 여부
-        let hasSelfHeal = false
-        // 순수 자힐 아닌 확률적 자힐은 그만큼 감점
-        let strangeHeal = 1
-        if(allData.skill.name.includes('Charge Energy')){
-            hasSelfHeal = true
-            strangeHeal = 1
-        }
-        else if(allData.skill.name.includes('Energizing Cheer')){
-            hasSelfHeal = true
-            strangeHeal = 5
-        }
-        else if(allData.skill.name.includes('Metronome')){
-            hasSelfHeal = true
-            strangeHeal = (totalMainSkill - 1) / (6/5)
-        }
         function limitE(ee){
             // 최대 기력 제한
             return ee > maxE ? maxE : ee
@@ -228,7 +240,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     })                    
                 }     
                 if(calcVer === 'lightVer' && i > 0){
-                    if(hasSelfHeal && i % timePerSelf === 0 && selfHealCount > 0){
+                    if(hasSelfHeal && i % timePerSelf === 0 && selfHealCount > 0){                        
                         // 자힐 발동 후 현재 기력
                         let currentE = energyCurve(i, 1, selfPerSkill)                                 
                         energyAxis.value.push({
@@ -314,21 +326,63 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 }                
                 return energyValue;
             }
+            // 손가락흔들기에서 힐스킬 나온 후 회복량 반환
+            function calcSelfHeal(){                
+                if(allData.skill.name.includes('Metronome')){
+                    // 손가락흔들기는 안에서 힐스킬 발동할 확률 추가로 계산
+                    let thisTimeHeal = 0
+                    const fingerShake = Math.random()
+                    if(fingerShake < 1/(totalMainSkill - 1)){
+                        // 자힐
+                        thisTimeHeal = selfPerSkill * selfHealSkillData.amount[selfSkillLevel - 1] / 10000
+                        
+                    }
+                    else if(fingerShake < 2/(totalMainSkill - 1)){
+                        // 랜덤힐
+                        const randHealRoll = Math.random()
+                        if(randHealRoll < 1 / 5){
+                            thisTimeHeal = selfPerSkill * randHealSkillData.amount[selfSkillLevel - 1] / 10000
+                             
+                        }
+                        else if(randHealRoll < 2 / 5){
+                            // 랜덤힐이 힐러에게
+                            healerEnerAxis += randHealSkillData.amount[selfSkillLevel - 1] * (enerPerSkillH / allDataH.skill.amount[mainSkillLevel - 1])
+                        }                                        
+                    }
+                    else if(fingerShake < 3/(totalMainSkill - 1)){
+                        // 전체힐
+                        thisTimeHeal = selfPerSkill * allHealSkillData.amount[selfSkillLevel - 1] / 10000
+                          
+                        healerEnerAxis += allHealSkillData.amount[selfSkillLevel - 1] * (enerPerSkillH / allDataH.skill.amount[mainSkillLevel - 1])
+                    }
+                    else{
+                        // 힐 안나옴
+                        thisTimeHeal = 0
+                    }
+                    thisTimeHeal = Math.floor(thisTimeHeal)
+                    healerEnerAxis = limitE(Math.floor(healerEnerAxis))                                      
+                    return thisTimeHeal               
+                }
+                else{
+                    // 손가락흔들기 보유몬이 아님
+                    return selfPerSkill
+                }
+            }
         
             for(let z = 0; z < simulationCount; z++){
                 // 기상 직후 스킬 발동 했는지 여부
                 if(Math.random() < morningProc){
                     healerEnerAxis += enerPerSkillH
                     if(Math.random() < morningProcS){
-                        calcExpect(z, 0, limitE(morningEner + selfPerSkill + enerPerSkill))
+                        calcExpect(z, 0, limitE(morningEner + calcSelfHeal() + enerPerSkill))
                     }   
                     else{
                         calcExpect(z, 0, limitE(morningEner + enerPerSkill))
                     }
                 }   
                 else{
-                    if(Math.random() < morningProcS){
-                        calcExpect(z, 0, limitE(morningEner + selfPerSkill))
+                    if(Math.random() < morningProcS){                        
+                        calcExpect(z, 0, limitE(morningEner + calcSelfHeal()))
                     }   
                     else{
                         calcExpect(z, 0, limitE(morningEner))
@@ -345,6 +399,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     // 해당 시간대의 기력에서 도우미 보정치를 곱해서 도우미 쿨을 감소시킨다
                     // 스킬 발동하면 기력을 증가한 값을 저장한다
                      
+                    healerEnerAxis = limitE(healerEnerAxis)  
                     // 직전 시간대의 힐러 기력량
                     const beforeHealerE = healerEnerAxis
                     // 스킬 발동 없을 때 현재 기력량. 힐러도 기력량 업데이트 됨
@@ -364,7 +419,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     // 주어진 에너지 구간의 경계선에 있는 시간대 x값 찾기
                     function findTimeStamp(start, startE, targetE){
                         return (startE - targetE) / (enerPerHour / convertH) + start
-                    } 
+                    }                     
                     // 힐러의 1 시간대 어치 도우미 쿨타임 감소분을 계산한다
                     const endMult = speedPerEner(healerEnerAxis)
                     const startMult = speedPerEner(beforeHealerE)   
@@ -406,24 +461,26 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                             helpActiveCountS += 1
                             manageBaseSpeedS += onlyBaseSpeed.value
                         }
+
+                        if(sec === breakfastX || sec === lunchX || sec === dinnerX){
+                            // 식사 기력 회복                                                       
+                            trySkillE += calcMeal(trySkillE)
+                            healerEnerAxis += calcMeal(healerEnerAxis)
+                        }
+
                         // 근데 30분보다 짧은 도우미속도면 30분 안에 도우미 여러번 발동 가능!                                    
                         const selfProc = (1 - Math.pow((1 - finalSkillProc.value / strangeHeal), helpActiveCountS))
                         if(helpActiveCountS > 0){
                             // 1 도우미 발동
-                            if(Math.random() < selfProc){
+                            if(Math.random() < selfProc){                                
                                 // 스킬 발동 적용한 기력량
-                                trySkillE += selfPerSkill                                
+                                trySkillE += calcSelfHeal()
                             }                           
                         }     
                     }             
                                     
                     // 근데 30분보다 짧은 도우미속도면 30분 안에 도우미 여러번 발동 가능!                                    
-                    const healerProc = 1 - Math.pow((1 - finalSkillProcH.value), helpActiveCount)
-                    if(sec === breakfastX || sec === lunchX || sec === dinnerX){
-                        // 식사 기력 회복                                                       
-                        trySkillE += calcMeal(trySkillE)
-                        healerEnerAxis += calcMeal(healerEnerAxis)
-                    }  
+                    const healerProc = 1 - Math.pow((1 - finalSkillProcH.value), helpActiveCount)                      
                     if(helpActiveCount > 0){
                         // 1 도우미 발동
                         if(Math.random() < healerProc){
@@ -433,7 +490,8 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         }                           
                     } 
                     // 현재 기력량을 같은 타임라인의 기댓값에 추가                 
-                    calcExpect(z, sec, limitE(trySkillE))                    
+                    calcExpect(z, sec, limitE(trySkillE))     
+                    healerEnerAxis = limitE(healerEnerAxis)               
 
                     // 수면하기 직전 상태 계산
                     if(sec === activeTime){
@@ -552,7 +610,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         calcLoading.value = false        
     }
     // 식재료 종류별 생산량 계산
-    function calcLeveLIng(totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){
+    function calcLeveLIng(ingSkillData, totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){
         
         // 수면 중에 물어오는 식재료 구하기용 수면 도우미 횟수 (최대 소지 수 안에서)
         const helpCountSleep = calcSleepSpeedCount(sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)        
@@ -630,9 +688,10 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 try{
                     const response = await fetch('https://api.sleepapi.net/api/ingredient')
                     const json = await response.json() 
+                    // 손가락 흔들기 기댓값
                     const divideExpect = allData.skill.name === "Metronome" ? (totalMainSkill - 1) : 1
                     // 스킬 한번당 가져오는 종류당 식재료량                  
-                    const ingPerSkill = Math.ceil(allData.skill.amount[mainSkillLevel - 1] / 3)
+                    const ingPerSkill = allData.skill.name === "Metronome" ? Math.ceil(ingSkillData.amount[mainSkillLevel - 1] / 3) : Math.ceil(allData.skill.amount[mainSkillLevel - 1] / 3)
                     // 특정 식재료가 스킬 한번에 나올 확률
                     const expectOne = 1 - (1 - 1/json.length) * (1 - 1/(json.length - 1)) * (1 - 1/(json.length - 2))
                     const addIngSkill = (finalSpeedCount.value + helpCountSleep) * finalSkillProc.value * ingPerSkill * expectOne / divideExpect            

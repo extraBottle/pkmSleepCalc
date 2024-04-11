@@ -26,6 +26,8 @@
 <script setup>
 import { ref, watchEffect } from 'vue'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
+import { useRouter } from 'vue-router'
+import { popupFail } from 'src/utils/popup'
 
 defineOptions({
     name: "EnerResult"
@@ -45,67 +47,90 @@ function restartCalc(){
   myProdCalcStore.calcLoading = true
 }
 watchEffect(async()=>{
-  if(prop.startLoad){
-    const pkmDB = await import('src/stores/pkmDBStore')
-    const inp = await import('src/stores/inputStore')
+  try{
+    if(prop.startLoad){
+      const pkmDB = await import('src/stores/pkmDBStore')
+      const inp = await import('src/stores/inputStore')
 
-    const myPkmDBStore = pkmDB.usePkmDBStore()
-    const myInputStore = inp.useInputStore()
-    const myHealerInputStore = inp.useHealerInputStore()
-    const mySleepTimeInputStore = inp.useSleepTimeInputStore()
+      const myPkmDBStore = pkmDB.usePkmDBStore()
+      const myInputStore = inp.useInputStore()
+      const myHealerInputStore = inp.useHealerInputStore()
+      const mySleepTimeInputStore = inp.useSleepTimeInputStore()
 
-    const pkmName = ref(myInputStore.pkmName)
-    const pkmLevel = myInputStore.pkmLevel
-    const upNature = myInputStore.upNature
-    const downNature = myInputStore.downNature
-    const upMult = myPkmDBStore.upMult[upNature]
-    const downMult = myPkmDBStore.downMult[downNature]
-    const mySub = myInputStore.subSkills
-    const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
-    const evoCount = myInputStore.evoCount
-    const firstIngName = myInputStore.firstIng
-    const secondIngName = myInputStore.secondIng
-    const thirdIngName = myInputStore.thirdIng
-    const mainSkillLevel = myInputStore.mainSkillLevel
-    const mealRecovery = myPkmDBStore.mealRecovery
+      const pkmName = ref(myInputStore.pkmName)
+      const pkmLevel = myInputStore.pkmLevel
+      const upNature = myInputStore.upNature
+      const downNature = myInputStore.downNature
+      const upMult = myPkmDBStore.upMult[upNature]
+      const downMult = myPkmDBStore.downMult[downNature]
+      const mySub = myInputStore.subSkills
+      const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
+      const evoCount = myInputStore.evoCount
+      const firstIngName = myInputStore.firstIng
+      const secondIngName = myInputStore.secondIng
+      const thirdIngName = myInputStore.thirdIng
+      const mainSkillLevel = myInputStore.mainSkillLevel
+      const mealRecovery = myPkmDBStore.mealRecovery
 
-    const maxE = myPkmDBStore.maxE
-    const totalMainSkill = myPkmDBStore.totalMainSkill
-    const mainSkillLevelH = myHealerInputStore.mainSkillLevel
-    const sleepTime = mySleepTimeInputStore.sleepTime
-    const calcVer = myHealerInputStore.calcVer
-    const skillCount = myHealerInputStore.healSkillCount
-    const timeForFull = myPkmDBStore.timeForFull
-    const upNatureH = myHealerInputStore.upNature
-    const downNatureH = myHealerInputStore.downNature
-    const pkmNameH = myHealerInputStore.pkmName
-    const pkmLevelH = myHealerInputStore.pkmLevel
-    const mySubH = myHealerInputStore.subSkills
-    const allDataH = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmNameH))
-    const erbCount = myInputStore.erbCount
-    const erbMult = myPkmDBStore.erbMult
-    const enerPerHour = myPkmDBStore.enerPerHour
-    const speedEnerMultList = myPkmDBStore.speedEnerMultList
-    const evoCountH = myHealerInputStore.evoCount
+      const maxE = myPkmDBStore.maxE
+      const totalMainSkill = myPkmDBStore.totalMainSkill
+      const mainSkillLevelH = myHealerInputStore.mainSkillLevel
+      const sleepTime = mySleepTimeInputStore.sleepTime
+      const calcVer = myHealerInputStore.calcVer
+      const skillCount = myHealerInputStore.healSkillCount
+      const timeForFull = myPkmDBStore.timeForFull
+      const upNatureH = myHealerInputStore.upNature
+      const downNatureH = myHealerInputStore.downNature
+      const pkmNameH = myHealerInputStore.pkmName
+      const pkmLevelH = myHealerInputStore.pkmLevel
+      const mySubH = myHealerInputStore.subSkills
+      const allDataH = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmNameH))
+      const erbCount = myInputStore.erbCount
+      const erbMult = myPkmDBStore.erbMult
+      const enerPerHour = myPkmDBStore.enerPerHour
+      const speedEnerMultList = myPkmDBStore.speedEnerMultList
+      const evoCountH = myHealerInputStore.evoCount
 
-    // 힐러 포켓몬의 두번째 식재료
-    const secondIngH = myHealerInputStore.secondIng
-    // 힐러 포켓몬의 세번째 식재료
-    const thirdIngH = myHealerInputStore.thirdIng
-    // 좋캠 티켓 사용 여부
-    const useGoodCamp = ref(myInputStore.useGoodCamp)
+      let ingSkillData = {}
+      let selfHealSkillData = {}
+      let randHealSkillData = {}
+      let allHealSkillData = {}
+      if(allData.skill.name.includes('Metronome')){
+        // 손가락흔들기 포켓몬 선택했으면 자힐 & 랜덤힐 & 식재 스킬 정보도 저장한다        
+        await myPkmDBStore.fetchPkmData('LEAFEON')
+        await myPkmDBStore.fetchPkmData('UMBREON')
+        await myPkmDBStore.fetchPkmData('VAPOREON')
+        await myPkmDBStore.fetchPkmData('SYLVEON')
+        ingSkillData = myPkmDBStore.searchPkmData('name', 'VAPOREON').skill
+        selfHealSkillData = myPkmDBStore.searchPkmData('name', 'UMBREON').skill
+        randHealSkillData = myPkmDBStore.searchPkmData('name', 'LEAFEON').skill
+        allHealSkillData = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill
+      } 
+
+      // 힐러 포켓몬의 두번째 식재료
+      const secondIngH = myHealerInputStore.secondIng
+      // 힐러 포켓몬의 세번째 식재료
+      const thirdIngH = myHealerInputStore.thirdIng
+      // 좋캠 티켓 사용 여부
+      const useGoodCamp = ref(myInputStore.useGoodCamp)
 
 
-    myProdCalcStore.calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-      allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
-    // 기력 적용 도우미 속도
-    myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)            
-    // 식재료 종류별 생산량
-    myProdCalcStore.calcLeveLIng(totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
-    energyChartRef.value.updateSeries([{
-      name: '남은 기력량',
-      data: myProdCalcStore.energyAxis
-    }])
+      myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+        allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
+      // 기력 적용 도우미 속도
+      myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)            
+      // 식재료 종류별 생산량
+      myProdCalcStore.calcLeveLIng(ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+      energyChartRef.value.updateSeries([{
+        name: '남은 기력량',
+        data: myProdCalcStore.energyAxis
+      }])
+    }
+  }
+  catch{
+    const router = useRouter()
+    router.push('prodCalc')
+    popupFail('새로고침 후 다시 시도해주세요')
   }
 })
 

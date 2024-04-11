@@ -131,10 +131,11 @@ function gogo(){
           }else{ sendDownHealer.value = false; sendUpHealer.value = false }
         }
         if(!sendNameHealer.value && !sendDownHealer.value && !sendUpHealer.value){
-          router.push('/prodcalc/result')
+          router.push('/prodcalc/result')            
         }        
       }else{
-        router.push('/prodcalc/result')
+        // 라이트 버전은 걍 통과        
+        router.push('/prodcalc/result')          
       }
       break;
       default:

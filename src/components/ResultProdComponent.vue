@@ -77,6 +77,8 @@ import { useDownloadStore } from 'src/stores/downloadStore'
 import { useInputStore, useSleepTimeInputStore, useHealerInputStore } from 'src/stores/inputStore'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
 import { tooltipMobile } from 'src/utils/tooltip'
+import { useRouter } from 'vue-router'
+import { popupFail } from 'src/utils/popup'
 
 defineOptions({
     name: "IngResult"
@@ -170,29 +172,51 @@ onMounted(()=>{
         myProdCalcStore.calcLoading = true
     }
 })
-watchEffect(()=>{
-    if(prop.startLoad){
-        // 기력 제외 도우미 속도
-        myProdCalcStore.onlyBaseSpeed = myProdCalcStore.calcBaseSpeed(pkmLevel, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub, allData, maxHS, useGoodCamp.value)
-        myProdCalcStore.finalSkillProc = myProdCalcStore.calcSkillProc(allData, upNature, downNature, upMult, downMult, mySub)
-        // 식재료 확률
-        myProdCalcStore.finalIngProc = myProdCalcStore.calcIngProc(allData, upNature, downNature, upMult, downMult, mySub)
-        // 기력 그래프
-        if(calcVer === 'proVer'){
-            myProdCalcStore.onlyBaseSpeedH = myProdCalcStore.calcBaseSpeed(pkmLevelH, upNatureH, downNatureH, upMult, downMult, hBonus, hbMult, mySubH, allDataH, maxHS, useGoodCamp.value)
-            myProdCalcStore.finalSkillProcH = myProdCalcStore.calcSkillProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
-            // 힐러 식재료 확률
-            myProdCalcStore.finalIngProcH = myProdCalcStore.calcIngProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
-            myProdCalcStore.calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-            allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)               
+watchEffect(async()=>{
+    try{
+        if(prop.startLoad){
+            let ingSkillData = {}
+            let selfHealSkillData = {}
+            let randHealSkillData = {}
+            let allHealSkillData = {}
+            if(allData.skill.name.includes('Metronome')){
+                // 손가락흔들기 포켓몬 선택했으면 자힐 & 랜덤힐 & 식재 스킬 정보도 저장한다        
+                await myPkmDBStore.fetchPkmData('LEAFEON')
+                await myPkmDBStore.fetchPkmData('UMBREON')
+                await myPkmDBStore.fetchPkmData('VAPOREON')
+                await myPkmDBStore.fetchPkmData('SYLVEON')
+                ingSkillData = myPkmDBStore.searchPkmData('name', 'VAPOREON').skill
+                selfHealSkillData = myPkmDBStore.searchPkmData('name', 'UMBREON').skill
+                randHealSkillData = myPkmDBStore.searchPkmData('name', 'LEAFEON').skill
+                allHealSkillData = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill
+            }            
+            // 기력 제외 도우미 속도
+            myProdCalcStore.onlyBaseSpeed = myProdCalcStore.calcBaseSpeed(pkmLevel, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub, allData, maxHS, useGoodCamp.value)
+            myProdCalcStore.finalSkillProc = myProdCalcStore.calcSkillProc(allData, upNature, downNature, upMult, downMult, mySub)
+            // 식재료 확률
+            myProdCalcStore.finalIngProc = myProdCalcStore.calcIngProc(allData, upNature, downNature, upMult, downMult, mySub)
+            // 기력 그래프
+            if(calcVer === 'proVer'){
+                myProdCalcStore.onlyBaseSpeedH = myProdCalcStore.calcBaseSpeed(pkmLevelH, upNatureH, downNatureH, upMult, downMult, hBonus, hbMult, mySubH, allDataH, maxHS, useGoodCamp.value)
+                myProdCalcStore.finalSkillProcH = myProdCalcStore.calcSkillProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
+                // 힐러 식재료 확률
+                myProdCalcStore.finalIngProcH = myProdCalcStore.calcIngProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
+                myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)               
+            }
+            else{
+                myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)            
+            }
+            // 기력 적용 도우미 속도
+            myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)            
+            // 식재료 종류별 생산량
+            myProdCalcStore.calcLeveLIng(ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
         }
-        else{
-            myProdCalcStore.calcEnergyCurve(totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)            
-        }
-        // 기력 적용 도우미 속도
-        myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)            
-        // 식재료 종류별 생산량
-        myProdCalcStore.calcLeveLIng(totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+    }
+    catch{
+        const router = useRouter()
+        router.push('prodCalc')
+        popupFail('새로고침 후 다시 시도해주세요')
     }
 })
 

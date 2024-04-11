@@ -64,7 +64,7 @@
       <q-slider color="secondary" v-model="erbCount" :min="0" :max="5"/>
     </div>
     <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.subSkillList"
-     label="서브 스킬 (최대 6개)" behavior="dialog" max-values="6">
+     label="서브 스킬 (최대 5개)" behavior="dialog" max-values="5">
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps" :class="scope.opt.bg">
           <q-item-section>
