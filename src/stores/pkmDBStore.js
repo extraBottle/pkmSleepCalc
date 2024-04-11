@@ -187,13 +187,15 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
 
     // 포켓몬 한글명 목록 불러오기(페이지 로드시)
     function loadKorPkmName(){
-        fullDex.data.forEach(item => {
-            if (sleepDex.includes(item.en)) {
-                korPkmName.push(item.kor);
-                enPkmName.push(item.en);
-                pkmDexNum.push(item.Ndex)
-            }
-        });
+        if(korPkmName.length === 0){
+            fullDex.data.forEach(item => {
+                if (sleepDex.includes(item.en)) {
+                    korPkmName.push(item.kor);
+                    enPkmName.push(item.en);
+                    pkmDexNum.push(item.Ndex)
+                }
+            });
+        }        
     }
 
     // 저장한 포슬립 포켓몬 데이터에서 원하는 값 찾기
