@@ -39,3 +39,6 @@
 - 계산 timeout 삭제
 - 서브스킬 최대 5개까지 선택 제한
 - 손가락흔들기에서 나오는 스킬 랜덤 확률 계산
+
+**v1.0.6**
+- analytics boot file execute now depends on cordova
