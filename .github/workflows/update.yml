@@ -4,7 +4,11 @@ name: Update Pkm List
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
+
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   update-pkm-list:
     runs-on: ubuntu-latest
