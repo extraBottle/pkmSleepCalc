@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import fullDex from 'src/pkmJson/data.json'
-import sleepDex from 'src/pkmJson/data2.json'
+import sleepDex from 'src/pkmJson/sleepPkm/data.json'
 
 // 인게임 포켓몬 정보 관리
 export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
