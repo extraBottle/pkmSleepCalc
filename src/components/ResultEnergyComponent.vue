@@ -26,8 +26,6 @@
 <script setup>
 import { ref, watchEffect } from 'vue'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
-import { useRouter } from 'vue-router'
-import { popupFail } from 'src/utils/popup'
 
 defineOptions({
     name: "EnerResult"
@@ -120,17 +118,16 @@ watchEffect(async()=>{
       // 기력 적용 도우미 속도
       myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)            
       // 식재료 종류별 생산량
-      myProdCalcStore.calcLeveLIng(ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+      myProdCalcStore.calcLeveLIng(calcVer, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
       energyChartRef.value.updateSeries([{
         name: '남은 기력량',
         data: myProdCalcStore.energyAxis
       }])
+      myProdCalcStore.calcLoading = false
     }
   }
-  catch{
-    const router = useRouter()
-    router.push('prodCalc')
-    popupFail('새로고침 후 다시 시도해주세요')
+  catch(e){
+    console.log('energy calc err', e)        
   }
 })
 

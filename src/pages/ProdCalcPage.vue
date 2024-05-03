@@ -52,6 +52,7 @@ import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue'
 import ChooseSleepTimeComponent from 'src/components/ChooseSleepTimeComponent.vue'
 import ChooseHealerComponent from'src/components/ChooseHealerComponent.vue'
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
+import { popupFail } from 'src/utils/popup'
 
 defineOptions({
   name: 'ProdCalcPage'
@@ -87,6 +88,7 @@ function gogo(){
       if(validateFirst.value.pkmName.length === 0){
         // 포켓몬 선택했는지
         sendName.value = true
+        popupFail('포켓몬 이름을 입력해주세요')
       }
       else{ sendName.value = false }
       if(upup.substring(0, 3) === downdown.substring(0, 3)){

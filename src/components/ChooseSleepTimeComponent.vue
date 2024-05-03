@@ -3,16 +3,7 @@
     <q-toolbar-title>수면 시간 입력</q-toolbar-title>
   </q-toolbar>
   <div class="column items-center">
-    <q-img
-      alt="Pokemon sleeping image"
-      :src="selectPkmImage"
-      style="max-width: 300px">
-      <template v-slot:loading>
-        <q-spinner-hourglass
-          color="primary"
-        />
-      </template>
-    </q-img>
+    <img :src="selectPkmImage" />
     <q-time
       v-model="sleepTime"
       :options="overOneHour"

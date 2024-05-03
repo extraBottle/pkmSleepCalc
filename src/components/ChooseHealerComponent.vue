@@ -37,13 +37,7 @@
         메인 스킬 레벨: {{ mainSkillLevel }}
         <q-slider color="secondary" v-model="mainSkillLevel" :min="1" :max="maxSkillLevel"/>
       </div>
-      <div class="column items-center" style="visibility: hidden; height: 5vh;">
-        <q-img
-          alt="Healer image"
-          src="images/sylveonStanding.png"
-          fit="scale-down"
-          no-spinner
-          style="max-width: 300px;" />
+      <div style="height: 5vh;">
       </div>
     </div>
     <div v-else-if="calcVer == 'proVer'" class="column items-center q-gutter-y-md">
@@ -58,7 +52,8 @@
     :options="pkmNameList" 
     label="포켓몬 이름"
     :error="props.nameValid" :error-message="nameEmptyMsg"
-    hint="입력하고 엔터를 눌러서 검색" @filter="searchName" @add="fetchApiIng()"
+    hint="입력하고 엔터를 눌러서 검색" @filter="searchName" @input-value="manageModel"
+    @update:model-value="fetchApiIng"
     use-input hide-selected fill-input input-debounce="0" hide-bottom-space/>
     <div class="text-center">
       직접 진화시킨 횟수: {{ evoCount }} 회
@@ -99,7 +94,7 @@
       <q-slider color="secondary" v-model="mainSkillLevel" :min="1" :max="maxSkillLevel"/>
     </div>
     <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.subSkillList"
-    label="서브 스킬 (최대 5개)" behavior="dialog" max-values="5">
+    :label= "limitSub" behavior="dialog" :max-values="watchLevel">
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps" :class="scope.opt.bg">
           <q-item-section>
@@ -121,16 +116,9 @@
     label="상승 성격" behavior="dialog" :error="props.upValid" :error-message="wrongUpMsg" hide-bottom-space></q-select>
     <q-select class="full-width" filled color="secondary" v-model="downNature" :options="myPkmDBStore.downNatureList" 
     label="하락 성격" behavior="dialog" :error="props.downValid" :error-message="wrongDownMsg" hide-bottom-space></q-select>
-    <span class="hidden">{{ mysteryVar }}</span>
     </div>
     <div v-else>
-      <div class="column items-center" style="visibility: hidden; height: 5vh;">
-        <q-img
-          alt="Hidden image"
-          src="images/sylveonStanding.png"
-          fit="scale-down"
-          no-spinner
-          style="max-width: 300px;" />
+      <div style="height: 5vh;">
       </div>
     </div>
 </template>
@@ -172,6 +160,7 @@ const calcVer = ref(myHealerInputStore.calcVer)
 // 힐러 메인 스킬 사용 횟수
 const healSkillCount = ref(myHealerInputStore.healSkillCount)
 // 힐러 메인 스킬 레벨
+myHealerInputStore.mainSkillLevel = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill.maxLevel
 const mainSkillLevel = ref(myHealerInputStore.mainSkillLevel)
 const maxSkillLevel = ref(6)
 // 이름
@@ -189,7 +178,7 @@ onBeforeMount(async()=>{
 })
 
 // 선택한 힐러 도감번호
-const selectedHealerDex = ref(myHealerInputStore.selectedHealerDex)
+const selectedHealerDex = ref(myHealerInputStore.selectedPkmDex)
 // 선택한 힐러 이미지
 const selectHealerImage = ref(myDownloadStore.fetchImage('pkm', selectedHealerDex.value))
 // 힐러 레벨
@@ -225,6 +214,27 @@ const nameEmptyMsg = ref('힐러 포켓몬을 선택해주세요')
 const wrongUpMsg = ref('상승 성격을 다시 입력해주세요')
 const wrongDownMsg = ref('하락 성격을 다시 입력해주세요')
 
+// 현재 레벨에 따라 선택 가능한 서브 스킬 수 제한
+const watchLevel = computed(()=>{
+  switch(true){
+    case pkmLevel.value < 10:
+      return 0
+    case pkmLevel.value < 25:
+      return 1
+    case pkmLevel.value < 50:
+      return 2
+    case pkmLevel.value < 75:
+      return 3
+    case pkmLevel.value < 100:
+      return 4
+    default:
+      return 5
+  }
+})
+const limitSub = computed(()=>{
+  return `서브 스킬 (최대 ${watchLevel.value}개)`
+})
+
 // 포켓몬을 선택하면 데이터 불러오기 + 식재료 목록 출력 + 이미지 불러오기
 async function fetchApiIng(){
   loadingCalc('불러오는 중...')
@@ -239,7 +249,11 @@ async function fetchApiIng(){
   fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 2, 'store')
   secondIngName.value = fixedSecondIngName.value
   thirdIngName.value = fixedThirdIngName.value
+  // 연달아 2번 동일한 포켓몬 불러오면 로딩 화면 종료
+  const originDex = selectedHealerDex.value
   selectedHealerDex.value = myPkmDBStore.findDexNum(pkmName.value)
+  if(originDex === selectedHealerDex.value){ stopLoading() }
+
   selectHealerImage.value = myDownloadStore.fetchImage('pkm', selectedHealerDex.value)
   maxSkillLevel.value = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value)).skill.maxLevel
 }
@@ -254,9 +268,11 @@ function searchName(val, update, abort) {
     pkmNameList.value = myPkmDBStore.korPkmName.filter(v => v.indexOf(val) > -1)
   })
 }
-const mysteryVar = computed(() => {
-  return pkmName.value.length > 0 ? fetchApiIng() : 0
-})
+function manageModel(val){
+  if(val.length > 0 && val !== myHealerInputStore.pkmName){
+    pkmName.value = '님피아'
+  }
+}
 
 defineExpose({
   calcVer,

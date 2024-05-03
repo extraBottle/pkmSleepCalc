@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
-import fullDex from 'src/fetch-api-data-action/data.json'
-import sleepDex from 'src/fetch-api-data-action/data2.json'
+import fullDex from 'src/pkmJson/data.json'
+import sleepDex from 'src/pkmJson/data2.json'
 
 // 인게임 포켓몬 정보 관리
 export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     // 서브 스킬 목록 (생산량에 영향을 주는)
-    const subSkillList = [
+    const subSkillList = [        
         {
             label: '나무열매 수 s',
             bg: 'bg-goldSkill',
@@ -56,6 +56,102 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
             bg: 'bg-sSkill',
             mult: 6
         }
+    ]
+    // 서브 스킬 목록 (전체)
+    const allSubSkillList = [
+        {
+            label: '도우미 보너스',
+            bg: 'bg-goldSkill',
+            mult: 0.05
+        },
+        {
+            label: '나무열매 수 s',
+            bg: 'bg-goldSkill',
+            mult: 1 // 이건 곱셈 아님! 덧셈임
+        },
+        {
+            label: '수면 EXP 보너스',
+            bg: 'bg-goldSkill',
+            mult: 0.14
+        },
+        {
+            label: '리서치 EXP 보너스',
+            bg: 'bg-goldSkill',
+            mult: 0.06
+        },
+        {
+            label: '기력 회복 보너스',
+            bg: 'bg-goldSkill',
+            mult: 0.14
+        },
+        {
+            label: '꿈의조각 보너스',
+            bg: 'bg-goldSkill',
+            mult: 0.06
+        },
+        {
+            label: '스킬 레벨 업 M',
+            bg: 'bg-goldSkill',
+            mult: 2
+        },
+        {
+            label: '도우미 스피드 M',
+            bg: 'bg-mSkill',
+            mult: 0.14
+        },
+        {
+            label: '식재료 확률 업 M',
+            bg: 'bg-mSkill',
+            mult: 0.36
+        },
+        {
+            label: '스킬 확률 업 M',
+            bg: 'bg-mSkill',
+            mult: 0.36
+        },
+        {
+            label: '최대 소지 수 업 L',
+            bg: 'bg-mSkill',
+            mult: 18
+        },
+        {
+            label: '최대 소지 수 업 M',
+            bg: 'bg-mSkill',
+            mult: 12
+        },
+        {
+            label: '스킬 레벨 업 s',
+            bg: 'bg-mSkill',
+            mult: 1
+        },
+        {
+            label: '도우미 스피드 s',
+            bg: 'bg-sSkill',
+            mult: 0.07
+        },
+        {
+            label: '식재료 확률 업 s',
+            bg: 'bg-sSkill',
+            mult: 0.18
+        },
+        {
+            label: '스킬 확률 업 s',
+            bg: 'bg-sSkill',
+            mult: 0.18
+        },
+        {
+            label: '최대 소지 수 업 s',
+            bg: 'bg-sSkill',
+            mult: 6
+        }
+    ]
+    // 팀 보너스 서브
+    const teamSubSkillList = [
+        '도우미 보너스',
+        '수면 EXP 보너스',
+        '리서치 EXP 보너스',
+        '기력 회복 보너스',
+        '꿈의조각 보너스'         
     ]
     // 도우미 보너스 적용 수치
     const hbMult = 0.05
@@ -131,7 +227,7 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     const mealRecovery = [
         {
             'e': 100,
-            'm': 0
+            'm': 1
         },
         {
             'e': 80,
@@ -180,7 +276,7 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
                 lazyPkmData.push(json);
                 lazyPkmName.push(json.name);
             } catch (error) {
-                console.error('fetch error:', error);
+                console.error('pkm DB fetch error:', error);
             }
         }
     }
@@ -199,8 +295,8 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     }
 
     // 저장한 포슬립 포켓몬 데이터에서 원하는 값 찾기
-    function searchPkmData(key, value){
-        return lazyPkmData.find(obj => obj[key] === value);
+    function searchPkmData(name, value){
+        return lazyPkmData.find(obj => obj[name] === value);
         // return object
     }
 
@@ -244,6 +340,7 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
 
     return {
         subSkillList,
+        allSubSkillList,
         hbMult,
         erbMult,
         maxHS,
@@ -261,6 +358,7 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
         pkmDexNum,
         lazyPkmData,
         totalMainSkill,
+        teamSubSkillList,
         fetchPkmData,
         loadKorPkmName,
         searchPkmData,

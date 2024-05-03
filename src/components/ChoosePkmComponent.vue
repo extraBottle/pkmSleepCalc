@@ -3,6 +3,7 @@
     <q-toolbar-title>포켓몬 정보 입력</q-toolbar-title>
   </q-toolbar>
   <div class="column items-center q-gutter-y-md">
+    <!-- 포켓몬 이미지 -->
     <q-img
         alt="Pokemon image"
         :src="selectPkmImage"
@@ -12,22 +13,26 @@
         @load="stopLoading()"
         >
     </q-img>
+    <!-- 포켓몬 이름 -->
     <q-select class="full-width q-mt-none" filled color="secondary" v-model="pkmName" :options="pkmNameList" 
     label="포켓몬 이름"
-    :error="props.nameValid" :error-message="nameEmptyMsg" @filter="searchName" @add="fetchApiIng()"
-    use-input hide-selected fill-input input-debounce="0"
-    hint="입력하고 엔터를 눌러서 검색" hide-bottom-space />
-    <div class="text-center">
+    :error="props.nameValid" :error-message="nameEmptyMsg" @filter="searchName" @input-value="manageModel"
+    use-input hide-selected fill-input input-debounce="0" @update:model-value="fetchApiIng"
+    :hint="nameSearchHint" hide-bottom-space :readonly="selectPkmName" />
+    <!-- 직접 진화시킨 횟수 -->
+    <div v-if="showEvoCount" class="text-center">
       직접 진화시킨 횟수: {{ evoCount }} 회
       <q-slider color="secondary" v-model="evoCount" :min="0" :max="2"/>
     </div>
+    <!-- 레벨 -->
     <div class="text-center full-width">
       <q-btn color="secondary" round size="xs" icon="remove" @click="subtractLevel"></q-btn>
       <span class="q-px-md">레벨: {{ pkmLevel }}</span>
       <q-btn color="secondary" round size="xs" icon="add" @click="addLevel"></q-btn>
       <q-slider color="secondary" v-model="pkmLevel" :min="1" :max="100"/>
     </div>
-    <div class="row justify-center q-gutter-x-md">
+    <!-- 식재료 선택 -->
+    <div v-if="showIngChoose" class="row justify-center q-gutter-x-md">
       <q-btn fab color="ingCircle" :icon="firstIng" />
       <div>
         <q-tooltip :hide-delay="tooltipMobile()">
@@ -51,20 +56,25 @@
         </q-fab>
       </div>
     </div>
-    <div class="full-width text-center">
+    <!-- 메인 스킬 렙 -->
+    <div v-if="showMainSkillLevel" class="full-width text-center">
       메인 스킬 레벨: {{ mainSkillLevel }}
       <q-slider color="secondary" v-model="mainSkillLevel" :min="1" :max="maxSkillLevel"/>
     </div>
-    <div class="text-center full-width">
+    <!-- 도우미 보너스 개수 -->
+    <div v-if="showHbCount" class="text-center full-width">
       <q-chip square class="bg-goldSkill">도우미 보너스</q-chip> 개수: {{ hbCount }}
       <q-slider color="secondary" v-model="hbCount" :min="0" :max="5"/>
     </div>
-    <div class="text-center full-width">
+    <!-- 기력 회복 보너스 개수 -->
+    <div v-if="showErbCount" class="text-center full-width">
       <q-chip square class="bg-goldSkill">기력 회복 보너스</q-chip> 개수: {{ erbCount }}
       <q-slider color="secondary" v-model="erbCount" :min="0" :max="5"/>
     </div>
-    <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.subSkillList"
-     label="서브 스킬 (최대 5개)" behavior="dialog" max-values="5">
+    <!-- 서브 스킬 선택 -->
+    <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="subSkillOptions"
+     :label= "limitSub" behavior="dialog" :max-values="watchLevel"
+     :error="props.subValid" :error-message="emptySub" hide-bottom-space>
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps" :class="scope.opt.bg">
           <q-item-section>
@@ -82,29 +92,59 @@
           >{{ scope.opt.label }}</q-chip>
       </template>
     </q-select>
+    <!-- 상승 성격 -->
     <q-select class="full-width" filled color="secondary" v-model="upNature" :options="myPkmDBStore.upNatureList" 
     label="상승 성격" behavior="dialog" :error="props.upValid" :error-message="wrongUpMsg" hide-bottom-space />
+    <!-- 하락 성격 -->
     <q-select class="full-width" filled color="secondary" v-model="downNature" :options="myPkmDBStore.downNatureList" 
     label="하락 성격" behavior="dialog" :error="props.downValid" :error-message="wrongDownMsg" hide-bottom-space />
+    <!-- 선호 이브이 진화 선택 -->
+    <q-select v-if="showEeveePrefer" class="full-width" filled color="secondary" v-model="preferEevee" :options="myEeveeStore.eeveelutionList" 
+    label="선호하는 진화체" behavior="dialog" :style="preferEeveeColor(preferEevee)" >
+      <template v-slot:option="scope">
+        <q-item v-bind="scope.itemProps" :style="preferEeveeColor(scope.opt)">
+          <q-item-section>
+            <q-item-label >{{ scope.opt.label }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </template>
+    </q-select>
+    <span v-if="showEeveePrefer" class="full-width row justify-start q-mt-none">(선호해야지만 결과에 나오는 진화체가 있습니다)</span>    
     <q-card class="bg-sSkill">
       <q-card-section>
-        <q-checkbox v-model="useGoodCamp">
+        <!-- 좋캠 적용 여부 -->
+        <q-checkbox v-if="showGoodCamp" v-model="useGoodCamp">
           <template v-slot:default>
             좋은 캠프 적용
             <q-icon size="xl" name="img:images/goodcampticket.png" />
           </template>
         </q-checkbox>
+        <!-- 힐러 포함 여부 -->
+        <q-checkbox v-else-if="showUseHealer" v-model="useHealer">
+          <template v-slot:default>
+            추가 힐러 포켓몬 사용
+            <q-icon size="xl" name="img:images/sylveonLink.png" />
+          </template>
+        </q-checkbox>
+        <!-- 이브이 수면시간 풀잠 이상인지 -->
+        <q-checkbox v-else-if="showEeveePrefer" v-model="fullSleep">
+          <template v-slot:default>
+            나는 8 시간 이상 잠을 잔다
+          </template>
+        </q-checkbox>
       </q-card-section>
     </q-card>
-    <span class="hidden">{{ mysteryVar }}</span>
   </div>
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onBeforeUnmount, computed } from 'vue'
+import { ref, onBeforeMount, computed, watch, onBeforeUnmount } from 'vue'
+import { useRoute } from 'vue-router';
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { useDownloadStore } from 'src/stores/downloadStore'
-import { useInputStore } from 'src/stores/inputStore'
+import { useInputStore, useHealerInputStore } from 'src/stores/inputStore'
+import { useEeveeStore } from 'src/stores/eeveeStore'
+import { useRateCalcStore } from 'src/stores/rateCalcStore';
 import { loadingCalc, stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
 
@@ -114,21 +154,60 @@ defineOptions({
 
 const myPkmDBStore = usePkmDBStore()
 myPkmDBStore.loadKorPkmName()
-  
+
+// 컴포넌트를 현재 페이지에 따라 내용 바꾼다
+const route = useRoute()
+// 보여줄 요소 관리
+const selectPkmName = ref(false)
+const showEvoCount = ref(true)
+const showIngChoose = ref(true)
+const showMainSkillLevel = ref(true)
+const showHbCount = ref(true)
+const showErbCount = ref(true)
+const showGoodCamp = ref(true)
+const showUseHealer = ref(true)
+const showEeveePrefer = ref(false)
 // 선택 가능한 포켓몬 목록
 const pkmNameList = ref(myPkmDBStore.korPkmName)
-// 넘어갈때 저장
-onBeforeUnmount(() => {
-  // store에 저장
-  myInputStore.storeEverything(hbCount.value, erbCount.value, 
-    pkmName.value, pkmLevel.value, evoCount.value, subSkills.value, firstIngName.value,
-    secondIngName.value, thirdIngName.value, fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
-    selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value)
+
+// 같은 루트 내에서 움직일때만 저장
+const prevRoute = ref(route.path)
+watch(prevRoute, (newPath, oldPath)=>{
+  // unmount로 바뀐 루트를 비교한다. 바꼈으면 저장안함
+  prevRoute.value = oldPath
+})
+onBeforeUnmount(()=>{
+  if(route.path === prevRoute.value){
+    if(prevRoute.value == '/rate'){
+      hbCount.value = 0
+      erbCount.value = 0
+      // 힐러는 라이트 버전
+      myHealerInputStore.calcVer = calcVer.value
+      myHealerInputStore.healSkillCount = 4
+    }
+    if(prevRoute.value == '/eeveelution'){
+      myEeveeStore.storeEverything(pkmLevel.value, subSkills.value, upNature.value, downNature.value, preferEevee.value, fullSleep.value)
+    }
+    else{
+      if(myPkmDBStore.searchPkmData('name', 'SYLVEON') !== undefined){
+        myHealerInputStore.mainSkillLevel = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill.maxLevel  
+      }  
+      // store에 저장
+      myInputStore.storeEverything(hbCount.value, erbCount.value, 
+        pkmName.value, pkmLevel.value, evoCount.value, subSkills.value, firstIngName.value,
+        secondIngName.value, thirdIngName.value, fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
+        selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value)
+    }
+  }
 })
 
 const props = defineProps({
   nameValid: {
     type: Boolean
+  },
+  subValid: {
+    type: Boolean,
+    default: false
   },
   upValid: {
     type: Boolean
@@ -140,6 +219,9 @@ const props = defineProps({
 
 const myDownloadStore = useDownloadStore()
 const myInputStore = useInputStore()
+const myHealerInputStore = useHealerInputStore()
+const myEeveeStore = useEeveeStore()
+const myRateCalcStore = useRateCalcStore()
 
 // 사용자 입력 포켓몬 이름
 const pkmName = ref(myInputStore.pkmName)
@@ -184,13 +266,53 @@ const selectPkmImage = ref()
 // 선택한 포켓몬의 최대 메인 스킬 레벨
 const maxSkillLevel = ref(6)
 const mainSkillLevel = ref(myInputStore.mainSkillLevel)
+// 선호 이브이 진화체 선택
+const preferEevee = ref(myEeveeStore.preferEevee)
+// 이브이 풀잠
+const fullSleep = ref(myEeveeStore.fullSleep)
 // 유효성 검사 이름 & 성격
 // 유효성 검사 메시지
 const nameEmptyMsg = ref('포켓몬을 선택해주세요')
 const wrongUpMsg = ref('상승 성격을 다시 입력해주세요')
 const wrongDownMsg = ref('하락 성격을 다시 입력해주세요')
+const emptySub = ref('서브 스킬을 전부 선택해주세요')
+const nameSearchHint = ref('입력하고 엔터를 눌러서 검색')
 
+// 현재 레벨에 따라 선택 가능한 서브 스킬 수 제한
+const watchLevel = computed(()=>{
+  switch(true){
+    case pkmLevel.value < 10:
+      return 0
+    case pkmLevel.value < 25:
+      return 1
+    case pkmLevel.value < 50:
+      return 2
+    case pkmLevel.value < 75:
+      return 3
+    case pkmLevel.value < 100:
+      return 4
+    default:
+      return 5
+  }
+})
+const limitSub = computed(()=>{
+  return `서브 스킬 (최대 ${watchLevel.value}개)`
+})
+// 서브 스킬 전부 선택했는지
+const didSelectAllSub = computed(()=>{
+  return subSkills.value.length === watchLevel.value ? true : false
+})
+
+// 좋은 캠프 티켓 사용할지
 const useGoodCamp = ref(myInputStore.useGoodCamp)
+// 힐러 쓰고 계산할지
+const useHealer = ref(myRateCalcStore.useHealer)
+const calcVer = computed(()=>{
+  return useHealer.value ? 'lightVer' : 'noHealer'
+})
+
+// 현재 페이지에 따라 선택 가능한 서브 스킬 목록 다름
+const subSkillOptions = ref()
 
 // 포켓몬 선택시 식재료 목록 불러오기
 function chooseIng(location, ingNum){
@@ -235,7 +357,13 @@ async function fetchApiIng(){
   fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 2, 'store')
   secondIngName.value = fixedSecondIngName.value
   thirdIngName.value = fixedThirdIngName.value
+  // 연달아 2번 동일한 포켓몬 불러오면 로딩 화면 종료
+  const originDex = selectedPkmDex.value
   selectedPkmDex.value = myPkmDBStore.findDexNum(pkmName.value)
+  if(originDex === selectedPkmDex.value){ stopLoading() }
+  // 힐러 정보 미리 불러오기
+  await myPkmDBStore.fetchPkmData('SYLVEON')
+  
   selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)
   maxSkillLevel.value = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value)).skill.maxLevel
 }
@@ -248,30 +376,78 @@ function subtractLevel(){
 
 function searchName (val, update, abort) {
   update(() => {
-    
     pkmNameList.value = myPkmDBStore.korPkmName.filter(v => v.indexOf(val) > -1)
   })
 }
-
+function manageModel(val){
+  if(val.length > 0 && val !== myInputStore.pkmName && route.path !== '/eeveelution'){
+    pkmName.value = ''
+  }
+}
+// 선호 이브이 선택시 배경색 변경
+function preferEeveeColor(c){
+  if(c !== undefined){
+    if(c.label === "없음"){
+      return
+    }
+    let color = `background-color: ${c.bg};`
+    if(c.label === "블래키"){
+      const white = "#fcfcfc"
+      color += `color: ${white};`
+    }
+    return color
+  }  
+}
 onBeforeMount(()=>{
-  // 첫 로딩때 미리 저장해둔 이미지 불러와야 로딩 빠름
-  if(pkmName.value.length > 0){
+  // 첫 로딩때 미리 저장해둔 이미지 불러와야 로딩 빠름  
+  if(route.path !== 'eeveelution' && pkmName.value.length > 0){
     selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)
   }
-  else{
+  else if(route.path !== 'eeveelution'){
     selectPkmImage.value = 'images/pikachuStanding.png'
   }
-})
-
-const mysteryVar = computed(() => {
-  return pkmName.value.length > 0 ? fetchApiIng() : 0
+  switch(route.path){
+    case '/prodcalc':
+      showUseHealer.value = false
+      subSkillOptions.value = myPkmDBStore.subSkillList
+      break
+    case '/rate':      
+      showHbCount.value = false
+      showErbCount.value = false
+      showGoodCamp.value = false
+      subSkillOptions.value = myPkmDBStore.allSubSkillList    
+      break
+    case '/eeveelution':
+      selectPkmName.value = true
+      showHbCount.value = false
+      showErbCount.value = false
+      showEvoCount.value = false
+      showIngChoose.value = false
+      showMainSkillLevel.value = false
+      showGoodCamp.value = false
+      showUseHealer.value = false
+      showEeveePrefer.value = true
+      subSkillOptions.value = myPkmDBStore.allSubSkillList
+      selectPkmImage.value = myDownloadStore.fetchImage('pkm', 133)
+      pkmName.value = "이브이"
+      nameSearchHint.value = "즐거운 이브이 진로상담 시간"
+      pkmLevel.value = myEeveeStore.pkmLevel
+      subSkills.value = myEeveeStore.subSkills
+      upNature.value = myEeveeStore.upNature
+      downNature.value = myEeveeStore.downNature
+      preferEevee.value = myEeveeStore.preferEevee
+      break
+    default:
+      return
+  }
 })
 
 // 부모 컴포넌트에서 입력했는지 확인
 defineExpose({
   pkmName,
   upNature,
-  downNature
+  downNature,
+  didSelectAllSub
 })
 
 </script>

@@ -42,7 +42,7 @@ export const useInputStore = defineStore('manage-input', () => {
     function storeEverything(h, e, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, gc) {
         hbCount.value = h;
         erbCount.value = e;
-
+        
         pkmName.value = n;
         pkmLevel.value = l;
         evoCount.value = evo

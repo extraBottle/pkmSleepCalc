@@ -12,7 +12,7 @@
 const { configure } = require('quasar/wrappers');
 
 
-module.exports = configure(function (ctx) {
+module.exports = configure(function () {
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
@@ -22,7 +22,7 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
       'apexcharts',
-      ctx.mode.cordova ? 'google-analytics' : ''
+      'vue-gtm'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css

@@ -7,12 +7,12 @@
           dense
           round
           icon="menu"
-          aria-label="Menu"
+          aria-label="Menu"          
           @click="toggleLeftDrawer"
         />
 
         <q-toolbar-title>
-          포켓몬 슬립 생산량 계산기
+          {{ route.name }}
         </q-toolbar-title>
 
         <div>v{{ myVersion }}<br>@두번째유리병</div>
@@ -28,9 +28,11 @@
       <q-list>
         <q-item-label
           header
+          class="q-py-sm row justify-between items-center"
           style="background-color: antiquewhite;"
         >
           이런 것도 있어요
+          <q-btn icon="home" flat round to="/" dense></q-btn>
         </q-item-label>
 
         <EssentialLink
@@ -50,34 +52,19 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router';
 import EssentialLink from 'components/EssentialLink.vue'
 import VersionInfo from '../../package.json'
+import { useRouteStore } from 'src/stores/routeStore';
 
 defineOptions({
   name: 'MainLayout'
 })
 
+const route = useRoute()
+const myRouteStore = useRouteStore()
 const myVersion = VersionInfo.version
-const linksList = [
-  {
-    title: 'exp 계산기',
-    caption: '렙업에 필요한 사탕 & 꿈조량을 알아보세요',
-    icon: 'images/pikachucandy.png',
-    link: 'https://extrabottle.github.io/pkmSleepExpCalc/'
-  },
-  {
-    title: '이브이 최적 진화 찾기',
-    caption: '이브이 진로상담 해드립니다',
-    icon: 'images/eeveeLink.png',
-    link: 'https://extrabottle.github.io/pkmSleepEevelution/'
-  },
-  {
-    title: '식재료 생산량 계산기',
-    caption: '내 포켓몬은 식재료를 얼마나 모아올까?',
-    icon: 'images/fancyapple.png',
-    link: 'https://extrabottle.github.io/pkmSleepCalc/'
-  }
-]
+const linksList = myRouteStore.linksList
 
 const leftDrawerOpen = ref(false)
 

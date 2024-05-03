@@ -31,3 +31,11 @@
 .clean-wrap{
     word-break: keep-all !important;
 }
+// 배민 을지로체
+@font-face {
+    font-family: BMEULJIRO;
+    src: url(./fonts/BMEULJIRO.otf);
+}
+.euljiro-font {
+    font-family: 'BMEULJIRO';
+}

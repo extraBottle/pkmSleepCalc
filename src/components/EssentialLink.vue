@@ -1,9 +1,8 @@
 <template>
   <q-item
     clickable
-    tag="a"
-    :target="whereTab"
-    :href="props.link"
+    :to="routeName"
+    @click="triggerEvent('enter_calc_from_menu')"
   >
     <q-item-section
       v-if="props.icon"
@@ -22,6 +21,8 @@
 </template>
 
 <script setup>
+import { triggerEvent } from 'src/utils/gtmAddEvent';
+
 defineOptions({
   name: 'EssentialLink'
 })
@@ -37,9 +38,9 @@ const props = defineProps({
     default: ''
   },
 
-  link: {
+  name: {
     type: String,
-    default: '#'
+    default: '포슬립 계산기 허브'
   },
 
   icon: {
@@ -47,5 +48,5 @@ const props = defineProps({
     default: ''
   }
 })
-const whereTab = props.link.includes('/pkmSleepCalc/') ? '_self' : '_blank'
+const routeName = { name: props.name }
 </script>

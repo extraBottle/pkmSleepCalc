@@ -77,8 +77,6 @@ import { useDownloadStore } from 'src/stores/downloadStore'
 import { useInputStore, useSleepTimeInputStore, useHealerInputStore } from 'src/stores/inputStore'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
 import { tooltipMobile } from 'src/utils/tooltip'
-import { useRouter } from 'vue-router'
-import { popupFail } from 'src/utils/popup'
 
 defineOptions({
     name: "IngResult"
@@ -159,8 +157,6 @@ const cssGoodCamp = computed(() => {
         return 'invisible'
     }
 })
-// 로딩 화면 관리
-const calcLoading = ref(true)
 
 const dishOrDaily = computed(()=>{
     return pkmName.value + '의 ' + (chooseRange.value === "한끼" ? '한끼당' : '하루') + ' 생산량'
@@ -195,6 +191,7 @@ watchEffect(async()=>{
             myProdCalcStore.finalSkillProc = myProdCalcStore.calcSkillProc(allData, upNature, downNature, upMult, downMult, mySub)
             // 식재료 확률
             myProdCalcStore.finalIngProc = myProdCalcStore.calcIngProc(allData, upNature, downNature, upMult, downMult, mySub)
+            console.log(allData, upNature, downNature, upMult, downMult, mySub)
             // 기력 그래프
             if(calcVer === 'proVer'){
                 myProdCalcStore.onlyBaseSpeedH = myProdCalcStore.calcBaseSpeed(pkmLevelH, upNatureH, downNatureH, upMult, downMult, hBonus, hbMult, mySubH, allDataH, maxHS, useGoodCamp.value)
@@ -202,21 +199,26 @@ watchEffect(async()=>{
                 // 힐러 식재료 확률
                 myProdCalcStore.finalIngProcH = myProdCalcStore.calcIngProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
                 myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-                allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)               
+                allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)       
             }
             else{
-                myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)            
+                myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)           
             }
             // 기력 적용 도우미 속도
-            myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)            
+            myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)
+            if(calcVer !== 'proVer' && (allData.skill.name.includes('Charge Energy') || allData.skill.name.includes('Energizing Cheer') || allData.skill.name.includes("Energy For Everyone") || allData.skill.name.includes('Metronome'))){
+                // 자힐 가능한 포켓몬은 2번 기력 계산한다
+                myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
+                myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)
+            }          
             // 식재료 종류별 생산량
-            myProdCalcStore.calcLeveLIng(ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+            myProdCalcStore.calcLeveLIng(calcVer, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+            myProdCalcStore.calcLoading = false
         }
     }
-    catch{
-        const router = useRouter()
-        router.push('prodCalc')
-        popupFail('새로고침 후 다시 시도해주세요')
+    catch(e){      
+        console.log('ing production calc err', e)
     }
 })
 
@@ -231,10 +233,6 @@ const amountThirdIng = computed(()=>{
 })
 const amountIngSkill = computed(()=>{
     return chooseRange.value === "한끼" ? (myProdCalcStore.totalIngCalc['all'] / 3).toFixed(2) : (myProdCalcStore.totalIngCalc['all']).toFixed(2)
-})
-
-defineExpose({
-    calcLoading
 })
 
 </script>
