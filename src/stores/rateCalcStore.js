@@ -66,7 +66,7 @@ export const useRateCalcStore = defineStore('rate-calc', () => {
         const finalFinal = Math.round(orderData[0] * finalGrade[whatSpeciality.value]["berry"]
             + orderData[2] * finalGrade[whatSpeciality.value]["ing"]
             + orderData[3] * finalGrade[whatSpeciality.value]["skill"])
-            + hbGood
+            + hbGood        
         return finalFinal > 100 ? 100 : finalFinal
     }
     // 등급 커트라인

@@ -162,9 +162,6 @@ for(let i=0; i < mySub.length; i++){
   if(mySub[i].label === '도우미 보너스'){
     hasHb = true
   }
-  else if(i === mySub.length - 1){
-    hasHb = false
-  }
 }
 if(myRateCalcStore.pkmName !== pkmName.value){
   // 무엇 특화인지
