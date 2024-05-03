@@ -100,10 +100,11 @@ function gogo(){
       }
       else{
         // 영향없음은 상승하락 동일해야 한다
-        if(upup === "영향 없음 --" || downdown === "영향 없음 --"){
+        if(upup === "영향 없음 --" || downdown === "영향 없음 --" || upup.length == 0 || downdown.length == 0){
           sendDown.value = true
           sendUp.value = true
-        }else{ sendDown.value = false; sendUp.value = false }
+        }
+        else{ sendDown.value = false; sendUp.value = false }
       }
       if(!sendName.value && !sendDown.value && !sendUp.value){
         stepper.value.next()
@@ -127,7 +128,7 @@ function gogo(){
         }
         else{
           // 영향없음은 상승하락 동일해야 한다
-          if(upup === "영향 없음 --"){
+          if(upup === "영향 없음 --" || downdown === "영향 없음 --" || upup.length == 0 || downdown.length == 0){
             sendDownHealer.value = true
             sendUpHealer.value = true
           }else{ sendDownHealer.value = false; sendUpHealer.value = false }
