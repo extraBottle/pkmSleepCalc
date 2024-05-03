@@ -173,7 +173,7 @@ function calcExp(){
     }
     else if(expPerLevel[startLev.value - 1] < leftExp.value && calcVer.value === 'pro'){
         leftExpRule.value = true
-        leftExpMsg.value = `남은 경험치는 ${expPerLevel[startLev.value - 1]}이하로 입력해주세요`
+        leftExpMsg.value = `남은 경험치는 ${Math.floor(expPerLevel[startLev.value - 1] * pkmSpeciesObj[species.value])}이하로 입력해주세요`
     }
     else if(currentL.value.validate && targetL.value.validate){
         currentL.value.resetValidation
