@@ -9,6 +9,8 @@ jobs:
   update-pkm-list:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Fetch API Data
         uses: JamesIves/fetch-api-data-action@v2.4.0
         with:
