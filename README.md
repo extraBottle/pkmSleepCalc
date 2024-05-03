@@ -66,3 +66,4 @@
 **v1.1.3**
 - 성격 선택안해도 그냥 넘어가는 오류 수정
 - action -> sleep pokemon name list update
+- 고정 식재료 정의 오류 수정

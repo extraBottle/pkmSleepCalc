@@ -235,7 +235,7 @@ const subSkills = ref(myInputStore.subSkills)
 const hbCount = ref(myInputStore.hbCount)
 // 사용자 입력 총 기력 회복 보너스 개수
 const erbCount = ref(myInputStore.erbCount)
-// 선택한 포켓몬의 첫번째 식재료
+// 선택한 포켓몬의 첫번째 식재료 (이미지 주소꼴)
 const firstIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.firstIng.replace(/\s/g, "").toLowerCase()))
 // 선택한 포켓몬의 두번째 식재료
 const secondIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.secondIng.replace(/\s/g, "").toLowerCase()))
@@ -251,10 +251,10 @@ const thirdIngName = ref(myInputStore.thirdIng)
 const fixedSecondIngName = ref(myInputStore.fixedSecondIng)
 // 선택한 포켓몬의 세번째 식재료 이름만
 const fixedThirdIngName = ref(myInputStore.fixedThirdIng)
-// 두번째 식재료
-const fixedSecondIng = ref(secondIng.value)
+// 두번째 식재료 (이미지 주소꼴)
+const fixedSecondIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedSecondIng.replace(/\s/g, "").toLowerCase()))
 // 세번째 식재료
-const fixedThirdIng = ref(thirdIng.value)
+const fixedThirdIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedThirdIng.replace(/\s/g, "").toLowerCase()))
 // 선택한 상승 성격
 const upNature = ref(myInputStore.upNature)
 // 선택한 하락 성격
