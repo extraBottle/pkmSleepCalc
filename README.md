@@ -68,3 +68,4 @@
 - action -> sleep pokemon name list update
 - 고정 식재료 정의 오류 수정
 - add google adsense tag
+- 한국어 태그 설정
