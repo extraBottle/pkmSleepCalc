@@ -213,7 +213,6 @@ onBeforeMount(async()=>{
           randHealSkillData = myPkmDBStore.searchPkmData('name', 'LEAFEON').skill
           allHealSkillData = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill
         }                  
-        console.log('skillLev', mainSkillLevel)
         const obj = {
           "upNature": upNature,
           "downNature": downNature,

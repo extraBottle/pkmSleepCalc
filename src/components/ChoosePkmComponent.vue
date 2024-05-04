@@ -179,19 +179,18 @@ watch(prevRoute, (newPath, oldPath)=>{
 })
 onBeforeUnmount(()=>{
   if(route.path === prevRoute.value){
-    let subtractSkillLevel = 0
-    for(let z=0; z< subSkills.value.length; z++){
-      if(subSkills.value[z].label.includes("스킬 레벨 업")){
-        subtractSkillLevel += subSkills.value[z].mult
-      }
-      else if(subSkills.value[z].label === '도우미 보너스'){ hbCount.value = 1 }
-      else if(subSkills.value[z].label === '기력 회복 보너스'){ erbCount.value = 1 }
-    }
     if(prevRoute.value == '/rate'){      
-      if(mainSkillLevel.value < subtractSkillLevel){
-        // 스렙업 서브가 사용자 입력 메인 스킬 레벨에 반영되어야 함
-        popupFail("메인 스킬 레벨이 올바르지 않습니다")
-        return false
+      let subtractSkillLevel = 0
+      for(let z=0; z< subSkills.value.length; z++){
+        if(subSkills.value[z].label.includes("스킬 레벨 업")){
+          subtractSkillLevel += subSkills.value[z].mult
+        }
+        else if(subSkills.value[z].label === '도우미 보너스'){ hbCount.value = 1 }
+        else if(subSkills.value[z].label === '기력 회복 보너스'){ erbCount.value = 1 }
+      }
+      if(mainSkillLevel.value <= subtractSkillLevel){
+        // 스렙업 서브가 사용자 입력 메인 스킬 레벨보다 작으면 적용 안했다고 가정해서 더함
+        mainSkillLevel.value += subtractSkillLevel
       }
       // 힐러는 라이트 버전
       myHealerInputStore.calcVer = calcVer.value
@@ -378,6 +377,7 @@ async function fetchApiIng(){
   
   selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)
   maxSkillLevel.value = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value)).skill.maxLevel
+  mainSkillLevel.value = mainSkillLevel.value > maxSkillLevel.value ? maxSkillLevel.value : mainSkillLevel.value
 }
 function addLevel(){
   pkmLevel.value += 1
