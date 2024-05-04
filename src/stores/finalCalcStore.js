@@ -612,10 +612,10 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         let addAllTime = 0.0
         for(let key in timeStaying.value){
             addAllTime += timeStaying.value[key] / parseFloat(key)
-        }
-        // selfSkillCount.value = (finalSpeedCount.value + helpCountSleep.value) * finalSkillProc.value
+        }        
         // ingHelpCount.value = (finalSpeedCount.value + helpCountSleep.value) * finalIngProc.value
         finalSpeedCount.value = Math.floor(addAllTime / onlyBaseSpeed.value)
+        selfSkillCount.value = (finalSpeedCount.value + helpCountSleep.value) * finalSkillProc.value
     }
     // 식재료 종류별 생산량 계산
     function calcLeveLIng(calcVer, ingSkillData, totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){

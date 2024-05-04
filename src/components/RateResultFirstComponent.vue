@@ -88,6 +88,7 @@ import { useDownloadStore } from 'src/stores/downloadStore'
 import { useInputStore, useHealerInputStore } from 'src/stores/inputStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore'
 import { stopLoading } from 'src/utils/loading';
+import { popupFail } from 'src/utils/popup'
 
 defineOptions({
   name: 'RateResultFirstComponent'
@@ -131,7 +132,7 @@ const maxHS = myPkmDBStore.maxHS
 const evoCount = myInputStore.evoCount
 const secondIngName = myInputStore.secondIng
 const thirdIngName = myInputStore.thirdIng
-const mainSkillLevel = myInputStore.mainSkillLevel
+let mainSkillLevel = myInputStore.mainSkillLevel
 const mealRecovery = myPkmDBStore.mealRecovery
 
 const maxE = myPkmDBStore.maxE
@@ -170,19 +171,32 @@ if(myRateCalcStore.pkmName !== pkmName.value){
 
 onBeforeMount(async()=>{
   try{
-      if(prop.startLoad){    
-        const subSkillList = [...[
-            {
-              label: '도우미 보너스',
-              bg: 'bg-goldSkill',
-              mult: 0.05
-            },
-            {
-              label: '기력 회복 보너스',
-              bg: 'bg-goldSkill',
-              mult: 0.14
-            }
-          ], ...myPkmDBStore.subSkillList.slice()
+      if(prop.startLoad){   
+        const addValidSub = []
+        if(allData.specialty === "skill"){
+          // 스킬몬은 스킬 레벨업 서브가 꽝
+          myPkmDBStore.allSubSkillList.forEach((e)=>{
+            if(e.label === "도우미 보너스" || e.label === "기력 회복 보너스"){
+              addValidSub.push(e)
+            }            
+          }) 
+        }
+        else if(allData.skill.name === 'Metronome' || allData.skill.unit === 'energy'){
+          // 비스킬몬은 스킬 레벨업이 유효
+          myPkmDBStore.allSubSkillList.forEach((e)=>{
+            if(e.label === "도우미 보너스" || e.label === "기력 회복 보너스" || e.label === "스킬 레벨 업 M" || e.label === "스킬 레벨 업 s"){
+              addValidSub.push(e)
+              if(e.label.includes("스킬 레벨 업")){
+                // 비스킬몬에게 스렙업 서브 가산점을 주기 위해서, 비교군은 스렙업 없는 만큼 스킬렙 감소한 상태로 시작
+                mainSkillLevel -= e.mult
+              }
+            }            
+          }) 
+        }
+        const subSkillList = [
+          ...addValidSub.slice(),
+          ...myPkmDBStore.subSkillList.slice()
+          
         ]      
                  
         // 기존에 검색한 포켓몬과 레벨이 다시 검색한 것과 동일하면 api 생략
@@ -205,7 +219,7 @@ onBeforeMount(async()=>{
           "upNatureList": upNatureList,
           "downNatureList": downNatureList,
           "mySub": mySub,
-          "subSkillList": subSkillList, // 이거 일반 리스트 + 도보 & 기력 회복
+          "subSkillList": subSkillList, // <-이거 일반 리스트 + 도보 & 기력 회복
           "allSubSkillListLength": myPkmDBStore.allSubSkillList.length,
           "pkmLevel": pkmLevel,
           "upMult": upMult,

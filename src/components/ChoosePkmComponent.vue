@@ -147,6 +147,7 @@ import { useEeveeStore } from 'src/stores/eeveeStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore';
 import { loadingCalc, stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
+import { popupFail } from 'src/utils/popup';
 
 defineOptions({
   name: 'ChoosePkmComponent'
@@ -178,9 +179,20 @@ watch(prevRoute, (newPath, oldPath)=>{
 })
 onBeforeUnmount(()=>{
   if(route.path === prevRoute.value){
-    if(prevRoute.value == '/rate'){
-      hbCount.value = 0
-      erbCount.value = 0
+    let subtractSkillLevel = 0
+    for(let z=0; z< subSkills.value.length; z++){
+      if(subSkills.value[z].label.includes("스킬 레벨 업")){
+        subtractSkillLevel += subSkills.value[z].mult
+      }
+      else if(subSkills.value[z].label === '도우미 보너스'){ hbCount.value = 1 }
+      else if(subSkills.value[z].label === '기력 회복 보너스'){ erbCount.value = 1 }
+    }
+    if(prevRoute.value == '/rate'){      
+      if(mainSkillLevel.value < subtractSkillLevel){
+        // 스렙업 서브가 사용자 입력 메인 스킬 레벨에 반영되어야 함
+        popupFail("메인 스킬 레벨이 올바르지 않습니다")
+        return false
+      }
       // 힐러는 라이트 버전
       myHealerInputStore.calcVer = calcVer.value
       myHealerInputStore.healSkillCount = 4

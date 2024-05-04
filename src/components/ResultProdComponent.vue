@@ -210,7 +210,7 @@ watchEffect(async()=>{
                 // 자힐 가능한 포켓몬은 2번 기력 계산한다
                 myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
                 allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
-                myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)
+                myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)                
             }          
             // 식재료 종류별 생산량
             myProdCalcStore.calcLeveLIng(calcVer, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
