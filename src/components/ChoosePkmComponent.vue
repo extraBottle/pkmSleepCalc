@@ -73,7 +73,7 @@
     </div>
     <!-- 서브 스킬 선택 -->
     <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="subSkillOptions"
-     :label= "limitSub" behavior="dialog" :max-values="watchLevel"
+     :label= "limitSub" behavior="dialog" :max-values="watchLevel" clearable clear-icon="close"
      :error="props.subValid" :error-message="emptySub" hide-bottom-space>
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps" :class="scope.opt.bg">
@@ -147,7 +147,6 @@ import { useEeveeStore } from 'src/stores/eeveeStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore';
 import { loadingCalc, stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
-import { popupFail } from 'src/utils/popup';
 
 defineOptions({
   name: 'ChoosePkmComponent'
