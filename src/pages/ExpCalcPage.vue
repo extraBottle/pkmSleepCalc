@@ -180,6 +180,12 @@ function calcExp(){
         targetL.value.resetValidation
         leftExpRule.value = false
         levSmall.value = false
+        if(calcVer.value === 'light'){
+            // 라이트 버전에선 프로 설정을 전부 기본값으로 변경한다
+            species.value = "일반"
+            nature.value = '영향 없음 --'
+            leftExp.value = expPerLevel[startLev.value - 1]
+        }
         candy = 25
         if(nature.value === "EXP 획득량 ▲▲"){
             candy *= 1.2
@@ -188,17 +194,15 @@ function calcExp(){
             candy = 21
         }
         if(boost.value){ candy *= boostRate[whatBoost.value][0] }
-        // 계산기 버전 라이트면 걍 최대 남은 경험치, 프로면 설정 세팅 따름
-        const left = calcVer.value === 'light' ? expPerLevel[startLev.value - 1] : leftExp.value
         //현재 레벨에서 목표레벨까지 필요한 경험치량
-        let totalExpRequired= left;
+        let totalExpRequired= leftExp.value;
         //사탕으로 렙업할 때 렙업하고도 초과하는 경험치량
-        let leftoverCandyExp= candy - left % candy;
-        if(left % candy === 0){
+        let leftoverCandyExp= candy - leftExp.value % candy;
+        if(leftExp.value % candy === 0){
             leftoverCandyExp= 0;
         };
         //현재 레벨에서 목표레벨까지 필요한 꿈의 조각 개수
-        let totalShardsRequired= Math.ceil(left / candy) * shardPerLevel[startLev.value - 1];        
+        let totalShardsRequired= Math.ceil(leftExp.value / candy) * shardPerLevel[startLev.value - 1];        
 
         for(let z= 0; z < (endLev.value - startLev.value - 1); z++){
             let addExp = Math.floor(expPerLevel[z + startLev.value] * pkmSpeciesObj[species.value]);
