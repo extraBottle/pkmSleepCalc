@@ -186,18 +186,19 @@ onBeforeMount(async()=>{
           myPkmDBStore.allSubSkillList.forEach((e)=>{
             if(e.label === "도우미 보너스" || e.label === "기력 회복 보너스" || e.label === "스킬 레벨 업 M" || e.label === "스킬 레벨 업 s"){
               addValidSub.push(e)
-              if(e.label.includes("스킬 레벨 업")){
-                // 비스킬몬에게 스렙업 서브 가산점을 주기 위해서, 비교군은 스렙업 없는 만큼 스킬렙 감소한 상태로 시작
-                mainSkillLevel -= e.mult
-              }
             }            
           }) 
         }
         const subSkillList = [
           ...addValidSub.slice(),
           ...myPkmDBStore.subSkillList.slice()
-          
-        ]      
+        ]
+        mySub.forEach((e)=>{
+          if(e.label.includes("스킬 레벨 업")){
+            // 비스킬몬에게 스렙업 서브 가산점을 주기 위해서, 비교군은 스렙업 없는 만큼 스킬렙 감소한 상태로 시작
+            mainSkillLevel -= e.mult
+          }
+        })      
                  
         // 기존에 검색한 포켓몬과 레벨이 다시 검색한 것과 동일하면 api 생략
         let selfHealSkillData = {}
@@ -212,7 +213,7 @@ onBeforeMount(async()=>{
           randHealSkillData = myPkmDBStore.searchPkmData('name', 'LEAFEON').skill
           allHealSkillData = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill
         }                  
-
+        console.log('skillLev', mainSkillLevel)
         const obj = {
           "upNature": upNature,
           "downNature": downNature,
