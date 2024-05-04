@@ -188,7 +188,8 @@ function calcExp(){
             candy = 21
         }
         if(boost.value){ candy *= boostRate[whatBoost.value][0] }
-        const left = expPerLevel[startLev.value - 1]
+        // 계산기 버전 라이트면 걍 최대 남은 경험치, 프로면 설정 세팅 따름
+        const left = calcVer.value === 'light' ? expPerLevel[startLev.value - 1] : leftExp.value
         //현재 레벨에서 목표레벨까지 필요한 경험치량
         let totalExpRequired= left;
         //사탕으로 렙업할 때 렙업하고도 초과하는 경험치량
@@ -199,27 +200,14 @@ function calcExp(){
         //현재 레벨에서 목표레벨까지 필요한 꿈의 조각 개수
         let totalShardsRequired= Math.ceil(left / candy) * shardPerLevel[startLev.value - 1];        
 
-        if(species.value === "일반" || calcVer.value === 'light'){ 
-            for(let z= 0; z < (endLev.value - startLev.value - 1); z++){
-                let addExp = expPerLevel[z + startLev.value];
-                totalExpRequired += addExp;
-                totalShardsRequired += Math.ceil((addExp - leftoverCandyExp) / candy) * shardPerLevel[z + startLev.value];
-                if((addExp - leftoverCandyExp) % candy === 0){
-                    leftoverCandyExp= 0;
-                }else{
-                    leftoverCandyExp= candy - (addExp - leftoverCandyExp) % candy;
-                };
-            };
-        }else{
-            for(let z= 0; z < (endLev.value - startLev.value - 1); z++){
-                let addExp = Math.floor(expPerLevel[z + startLev.value] * pkmSpeciesObj[species.value]);
-                totalExpRequired += addExp;
-                totalShardsRequired += Math.ceil((addExp - leftoverCandyExp) / candy) * shardPerLevel[z + startLev.value];
-                if((addExp - leftoverCandyExp) % candy === 0){
-                    leftoverCandyExp= 0;
-                }else{
-                    leftoverCandyExp= candy - (addExp - leftoverCandyExp) % candy;
-                };
+        for(let z= 0; z < (endLev.value - startLev.value - 1); z++){
+            let addExp = Math.floor(expPerLevel[z + startLev.value] * pkmSpeciesObj[species.value]);
+            totalExpRequired += addExp;
+            totalShardsRequired += Math.ceil((addExp - leftoverCandyExp) / candy) * shardPerLevel[z + startLev.value];
+            if((addExp - leftoverCandyExp) % candy === 0){
+                leftoverCandyExp= 0;
+            }else{
+                leftoverCandyExp= candy - (addExp - leftoverCandyExp) % candy;
             };
         };
         //현재 레벨에서 목표레벨까지 필요한 사탕 개수
