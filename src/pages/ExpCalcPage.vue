@@ -171,9 +171,9 @@ function calcExp(){
     if(startLev.value >= endLev.value){
         levSmall.value = true
     }
-    else if(Math.floor(expPerLevel[startLev.value - 1] * pkmSpeciesObj[species.value]) < leftExp.value && calcVer.value === 'pro'){
+    else if(Math.round(expPerLevel[startLev.value - 1] * pkmSpeciesObj[species.value]) < leftExp.value && calcVer.value === 'pro'){
         leftExpRule.value = true
-        leftExpMsg.value = `남은 경험치는 ${Math.floor(expPerLevel[startLev.value - 1] * pkmSpeciesObj[species.value])}이하로 입력해주세요`
+        leftExpMsg.value = `남은 경험치는 ${Math.round(expPerLevel[startLev.value - 1] * pkmSpeciesObj[species.value])}이하로 입력해주세요`
     }
     else if(currentL.value.validate && targetL.value.validate){
         currentL.value.resetValidation
@@ -205,7 +205,7 @@ function calcExp(){
         let totalShardsRequired= Math.ceil(leftExp.value / candy) * shardPerLevel[startLev.value - 1];        
 
         for(let z= 0; z < (endLev.value - startLev.value - 1); z++){
-            let addExp = Math.floor(expPerLevel[z + startLev.value] * pkmSpeciesObj[species.value]);
+            let addExp = Math.round(expPerLevel[z + startLev.value] * pkmSpeciesObj[species.value]);
             totalExpRequired += addExp;
             totalShardsRequired += Math.ceil((addExp - leftoverCandyExp) / candy) * shardPerLevel[z + startLev.value];
             if((addExp - leftoverCandyExp) % candy === 0){
