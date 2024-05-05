@@ -22,6 +22,7 @@
                 <div class="text-h5 text-center text-weight-bold clean-wrap">
                     {{ dishOrDaily }}
                     <span class="text-subtitle2">(기댓값)</span>
+                    <q-btn color="grey-5" icon="help" round flat dense @click="showTime = true"></q-btn>
                 </div>
             </q-card-section>
             <q-separator inset />
@@ -68,6 +69,19 @@
             </q-card-section>
         </q-card>
     </div>
+    <q-dialog v-model="showTime">
+        <q-card>
+          <q-bar>          
+            <div>도움말</div>
+            <q-space />          
+            <q-btn dense flat icon="close" v-close-popup />                 
+          </q-bar>
+          <q-card-section>
+            <span class="text-bold">
+                "수면 + 활동시간"</span>(총 24h)을 전부 반영하여 계산한 결과입니다            
+          </q-card-section>   
+        </q-card>
+      </q-dialog>
 </template>
 
 <script setup>
@@ -94,6 +108,7 @@ const mySleepTimeInputStore = useSleepTimeInputStore()
 const myHealerInputStore = useHealerInputStore()
 const myProdCalcStore = useProdCalcStore()
 
+const showTime = ref(false)
 // 선택한 포켓몬 이미지
 const selectPkmImage = ref(myDownloadStore.fetchImage('pkm', myInputStore.selectedPkmDex))
 const pkmName = ref(myInputStore.pkmName)
