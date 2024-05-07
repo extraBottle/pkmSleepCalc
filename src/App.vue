@@ -30,14 +30,7 @@ useMeta(()=>{
     title: pageName.value,
     titleTemplate: title => `${title} - 포켓몬 슬립`,     
     meta: {
-      description: { name: 'description', content: desc.value },   
-      ogTitle: {
-        property: "og:title",
-        content: pageName.value,
-        template (ogTitle) {
-          return `${ogTitle} - 두번째유리병`
-        }
-      }
+      description: { name: 'description', content: desc.value }
     }
   }
 })
