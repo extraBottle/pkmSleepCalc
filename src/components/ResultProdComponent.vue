@@ -206,7 +206,6 @@ watchEffect(async()=>{
             myProdCalcStore.finalSkillProc = myProdCalcStore.calcSkillProc(allData, upNature, downNature, upMult, downMult, mySub)
             // 식재료 확률
             myProdCalcStore.finalIngProc = myProdCalcStore.calcIngProc(allData, upNature, downNature, upMult, downMult, mySub)
-            console.log(allData, upNature, downNature, upMult, downMult, mySub)
             // 기력 그래프
             if(calcVer === 'proVer'){
                 myProdCalcStore.onlyBaseSpeedH = myProdCalcStore.calcBaseSpeed(pkmLevelH, upNatureH, downNatureH, upMult, downMult, hBonus, hbMult, mySubH, allDataH, maxHS, useGoodCamp.value)

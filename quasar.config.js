@@ -105,7 +105,8 @@ module.exports = configure(function () {
       // Quasar plugins
       plugins: [
         'Notify',
-        'Loading'
+        'Loading',
+        'Meta'
       ]
     },
 
