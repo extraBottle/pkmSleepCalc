@@ -212,11 +212,11 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
         },
         {
             'e': 40,
-            'm': 0.62
+            'm': 0.58
         },
         {
             'e': 20,
-            'm': 0.71
+            'm': 0.66
         },
         {
             'e': 0,
