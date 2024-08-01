@@ -267,16 +267,16 @@ onBeforeMount(async()=>{
           "ribbonInv": ribbonInv,
           "sleepLimit": sleepLimit
         }        
-        // const response = await fetch('https://fg1kg79is8.execute-api.ap-northeast-2.amazonaws.com/rate', {
-        //   method: "POST",
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(obj)
-        // })
-        // const json = await response.json()
-        // orderData.value = json.orderData
-        // minOrderData.value = json.minOrderData
-        // vsOutput.value = json.vsOutput
-        // oneBest.value = json.oneBest               
+        const response = await fetch('https://fg1kg79is8.execute-api.ap-northeast-2.amazonaws.com/rate', {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(obj)
+        })
+        const json = await response.json()
+        orderData.value = json.orderData
+        minOrderData.value = json.minOrderData
+        vsOutput.value = json.vsOutput
+        oneBest.value = json.oneBest               
                                                     
         stopLoading()       
       }
