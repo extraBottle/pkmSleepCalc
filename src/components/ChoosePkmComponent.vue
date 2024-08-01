@@ -134,6 +134,80 @@
         </q-checkbox>
       </q-card-section>
     </q-card>
+    <!-- 절친 리본 적용 여부 -->
+    <q-card v-if="showUseRibbon" class="bg-sSkill">
+      <q-card-section>        
+        <q-checkbox v-model="useRibbon" @click="ribbonDialog">
+          <template v-slot:default>
+            굿나잇리본 적용
+            <q-icon size="xl" name="img:images/ribbon.png" />
+          </template>
+        </q-checkbox>
+      </q-card-section>
+    </q-card>
+    <q-dialog v-model="showRibbon" persistent>
+        <q-card>
+          <q-bar>          
+            <div>굿나잇리본 선택</div>              
+          </q-bar>
+          <q-card-section>
+            <q-list>
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar>
+                  <q-radio dense v-model="ribbonLev" val="0" color="secondary"/>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>선택 안함</q-item-label>                  
+                </q-item-section>
+              </q-item>
+
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar>
+                  <q-radio dense v-model="ribbonLev" val="1" color="secondary"/>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label><span class="text-bold">레벨 1</span> (수면 200h+)</q-item-label>
+                  <q-item-label caption>최대 소지수 + {{ firstRibbonInv }}</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar>
+                  <q-radio dense v-model="ribbonLev" val="2" color="secondary" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label><span class="text-bold">레벨 2</span> (수면 500h+)</q-item-label>
+                  <q-item-label caption>최대 소지수 + {{ secondRibbonInv }}</q-item-label>
+                  <q-item-label v-if="leftEvo > 0" caption>도우미 속도 + {{ secondRibbonSpeed }}%</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar top>
+                  <q-radio dense v-model="ribbonLev" val="3" color="secondary" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label><span class="text-bold">레벨 3</span> (수면 1000h+)</q-item-label>
+                  <q-item-label caption>최대 소지수 + {{ thirdRibbonInv }}</q-item-label>
+                  <q-item-label v-if="leftEvo > 0" caption>도우미 속도 + {{ thirdRibbonSpeed }}%</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar top>
+                  <q-radio dense v-model="ribbonLev" val="4" color="secondary" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label><span class="text-bold">레벨 4</span> (수면 2000h+)</q-item-label>
+                  <q-item-label caption>최대 소지수 + {{ fourthRibbonInv }}</q-item-label>
+                  <q-item-label v-if="leftEvo > 0" caption>도우미 속도 + {{ fourthRibbonSpeed }}%</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>   
+            <div class="row justify-end full-width"><q-btn label="확인" color="primary" @click="updateRibbon" v-close-popup/></div> 
+          </q-card-section>   
+        </q-card>
+      </q-dialog>
   </div>
 </template>
 
@@ -167,6 +241,7 @@ const showErbCount = ref(true)
 const showGoodCamp = ref(true)
 const showUseHealer = ref(true)
 const showEeveePrefer = ref(false)
+const showUseRibbon = ref(true)
 // 선택 가능한 포켓몬 목록
 const pkmNameList = ref(myPkmDBStore.korPkmName)
 
@@ -206,7 +281,7 @@ onBeforeUnmount(()=>{
       myInputStore.storeEverything(hbCount.value, erbCount.value, 
         pkmName.value, pkmLevel.value, evoCount.value, subSkills.value, firstIngName.value,
         secondIngName.value, thirdIngName.value, fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
-        selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value)
+        selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value, useRibbon.value, ribbonLev.value, leftEvo.value)
     }
   }
 })
@@ -239,6 +314,8 @@ const pkmName = ref(myInputStore.pkmName)
 const pkmLevel = ref(myInputStore.pkmLevel)
 // 직접 진화시킨 횟수
 const evoCount = ref(myInputStore.evoCount)
+// 가능한 진화 횟수
+const leftEvo = ref(myInputStore.leftEvo)
 // 사용자 선택 보유중인 서브 스킬들
 const subSkills = ref(myInputStore.subSkills)
 // 사용자 입력 총 도우미 보너스 개수
@@ -280,6 +357,19 @@ const mainSkillLevel = ref(myInputStore.mainSkillLevel)
 const preferEevee = ref(myEeveeStore.preferEevee)
 // 이브이 풀잠
 const fullSleep = ref(myEeveeStore.fullSleep)
+// 굿나잇리본 레벨 선택
+const ribbonLev = ref(myInputStore.ribbonLev)
+// 굿나잇리본 1렙
+const firstRibbonInv = ref(myPkmDBStore.ribbonList[0]["inventory"])
+// 굿나잇리본 2렙
+const secondRibbonInv = ref(myPkmDBStore.ribbonList[1]["inventory"])
+const secondRibbonSpeed = ref(myPkmDBStore.ribbonList[1]["speed"][leftEvo.value])
+// 굿나잇리본 3렙
+const thirdRibbonInv = ref(myPkmDBStore.ribbonList[2]["inventory"])
+const thirdRibbonSpeed = ref(myPkmDBStore.ribbonList[2]["speed"][leftEvo.value])
+// 굿나잇리본 4렙
+const fourthRibbonInv = ref(myPkmDBStore.ribbonList[3]["inventory"])
+const fourthRibbonSpeed = ref(myPkmDBStore.ribbonList[3]["speed"][leftEvo.value])
 // 유효성 검사 이름 & 성격
 // 유효성 검사 메시지
 const nameEmptyMsg = ref('포켓몬을 선택해주세요')
@@ -320,6 +410,9 @@ const useHealer = ref(myRateCalcStore.useHealer)
 const calcVer = computed(()=>{
   return useHealer.value ? 'lightVer' : 'noHealer'
 })
+// 굿나잇리본 적용 여부
+const useRibbon = ref(myInputStore.useRibbon)
+const showRibbon = ref(false)
 
 // 현재 페이지에 따라 선택 가능한 서브 스킬 목록 다름
 const subSkillOptions = ref()
@@ -375,7 +468,16 @@ async function fetchApiIng(){
   await myPkmDBStore.fetchPkmData('SYLVEON')
   
   selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)
-  maxSkillLevel.value = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value)).skill.maxLevel
+  // 불러온 포켓몬의 모든 정보
+  const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
+  // 불러온 포켓몬의 남은 진화횟수
+  leftEvo.value = allData.remainingEvolutions
+  // 굿나잇리본 효과 반영
+  secondRibbonSpeed.value = myPkmDBStore.ribbonList[1]["speed"][leftEvo.value]
+  thirdRibbonSpeed.value = myPkmDBStore.ribbonList[2]["speed"][leftEvo.value]
+  fourthRibbonSpeed.value = myPkmDBStore.ribbonList[3]["speed"][leftEvo.value]
+  // 메인 스킬 최대 레벨 반영
+  maxSkillLevel.value = allData.skill.maxLevel
   mainSkillLevel.value = mainSkillLevel.value > maxSkillLevel.value ? maxSkillLevel.value : mainSkillLevel.value
 }
 function addLevel(){
@@ -409,6 +511,19 @@ function preferEeveeColor(c){
     return color
   }  
 }
+// 굿나잇리본 팝업 띄우기
+function ribbonDialog(){
+  showRibbon.value = true
+}
+// 굿나잇리본 선택 사항 업데이트
+function updateRibbon(){
+  if(ribbonLev.value == "0"){
+    useRibbon.value = false
+  }
+  else{
+    useRibbon.value = true
+  }
+}
 onBeforeMount(()=>{
   // 첫 로딩때 미리 저장해둔 이미지 불러와야 로딩 빠름  
   if(route.path !== 'eeveelution' && pkmName.value.length > 0){
@@ -438,6 +553,7 @@ onBeforeMount(()=>{
       showGoodCamp.value = false
       showUseHealer.value = false
       showEeveePrefer.value = true
+      showUseRibbon.value = false
       subSkillOptions.value = myPkmDBStore.allSubSkillList
       selectPkmImage.value = myDownloadStore.fetchImage('pkm', 133)
       pkmName.value = "이브이"

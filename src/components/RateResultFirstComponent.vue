@@ -17,7 +17,12 @@
     </div>
     <q-card class="col-xs-12 col-sm-10">
       <q-card-section>
-        <span class="text-subtitle1 text-bold">분야별 백분위</span>
+        <span class="text-subtitle1 text-bold q-pr-xs">분야별 백분위</span>
+        <q-icon :class="cssRibbon" size="md" name="img:images/ribbon.png">
+            <q-tooltip :hide-delay="tooltipMobile()">
+                굿나잇리본 {{ ribbonLev }}레벨
+            </q-tooltip>
+        </q-icon>                        
       </q-card-section>        
         <apexchart type="radar" 
         height="300"
@@ -88,7 +93,7 @@ import { useDownloadStore } from 'src/stores/downloadStore'
 import { useInputStore, useHealerInputStore } from 'src/stores/inputStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore'
 import { stopLoading } from 'src/utils/loading';
-import { popupFail } from 'src/utils/popup'
+import { tooltipMobile } from 'src/utils/tooltip'
 
 defineOptions({
   name: 'RateResultFirstComponent'
@@ -134,6 +139,10 @@ const secondIngName = myInputStore.secondIng
 const thirdIngName = myInputStore.thirdIng
 let mainSkillLevel = myInputStore.mainSkillLevel
 const mealRecovery = myPkmDBStore.mealRecovery
+// 굿나잇리본 선택
+const ribbonSpeed = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["speed"][myInputStore.leftEvo] : 0
+const ribbonInv = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["inventory"] : 0
+const ribbonLev = ref(myInputStore.ribbonLev)
 
 const maxE = myPkmDBStore.maxE
 const totalMainSkill = myPkmDBStore.totalMainSkill
@@ -147,7 +156,8 @@ const speedEnerMultList = myPkmDBStore.speedEnerMultList
 
 const upNatureList = myPkmDBStore.upNatureList
 const downNatureList = myPkmDBStore.downNatureList
-
+// 최대 축적 가능 스킬 횟수
+const sleepLimit = allData.specialty == "skill" ? myPkmDBStore.collectSkillCount.skill : myPkmDBStore.collectSkillCount.else
 
 // 분야별 1등
 const oneBest = ref(myRateCalcStore.oneBest)
@@ -168,6 +178,15 @@ if(myRateCalcStore.pkmName !== pkmName.value){
   // 무엇 특화인지
   myRateCalcStore.whatSpeciality = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(myInputStore.pkmName)).specialty
 }
+// 굿나잇리본 사용 여부
+const useRibbon = ref(myInputStore.useRibbon)
+const cssRibbon = computed(() => {
+    if(useRibbon.value){
+        return ''
+    }else{
+        return 'invisible'
+    }
+})
 
 onBeforeMount(async()=>{
   try{
@@ -243,18 +262,21 @@ onBeforeMount(async()=>{
           "speedEnerMultList": speedEnerMultList,
           "allDataH": allDataH,
           "teamSubSkillList": myPkmDBStore.teamSubSkillList,
-          "speciality": myRateCalcStore.whatSpeciality
+          "speciality": myRateCalcStore.whatSpeciality,
+          "ribbonSpeed": ribbonSpeed,
+          "ribbonInv": ribbonInv,
+          "sleepLimit": sleepLimit
         }        
-        const response = await fetch('https://fg1kg79is8.execute-api.ap-northeast-2.amazonaws.com/rate', {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(obj)
-        })
-        const json = await response.json()
-        orderData.value = json.orderData
-        minOrderData.value = json.minOrderData
-        vsOutput.value = json.vsOutput
-        oneBest.value = json.oneBest               
+        // const response = await fetch('https://fg1kg79is8.execute-api.ap-northeast-2.amazonaws.com/rate', {
+        //   method: "POST",
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify(obj)
+        // })
+        // const json = await response.json()
+        // orderData.value = json.orderData
+        // minOrderData.value = json.minOrderData
+        // vsOutput.value = json.vsOutput
+        // oneBest.value = json.oneBest               
                                                     
         stopLoading()       
       }

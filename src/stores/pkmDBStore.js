@@ -4,6 +4,29 @@ import sleepDex from 'src/pkmJson/sleepPkm/data.json'
 
 // 인게임 포켓몬 정보 관리
 export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
+    // 굿나잇리본 레벨별 성능
+    const ribbonList = [
+        {
+            level: 1,
+            inventory: 1,
+            speed: [0, 0, 0]
+        },
+        {
+            level: 2,
+            inventory: 3,
+            speed: [0, 5, 11]
+        },
+        {
+            level: 3,
+            inventory: 6,
+            speed: [0, 5, 11]
+        },
+        {
+            level: 4,
+            inventory: 8,
+            speed: [0, 12, 25]
+        }
+    ]
     // 서브 스킬 목록 (생산량에 영향을 주는)
     const subSkillList = [        
         {
@@ -161,6 +184,11 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     const maxHS = 0.35
     // 현존하는 모든 메인 스킬 개수
     const totalMainSkill = 14
+    // 스킬형의 최대 축적 가능 스킬 횟수
+    const collectSkillCount = {
+        "skill": 2,
+        "else": 1
+    }
     // 상승 성격
     const upNatureList = [
         '영향 없음 --',
@@ -359,6 +387,8 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
         lazyPkmData,
         totalMainSkill,
         teamSubSkillList,
+        ribbonList,
+        collectSkillCount,
         fetchPkmData,
         loadKorPkmName,
         searchPkmData,

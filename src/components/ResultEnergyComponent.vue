@@ -88,6 +88,8 @@ watchEffect(async()=>{
       const enerPerHour = myPkmDBStore.enerPerHour
       const speedEnerMultList = myPkmDBStore.speedEnerMultList
       const evoCountH = myHealerInputStore.evoCount
+      const ribbonInv = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["inventory"] : 0
+      const ribbonInvH = myHealerInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myHealerInputStore.ribbonLev, 10) - 1]["inventory"] : 0
 
       let ingSkillData = {}
       let selfHealSkillData = {}
@@ -111,14 +113,15 @@ watchEffect(async()=>{
       const thirdIngH = myHealerInputStore.thirdIng
       // 좋캠 티켓 사용 여부
       const useGoodCamp = ref(myInputStore.useGoodCamp)
+      // 최대 축적 스킬 횟수
+      const sleepLimit = allData.specialty == "skill" ? myPkmDBStore.collectSkillCount.skill : myPkmDBStore.collectSkillCount.else
 
-
-      myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+      myProdCalcStore.calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
         allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
       // 기력 적용 도우미 속도
-      myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)            
+      myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)            
       // 식재료 종류별 생산량
-      myProdCalcStore.calcLeveLIng(calcVer, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+      myProdCalcStore.calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
       energyChartRef.value.updateSeries([{
         name: '남은 기력량',
         data: myProdCalcStore.energyAxis

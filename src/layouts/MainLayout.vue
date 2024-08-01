@@ -41,26 +41,6 @@
           v-bind="link.children[0]"
           style="border-bottom: dotted;"
         />
-        <q-item
-          clickable          
-          tag="a"
-          href="https://toss.me/extrabottl"
-          target="_blank"
-          style="background-color: antiquewhite;"
-        >
-          <q-item-section avatar>
-            <q-avatar>
-              <img src="images/dreamclusterl.png">
-            </q-avatar>
-          </q-item-section>
-
-          <q-item-section>
-            <q-item-label class="text-bold">후원하기</q-item-label>            
-          </q-item-section>
-          <q-item-section side>
-            <q-icon color="grey-5" size="xs" name="open_in_new"/>
-          </q-item-section>
-        </q-item>
       </q-list>
     </q-drawer>
     <q-page-container>

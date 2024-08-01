@@ -116,6 +116,80 @@
     label="상승 성격" behavior="dialog" :error="props.upValid" :error-message="wrongUpMsg" hide-bottom-space></q-select>
     <q-select class="full-width" filled color="secondary" v-model="downNature" :options="myPkmDBStore.downNatureList" 
     label="하락 성격" behavior="dialog" :error="props.downValid" :error-message="wrongDownMsg" hide-bottom-space></q-select>
+    <!-- 절친 리본 적용 여부 -->
+    <q-card class="bg-sSkill">
+      <q-card-section>        
+        <q-checkbox v-model="useRibbon" @click="ribbonDialog">
+          <template v-slot:default>
+            굿나잇리본 적용
+            <q-icon size="xl" name="img:images/ribbon.png" />
+          </template>
+        </q-checkbox>
+      </q-card-section>
+    </q-card>
+    <q-dialog v-model="showRibbon" persistent>
+        <q-card>
+          <q-bar>          
+            <div>굿나잇리본 선택</div>              
+          </q-bar>
+          <q-card-section>
+            <q-list>
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar>
+                  <q-radio dense v-model="ribbonLev" val="0" color="secondary"/>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>선택 안함</q-item-label>                  
+                </q-item-section>
+              </q-item>
+
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar>
+                  <q-radio dense v-model="ribbonLev" val="1" color="secondary"/>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label><span class="text-bold">레벨 1</span> (수면 200h+)</q-item-label>
+                  <q-item-label caption>최대 소지수 + {{ firstRibbonInv }}</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar>
+                  <q-radio dense v-model="ribbonLev" val="2" color="secondary" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label><span class="text-bold">레벨 2</span> (수면 500h+)</q-item-label>
+                  <q-item-label caption>최대 소지수 + {{ secondRibbonInv }}</q-item-label>
+                  <q-item-label v-if="leftEvo > 0" caption>도우미 속도 + {{ secondRibbonSpeed }}%</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar top>
+                  <q-radio dense v-model="ribbonLev" val="3" color="secondary" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label><span class="text-bold">레벨 3</span> (수면 1000h+)</q-item-label>
+                  <q-item-label caption>최대 소지수 + {{ thirdRibbonInv }}</q-item-label>
+                  <q-item-label v-if="leftEvo > 0" caption>도우미 속도 + {{ thirdRibbonSpeed }}%</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item tag="label" v-ripple>
+                <q-item-section avatar top>
+                  <q-radio dense v-model="ribbonLev" val="4" color="secondary" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label><span class="text-bold">레벨 4</span> (수면 2000h+)</q-item-label>
+                  <q-item-label caption>최대 소지수 + {{ fourthRibbonInv }}</q-item-label>
+                  <q-item-label v-if="leftEvo > 0" caption>도우미 속도 + {{ fourthRibbonSpeed }}%</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>   
+            <div class="row justify-end full-width"><q-btn label="확인" color="primary" @click="updateRibbon" v-close-popup/></div> 
+          </q-card-section>   
+        </q-card>
+      </q-dialog>
     </div>
     <div v-else>
       <div style="height: 5vh;">
@@ -149,7 +223,7 @@ onBeforeUnmount(()=>{
   myHealerInputStore.storeEverything(calcVer.value, healSkillCount.value,
     pkmName.value, pkmLevel.value, evoCount.value, subSkills.value, firstIngName.value, secondIngName.value, thirdIngName.value,
     fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
-    selectedHealerDex.value, mainSkillLevel.value,)
+    selectedHealerDex.value, mainSkillLevel.value, useRibbon.value, ribbonLev.value, leftEvo.value)
 })
 const myDownloadStore = useDownloadStore()
 const myPkmDBStore = usePkmDBStore()
@@ -213,6 +287,38 @@ const fixedThirdIng = ref(myDownloadStore.fetchIcon('ing', fixedThirdIngName.val
 const nameEmptyMsg = ref('힐러 포켓몬을 선택해주세요')
 const wrongUpMsg = ref('상승 성격을 다시 입력해주세요')
 const wrongDownMsg = ref('하락 성격을 다시 입력해주세요')
+
+// 가능한 진화 횟수
+const leftEvo = ref(myHealerInputStore.leftEvo)
+// 굿나잇리본 적용 여부
+const useRibbon = ref(myHealerInputStore.useRibbon)
+const showRibbon = ref(false)
+// 굿나잇리본 팝업 띄우기
+function ribbonDialog(){
+  showRibbon.value = true
+}
+// 굿나잇리본 레벨 선택
+const ribbonLev = ref(myHealerInputStore.ribbonLev)
+// 굿나잇리본 1렙
+const firstRibbonInv = ref(myPkmDBStore.ribbonList[0]["inventory"])
+// 굿나잇리본 2렙
+const secondRibbonInv = ref(myPkmDBStore.ribbonList[1]["inventory"])
+const secondRibbonSpeed = ref(myPkmDBStore.ribbonList[1]["speed"][leftEvo.value])
+// 굿나잇리본 3렙
+const thirdRibbonInv = ref(myPkmDBStore.ribbonList[2]["inventory"])
+const thirdRibbonSpeed = ref(myPkmDBStore.ribbonList[2]["speed"][leftEvo.value])
+// 굿나잇리본 4렙
+const fourthRibbonInv = ref(myPkmDBStore.ribbonList[3]["inventory"])
+const fourthRibbonSpeed = ref(myPkmDBStore.ribbonList[3]["speed"][leftEvo.value])
+// 굿나잇리본 선택 사항 업데이트
+function updateRibbon(){
+  if(ribbonLev.value == "0"){
+    useRibbon.value = false
+  }
+  else{
+    useRibbon.value = true
+  }
+}
 
 // 현재 레벨에 따라 선택 가능한 서브 스킬 수 제한
 const watchLevel = computed(()=>{

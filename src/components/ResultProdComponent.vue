@@ -12,11 +12,18 @@
         <q-card bordered class="full-width bg-googleBack">
             <q-card-section>                
                 <div class="full-width row justify-between">
-                    <q-icon :class="cssGoodCamp" size="xl" name="img:images/goodcampticket.png">
-                        <q-tooltip :hide-delay="tooltipMobile()">
-                            좋은 캠프 적용 중!
-                        </q-tooltip>
-                    </q-icon>
+                    <div>
+                        <q-icon :class="cssGoodCamp" size="xl" name="img:images/goodcampticket.png">
+                            <q-tooltip :hide-delay="tooltipMobile()">
+                                좋은 캠프 적용 중!
+                            </q-tooltip>
+                        </q-icon>
+                        <q-icon :class="cssRibbon" size="xl" name="img:images/ribbon.png">
+                            <q-tooltip :hide-delay="tooltipMobile()">
+                                굿나잇리본 적용 중!
+                            </q-tooltip>
+                        </q-icon>
+                    </div>
                     <q-select outlined dense v-model="chooseRange" :options="options" />
                 </div>
                 <div class="text-h5 text-center text-weight-bold clean-wrap">
@@ -128,6 +135,9 @@ const secondIngName = myInputStore.secondIng
 const thirdIngName = myInputStore.thirdIng
 const mainSkillLevel = myInputStore.mainSkillLevel
 const mealRecovery = myPkmDBStore.mealRecovery
+// 굿나잇리본 효과
+const ribbonSpeed = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["speed"][myInputStore.leftEvo] : 0
+const ribbonInv = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["inventory"] : 0
 
 const maxE = myPkmDBStore.maxE
 const totalMainSkill = myPkmDBStore.totalMainSkill
@@ -147,6 +157,11 @@ const erbMult = myPkmDBStore.erbMult
 const enerPerHour = myPkmDBStore.enerPerHour
 const speedEnerMultList = myPkmDBStore.speedEnerMultList
 const evoCountH = myHealerInputStore.evoCount
+// 굿나잇리본 효과 (힐러)
+const ribbonSpeedH = myHealerInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myHealerInputStore.ribbonLev, 10) - 1]["speed"][myHealerInputStore.leftEvo] : 0
+const ribbonInvH = myHealerInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myHealerInputStore.ribbonLev, 10) - 1]["inventory"] : 0
+// 최대 축적 스킬 횟수
+const sleepLimit = allData.specialty == "skill" ? myPkmDBStore.collectSkillCount.skill : myPkmDBStore.collectSkillCount.else
 
 const options = ["한끼", "1일"]
 const chooseRange = ref(options[0])
@@ -167,6 +182,15 @@ const thirdIngH = myHealerInputStore.thirdIng
 const useGoodCamp = ref(myInputStore.useGoodCamp)
 const cssGoodCamp = computed(() => {
     if(useGoodCamp.value){
+        return ''
+    }else{
+        return 'invisible'
+    }
+})
+// 굿나잇리본 사용 여부
+const useRibbon = ref(myInputStore.useRibbon)
+const cssRibbon = computed(() => {
+    if(useRibbon.value){
         return ''
     }else{
         return 'invisible'
@@ -202,32 +226,32 @@ watchEffect(async()=>{
                 allHealSkillData = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill
             }            
             // 기력 제외 도우미 속도
-            myProdCalcStore.onlyBaseSpeed = myProdCalcStore.calcBaseSpeed(pkmLevel, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub, allData, maxHS, useGoodCamp.value)
+            myProdCalcStore.onlyBaseSpeed = myProdCalcStore.calcBaseSpeed(ribbonSpeed, pkmLevel, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub, allData, maxHS, useGoodCamp.value)
             myProdCalcStore.finalSkillProc = myProdCalcStore.calcSkillProc(allData, upNature, downNature, upMult, downMult, mySub)
             // 식재료 확률
             myProdCalcStore.finalIngProc = myProdCalcStore.calcIngProc(allData, upNature, downNature, upMult, downMult, mySub)
             // 기력 그래프
             if(calcVer === 'proVer'){
-                myProdCalcStore.onlyBaseSpeedH = myProdCalcStore.calcBaseSpeed(pkmLevelH, upNatureH, downNatureH, upMult, downMult, hBonus, hbMult, mySubH, allDataH, maxHS, useGoodCamp.value)
+                myProdCalcStore.onlyBaseSpeedH = myProdCalcStore.calcBaseSpeed(ribbonSpeedH, pkmLevelH, upNatureH, downNatureH, upMult, downMult, hBonus, hbMult, mySubH, allDataH, maxHS, useGoodCamp.value)
                 myProdCalcStore.finalSkillProcH = myProdCalcStore.calcSkillProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
                 // 힐러 식재료 확률
                 myProdCalcStore.finalIngProcH = myProdCalcStore.calcIngProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
-                myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                myProdCalcStore.calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
                 allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)       
             }
             else{
-                myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)           
+                myProdCalcStore.calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)           
             }
             // 기력 적용 도우미 속도
-            myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)
+            myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)
             if(calcVer !== 'proVer' && (allData.skill.name.includes('Charge Energy') || allData.skill.name.includes('Energizing Cheer') || allData.skill.name.includes("Energy For Everyone") || allData.skill.name.includes('Metronome'))){
                 // 자힐 가능한 포켓몬은 2번 기력 계산한다
-                myProdCalcStore.calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                myProdCalcStore.calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
                 allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
-                myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour)                
+                myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)              
             }          
             // 식재료 종류별 생산량
-            myProdCalcStore.calcLeveLIng(calcVer, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+            myProdCalcStore.calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
             myProdCalcStore.calcLoading = false
         }
     }

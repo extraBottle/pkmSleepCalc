@@ -38,8 +38,14 @@ export const useInputStore = defineStore('manage-input', () => {
     const mainSkillLevel = ref(1)
     // 좋은 캠프 티켓 적용 여부
     const useGoodCamp = ref(false)
+    // 굿나잇리본 적용 여부
+    const useRibbon = ref(false)
+    // 굿나잇리본 레벨
+    const ribbonLev = ref("0")
+    // 남은 진화 횟수
+    const leftEvo = ref(1)
     // 전부 저장
-    function storeEverything(h, e, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, gc) {
+    function storeEverything(h, e, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, gc, ur, rl, le) {
         hbCount.value = h;
         erbCount.value = e;
         
@@ -57,6 +63,9 @@ export const useInputStore = defineStore('manage-input', () => {
         selectedPkmDex.value = num;
         mainSkillLevel.value = ms;
         useGoodCamp.value = gc;
+        useRibbon.value = ur;
+        ribbonLev.value = rl;
+        leftEvo.value = le;
     }
     function hasEssential(){
         if(pkmName.value !== '' && upNature.value !== '' && downNature.value !== ''){
@@ -85,6 +94,9 @@ export const useInputStore = defineStore('manage-input', () => {
         selectedPkmDex,
         mainSkillLevel,
         useGoodCamp,
+        useRibbon,
+        ribbonLev,
+        leftEvo,
         storeEverything,
         hasEssential
     };
@@ -134,9 +146,15 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     // 선택한 도감번호
     const selectedPkmDex= ref('700')
     const mainSkillLevel = ref(6)
+    // 굿나잇리본 적용 여부
+    const useRibbon = ref(true)
+    // 굿나잇리본 레벨
+    const ribbonLev = ref("3")
+    // 남은 진화 횟수
+    const leftEvo = ref(0)
 
     // 전부 저장
-    function storeEverything(ver, hc, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms) {
+    function storeEverything(ver, hc, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, ur, rl, le) {
         calcVer.value = ver;
         healSkillCount.value = hc;
 
@@ -152,7 +170,10 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
         upNature.value = u;
         downNature.value = d;
         selectedPkmDex.value = num;
-        mainSkillLevel.value = ms
+        mainSkillLevel.value = ms;
+        useRibbon.value = ur;
+        ribbonLev.value = rl;
+        leftEvo.value = le;
     }
     function hasEssential(){
         if(pkmName.value !== '' && upNature.value !== '' && downNature.value !== ''){
@@ -180,6 +201,9 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
         downNature,
         selectedPkmDex,
         mainSkillLevel,
+        useRibbon,
+        ribbonLev,
+        leftEvo,
         storeEverything,
         hasEssential
     }

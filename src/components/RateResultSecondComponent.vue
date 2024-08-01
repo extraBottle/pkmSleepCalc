@@ -32,7 +32,12 @@
     <div class="row flex-center q-gutter-md">
       <q-card>
         <q-card-section>
-          <span class="text-subtitle1 text-bold">통합 점수</span>
+          <span class="text-subtitle1 text-bold q-pr-xs">통합 점수</span>
+          <q-icon :class="cssRibbon" size="md" name="img:images/ribbon.png">
+              <q-tooltip :hide-delay="tooltipMobile()">
+                  굿나잇리본 {{ ribbonLev }}레벨
+              </q-tooltip>
+          </q-icon>                 
         </q-card-section>
         <apexchart type="radialBar" :options="chartOptions" :series="series"></apexchart>
       </q-card>
@@ -82,10 +87,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useDownloadStore } from 'src/stores/downloadStore'
 import { useInputStore } from 'src/stores/inputStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore';
+import { tooltipMobile } from 'src/utils/tooltip'
 
 defineOptions({
   name: 'RateResultFirstComponent'
@@ -112,6 +118,16 @@ const gradeMedal = ref(`images/${whatGradeName.value}.png`)
 const showCut = ref(false)
 // 커트라인 스펙
 const cutSub = ref(myRateCalcStore.minPoke())
+// 굿나잇리본 사용 여부
+const useRibbon = ref(myInputStore.useRibbon)
+const cssRibbon = computed(() => {
+    if(useRibbon.value){
+        return ''
+    }else{
+        return 'invisible'
+    }
+})
+const ribbonLev = ref(myInputStore.ribbonLev)
 
 function loadFunc(){
   loadedImg.value = false

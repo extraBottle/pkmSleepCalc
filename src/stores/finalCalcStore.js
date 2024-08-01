@@ -75,13 +75,14 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
     }
 
     // 기본 스피드 계산 return
-    function calcBaseSpeed(level, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub = [], allData={}, maxHS, useGoodCamp){
+    function calcBaseSpeed(ribbonSpeed, level, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub = [], allData={}, maxHS, useGoodCamp){
         // enName = myPkmDBStore.convertKorEn(myInputStore.pkmName)
         // level = myInputStore.pkmLevel
         // upNature = myInputStore.upNature
         // upMult = myInputStore.upMult
         // hBonus = myInputStore.hbCount
         // mySub = myInputStore.subSkills
+        // ribbonSpeed = 굿나잇리본 적용 도우미 속도 변화량
         // allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(myInputStore.pkmName))
 
         // 도우미 보정 성격 확인
@@ -99,12 +100,12 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         speedSub = speedSub + totalHB >= maxHS ? maxHS : speedSub + totalHB
 
         // 포켓몬의 기본 도우미 속도 계산 (기력 제외)
-        const multSpeed = (((501 - level) / 500) * speedNature  * (1 - speedSub))    
+        const multSpeed = (((501 - level) / 500) * speedNature  * (1 - speedSub) * (1 - ribbonSpeed / 100))    
         const goodCampBoost = useGoodCamp ? 0.8 : 1.0
         return allData.frequency * multSpeed * convertS * goodCampBoost
     }
 
-    function calcEnergyCurve(allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+    function calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
         allDataH, evoCountH = 0, mySubH = [], pkmLevelH = 0, secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = ''){
         // maxE = 150
         // mainSkillLevel = myHealerInputStore.mainSkillLevel
@@ -270,7 +271,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     }                    
                 }
             }
-            helpCountSleep.value = calcSleepSpeedCount('me', sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
+            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
         }
         else if(calcVer === 'proVer'){            
             // timeStaying.value = {}
@@ -294,7 +295,9 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             // monte carlo simulation            
             // 기상 직후 스킬 발동 확률. 시뮬 돌릴수록 값이 변한다. 우선 80%로 시작
             let morningProc = 0.8
+            let morningDoubleProc = 0.0
             let morningProcS = 0.4
+            let morningDoubleProcS = 0.0
             // 시뮬 결과 매초 y값(기력). 계산이 끝나면 기댓값을 구한다.
             function calcExpect(z, sec, newE){
                 let limitMaxE = newE > maxE ? maxE : newE
@@ -382,18 +385,42 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         
             for(let z = 0; z < simulationCount; z++){
                 // 기상 직후 스킬 발동 했는지 여부
-                if(Math.random() < morningProc){
+                let rollMorning = Math.random()
+                // 기상 직후 자힐 발동 여부
+                let rollMorningS = Math.random()
+                // 힐러 스킬 발동 횟수
+                let skillNumH = 0
+                if(rollMorning < morningProc){
                     healerEnerAxis += enerPerSkillH
-                    if(Math.random() < morningProcS){
-                        calcExpect(z, 0, limitE(morningEner + calcSelfHeal() + enerPerSkill))
+                    skillNumH = 1
+                    if(rollMorning < morningDoubleProc){
+                        healerEnerAxis += enerPerSkillH
+                        healerEnerAxis = limitE(Math.floor(healerEnerAxis)) 
+                        skillNumH = 2
+                    }
+                    if(rollMorningS < morningProcS){
+                        if(rollMorningS < morningDoubleProcS){
+                            // 자힐몬인데 스킬형 포켓몬
+                            calcExpect(z, 0, limitE(morningEner + calcSelfHeal() * 2 + enerPerSkill * skillNumH))    
+                        }
+                        else{
+                            calcExpect(z, 0, limitE(morningEner + calcSelfHeal() + enerPerSkill * skillNumH))
+                        }                        
                     }   
                     else{
-                        calcExpect(z, 0, limitE(morningEner + enerPerSkill))
+                        calcExpect(z, 0, limitE(morningEner + enerPerSkill * skillNumH))
                     }
                 }   
                 else{
-                    if(Math.random() < morningProcS){                        
-                        calcExpect(z, 0, limitE(morningEner + calcSelfHeal()))
+                    // 힐러 스킬 발동 없을때
+                    if(rollMorningS < morningProcS){
+                        if(rollMorningS < morningDoubleProcS){
+                            // 자힐몬인데 스킬형 포켓몬
+                            calcExpect(z, 0, limitE(morningEner + calcSelfHeal() * 2))    
+                        }
+                        else{
+                            calcExpect(z, 0, limitE(morningEner + calcSelfHeal()))
+                        }                        
                     }   
                     else{
                         calcExpect(z, 0, limitE(morningEner))
@@ -526,25 +553,34 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         healerEnerAxis = healerEnerAxis + morningEnerH > 100 ? 100 : healerEnerAxis + morningEnerH
                         if(hasSelfHeal){
                             // 자힐 수면 중 전체 도우미
-                            const totalCountHelpS = calcSleepSpeedCount('me', sleepTime, trySkillE,
+                            const totalCountHelpS = calcSleepSpeedCount('me', ribbonInv, sleepTime, trySkillE,
                                 speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
                             // 기상 직후 스킬 발동률 업데이트
                             morningProcS = 1 - Math.pow((1 - finalSkillProc.value / strangeHeal), totalCountHelpS)
+                            // 힐러 2번 스킬 발동 확률 (힐러가 스킬형일 경우에 한)
+                            if(allData.specialty == "skill"){
+                                morningProcS = totalCountHelpS * finalSkillProc.value * Math.pow(1 - finalSkillProc.value, totalCountHelpS - 1)
+                                morningDoubleProcS = 1 - Math.pow((1 - finalSkillProc.value), totalCountHelpS) - totalCountHelpS * finalSkillProc.value * Math.pow(1 - finalSkillProc.value, totalCountHelpS - 1)
+                            }              
                         }                        
                         // 힐러 수면 중 전체 도우미 횟수 기댓값
-                        const totalCountHelpH = calcSleepSpeedCount('healer', sleepTime, beforeSleepH,
+                        const totalCountHelpH = calcSleepSpeedCount('healer', ribbonInvH, sleepTime, beforeSleepH,
                             speedEnerMultList, allDataH, evoCountH,
                             mySubH, pkmLevelH, secondIngH, thirdIngH, enerPerHour, useGoodCamp)
                         // 기상 직후 스킬 발동률 업데이트
-                        morningProc = 1 - Math.pow((1 - finalSkillProcH.value), totalCountHelpH)
-                        
+                        morningProc = 1 - Math.pow((1 - finalSkillProcH.value), totalCountHelpH)                       
+                        // 힐러 2번 스킬 발동 확률 (힐러가 스킬형일 경우에 한)
+                        if(allDataH.specialty == "skill"){
+                            morningProc = totalCountHelpH * finalSkillProcH.value * Math.pow(1 - finalSkillProcH.value, totalCountHelpH - 1)
+                            morningDoubleProc = 1 - Math.pow((1 - finalSkillProcH.value), totalCountHelpH) - totalCountHelpH * finalSkillProcH.value * Math.pow(1 - finalSkillProcH.value, totalCountHelpH - 1)
+                        }                                                
                     }  
                 }                
             }            
         }                
     }
     // 기력을 도우미 속도에 대입해서 총 도우미 횟수 계산
-    function calcSpeedWithEner(speedEnerMultList = [], calcVer="target", enerPerHour){
+    function calcSpeedWithEner(speedEnerMultList = [], calcVer="target", enerPerHour, sleepLimit){
         // speedEnerMultList = pkmDbStore 에서 [ {'e': 80, 'm': 0.45} ] 꼴
 
         // (각 구간별 머무르는 시간 / 그 시간대의 배율)의 합을 기본 도우미 속도로 나누면 끝
@@ -614,15 +650,17 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             addAllTime += timeStaying.value[key] / parseFloat(key)
         }        
         // ingHelpCount.value = (finalSpeedCount.value + helpCountSleep.value) * finalIngProc.value
-        finalSpeedCount.value = Math.floor(addAllTime / onlyBaseSpeed.value)
-        selfSkillCount.value = (finalSpeedCount.value + helpCountSleep.value) * finalSkillProc.value
+        finalSpeedCount.value = Math.floor(addAllTime / onlyBaseSpeed.value)   
+        // 수면 중 축적 스킬 횟수 제한     
+        const sleepLimitCount = helpCountSleep.value * finalSkillProc.value > sleepLimit ? sleepLimit : helpCountSleep.value * finalSkillProc.value
+        selfSkillCount.value = finalSpeedCount.value * finalSkillProc.value + sleepLimitCount
     }
     // 식재료 종류별 생산량 계산
-    function calcLeveLIng(calcVer, ingSkillData, totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){
+    function calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){
         
         if(calcVer === 'proVer'){
             // 수면 중에 물어오는 식재료 구하기용 수면 도우미 횟수 (최대 소지 수 안에서)
-            helpCountSleep.value = calcSleepSpeedCount('me', sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)        
+            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)        
         }
         // 특정 레벨 식재량 찾기 30렙 이상만
         function findAmount(n, l){
@@ -723,7 +761,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         }        
     }
     // 잘때 도우미 횟수 return (단, 소지수 초과한 열매 only 도우미는 계산 X)
-    function calcSleepSpeedCount(target, sleepTime, energyBeforeSleep, speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp){
+    function calcSleepSpeedCount(target, ribbonInv, sleepTime, energyBeforeSleep, speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp){
         let splitSleep = sleepTime.split(':')
         const sleepH = parseInt(splitSleep[0], 10)
         const sleepM = parseInt(splitSleep[1], 10)
@@ -781,7 +819,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
 
         const goodCampBoost = useGoodCamp ? 1.2 : 1.0
         // 최대 소지 수 계산        
-        let inventorySize = (allData['carrySize'] + evoCount * 5) * goodCampBoost
+        let inventorySize = (allData['carrySize'] + evoCount * 5) * goodCampBoost + ribbonInv
         for(let r = 0; r < mySub.length; r++){
             if(mySub[r].label === '최대 소지 수 업 L' || mySub[r].label === '최대 소지 수 업 M' || mySub[r].label === '최대 소지 수 업 s'){
                 inventorySize += mySub[r].mult
