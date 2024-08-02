@@ -184,7 +184,7 @@ const cssRibbon = computed(() => {
     if(useRibbon.value){
         return ''
     }else{
-        return 'invisible'
+        return 'hidden'
     }
 })
 

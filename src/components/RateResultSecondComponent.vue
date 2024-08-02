@@ -124,7 +124,7 @@ const cssRibbon = computed(() => {
     if(useRibbon.value){
         return ''
     }else{
-        return 'invisible'
+        return 'hidden'
     }
 })
 const ribbonLev = ref(myInputStore.ribbonLev)

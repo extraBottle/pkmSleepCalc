@@ -184,7 +184,7 @@ const cssGoodCamp = computed(() => {
     if(useGoodCamp.value){
         return ''
     }else{
-        return 'invisible'
+        return 'hidden'
     }
 })
 // 굿나잇리본 사용 여부
