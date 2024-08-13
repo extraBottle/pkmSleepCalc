@@ -12,7 +12,7 @@ export const useEeveeStore = defineStore('eevee-input', () => {
     // 선택한 하락 성격
     const downNature= ref('')
     // 선호 이브이
-    const preferEevee = ref()
+    const preferEevee = ref({ label: "없음", bg: '#fcfcfc' })
     // 풀잠 여부
     const fullSleep = ref(true)
     // 추천 결과
