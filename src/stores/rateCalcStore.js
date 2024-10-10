@@ -46,8 +46,8 @@ export const useRateCalcStore = defineStore('rate-calc', () => {
         // 통합 점수 계산기준
         const finalGrade = {
             "ingredient": {
-                "ing": 0.87,
-                "berry": 0.1,
+                "ing": 0.925,
+                "berry": 0.045,
                 "skill": 0.03
             },
             "berry": {
