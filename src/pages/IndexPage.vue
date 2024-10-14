@@ -16,6 +16,8 @@
         padding
         arrows
         infinite
+        prev-icon="arrow_back_ios"
+        next-icon="arrow_forward_ios"
         navigation
         navigation-position="top"
         class="rounded-borders transparent"
@@ -37,7 +39,7 @@
               <q-badge color="secondary" label="Click" rounded floating />
               <q-img :src="calc.children[0].meta.icon" height="150px" width="150px">
               </q-img>
-            </q-card>
+            </q-card>            
           </q-btn>
           <!-- 도움말 팝업창 -->
           <q-dialog v-model="showHelp">
@@ -56,7 +58,7 @@
                     fit="scale-down"
                     style="width: 100px;"
                     >
-                  </q-img>       
+                  </q-img>                                        
                 </div>
               </q-card-section>   
               <q-separator inset />
@@ -66,8 +68,7 @@
             </q-card>
           </q-dialog>          
         </q-carousel-slide>
-      </q-carousel>
-      <q-btn push class="absolute-bottom-right text-h6" color="primary" label="시작하기" @click="clickCalc" padding="md lg"></q-btn>
+      </q-carousel>      
     </div>
   </q-page>
 </template>
@@ -82,7 +83,7 @@ defineOptions({
 });
 const sliceRoute = routes.slice(1, routes.length - 1)
 const router = useRouter()
-const slide = ref(routes[4].children[0].name)
+const slide = ref(routes[3].children[0].name)
 // 랜덤 대문 이미지
 const imgList = ["doorImage", "drPika", "dbPika"]
 function randPick(){

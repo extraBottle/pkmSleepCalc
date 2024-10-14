@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header bordered>
       <q-toolbar>
         <q-btn
           flat
@@ -17,6 +17,19 @@
 
         <div>v{{ myVersion }}<br>@두번째유리병</div>
       </q-toolbar>
+      <q-tabs
+        v-if="notHomePage && $q.platform.is.desktop"
+        class="text-dark bg-googleBack lt-md"
+        active-color="primary"               
+        dense
+        align="justify"
+      >
+        <q-route-tab v-for="link in linksList" 
+          :key="link.children[0].meta.title" 
+          :to="link.path" class="q-px-xs" 
+          :icon="'img:' + link.children[0].meta.icon" 
+          :label="link.children[0].meta.shortName" />
+      </q-tabs>
     </q-header>
 
     <q-drawer
@@ -43,6 +56,21 @@
         />
       </q-list>
     </q-drawer>
+    <q-footer v-if="$q.platform.is.mobile" bordered class="bg-googleBack" v-model="notHomePage">
+      <q-tabs        
+        class="text-dark"
+        active-color="primary"
+        active-bg-color="brown-1"        
+        dense
+        align="justify"
+      >
+        <q-route-tab v-for="link in linksList" 
+            :key="link.children[0].meta.title" 
+            :to="link.path" class="q-px-xs" 
+            :icon="'img:' + link.children[0].meta.icon" 
+            :label="link.children[0].meta.shortName" />
+      </q-tabs>
+    </q-footer>
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -50,7 +78,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useQuasar } from 'quasar'
 import { useRoute } from 'vue-router';
 import EssentialLink from 'components/EssentialLink.vue'
 import VersionInfo from '../../package.json'
@@ -60,6 +89,7 @@ defineOptions({
   name: 'MainLayout'
 })
 
+const $q = useQuasar()
 const route = useRoute()
 const myVersion = VersionInfo.version
 const linksList = routes.slice(1, routes.length - 1)
@@ -69,4 +99,14 @@ const leftDrawerOpen = ref(false)
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+// 모바일이고 홈페이지가 아닐때에만 하단 바 등장
+// 데스크탑이고 화면이 좌측 툴바가 닫힐 정도로 작으면 상단 바 등장
+const notHomePage = computed(()=>{
+    switch(true){      
+      case route.path === "/":
+        return false
+      default:
+        return true
+    }
+  })
 </script>
