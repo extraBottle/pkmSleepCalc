@@ -56,8 +56,8 @@ export const useRateCalcStore = defineStore('rate-calc', () => {
                 "ing": 0.01
             },
             "skill": {
-                "skill": 0.87,
-                "berry": 0.1,
+                "skill": 0.88,
+                "berry": 0.09,
                 "ing": 0.03
             }
         }
