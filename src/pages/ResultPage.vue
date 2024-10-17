@@ -6,7 +6,7 @@
             contracted
             color="primary"
             active-icon="none"
-            class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 bg-googleBack"
+            class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack"
             animated
         >
             <q-step

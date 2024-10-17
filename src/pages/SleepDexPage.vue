@@ -1,6 +1,6 @@
 <template>
 <q-page :class="showDex ? 'row justify-center bg-googleDark' : 'flex flex-center bg-googleDark'">
-<div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 bg-googleBack q-px-md" :style="!showDex ? 'border: 2mm solid #b46856' : ''">
+<div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack q-px-md" :style="!showDex ? 'border: 2mm solid #b46856' : ''">
   <q-toolbar class="bg-primary text-white text-center">
       <q-toolbar-title>포켓몬을 검색하세요</q-toolbar-title>
   </q-toolbar>    

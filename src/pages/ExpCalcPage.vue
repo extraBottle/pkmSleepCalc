@@ -1,6 +1,6 @@
 <template>
-<div class="row justify-center bg-googleDark">
-<div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 bg-googleBack">
+<q-page class="row justify-center bg-googleDark">
+<div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack">
 <div class="column items-center q-px-md q-gutter-y-md">
     <q-space />
     <q-toolbar class="bg-primary text-white text-center">
@@ -97,10 +97,10 @@
             </div>
           </q-card-section>   
         </q-card>
-    </q-dialog>
+    </q-dialog>      
 </div>
 </div>
-</div>
+</q-page>
 </template>
 
 <script setup>

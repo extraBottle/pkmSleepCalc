@@ -3,6 +3,7 @@
     <q-header bordered>
       <q-toolbar>
         <q-btn
+          v-if="onlySmallWindow"
           flat
           dense
           round
@@ -36,6 +37,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+      @on-layout="handleMenuBtn"
       style="background-color: bisque;"
     >
       <q-list>
@@ -71,7 +73,7 @@
             :label="link.children[0].meta.shortName" />
       </q-tabs>
     </q-footer>
-    <q-page-container>
+    <q-page-container style="min-height: 100vh;">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -94,6 +96,7 @@ const route = useRoute()
 const myVersion = VersionInfo.version
 const linksList = routes.slice(1, routes.length - 1)
 
+const onlySmallWindow = ref(true)
 const leftDrawerOpen = ref(false)
 
 function toggleLeftDrawer () {
@@ -109,4 +112,8 @@ const notHomePage = computed(()=>{
         return true
     }
   })
+// 좌측 메뉴바가 화면에 고정될 정도로 화면이 크면 메뉴 열고 닫는 버튼 삭제
+function handleMenuBtn(state){  
+  state ? onlySmallWindow.value = false : onlySmallWindow.value = true
+}
 </script>

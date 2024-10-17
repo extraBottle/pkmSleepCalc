@@ -92,6 +92,16 @@ const routes = [
        }
     ],
   },
+  // {
+  //   // 테스트용
+  //   path: '/test',
+  //   component: () => import('layouts/MainLayout.vue'),
+  //   children: [
+  //     { path: '', name: 'tttt', component: () => import('pages/TestPage.vue'),
+  //       meta: { help: 'exp 계산부터 개체값 측정까지! 당신의 포켓몬을 완벽 분석해드립니다' }
+  //      }
+  //   ],
+  // },
 
   // Always leave this as last one,
   // but you can also remove it

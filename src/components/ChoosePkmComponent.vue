@@ -2,23 +2,29 @@
   <q-toolbar class="bg-primary text-white text-center">
     <q-toolbar-title>포켓몬 정보 입력</q-toolbar-title>
   </q-toolbar>
-  <div class="column items-center q-gutter-y-md">
+  <div class="column items-center q-gutter-y-md">        
     <!-- 포켓몬 이미지 -->
-    <q-img
-        alt="Pokemon image"
-        :src="selectPkmImage"
-        fit="scale-down"
-        style="max-width: 300px;"
-        no-spinner
-        @load="stopLoading()"
-        >
-    </q-img>
-    <!-- 포켓몬 이름 -->
+    <q-img              
+      alt="Pokemon image"
+      :src="selectPkmImage"
+      fit="scale-down"
+      style="max-width: 300px;"
+      no-spinner
+      @load="stopLoading()"
+    />    
+    <!-- 추천 개체값 평가 세팅 안내 -->
+    <q-card v-if="showRecommend" class="bg-ingCircle q-mb-md" style="border: 4px solid #b46856" flat>
+      <q-card-section class="row">
+        <q-icon color="primary" size="md" name="info" left />
+        <div class="col column justify-center" style="word-break: keep-all;"><span><span class="text-bold">최종진화 & 레벨 50</span>으로 설정하고 평가하기를 추천해요</span></div>
+      </q-card-section>
+    </q-card>     
+    <!-- 포켓몬 이름 -->      
     <q-select class="full-width q-mt-none" filled color="secondary" v-model="pkmName" :options="pkmNameList" 
     label="포켓몬 이름"
     :error="props.nameValid" :error-message="nameEmptyMsg" @filter="searchName" @input-value="manageModel"
     use-input hide-selected fill-input input-debounce="0" @update:model-value="fetchApiIng"
-    :hint="nameSearchHint" hide-bottom-space :readonly="selectPkmName" />
+    :hint="nameSearchHint" hide-bottom-space :readonly="selectPkmName" />    
     <!-- 직접 진화시킨 횟수 -->
     <div v-if="showEvoCount" class="text-center">
       직접 진화시킨 횟수: {{ evoCount }} 회
@@ -242,6 +248,7 @@ const showGoodCamp = ref(true)
 const showUseHealer = ref(true)
 const showEeveePrefer = ref(false)
 const showUseRibbon = ref(true)
+const showRecommend = ref(false)
 // 선택 가능한 포켓몬 목록
 const pkmNameList = ref(myPkmDBStore.korPkmName)
 
@@ -541,6 +548,7 @@ onBeforeMount(()=>{
       showHbCount.value = false
       showErbCount.value = false
       showGoodCamp.value = false
+      showRecommend.value = true
       subSkillOptions.value = myPkmDBStore.allSubSkillList    
       break
     case '/eeveelution':

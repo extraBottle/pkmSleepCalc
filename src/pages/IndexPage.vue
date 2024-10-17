@@ -1,74 +1,74 @@
 <template>
   <q-page class="row justify-center bg-googleDark">
-    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 bg-googleBack relative-position">
+    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack column">
+      <div class="col"></div>
+      <div class="col-auto q-pt-md full-width">
+        <div class="row justify-center">
+          <q-btn class="invisible" icon="help" round flat dense />
+          <q-chip class="text-subtitle1" color="primary" text-color="white">
+            {{ slide.meta.title }}     
+          </q-chip>      
+          <q-btn color="grey-5" icon="help" round flat dense @click="showHelp = true"></q-btn>  
+        </div>
+        <div class="relative-position">        
+          <Carousel ref="myCarousel" :itemsToShow="1.95" :wrapAround="true" :transition="300" :modelValue="2" @slide-end="updateTitle" :breakpoints="bpCarousel">        
+            <Slide v-for="(calc, index) in sliceRoute" :key="calc.path">
+              <div class="carousel__item">
+                <q-btn flat round @click="clickCalc(index)">
+                  <q-card v-if="calc.children[0].meta.title.includes('이브이')" class="bg-sSkill shadow-8 flex flex-center" style="width: 150px; height: 150px;">
+                    <q-badge color="secondary" label="Click" rounded floating />
+                    <q-img src="images/eeveeLink.png" height="130px" width="130px">
+                    </q-img>
+                  </q-card>
+                  <q-card v-else class="bg-sSkill shadow-8">
+                    <q-badge color="secondary" label="Click" rounded floating />
+                    <q-img :src="calc.children[0].meta.icon" height="150px" width="150px">
+                    </q-img>
+                  </q-card>            
+                </q-btn> 
+              </div>
+            </Slide>    
+            <template #addons>
+              <pagination />
+            </template>            
+          </Carousel>    
+          <q-btn class="absolute-left" icon="arrow_back_ios" @click="myCarousel.prev()" color="primary" size="lg" dense flat/>  
+          <q-btn class="absolute-right" icon="arrow_forward_ios" @click="myCarousel.next()" color="primary" size="lg" dense flat/>  
+        </div>
+               
+        <!-- 도움말 팝업창 -->
+        <q-dialog v-model="showHelp">
+          <q-card style="width: 280px;">
+            <q-bar>          
+              <div>도움말</div>
+              <q-space />          
+              <q-btn dense flat icon="close" v-close-popup />                 
+            </q-bar>
+            <q-card-section>
+              <div class="full-width column flex-center">
+                <div class="text-h6 text-bold">{{ slide.meta.title }}</div>   
+                <q-img
+                  alt="Calc image"
+                  :src="slide.meta.icon"
+                  fit="scale-down"
+                  style="width: 100px;"
+                  >
+                </q-img>                                        
+              </div>
+            </q-card-section>   
+            <q-separator inset />
+            <q-card-section>
+              {{ slide.meta.help }}
+            </q-card-section>
+          </q-card>
+        </q-dialog>  
+      </div>
+      <div class="col"></div>
       <q-img
-      class="absolute-bottom"
-      style="max-height: 60%;"
-      fit="scale-down"
-      :src="randImage"></q-img>
-      <q-carousel
-        v-model="slide"
-        transition-prev="slide-right"
-        transition-next="slide-left"
-        swipeable
-        animated
-        control-color="primary"
-        padding
-        arrows
-        infinite
-        prev-icon="arrow_back_ios"
-        next-icon="arrow_forward_ios"
-        navigation
-        navigation-position="top"
-        class="rounded-borders transparent"
-      >
-        <q-carousel-slide v-for="calc in sliceRoute" :name="calc.children[0].name" v-bind:key="calc.path" class="row justify-center items-start relative">           
-          <div class="relative-position">
-            <q-chip class="text-subtitle1 q-mb-md shadow-4" color="primary" text-color="white">
-              {{ calc.children[0].meta.title }}            
-            </q-chip>
-            <q-btn style="position: absolute; right: -30px;" color="grey-5" icon="help" round flat dense @click="showHelp = true"></q-btn>
-          </div>        
-          <q-btn class="absolute-center" flat round @click="clickCalc">
-            <q-card v-if="calc.children[0].meta.title.includes('이브이')" class="bg-sSkill shadow-8 flex flex-center" style="width: 150px; height: 150px;">
-              <q-badge color="secondary" label="Click" rounded floating />
-              <q-img src="images/eeveeLink.png" height="130px" width="130px">
-              </q-img>
-            </q-card>
-            <q-card v-else class="bg-sSkill shadow-8">
-              <q-badge color="secondary" label="Click" rounded floating />
-              <q-img :src="calc.children[0].meta.icon" height="150px" width="150px">
-              </q-img>
-            </q-card>            
-          </q-btn>
-          <!-- 도움말 팝업창 -->
-          <q-dialog v-model="showHelp">
-            <q-card style="width: 280px;">
-              <q-bar>          
-                <div>도움말</div>
-                <q-space />          
-                <q-btn dense flat icon="close" v-close-popup />                 
-              </q-bar>
-              <q-card-section>
-                <div class="full-width column flex-center">
-                  <div class="text-h6 text-bold">{{ calc.children[0].meta.title }}</div>   
-                  <q-img
-                    alt="Calc image"
-                    :src="calc.children[0].meta.icon"
-                    fit="scale-down"
-                    style="width: 100px;"
-                    >
-                  </q-img>                                        
-                </div>
-              </q-card-section>   
-              <q-separator inset />
-              <q-card-section>
-                {{ calc.children[0].meta.help }}
-              </q-card-section>
-            </q-card>
-          </q-dialog>          
-        </q-carousel-slide>
-      </q-carousel>      
+          class="col-auto"
+          style="max-height: 50vh;"
+          fit="scale-down"
+          :src="randImage"></q-img> 
     </div>
   </q-page>
 </template>
@@ -76,22 +76,23 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { ref } from 'vue';
-import { triggerEvent } from 'src/utils/gtmAddEvent';
 import routes from 'src/router/routes'
+import { Carousel, Slide, Pagination } from 'vue3-carousel'
+import 'src/css/carousel.css'
 defineOptions({
   name: 'IndexPage'
 });
 const sliceRoute = routes.slice(1, routes.length - 1)
 const router = useRouter()
-const slide = ref(routes[3].children[0].name)
+const myCarousel = ref(null)
+// 현재 슬라이드 속 라우터 이름
+const slide = ref(sliceRoute[2].children[0])
 // 랜덤 대문 이미지
-const imgList = ["doorImage", "drPika", "dbPika"]
+const imgList = ["doorImage", "dbPika"]
 function randPick(){
   const rr = Math.random() * 100
   switch(true){
     case rr > 99:
-      return 2
-    case rr > 98:
       return 1
     default:
       return 0
@@ -99,16 +100,102 @@ function randPick(){
 }
 const randImage = ref(`images/${imgList[randPick()]}.png`)
 const showHelp = ref(false)
-
-function clickCalc(){
-  triggerEvent('enter_calc_from_home')
-  router.push({ name: slide.value })
+const bpCarousel = {
+  500: {
+    itemsToShow: 3.1,
+    snapAlign: 'center',
+  },
+  770: {
+    itemsToShow: 3.3,
+    snapAlign: 'center',
+  },
+  860: {
+    itemsToShow: 3.9,
+    snapAlign: 'center',
+  },
+  1024: {
+    itemsToShow: 2.8,
+    snapAlign: 'center',
+  },
+  1180: {
+    itemsToShow: 3.5,
+    snapAlign: 'center',
+  },
+  2000: {
+    itemsToShow: 4.5,
+    snapAlign: 'center',
+  }
+}
+// 계산기 제목 표시
+function updateTitle(data){
+  slide.value = sliceRoute[data.currentSlideIndex].children[0]
+}
+// 계산기 클릭 & 좌우 이동 (화면에 선택지를 최대 5개까지만 출력한다고 가정)
+function clickCalc(index){  
+  const gap = myCarousel.value.data.currentSlide.value - index
+  if(slide.value.name === sliceRoute[index].children[0].name){
+    // 가운데 계산기 클릭하면 바로 이동
+    router.push({ name: slide.value.name })
+  }
+  else if(gap > 2 || gap >= -2 && gap < 0){
+    // 우측으로 이동    
+    myCarousel.value.next()
+  }
+  else if(gap < -2 || gap > 0 && gap <= 2){
+    // 좌측으로 이동
+    myCarousel.value.prev()
+  }
 }
 
 </script>
 
-<style lang="scss">
-q-card {
-  border-color: $primary;
+
+<style scoped>
+.carousel__item {
+  min-height: 200px;
+  border-radius: 8px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.carousel__slide {
+  padding: 5px;
+}
+
+/* .carousel__viewport {
+  perspective: 2000px;
+} */
+
+/* .carousel__track {
+  transform-style: preserve-3d;
+} */
+
+.carousel__slide--sliding {
+  transition: 0.5s;
+}
+
+.carousel__slide {
+  opacity: 0.5;
+  transform: scale(0.8);
+}
+
+.carousel__slide--active ~ .carousel__slide {
+  transform: scale(0.8);
+}
+
+.carousel__slide--prev {
+  opacity: 0.5;
+  transform: scale(0.8);
+}
+
+.carousel__slide--next {
+  opacity: 0.5;
+  transform: scale(0.8);
+}
+
+.carousel__slide--active {
+  opacity: 1;
+  transform: scale(1.0);
 }
 </style>
