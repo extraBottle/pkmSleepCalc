@@ -11,7 +11,7 @@
           <q-btn color="grey-5" icon="help" round flat dense @click="showHelp = true"></q-btn>  
         </div>
         <div class="relative-position">        
-          <Carousel ref="myCarousel" :itemsToShow="1.95" :wrapAround="true" :transition="300" :modelValue="2" @slide-end="updateTitle" :breakpoints="bpCarousel">        
+          <Carousel ref="myCarousel" :itemsToShow="1.95" :wrapAround="true" :transition="100" :modelValue="2" @slide-end="updateTitle" :breakpoints="bpCarousel">        
             <Slide v-for="(calc, index) in sliceRoute" :key="calc.path">
               <div class="carousel__item">
                 <q-btn flat round @click="clickCalc(index)">
@@ -172,7 +172,7 @@ function clickCalc(index){
 } */
 
 .carousel__slide--sliding {
-  transition: 0.5s;
+  transition: 0.1s;
 }
 
 .carousel__slide {
