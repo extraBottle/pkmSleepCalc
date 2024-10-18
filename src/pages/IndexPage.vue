@@ -1,6 +1,6 @@
 <template>
   <q-page class="row justify-center bg-googleDark">
-    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack column">
+    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack column" style="max-height: 100vh;">
       <div class="col"></div>
       <div class="col-auto q-pt-md full-width">
         <div class="row justify-center">
@@ -68,7 +68,7 @@
           class="col-auto"
           style="max-height: 50vh;"
           fit="scale-down"
-          :src="randImage"></q-img> 
+          :src="doorImage"></q-img> 
     </div>
   </q-page>
 </template>
@@ -87,18 +87,8 @@ const router = useRouter()
 const myCarousel = ref(null)
 // 현재 슬라이드 속 라우터 이름
 const slide = ref(sliceRoute[2].children[0])
-// 랜덤 대문 이미지
-const imgList = ["doorImage", "dbPika"]
-function randPick(){
-  const rr = Math.random() * 100
-  switch(true){
-    case rr > 99:
-      return 1
-    default:
-      return 0
-  }
-}
-const randImage = ref(`images/${imgList[randPick()]}.png`)
+// 홈화면 이미지
+const doorImage = ref('images/doorImage.png')
 const showHelp = ref(false)
 const bpCarousel = {
   500: {
@@ -155,21 +145,13 @@ function clickCalc(index){
   min-height: 200px;
   border-radius: 8px;
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
 }
 
 .carousel__slide {
   padding: 5px;
 }
-
-/* .carousel__viewport {
-  perspective: 2000px;
-} */
-
-/* .carousel__track {
-  transform-style: preserve-3d;
-} */
 
 .carousel__slide--sliding {
   transition: 0.1s;
