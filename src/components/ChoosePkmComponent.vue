@@ -382,7 +382,9 @@ const fourthRibbonSpeed = ref(myPkmDBStore.ribbonList[3]["speed"][leftEvo.value]
 const nameEmptyMsg = ref('포켓몬을 선택해주세요')
 const wrongUpMsg = ref('상승 성격을 다시 입력해주세요')
 const wrongDownMsg = ref('하락 성격을 다시 입력해주세요')
-const emptySub = ref('서브 스킬을 전부 선택해주세요')
+const emptySub = computed(()=>{
+  return `서브 스킬을 ${watchLevel.value}개 선택해주세요`
+})
 const nameSearchHint = ref('입력하고 엔터를 눌러서 검색')
 
 // 현재 레벨에 따라 선택 가능한 서브 스킬 수 제한
