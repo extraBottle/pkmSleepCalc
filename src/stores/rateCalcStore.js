@@ -56,9 +56,9 @@ export const useRateCalcStore = defineStore('rate-calc', () => {
                 "ing": 0.01
             },
             "skill": {
-                "skill": 0.88,
-                "berry": 0.09,
-                "ing": 0.03
+                "skill": 0.92,
+                "berry": 0.07,
+                "ing": 0.01
             }
         }
         // 도우미 보너스 가산점
