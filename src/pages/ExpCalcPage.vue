@@ -142,7 +142,7 @@ const endLev = ref(maxLevel)
 const showResult = ref(false)
 const boostRate = {
     "미니 부스트": [2, 4],
-    "일반 부스트": [2, 6]
+    "일반 부스트": [2, 5]
 }
 const candyRate = computed(()=>{ 
     return boost.value ? boostRate[whatBoost.value][0] : 1
