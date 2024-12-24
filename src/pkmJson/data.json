@@ -11,6 +11,11 @@
     "kor": "피카츄(홀리데이)"
     },
     {
+    "Ndex": "133-holiday",
+    "en": "EEVEE_CHRISTMAS",
+    "kor": "이브이(홀리데이)"
+    },
+    {
     "Ndex": 1,
     "en": "BULBASAUR",
     "kor": "이상해씨"
@@ -196,9 +201,19 @@
     "kor": "식스테일"
     },
     {
+    "Ndex": "37-alolanvulpix",
+    "en": "VULPIX_ALOLAN",
+    "kor": "식스테일(알로라)"
+    },
+    {
     "Ndex": 38,
     "en": "NINETALES",
     "kor": "나인테일"
+    },
+    {
+    "Ndex": "38-alolanninetales",
+    "en": "NINETALES_ALOLAN",
+    "kor": "나인테일(알로라)"
     },
     {
     "Ndex": 39,
