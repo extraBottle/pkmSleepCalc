@@ -219,7 +219,7 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     // 하락 보정치
     const downMult = {
         '영향 없음 --': 1.0,
-        '도우미 스피드 ▽▽': 1.1,
+        '도우미 스피드 ▽▽': 1.075,
         '기력 회복량 ▽▽': 0.88,
         '식재료 도우미 확률 ▽▽': 0.8,
         '메인 스킬 발동률 ▽▽': 0.8,
