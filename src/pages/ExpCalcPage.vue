@@ -123,7 +123,8 @@ const maxLevel = 60;
 const pkmSpeciesObj = {
     "일반": 1.0,
     "600족(1.5배)": 1.5,
-    "전설(1.8배)": 1.8
+    "준전설(1.8배)": 1.8,
+    "전설/환상(2.2배)": 2.2
 };
 let candy= 25
 
@@ -133,7 +134,7 @@ const boost = ref(false)
 const whatBoost = ref("미니 부스트")
 const boostList = ["미니 부스트", "일반 부스트"]
 const species = ref("일반")
-const specList = ["일반", "600족(1.5배)",  "전설(1.8배)"]
+const specList = ["일반", "600족(1.5배)",  "준전설(1.8배)", "전설/환상(2.2배)"]
 const nature = ref('영향 없음 --')
 const natList = ["EXP 획득량 ▲▲", '영향 없음 --', 'EXP 획득량 ▽▽']
 const startLev = ref(1)
