@@ -65,7 +65,7 @@ export const useInputStore = defineStore('manage-input', () => {
         useGoodCamp.value = gc;
         useRibbon.value = ur;
         ribbonLev.value = rl;
-        leftEvo.value = le;
+        leftEvo.value = le;        
     }
     function hasEssential(){
         if(pkmName.value !== '' && upNature.value !== '' && downNature.value !== ''){

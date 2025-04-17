@@ -36,7 +36,7 @@
       <template v-slot:navigation>
         <q-stepper-navigation class="row justify-end">
           <q-btn v-if="step > 1" flat color="primary" @click="prev()" label="뒤로" class="q-ml-sm" />
-          <q-btn v-if="step < 3" @click="gogo()" color="primary" :label="step === 1 ? '평가하기' : '다음'" />
+          <q-btn v-if="step < 3" @click="gogo()" color="primary" :label="step === 1 ? '평가하기' : '다음'" :disable = "step === 2 && myRateCalcStore.whatSpeciality == 'all'"/>
           <q-btn v-else @click="step = 1" color="primary" label="다시하기" icon="refresh" />
         </q-stepper-navigation>
       </template>
@@ -50,6 +50,7 @@ import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue';
 import RateResultFirstComponent from 'src/components/RateResultFirstComponent.vue'
 import RateResultSecondComponent from 'src/components/RateResultSecondComponent.vue'
 import { popupFail } from 'src/utils/popup';
+import { useRateCalcStore } from 'src/stores/rateCalcStore'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
 import { loadingCalc } from 'src/utils/loading';
 
@@ -61,6 +62,7 @@ onBeforeUnmount(()=>{
 })
 
 const myProdCalcStore = useProdCalcStore()
+const myRateCalcStore = useRateCalcStore()
 // 이거 플래그가 켜지면 계산 시작
 const handleStartLoad = ref(false)
 

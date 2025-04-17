@@ -50,6 +50,13 @@
       </q-card-section>
       <apexchart type="bar" :options="genOptions('skill')" :series="genSeries('skill')"></apexchart>
     </q-card>
+    <!-- ALL 특기인 포켓몬 안내 문구 -->
+    <q-card v-if="myRateCalcStore.whatSpeciality == 'all'" class="bg-ingCircle q-mb-md" style="border: 4px solid #b46856" flat>
+      <q-card-section class="row">
+        <q-icon color="primary" size="md" name="info" left />
+        <div class="col column justify-center" style="word-break: keep-all;"><span>'올' 특기인 포켓몬은 최종 개체값 평가를 제공하지 않습니다.</span></div>
+      </q-card-section>
+    </q-card>    
     <!-- 1등 스펙 보기 -->
     <q-dialog v-model="showBest">
       <q-card>

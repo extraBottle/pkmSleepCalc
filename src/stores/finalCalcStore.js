@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+// 식재료 생산량 계산 알고리즘
 export const useProdCalcStore = defineStore('production-calc', ()=> {
     // 성격, 레벨, 서브 적용한 기본 도우미 속도 (기력 제외)
     const onlyBaseSpeed = ref(0)
