@@ -347,10 +347,18 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
                 findIng= allIngList(0)['ingredient']['longName'];
                 break;
             case 1:
-                findIng= allIngList(30).find(obj => obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'];
+                if(allIngList(30).length < 2){
+                    findIng= allIngList(0)['ingredient']['longName'];
+                }
+                else{
+                    findIng= allIngList(30).find(obj => obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'];
+                }
                 break;
             case 2:
-                if(allIngList(60).length < 3){
+                if(allIngList(60).length < 2){
+                    findIng= allIngList(0)['ingredient']['longName'];
+                }
+                else if(allIngList(60).length < 3){
                     findIng= allIngList(30).find(obj => obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'];
                 }
                 else{
