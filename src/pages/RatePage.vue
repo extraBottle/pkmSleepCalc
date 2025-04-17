@@ -36,7 +36,8 @@
       <template v-slot:navigation>
         <q-stepper-navigation class="row justify-end">
           <q-btn v-if="step > 1" flat color="primary" @click="prev()" label="뒤로" class="q-ml-sm" />
-          <q-btn v-if="step < 3" @click="gogo()" color="primary" :label="step === 1 ? '평가하기' : '다음'" :disable = "step === 2 && myRateCalcStore.whatSpeciality == 'all'"/>
+          <q-btn v-if="step === 1" @click="gogo()" color="primary" label="평가하기"/>
+          <q-btn v-else-if="step === 2 && myRateCalcStore.whatSpeciality !== 'all'" @click="gogo()" color="primary" label="다음"/>
           <q-btn v-else @click="step = 1" color="primary" label="다시하기" icon="refresh" />
         </q-stepper-navigation>
       </template>

@@ -220,7 +220,7 @@ async function fetchApiIng(){
   }
   // 식재료 & 열매수 불러오기
   firstIngCount.value = fetchedData["ingredient0"].amount
-  berryNum.value = fetchedData.specialty === "berry" ? 2 : 1
+  berryNum.value = fetchedData.specialty === "berry" || fetchedData.specialty === "all" ? 2 : 1
   allIngList.value[0].forEach((e)=>{
     if(e.ingredient.longName === fixedSecondIngName.value){
       ingCount.value[0] = e.amount
