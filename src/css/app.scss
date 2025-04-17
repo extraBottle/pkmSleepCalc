@@ -18,8 +18,9 @@
     background: #e6e3e3 !important;
 }
 .q-select__dialog{
+    max-width: 400px !important;
     @media(max-width: $breakpoint-sm-max){
-        max-width: 70% !important;
+        max-width: 250px !important;
     }
 }
 .apexchart_width{
