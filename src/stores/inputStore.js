@@ -123,7 +123,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     // 힐러 포켓몬 설정 스펙
     const calcVer = ref('lightVer')
     // 힐러 메인 스킬 사용 횟수
-    const healSkillCount = ref(4)
+    const healSkillCount = ref(5)
     // 이건 개체값 검사기에서 사용하기 위한 수정불가값
     const fixedHealSkillCount = 5
     /*
