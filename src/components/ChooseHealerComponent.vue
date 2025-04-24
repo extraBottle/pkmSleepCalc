@@ -222,7 +222,7 @@ const props = defineProps({
 onBeforeUnmount(()=>{
   // 기력회복보너스 보유시 수면 회복 기력 증가
   let hasErb = false
-  for(let i = 0; i < subSkills.length; i++){
+  for(let i = 0; i < subSkills.value.length; i++){
       if(subSkills[i].label === '기력 회복 보너스'){
           hasErb = true
       }
