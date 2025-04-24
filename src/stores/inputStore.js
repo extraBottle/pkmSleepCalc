@@ -44,8 +44,10 @@ export const useInputStore = defineStore('manage-input', () => {
     const ribbonLev = ref("0")
     // 남은 진화 횟수
     const leftEvo = ref(1)
+    // 기력회복 보너스 보유 여부
+    const hasErb = ref(false)
     // 전부 저장
-    function storeEverything(h, e, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, gc, ur, rl, le) {
+    function storeEverything(h, e, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, gc, ur, rl, le, he) {
         hbCount.value = h;
         erbCount.value = e;
         
@@ -65,7 +67,8 @@ export const useInputStore = defineStore('manage-input', () => {
         useGoodCamp.value = gc;
         useRibbon.value = ur;
         ribbonLev.value = rl;
-        leftEvo.value = le;        
+        leftEvo.value = le;   
+        hasErb.value = he;     
     }
     function hasEssential(){
         if(pkmName.value !== '' && upNature.value !== '' && downNature.value !== ''){
@@ -97,6 +100,7 @@ export const useInputStore = defineStore('manage-input', () => {
         useRibbon,
         ribbonLev,
         leftEvo,
+        hasErb,
         storeEverything,
         hasEssential
     };
@@ -154,9 +158,11 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     const ribbonLev = ref("3")
     // 남은 진화 횟수
     const leftEvo = ref(0)
+    // 기력회복 보너스 보유 여부
+    const hasErb = ref(false)
 
     // 전부 저장
-    function storeEverything(ver, hc, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, ur, rl, le) {
+    function storeEverything(ver, hc, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, ur, rl, le, he) {
         calcVer.value = ver;
         healSkillCount.value = hc;
 
@@ -176,6 +182,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
         useRibbon.value = ur;
         ribbonLev.value = rl;
         leftEvo.value = le;
+        hasErb.value = he;
     }
     function hasEssential(){
         if(pkmName.value !== '' && upNature.value !== '' && downNature.value !== ''){
@@ -207,6 +214,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
         useRibbon,
         ribbonLev,
         leftEvo,
+        hasErb,
         storeEverything,
         hasEssential
     }

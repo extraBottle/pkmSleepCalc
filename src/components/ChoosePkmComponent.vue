@@ -69,12 +69,12 @@
     </div>
     <!-- 도우미 보너스 개수 -->
     <div v-if="showHbCount" class="text-center full-width">
-      <q-chip square class="bg-goldSkill">도우미 보너스</q-chip> 개수: {{ hbCount }}
+      팀전체 <q-chip square class="bg-goldSkill">도우미 보너스</q-chip> 개수: {{ hbCount }}
       <q-slider color="secondary" v-model="hbCount" :min="0" :max="5"/>
     </div>
     <!-- 기력 회복 보너스 개수 -->
     <div v-if="showErbCount" class="text-center full-width">
-      <q-chip square class="bg-goldSkill">기력 회복 보너스</q-chip> 개수: {{ erbCount }}
+      팀전체 <q-chip square class="bg-goldSkill">기력 회복 보너스</q-chip> 개수: {{ erbCount }}
       <q-slider color="secondary" v-model="erbCount" :min="0" :max="5"/>
     </div>
     <!-- 서브 스킬 선택 -->
@@ -281,6 +281,13 @@ onBeforeUnmount(()=>{
       myEeveeStore.storeEverything(pkmLevel.value, subSkills.value, upNature.value, downNature.value, preferEevee.value, fullSleep.value)
     }
     else{
+      // 기력회복보너스 보유시 수면 회복 기력 증가
+      let hasErb = false
+      for(let i = 0; i < subSkills.length; i++){
+          if(subSkills[i].label === '기력 회복 보너스'){
+              hasErb = true
+          }
+      }
       if(myPkmDBStore.searchPkmData('name', 'SYLVEON') !== undefined){
         myHealerInputStore.mainSkillLevel = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill.maxLevel  
       }  
@@ -288,7 +295,7 @@ onBeforeUnmount(()=>{
       myInputStore.storeEverything(hbCount.value, erbCount.value, 
         pkmName.value, pkmLevel.value, evoCount.value, subSkills.value, firstIngName.value,
         secondIngName.value, thirdIngName.value, fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
-        selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value, useRibbon.value, ribbonLev.value, leftEvo.value)
+        selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value, useRibbon.value, ribbonLev.value, leftEvo.value, hasErb)
     }
   }
 })
@@ -544,7 +551,7 @@ onBeforeMount(()=>{
   switch(route.path){
     case '/prodcalc':
       showUseHealer.value = false
-      subSkillOptions.value = myPkmDBStore.subSkillList
+      subSkillOptions.value = myPkmDBStore.allSubSkillList
       break
     case '/rate':      
       showHbCount.value = false

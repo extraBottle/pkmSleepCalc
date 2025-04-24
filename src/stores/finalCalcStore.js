@@ -106,8 +106,8 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         return allData.frequency * multSpeed * convertS * goodCampBoost
     }
 
-    function calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-        allDataH, evoCountH = 0, mySubH = [], pkmLevelH = 0, secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = ''){
+    function calcEnergyCurve(hasErb = false, erbMaxEnergy = 100, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+        allDataH, evoCountH = 0, mySubH = [], pkmLevelH = 0, secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = '', hasErbH = false){
         // maxE = 150
         // mainSkillLevel = myHealerInputStore.mainSkillLevel
         // sleepTime = mySleepTimeInputStore.sleepTime
@@ -180,14 +180,11 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             enerPerSkill = Math.floor(enerPerSkill * downMult)
             selfPerSkill = Math.floor(selfPerSkill * downMult)
         }
-        for(let i = 0; i < mySub.length; i++){
-            if(mySub[i].label === '기력 회복 보너스'){
-                erbCount = 1
-            }
-        }
+        // 기상 직후 도달 가능한 최대 기력
+        const maxEnergy = hasErb ? erbMaxEnergy : 100
         const recoverSub = (erbCount * erbMult) + 1
-        let morningEner = (100 / (timeForFull / convertH)) * (sleepH * convertH + sleepM * convertM) * recoverNature * recoverSub
-        morningEner = morningEner > 100 ? 100 : Math.floor(morningEner)
+        let morningEner = (maxEnergy / (timeForFull / convertH)) * (sleepH * convertH + sleepM * convertM) * recoverNature * recoverSub
+        morningEner = morningEner > maxEnergy ? maxEnergy : Math.floor(morningEner)
         function limitE(ee){
             // 최대 기력 제한
             return ee > maxE ? maxE : ee
@@ -288,9 +285,11 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 recoverNatureH = downMult
                 enerPerSkillH = Math.floor(enerPerSkillH * downMult)
             }
+            // 기상 직후 도달 가능한 최대 기력
+            const maxEnergyH = hasErbH ? erbMaxEnergy : 100         
             // 힐러 본인의 기상 직후 기력
-            let morningEnerH = (100 / (timeForFull / convertH)) * (sleepH * convertH + sleepM * convertM) * recoverNatureH * recoverSub
-            morningEnerH = morningEnerH > 100 ? 100 : morningEnerH            
+            let morningEnerH = (maxEnergyH / (timeForFull / convertH)) * (sleepH * convertH + sleepM * convertM) * recoverNatureH * recoverSub
+            morningEnerH = morningEnerH > maxEnergyH ? maxEnergyH : morningEnerH            
             // 힐러의 1 시간대 전 기력 상태 추적
             let healerEnerAxis = morningEnerH
             // monte carlo simulation            
@@ -550,8 +549,8 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                             healerEnerAxis = healerEnerAxis - Math.ceil((enerPerHour / convertH) * (sleepH * convertH + sleepM * convertM))
                         }
                         // 기상 기력 (수면 기력 회복 적용)
-                        morningEner = consumeE + morningEner > 100 ? 100 : consumeE + morningEner
-                        healerEnerAxis = healerEnerAxis + morningEnerH > 100 ? 100 : healerEnerAxis + morningEnerH
+                        morningEner = consumeE + morningEner > maxEnergy ? maxEnergy : consumeE + morningEner
+                        healerEnerAxis = healerEnerAxis + morningEnerH > maxEnergyH ? maxEnergyH : healerEnerAxis + morningEnerH
                         if(hasSelfHeal){
                             // 자힐 수면 중 전체 도우미
                             const totalCountHelpS = calcSleepSpeedCount('me', ribbonInv, sleepTime, trySkillE,

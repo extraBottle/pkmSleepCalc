@@ -69,6 +69,9 @@ watchEffect(async()=>{
       const thirdIngName = myInputStore.thirdIng
       const mainSkillLevel = myInputStore.mainSkillLevel
       const mealRecovery = myPkmDBStore.mealRecovery
+      const hasErb = myInputStore.hasErb
+
+      const erbMaxEnergy = myPkmDBStore.erbMaxEnergy
 
       const maxE = myPkmDBStore.maxE
       const totalMainSkill = myPkmDBStore.totalMainSkill
@@ -90,6 +93,7 @@ watchEffect(async()=>{
       const evoCountH = myHealerInputStore.evoCount
       const ribbonInv = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["inventory"] : 0
       const ribbonInvH = myHealerInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myHealerInputStore.ribbonLev, 10) - 1]["inventory"] : 0
+      const hasErbH = myHealerInputStore.hasErb
 
       let ingSkillData = {}
       let selfHealSkillData = {}
@@ -116,8 +120,8 @@ watchEffect(async()=>{
       // 최대 축적 스킬 횟수
       const sleepLimit = allData.specialty == "skill" ? myPkmDBStore.collectSkillCount.skill : myPkmDBStore.collectSkillCount.else
 
-      myProdCalcStore.calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-        allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
+      myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+        allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH, hasErbH)
       // 기력 적용 도우미 속도
       myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)            
       // 식재료 종류별 생산량
