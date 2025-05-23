@@ -274,8 +274,7 @@ onBeforeUnmount(()=>{
         mainSkillLevel.value += subtractSkillLevel
       }
       // 힐러는 라이트 버전
-      myHealerInputStore.calcVer = calcVer.value
-      myHealerInputStore.healSkillCount = 4
+      myHealerInputStore.calcVer = calcVer.value      
     }
     if(prevRoute.value == '/eeveelution'){
       myEeveeStore.storeEverything(pkmLevel.value, subSkills.value, upNature.value, downNature.value, preferEevee.value, fullSleep.value)
