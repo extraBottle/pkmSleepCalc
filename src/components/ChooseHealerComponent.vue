@@ -93,7 +93,7 @@
       메인 스킬 레벨: {{ mainSkillLevel }}
       <q-slider color="secondary" v-model="mainSkillLevel" :min="1" :max="maxSkillLevel"/>
     </div>
-    <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.subSkillList"
+    <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="myPkmDBStore.allSubSkillList"
     :label= "limitSub" behavior="dialog" :max-values="watchLevel">
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps" :class="scope.opt.bg">
@@ -220,10 +220,17 @@ const props = defineProps({
   }
 })
 onBeforeUnmount(()=>{
+  // 기력회복보너스 보유시 수면 회복 기력 증가
+  let hasErb = false
+  for(let i = 0; i < subSkills.value.length; i++){
+      if(subSkills.value[i].label === '기력 회복 보너스'){
+          hasErb = true
+      }
+  }
   myHealerInputStore.storeEverything(calcVer.value, healSkillCount.value,
     pkmName.value, pkmLevel.value, evoCount.value, subSkills.value, firstIngName.value, secondIngName.value, thirdIngName.value,
     fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
-    selectedHealerDex.value, mainSkillLevel.value, useRibbon.value, ribbonLev.value, leftEvo.value)
+    selectedHealerDex.value, mainSkillLevel.value, useRibbon.value, ribbonLev.value, leftEvo.value, hasErb)
 })
 const myDownloadStore = useDownloadStore()
 const myPkmDBStore = usePkmDBStore()
@@ -338,7 +345,7 @@ const watchLevel = computed(()=>{
   }
 })
 const limitSub = computed(()=>{
-  return `서브 스킬 (최대 ${watchLevel.value}개)`
+  return `서브 스킬 (${watchLevel.value}개 선택)`
 })
 
 // 포켓몬을 선택하면 데이터 불러오기 + 식재료 목록 출력 + 이미지 불러오기

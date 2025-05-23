@@ -185,6 +185,8 @@ if(myRateCalcStore.pkmName !== pkmName.value){
   // 무엇 특화인지
   myRateCalcStore.whatSpeciality = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(myInputStore.pkmName)).specialty
 }
+// 기력 회복 보너스 반영
+const maxEnergy = myInputStore.hasErb ? myPkmDBStore.erbMaxEnergy : 100
 // 굿나잇리본 사용 여부
 const useRibbon = ref(myInputStore.useRibbon)
 const cssRibbon = computed(() => {
@@ -272,7 +274,8 @@ onBeforeMount(async()=>{
           "speciality": myRateCalcStore.whatSpeciality,
           "ribbonSpeed": ribbonSpeed,
           "ribbonInv": ribbonInv,
-          "sleepLimit": sleepLimit
+          "sleepLimit": sleepLimit,
+          "maxEnergy": maxEnergy
         }        
         const response = await fetch('https://fg1kg79is8.execute-api.ap-northeast-2.amazonaws.com/rate', {
           method: "POST",

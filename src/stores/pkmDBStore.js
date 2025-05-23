@@ -176,6 +176,8 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
         '기력 회복 보너스',
         '꿈의조각 보너스'         
     ]
+    // 기력 회복 보너스 보유 포켓몬의 최대 회복 기력
+    const erbMaxEnergy = 105
     // 도우미 보너스 적용 수치
     const hbMult = 0.05
     // 기력 회복 보너스 적용 수치
@@ -377,6 +379,7 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     return {
         subSkillList,
         allSubSkillList,
+        erbMaxEnergy,
         hbMult,
         erbMult,
         maxHS,

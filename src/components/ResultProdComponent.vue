@@ -135,6 +135,9 @@ const secondIngName = myInputStore.secondIng
 const thirdIngName = myInputStore.thirdIng
 const mainSkillLevel = myInputStore.mainSkillLevel
 const mealRecovery = myPkmDBStore.mealRecovery
+const hasErb = myInputStore.hasErb
+
+const erbMaxEnergy = myPkmDBStore.erbMaxEnergy
 // 굿나잇리본 효과
 const ribbonSpeed = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["speed"][myInputStore.leftEvo] : 0
 const ribbonInv = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["inventory"] : 0
@@ -157,6 +160,7 @@ const erbMult = myPkmDBStore.erbMult
 const enerPerHour = myPkmDBStore.enerPerHour
 const speedEnerMultList = myPkmDBStore.speedEnerMultList
 const evoCountH = myHealerInputStore.evoCount
+const hasErbH = myHealerInputStore.hasErb
 // 굿나잇리본 효과 (힐러)
 const ribbonSpeedH = myHealerInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myHealerInputStore.ribbonLev, 10) - 1]["speed"][myHealerInputStore.leftEvo] : 0
 const ribbonInvH = myHealerInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myHealerInputStore.ribbonLev, 10) - 1]["inventory"] : 0
@@ -196,7 +200,6 @@ const cssRibbon = computed(() => {
         return 'invisible'
     }
 })
-
 const dishOrDaily = computed(()=>{
     return pkmName.value + '의 ' + (chooseRange.value === "한끼" ? '한끼당' : '하루') + ' 생산량'
 })
@@ -236,17 +239,18 @@ watchEffect(async()=>{
                 myProdCalcStore.finalSkillProcH = myProdCalcStore.calcSkillProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
                 // 힐러 식재료 확률
                 myProdCalcStore.finalIngProcH = myProdCalcStore.calcIngProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
-                myProdCalcStore.calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-                allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)       
+                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH, hasErbH)       
             }
             else{
-                myProdCalcStore.calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, allDataH)           
+                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, 
+                allDataH)           
             }
             // 기력 적용 도우미 속도
             myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)
             if(calcVer !== 'proVer' && (allData.skill.name.includes('Charge Energy') || allData.skill.name.includes('Energizing Cheer') || allData.skill.name.includes("Energy For Everyone") || allData.skill.name.includes('Metronome'))){
                 // 자힐 가능한 포켓몬은 2번 기력 계산한다
-                myProdCalcStore.calcEnergyCurve(ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
                 allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
                 myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)              
             }          
