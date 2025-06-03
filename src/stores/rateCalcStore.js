@@ -85,11 +85,10 @@ export const useRateCalcStore = defineStore('rate-calc', () => {
         }
     }
 
-    function storeRate(n, l, o, h, m, b, v, t){
+    function storeRate(n, l, o, m, b, v, t){
         pkmName.value = n
         pkmLevel.value = l
         orderData.value = o
-        useHealer.value = h
         minOrderData.value = m   
         hasHb.value = b  
         vsOutput.value = v

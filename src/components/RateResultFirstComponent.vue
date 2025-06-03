@@ -122,7 +122,7 @@ const selectedPkmDex = ref(myInputStore.selectedPkmDex)
 const selectPkmImage = ref(myDownloadStore.fetchImage('pkm', selectedPkmDex.value))
 
 onBeforeUnmount(()=>{
-  myRateCalcStore.storeRate(pkmName.value, pkmLevel, orderData.value, myRateCalcStore.useHealer, minOrderData.value, hasHb, vsOutput.value, oneBest.value)
+  myRateCalcStore.storeRate(pkmName.value, pkmLevel, orderData.value, minOrderData.value, hasHb, vsOutput.value, oneBest.value)
 })
 
 const prop = defineProps({
