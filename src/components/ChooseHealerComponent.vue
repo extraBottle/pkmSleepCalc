@@ -55,10 +55,6 @@
     hint="입력하고 엔터를 눌러서 검색" @filter="searchName" @input-value="manageModel"
     @update:model-value="fetchApiIng"
     use-input hide-selected fill-input input-debounce="0" hide-bottom-space/>
-    <div class="text-center">
-      직접 진화시킨 횟수: {{ evoCount }} 회
-      <q-slider color="secondary" v-model="evoCount" :min="0" :max="2"/>
-    </div>
     <div class="text-center full-width">
       <q-btn color="secondary" round size="xs" icon="remove" @click="subtractLevel"></q-btn>
       <span class="q-px-md">레벨: {{ pkmLevel }}</span>
@@ -228,7 +224,7 @@ onBeforeUnmount(()=>{
       }
   }
   myHealerInputStore.storeEverything(calcVer.value, healSkillCount.value,
-    pkmName.value, pkmLevel.value, evoCount.value, subSkills.value, firstIngName.value, secondIngName.value, thirdIngName.value,
+    pkmName.value, pkmLevel.value, subSkills.value, firstIngName.value, secondIngName.value, thirdIngName.value,
     fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
     selectedHealerDex.value, mainSkillLevel.value, useRibbon.value, ribbonLev.value, leftEvo.value, hasErb)
 })
@@ -246,7 +242,6 @@ const mainSkillLevel = ref(myHealerInputStore.mainSkillLevel)
 const maxSkillLevel = ref(6)
 // 이름
 const pkmName = ref(myHealerInputStore.pkmName)
-const evoCount = ref(myHealerInputStore.evoCount)
 onBeforeMount(async()=>{
   try{
     // 처음엔 님피아가 기본 힐러로 설정돼있다

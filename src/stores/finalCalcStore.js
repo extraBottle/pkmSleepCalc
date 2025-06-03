@@ -106,8 +106,8 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         return allData.frequency * multSpeed * convertS * goodCampBoost
     }
 
-    function calcEnergyCurve(hasErb = false, erbMaxEnergy = 100, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-        allDataH, evoCountH = 0, mySubH = [], pkmLevelH = 0, secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = '', hasErbH = false){
+    function calcEnergyCurve(hasErb = false, erbMaxEnergy = 100, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+        allDataH, mySubH = [], pkmLevelH = 0, secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = '', hasErbH = false){
         // maxE = 150
         // mainSkillLevel = myHealerInputStore.mainSkillLevel
         // sleepTime = mySleepTimeInputStore.sleepTime
@@ -269,7 +269,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     }                    
                 }
             }
-            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
+            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
         }
         else if(calcVer === 'proVer'){            
             // timeStaying.value = {}
@@ -554,7 +554,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         if(hasSelfHeal){
                             // 자힐 수면 중 전체 도우미
                             const totalCountHelpS = calcSleepSpeedCount('me', ribbonInv, sleepTime, trySkillE,
-                                speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
+                                speedEnerMultList, allData, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
                             // 기상 직후 스킬 발동률 업데이트
                             morningProcS = 1 - Math.pow((1 - finalSkillProc.value / strangeHeal), totalCountHelpS)
                             // 힐러 2번 스킬 발동 확률 (힐러가 스킬형일 경우에 한)
@@ -565,7 +565,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         }                        
                         // 힐러 수면 중 전체 도우미 횟수 기댓값
                         const totalCountHelpH = calcSleepSpeedCount('healer', ribbonInvH, sleepTime, beforeSleepH,
-                            speedEnerMultList, allDataH, evoCountH,
+                            speedEnerMultList, allDataH,
                             mySubH, pkmLevelH, secondIngH, thirdIngH, enerPerHour, useGoodCamp)
                         // 기상 직후 스킬 발동률 업데이트
                         morningProc = 1 - Math.pow((1 - finalSkillProcH.value), totalCountHelpH)                       
@@ -656,11 +656,11 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         selfSkillCount.value = finalSpeedCount.value * finalSkillProc.value + sleepLimitCount
     }
     // 식재료 종류별 생산량 계산
-    function calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp, mainSkillLevel){
+    function calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, mySub, useGoodCamp, mainSkillLevel){
         
         if(calcVer === 'proVer'){
             // 수면 중에 물어오는 식재료 구하기용 수면 도우미 횟수 (최대 소지 수 안에서)
-            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, evoCount, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)        
+            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)        
         }
         // 특정 레벨 식재량 찾기 30렙 이상만
         function findAmount(n, l){
@@ -761,7 +761,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         }        
     }
     // 잘때 도우미 횟수 return (단, 소지수 초과한 열매 only 도우미는 계산 X)
-    function calcSleepSpeedCount(target, ribbonInv, sleepTime, energyBeforeSleep, speedEnerMultList, allData, evoCount, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp){
+    function calcSleepSpeedCount(target, ribbonInv, sleepTime, energyBeforeSleep, speedEnerMultList, allData, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp){
         let splitSleep = sleepTime.split(':')
         const sleepH = parseInt(splitSleep[0], 10)
         const sleepM = parseInt(splitSleep[1], 10)
@@ -819,7 +819,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
 
         const goodCampBoost = useGoodCamp ? 1.2 : 1.0
         // 최대 소지 수 계산        
-        let inventorySize = (allData['carrySize'] + evoCount * 5) * goodCampBoost + ribbonInv
+        let inventorySize = allData['carrySize'] * goodCampBoost + ribbonInv
         for(let r = 0; r < mySub.length; r++){
             if(mySub[r].label === '최대 소지 수 업 L' || mySub[r].label === '최대 소지 수 업 M' || mySub[r].label === '최대 소지 수 업 s'){
                 inventorySize += mySub[r].mult

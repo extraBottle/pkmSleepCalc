@@ -16,9 +16,7 @@ export const useInputStore = defineStore('manage-input', () => {
     // 사용자 입력 포켓몬 이름
     const pkmName= ref('')
     // 사용자 입력 포켓몬 레벨
-    const pkmLevel= ref(30)
-    // 직접 진화시킨 횟수
-    const evoCount = ref(0)
+    const pkmLevel= ref(50)
     // 사용자 선택 보유중인 서브 스킬들
     const subSkills= ref([])
     // 선택한 포켓몬의 첫번째 식재료
@@ -47,13 +45,12 @@ export const useInputStore = defineStore('manage-input', () => {
     // 기력회복 보너스 보유 여부
     const hasErb = ref(false)
     // 전부 저장
-    function storeEverything(h, e, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, gc, ur, rl, le, he) {
+    function storeEverything(h, e, n, l, s, f, se, t, fs, ft, u, d, num, ms, gc, ur, rl, le, he) {
         hbCount.value = h;
         erbCount.value = e;
         
         pkmName.value = n;
         pkmLevel.value = l;
-        evoCount.value = evo
         subSkills.value = s;
         firstIng.value = f;
         secondIng.value = se;
@@ -85,7 +82,6 @@ export const useInputStore = defineStore('manage-input', () => {
 
         pkmName,
         pkmLevel,
-        evoCount,
         subSkills,
         firstIng,
         secondIng,
@@ -124,7 +120,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     const calcVer = ref('lightVer')
     // 힐러 메인 스킬 사용 횟수
     const healSkillCount = ref(5)
-    // 이건 개체값 검사기에서 사용하기 위한 수정불가값
+    // 이건 개체값 검사기에서 사용하기 위한 수정불가값(오류 때문인지 밑에 적힌 횟수 - 1로 계산됨)
     const fixedHealSkillCount = 6
     /*
             이거는 일반 포켓몬이랑 공통인 정보
@@ -132,9 +128,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     // 사용자 입력 포켓몬 이름
     const pkmName= ref('님피아')
     // 사용자 입력 포켓몬 레벨
-    const pkmLevel= ref(30)
-    // 직접 진화시킨 횟수
-    const evoCount = ref(0)
+    const pkmLevel= ref(50)    
     // 사용자 선택 보유중인 서브 스킬들
     const subSkills= ref([])
     // 선택한 포켓몬의 첫번째 식재료
@@ -162,13 +156,12 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     const hasErb = ref(false)
 
     // 전부 저장
-    function storeEverything(ver, hc, n, l, evo, s, f, se, t, fs, ft, u, d, num, ms, ur, rl, le, he) {
+    function storeEverything(ver, hc, n, l, s, f, se, t, fs, ft, u, d, num, ms, ur, rl, le, he) {
         calcVer.value = ver;
         healSkillCount.value = hc;
 
         pkmName.value = n;
         pkmLevel.value = l;
-        evoCount.value = evo
         subSkills.value = s;
         firstIng.value = f;
         secondIng.value = se;
@@ -200,7 +193,6 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
 
         pkmName,
         pkmLevel,
-        evoCount,
         subSkills,
         firstIng,
         secondIng,

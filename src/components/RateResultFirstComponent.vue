@@ -141,7 +141,6 @@ const downMult = myPkmDBStore.downMult
 const mySub = myInputStore.subSkills
 const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
 const maxHS = myPkmDBStore.maxHS
-const evoCount = myInputStore.evoCount
 const secondIngName = myInputStore.secondIng
 const thirdIngName = myInputStore.thirdIng
 let mainSkillLevel = myInputStore.mainSkillLevel
@@ -257,8 +256,7 @@ onBeforeMount(async()=>{
           "allHealSkillData": allHealSkillData,
           "selfHealSkillData": selfHealSkillData,
           "randHealSkillData":randHealSkillData ,
-          "totalMainSkill": totalMainSkill,
-          "evoCount": evoCount,
+          "totalMainSkill": totalMainSkill,          
           "secondIngName": secondIngName,
           "thirdIngName": thirdIngName,
           "mainSkillLevel": mainSkillLevel,

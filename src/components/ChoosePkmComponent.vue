@@ -25,11 +25,6 @@
     :error="props.nameValid" :error-message="nameEmptyMsg" @filter="searchName" @input-value="manageModel"
     use-input hide-selected fill-input input-debounce="0" @update:model-value="fetchApiIng"
     :hint="nameSearchHint" hide-bottom-space :readonly="selectPkmName" />    
-    <!-- 직접 진화시킨 횟수 -->
-    <div v-if="showEvoCount" class="text-center">
-      직접 진화시킨 횟수: {{ evoCount }} 회
-      <q-slider color="secondary" v-model="evoCount" :min="0" :max="2"/>
-    </div>
     <!-- 레벨 -->
     <div class="text-center full-width">
       <q-btn color="secondary" round size="xs" icon="remove" @click="subtractLevel"></q-btn>
@@ -239,7 +234,6 @@ myPkmDBStore.loadKorPkmName()
 const route = useRoute()
 // 보여줄 요소 관리
 const selectPkmName = ref(false)
-const showEvoCount = ref(true)
 const showIngChoose = ref(true)
 const showMainSkillLevel = ref(true)
 const showHbCount = ref(true)
@@ -292,7 +286,7 @@ onBeforeUnmount(()=>{
       }  
       // store에 저장
       myInputStore.storeEverything(hbCount.value, erbCount.value, 
-        pkmName.value, pkmLevel.value, evoCount.value, subSkills.value, firstIngName.value,
+        pkmName.value, pkmLevel.value, ubSkills.value, firstIngName.value,
         secondIngName.value, thirdIngName.value, fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
         selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value, useRibbon.value, ribbonLev.value, leftEvo.value, hasErb)
     }
@@ -325,8 +319,6 @@ const myRateCalcStore = useRateCalcStore()
 const pkmName = ref(myInputStore.pkmName)
 // 사용자 입력 포켓몬 레벨
 const pkmLevel = ref(myInputStore.pkmLevel)
-// 직접 진화시킨 횟수
-const evoCount = ref(myInputStore.evoCount)
 // 가능한 진화 횟수
 const leftEvo = ref(myInputStore.leftEvo)
 // 사용자 선택 보유중인 서브 스킬들
@@ -562,8 +554,7 @@ onBeforeMount(()=>{
     case '/eeveelution':
       selectPkmName.value = true
       showHbCount.value = false
-      showErbCount.value = false
-      showEvoCount.value = false
+      showErbCount.value = false      
       showIngChoose.value = false
       showMainSkillLevel.value = false
       showGoodCamp.value = false
