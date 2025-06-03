@@ -173,7 +173,8 @@ const orderData = ref(myRateCalcStore.orderData)
 const minOrderData = ref(myRateCalcStore.minOrderData)
 // 나 vs 1등
 const vsOutput = ref(myRateCalcStore.vsOutput)
-const useHealer = myRateCalcStore.useHealer
+// 피검사 포켓몬이 힐러면 추가 힐러는 자동으로 체크해제
+const useHealer = (allData.specialty === "skill" && allData.skill.name === "Energy For Everyone") ? false : myRateCalcStore.useHealer
 // 도우미보너스 존재 유무
 let hasHb = false
 for(let i=0; i < mySub.length; i++){
@@ -201,7 +202,7 @@ onBeforeMount(async()=>{
   try{
       if(prop.startLoad){   
         const addValidSub = []
-        if(allData.specialty === "skill"){
+        if(allData.specialty === "skill"){          
           // 스킬몬은 스킬 레벨업 서브가 꽝
           myPkmDBStore.allSubSkillList.forEach((e)=>{
             if(e.label === "도우미 보너스" || e.label === "기력 회복 보너스"){

@@ -128,7 +128,7 @@
         <!-- 힐러 포함 여부 -->
         <q-checkbox v-else-if="showUseHealer" v-model="useHealer">
           <template v-slot:default>
-            추가 힐러 포켓몬 사용
+            힐러 포켓몬 사용
             <q-icon size="xl" name="img:images/sylveonLink.png" />
           </template>
         </q-checkbox>
