@@ -154,7 +154,7 @@ const ribbonLev = ref(myInputStore.ribbonLev)
 const maxE = myPkmDBStore.maxE
 const totalMainSkill = myPkmDBStore.totalMainSkill
 const mainSkillLevelH = myHealerInputStore.mainSkillLevel
-const calcVer = myHealerInputStore.calcVer
+// const calcVer = myHealerInputStore.calcVer
 const skillCount = myHealerInputStore.fixedHealSkillCount
 const pkmNameH = myHealerInputStore.pkmName
 const allDataH = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmNameH))
@@ -173,7 +173,7 @@ const orderData = ref(myRateCalcStore.orderData)
 const minOrderData = ref(myRateCalcStore.minOrderData)
 // 나 vs 1등
 const vsOutput = ref(myRateCalcStore.vsOutput)
-const useHealer = myHealerInputStore.calcVer === 'lightVer' ? true : false
+const useHealer = myRateCalcStore.useHealer
 // 도우미보너스 존재 유무
 let hasHb = false
 for(let i=0; i < mySub.length; i++){
@@ -265,7 +265,7 @@ onBeforeMount(async()=>{
           "mealRecovery": mealRecovery,
           "maxE": maxE,
           "mainSkillLevelH": mainSkillLevelH,
-          "calcVer": calcVer,
+          "useHealer": useHealer,
           "skillCount": skillCount,                      
           "enerPerHour": enerPerHour,
           "speedEnerMultList": speedEnerMultList,

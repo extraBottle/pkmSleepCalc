@@ -260,7 +260,8 @@ watch(prevRoute, (newPath, oldPath)=>{
 })
 onBeforeUnmount(()=>{
   if(route.path === prevRoute.value){
-    if(prevRoute.value == '/rate'){      
+    if(prevRoute.value == '/rate'){   
+      myRateCalcStore.useHealer = useHealer.value   
       let subtractSkillLevel = 0
       for(let z=0; z< subSkills.value.length; z++){
         if(subSkills.value[z].label.includes("스킬 레벨 업")){
@@ -272,9 +273,7 @@ onBeforeUnmount(()=>{
       if(mainSkillLevel.value <= subtractSkillLevel){
         // 스렙업 서브가 사용자 입력 메인 스킬 레벨보다 작으면 적용 안했다고 가정해서 더함
         mainSkillLevel.value += subtractSkillLevel
-      }
-      // 힐러는 라이트 버전
-      myHealerInputStore.calcVer = calcVer.value      
+      }     
     }
     if(prevRoute.value == '/eeveelution'){
       myEeveeStore.storeEverything(pkmLevel.value, subSkills.value, upNature.value, downNature.value, preferEevee.value, fullSleep.value)
@@ -422,9 +421,6 @@ const didSelectAllSub = computed(()=>{
 const useGoodCamp = ref(myInputStore.useGoodCamp)
 // 힐러 쓰고 계산할지
 const useHealer = ref(myRateCalcStore.useHealer)
-const calcVer = computed(()=>{
-  return useHealer.value ? 'lightVer' : 'noHealer'
-})
 // 굿나잇리본 적용 여부
 const useRibbon = ref(myInputStore.useRibbon)
 const showRibbon = ref(false)
