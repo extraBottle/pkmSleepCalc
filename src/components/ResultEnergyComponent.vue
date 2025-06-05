@@ -62,8 +62,7 @@ watchEffect(async()=>{
       const upMult = myPkmDBStore.upMult[upNature]
       const downMult = myPkmDBStore.downMult[downNature]
       const mySub = myInputStore.subSkills
-      const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
-      const evoCount = myInputStore.evoCount
+      const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))      
       const firstIngName = myInputStore.firstIng
       const secondIngName = myInputStore.secondIng
       const thirdIngName = myInputStore.thirdIng
@@ -89,8 +88,7 @@ watchEffect(async()=>{
       const erbCount = myInputStore.erbCount
       const erbMult = myPkmDBStore.erbMult
       const enerPerHour = myPkmDBStore.enerPerHour
-      const speedEnerMultList = myPkmDBStore.speedEnerMultList
-      const evoCountH = myHealerInputStore.evoCount
+      const speedEnerMultList = myPkmDBStore.speedEnerMultList      
       const ribbonInv = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["inventory"] : 0
       const ribbonInvH = myHealerInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myHealerInputStore.ribbonLev, 10) - 1]["inventory"] : 0
       const hasErbH = myHealerInputStore.hasErb
@@ -120,12 +118,12 @@ watchEffect(async()=>{
       // 최대 축적 스킬 횟수
       const sleepLimit = allData.specialty == "skill" ? myPkmDBStore.collectSkillCount.skill : myPkmDBStore.collectSkillCount.else
 
-      myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, evoCount, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-        allDataH, evoCountH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH, hasErbH)
+      myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+        allDataH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH, hasErbH)
       // 기력 적용 도우미 속도
       myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)            
       // 식재료 종류별 생산량
-      myProdCalcStore.calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, evoCount, mySub, useGoodCamp.value, mainSkillLevel)    
+      myProdCalcStore.calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, mySub, useGoodCamp.value, mainSkillLevel)    
       energyChartRef.value.updateSeries([{
         name: '남은 기력량',
         data: myProdCalcStore.energyAxis

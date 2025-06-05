@@ -199,7 +199,7 @@ async function fetchApiIng(){
   fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 2, 'store')
   secondIngName.value = fixedSecondIngName.value
   thirdIngName.value = fixedThirdIngName.value  
-  invenSize.value = fetchedData.carrySize
+  invenSize.value = fetchedData.carrySize + fetchedData.previousEvolutions * 5
   baseSpeed.value = ''
   let justSec = fetchedData.frequency
   if(Math.floor(justSec / Math.pow(60, 2)) > 0){
