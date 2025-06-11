@@ -346,11 +346,11 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
         }
         switch(place){
             case 0:
-                findIng= allIngList(0)['ingredient']['longName'];
+                findIng= allIngList(0)[0]['ingredient']['longName'];
                 break;
             case 1:
                 if(allIngList(30).length < 2){
-                    findIng= allIngList(0)['ingredient']['longName'];
+                    findIng= allIngList(0)[0]['ingredient']['longName'];
                 }
                 else{
                     findIng= allIngList(30).find(obj => obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'];
@@ -358,16 +358,16 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
                 break;
             case 2:
                 if(allIngList(60).length < 2){
-                    findIng= allIngList(0)['ingredient']['longName'];
+                    findIng= allIngList(0)[0]['ingredient']['longName'];
                 }
                 else if(allIngList(60).length < 3){
                     findIng= allIngList(30).find(obj => obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'];
                 }
                 else{
                     findIng= allIngList(60).find(obj =>
-                        obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'] &&
+                        obj['ingredient']['longName'] !== allIngList(0)[0]['ingredient']['longName'] &&
                         obj['ingredient']['longName'] !== allIngList(30).find(obj => 
-                            obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'])['ingredient']['longName']
+                            obj['ingredient']['longName'] !== allIngList(0)[0]['ingredient']['longName'])['ingredient']['longName'])['ingredient']['longName']
                 }
                 break;
             default:
