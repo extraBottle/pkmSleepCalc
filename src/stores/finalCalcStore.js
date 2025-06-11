@@ -844,18 +844,18 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             case pkmLevel >= 60:
                 levelCut = 3;
                 // 1 도우미 당 가져오는 식재료 기댓값
-                firstIngRatio = (allData['ingredient0'].amount * ingProc / levelCut)
+                firstIngRatio = (allData['ingredient0'][0].amount * ingProc / levelCut)
                 secondIngRatio = (findAmount(secondIng, 30) * ingProc / levelCut)
                 thirdIngRatio = (findAmount(thirdIng, 60) * ingProc / levelCut)
                 break;
             case pkmLevel >= 30:
                 levelCut = 2;      
-                firstIngRatio = (allData['ingredient0'].amount * ingProc / levelCut)
+                firstIngRatio = (allData['ingredient0'][0].amount * ingProc / levelCut)
                 secondIngRatio = (findAmount(secondIng, 30) * ingProc / levelCut)
                 break;          
             default:
                 levelCut = 1;
-                firstIngRatio = (allData['ingredient0'].amount * ingProc / levelCut)
+                firstIngRatio = (allData['ingredient0'][0].amount * ingProc / levelCut)
         }
         // 식재료 기댓값 -> 식재 확률 * 한번에 가져오는 개수 / 레벨대 경쟁자
         // 문제는 이게 힐러라는거지
