@@ -106,6 +106,11 @@ const routes = [
   // Always leave this as last one,
   // but you can also remove it
   {
+    path: '/maintenance',
+    name: 'maintenance',
+    component: () => import('pages/MaintenancePage.vue'),
+  },
+  {
     path: '/:catchAll(.*)*',
     name: 'error',
     component: () => import('pages/ErrorNotFound.vue'),
