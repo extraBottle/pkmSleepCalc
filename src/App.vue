@@ -22,6 +22,12 @@ onErrorCaptured(()=>{
   popupFail('오류가 발생했습니다')
 })
 
+const isMaintenance = true;
+
+if (isMaintenance && route.path !== '/maintenance') {
+  router.push('/maintenance');
+}
+
 // dynamic meta tag
 useMeta(()=>{
   const pageName = ref(route.name)
