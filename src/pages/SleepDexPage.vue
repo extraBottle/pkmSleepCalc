@@ -165,7 +165,7 @@ const skillProc = ref(0)
 // 포켓몬 선택시 식재료 목록 불러오기
 function chooseIng(location, ingPlace){
   const chosenIconName = myPkmDBStore.bringIng(pkmName.value, ingPlace);
-  const chosenIcon = myDownloadStore.fetchIcon('ing', chosenIconName);
+  const chosenIcon = `img:ingredients/${chosenIconName}.png`;
   if(location === 1){
     firstIng.value = chosenIcon
     firstIngName.value = chosenIconName
@@ -191,9 +191,9 @@ async function fetchApiIng(){
   const fetchedData = myPkmDBStore.searchPkmData('kor_name', pkmName.value)  
   whatBerry.value = myDownloadStore.fetchIcon('berry', fetchedData.berries.name);
 
-  fixedFirstIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 1))
-  fixedSecondIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 2))
-  fixedThirdIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 3))
+  fixedFirstIng.value = `img:ingredients/${myPkmDBStore.bringIng(pkmName.value, 1)}.png`
+  fixedSecondIng.value = `img:ingredients/${myPkmDBStore.bringIng(pkmName.value, 2)}.png`
+  fixedThirdIng.value = `img:ingredients/${myPkmDBStore.bringIng(pkmName.value, 3)}.png`
   firstIng.value = fixedFirstIng.value
   secondIng.value = fixedSecondIng.value
   thirdIng.value = fixedThirdIng.value  
@@ -227,7 +227,7 @@ async function fetchApiIng(){
   allIngList.value.push(fetchedData["ingredient60"])
   for (let z = 0; z < 3; z++){
     allIngList.value[z].forEach(ele => {
-      ele['url'] = myDownloadStore.fetchIcon('ing', ele.name)
+      ele['url'] = `img:ingredients/${ele.name}.png`
     })
   }  
   fetchedData["ingredient0"].forEach((e)=>{    

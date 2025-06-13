@@ -37,7 +37,7 @@
                 <div v-for="(val, key) in finalIngList" class="col" :key="key">
                     <q-card v-if="key !== 'all'">
                         <q-card-section class="row bg-sSkill">
-                            <q-avatar class="shadow-1" color="ingCircle" :icon="myDownloadStore.fetchIcon('ing', key)" />
+                            <q-avatar class="shadow-1" color="ingCircle" :icon="`img:ingredients/${key}.png`" />
                             <q-separator vertical class="q-mx-md"/>
                             <div class="text-h5 q-py-sm">{{ Math.round(chooseRange === "한끼" ? val / 3 : val) }} 개</div>
                         </q-card-section>
@@ -149,12 +149,6 @@ const sleepLimit = allData.specialty == "skill" ? myPkmDBStore.collectSkillCount
 
 const options = ["한끼", "1일"]
 const chooseRange = ref(options[0])
-// 선택한 포켓몬의 첫번째 식재료
-const firstIng = ref(myDownloadStore.fetchIcon('ing', firstIngName))
-// 선택한 포켓몬의 두번째 식재료
-const secondIng = ref(myDownloadStore.fetchIcon('ing', secondIngName))
-// 선택한 포켓몬의 세번째 식재료
-const thirdIng = ref(myDownloadStore.fetchIcon('ing', thirdIngName))
 
 // 힐러 포켓몬의 첫번째 식재료
 const firstIngH = myHealerInputStore.firstIng

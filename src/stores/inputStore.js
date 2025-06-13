@@ -28,6 +28,7 @@ export const useInputStore = defineStore('manage-input', () => {
     const fixedFirstIng= ref('fancyapple')
     const fixedSecondIng= ref('warmingginger')
     const fixedThirdIng= ref('fancyegg')
+    const allIngList = ref([])
     // 선택한 상승 성격
     const upNature= ref('')
     // 선택한 하락 성격
@@ -46,7 +47,7 @@ export const useInputStore = defineStore('manage-input', () => {
     // 기력회복 보너스 보유 여부
     const hasErb = ref(false)
     // 전부 저장
-    function storeEverything(h, e, n, l, s, f, se, t, ff, fs, ft, u, d, num, ms, gc, ur, rl, le, he) {
+    function storeEverything(h, e, n, l, s, f, se, t, ff, fs, ft, u, d, num, ms, gc, ur, rl, le, he, ai) {
         hbCount.value = h;
         erbCount.value = e;
         
@@ -68,6 +69,7 @@ export const useInputStore = defineStore('manage-input', () => {
         ribbonLev.value = rl;
         leftEvo.value = le;   
         hasErb.value = he;     
+        allIngList.value = ai;
     }
     function hasEssential(){
         if(pkmName.value !== '' && upNature.value !== '' && downNature.value !== ''){
@@ -101,7 +103,8 @@ export const useInputStore = defineStore('manage-input', () => {
         leftEvo,
         hasErb,
         storeEverything,
-        hasEssential
+        hasEssential,
+        allIngList
     };
 })
 // 수면 시간 입력값 관리
@@ -143,6 +146,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     const fixedFirstIng= ref('fancyapple')
     const fixedSecondIng= ref('soothingcacao')
     const fixedThirdIng= ref('largeleek')
+    const allIngList = ref([])
     // 선택한 상승 성격
     const upNature= ref('')
     // 선택한 하락 성격
@@ -160,7 +164,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     const hasErb = ref(false)
 
     // 전부 저장
-    function storeEverything(ver, hc, n, l, s, f, se, t, ff, fs, ft, u, d, num, ms, ur, rl, le, he) {
+    function storeEverything(ver, hc, n, l, s, f, se, t, ff, fs, ft, u, d, num, ms, ur, rl, le, he, ai) {
         calcVer.value = ver;
         healSkillCount.value = hc;
 
@@ -181,6 +185,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
         ribbonLev.value = rl;
         leftEvo.value = le;
         hasErb.value = he;
+        allIngList.value = ai;
     }
     function hasEssential(){
         if(pkmName.value !== '' && upNature.value !== '' && downNature.value !== ''){
@@ -214,6 +219,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
         leftEvo,
         hasErb,
         storeEverything,
-        hasEssential
+        hasEssential,
+        allIngList
     }
 })

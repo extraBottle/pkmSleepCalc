@@ -297,7 +297,7 @@ onBeforeUnmount(()=>{
       myInputStore.storeEverything(hbCount.value, erbCount.value, 
         pkmName.value, pkmLevel.value, subSkills.value, firstIngName.value,
         secondIngName.value, thirdIngName.value, fixedFirstIngName.value, fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
-        selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value, useRibbon.value, ribbonLev.value, leftEvo.value, hasErb)
+        selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value, useRibbon.value, ribbonLev.value, leftEvo.value, hasErb, allIngList.value)
     }
   }
 })
@@ -337,13 +337,13 @@ const hbCount = ref(myInputStore.hbCount)
 // 사용자 입력 총 기력 회복 보너스 개수
 const erbCount = ref(myInputStore.erbCount)
 // 레벨별 모든 식재료
-const allIngList = ref([])
+const allIngList = ref(myInputStore.allIngList)
 // 선택한 포켓몬의 첫번째 식재료 (이미지 주소꼴)
-const firstIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.firstIng))
+const firstIng = ref(`img:ingredients/${myInputStore.firstIng}.png`)
 // 선택한 포켓몬의 두번째 식재료
-const secondIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.secondIng))
+const secondIng = ref(`img:ingredients/${myInputStore.secondIng}.png`)
 // 선택한 포켓몬의 세번째 식재료
-const thirdIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.thirdIng))
+const thirdIng = ref(`img:ingredients/${myInputStore.thirdIng}.png`)
 // 선택한 포켓몬의 첫번째 식재료 이름만
 const firstIngName = ref(myInputStore.firstIng)
 // 선택한 포켓몬의 두번째 식재료 이름만
@@ -357,11 +357,11 @@ const fixedSecondIngName = ref(myInputStore.fixedSecondIng)
 // 고정- 선택한 포켓몬의 세번째 식재료 이름만
 const fixedThirdIngName = ref(myInputStore.fixedThirdIng)
 // 고정 - 첫번째 식재료 이미지
-const fixedFirstIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedFirstIng))
+const fixedFirstIng = ref(`img:ingredients/${myInputStore.fixedFirstIng}.png`)
 // 고정- 선택한 포켓몬의 두번째 식재료 이미지
-const fixedSecondIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedSecondIng))
+const fixedSecondIng = ref(`img:ingredients/${myInputStore.fixedSecondIng}.png`)
 // 고정- 선택한 포켓몬의 세번째 식재료 이미지
-const fixedThirdIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedThirdIng))
+const fixedThirdIng = ref(`img:ingredients/${myInputStore.fixedThirdIng}.png`)
 // 선택한 상승 성격
 const upNature = ref(myInputStore.upNature)
 // 선택한 하락 성격
@@ -439,7 +439,7 @@ const subSkillOptions = ref()
 // 포켓몬 선택시 식재료 목록 불러오기
 function chooseIng(location, ingPlace){
   const chosenIconName = myPkmDBStore.bringIng(pkmName.value, ingPlace);
-  const chosenIcon = myDownloadStore.fetchIcon('ing', chosenIconName);
+  const chosenIcon = `img:ingredients/${chosenIconName}.png`;
   if(location === 1){
     firstIng.value = chosenIcon
     firstIngName.value = chosenIconName
@@ -462,9 +462,9 @@ async function fetchApiIng(){
   fixedSecondIngName.value = myPkmDBStore.bringIng(pkmName.value, 2)
   fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 3)
   // 고정 식재료 이미지 저장
-  fixedFirstIng.value = myDownloadStore.fetchIcon('ing', fixedFirstIngName.value)
-  fixedSecondIng.value = myDownloadStore.fetchIcon('ing', fixedSecondIngName.value)
-  fixedThirdIng.value = myDownloadStore.fetchIcon('ing', fixedThirdIngName.value)
+  fixedFirstIng.value = `img:ingredients/${fixedFirstIngName.value}.png`
+  fixedSecondIng.value = `img:ingredients/${fixedSecondIngName.value}.png`
+  fixedThirdIng.value = `img:ingredients/${fixedThirdIngName.value}.png`
   // 선택 식재료 이미지 저장
   firstIng.value = fixedFirstIng.value
   secondIng.value = fixedSecondIng.value
@@ -488,7 +488,7 @@ async function fetchApiIng(){
   allIngList.value.push(allData["ingredient60"])
   for (let z = 0; z < 3; z++){
     allIngList.value[z].forEach(ele => {
-      ele['url'] = myDownloadStore.fetchIcon('ing', ele.name)
+      ele['url'] = `img:ingredients/${ele.name}.png`
     })
   }
   // 불러온 포켓몬의 남은 진화횟수

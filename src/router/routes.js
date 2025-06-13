@@ -68,7 +68,7 @@ const routes = [
         meta: {
           title: '식재료 생산량 계산기',
           caption: '내 포켓몬은 식재료를 얼마나 모아올까?',
-          icon: 'images/fancyapple.png',          
+          icon: 'ingredients/fancyapple.png',          
           help: '내 포켓몬의 하루 & 한끼 당 식재료 생산량을 계산합니다.',
           shortName: '식재료'
         }

@@ -22,9 +22,9 @@ export const useDownloadStore = defineStore('download-src', ()=> {
                 firstSrc = "https://www.serebii.net/pokemonsleep/pokemon/sleep/";
                 break;
             // 식재료 이미지
-            case "ing":
-                firstSrc = "https://www.serebii.net/pokemonsleep/ingredients/";
-                break;
+            // case "ing":
+            //     firstSrc = "https://www.serebii.net/pokemonsleep/ingredients/";
+            //     break;
             // 나무열매 이미지
             case "berry":
                 firstSrc = "https://www.serebii.net/pokemonsleep/berries/"
