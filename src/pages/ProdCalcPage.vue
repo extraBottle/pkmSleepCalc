@@ -117,8 +117,9 @@ function gogo(){
       if(validateThird.value.calcVer === "proVer"){
         const upup = validateThird.value.upNature
         const downdown = validateThird.value.downNature
-        if(myPkmDBStore.searchPkmData('kor_name', validateThird.value.pkmName).skill !== "Energy For Everyone"){
-          // 포켓몬 선택했는지          
+        if(!myPkmDBStore.searchPkmData('kor_name', validateThird.value.pkmName).skill.includes("Energy For Everyone") &&
+          !myPkmDBStore.searchPkmData('kor_name', validateThird.value.pkmName).skill.includes("Energizing Cheer")){
+          // 힐러 포켓몬 선택했는지          
           sendNameHealer.value = true
         } 
         else{ sendNameHealer.value = false }

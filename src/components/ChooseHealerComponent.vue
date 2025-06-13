@@ -442,7 +442,7 @@ function searchName(val, update, abort) {
 }
 function manageModel(val){
   if(val.length > 0 && val !== myHealerInputStore.pkmName){
-    pkmName.value = '가디안'
+    pkmName.value = ''
   }
 }
 

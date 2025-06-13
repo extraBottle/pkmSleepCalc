@@ -35,6 +35,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
     const simulationCount = 10000
     // 자체 스킬 사용 횟수
     const selfSkillCount = ref(0)
+    const fixedSelfSkillCount = ref(0)
     // 수면 중 소지수 꽉차기전 도우미 횟수
     const helpCountSleep = ref(0)
 
@@ -118,6 +119,9 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         energyAxis.value = []
         // 힐러 스킬 당 타겟 포켓몬 회복량
         let enerPerSkill = allDataH.main_skills.amount[mainSkillLevel - 1]
+        if(allDataH.main_skills.name.includes('Energizing Cheer')){
+            enerPerSkill = enerPerSkill / 5
+        }
         // 타겟 포켓몬 자체 스킬 당 자체 회복량
         let selfPerSkill = allData.main_skills.amount[selfSkillLevel - 1]
         // 자힐몬인지 여부
@@ -596,6 +600,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         // 수면 중 축적 스킬 횟수 제한     
         const sleepLimitCount = helpCountSleep.value * finalSkillProc.value > sleepLimit ? sleepLimit : helpCountSleep.value * finalSkillProc.value
         selfSkillCount.value = finalSpeedCount.value * finalSkillProc.value + sleepLimitCount
+        fixedSelfSkillCount.value = finalSpeedCount.value * finalSkillProc.value + sleepLimitCount
     }
     // 식재료 종류별 생산량 계산
     function calcLeveLIng(calcVer, ribbonInv, sleepLimit, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, mySub, useGoodCamp, mainSkillLevel){
@@ -667,8 +672,6 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         }
         // 메인 스킬 식재 스킬일 경우 식재량에 추가
         if(allData.main_skills.unit === 'ingredients'){             
-            // 수면 중 스킬 발동 기댓값
-            const sleepySkillCount = Math.min(helpCountSleep.value * finalSkillProc.value, sleepLimit);
             // ingredient magnet
             if(allData.main_skills.name.includes('Magnet')){  
                 (async()=>{
@@ -688,7 +691,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         // 특정 식재료가 스킬 한번에 나올 확률
                         const expectOne = 1 - (1 - 1/totalIngNum) * (1 - 1/(totalIngNum - 1)) * (1 - 1/(totalIngNum - 2))
                         // 수면 중 스킬 발동 기댓값
-                        const addIngSkill = selfSkillCount.value * ingPerSkill * expectOne            
+                        const addIngSkill = fixedSelfSkillCount.value * ingPerSkill * expectOne            
                         checkIngSkillDisplay.value = true
                         // 식재 메인 스킬 발동만큼 식재량 증가                    
                         totalIngCalc.value[firstIng] += addIngSkill
@@ -707,7 +710,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             }
             // ingredient draw
             else if(allData.main_skills.name.includes('Draw')){                
-                const totalIngFromSkill = selfSkillCount.value * allData.main_skills.avg_amount[mainSkillLevel - 1] / allData.main_skills.selection.length;
+                const totalIngFromSkill = fixedSelfSkillCount.value * allData.main_skills.avg_amount[mainSkillLevel - 1] / allData.main_skills.selection.length;
                 allData.main_skills.selection.forEach((i)=> {
                     if(totalIngCalc.value.hasOwnProperty(i)){
                         totalIngCalc.value[i] += totalIngFromSkill
@@ -854,6 +857,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         totalIngCalc.value = {}
         timeStaying.value = {}
         selfSkillCount.value = 0
+        fixedSelfSkillCount.value = 0
         helpCountSleep.value = 0
     }
 
@@ -877,6 +881,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         convertS,
         simulationCount,
         selfSkillCount,
+        fixedSelfSkillCount,
         helpCountSleep,
         calcIngProc,
         calcBaseSpeed,
