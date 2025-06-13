@@ -262,7 +262,7 @@ onBeforeMount(async()=>{
         }        
         const response = await fetch('https://fg1kg79is8.execute-api.ap-northeast-2.amazonaws.com/rate', {
           method: "POST",
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'extrabottle-bimil': import.meta.env.VITE_AWS_API_KEY },
           body: JSON.stringify(obj)
         })
         const json = await response.json()

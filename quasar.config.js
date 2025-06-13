@@ -63,7 +63,8 @@ module.exports = configure(function () {
       // analyze: true,
       env: {
         // Supabase api
-        VITE_SUPABASE_API_KEY: process.env.VITE_SUPABASE_API_KEY
+        VITE_SUPABASE_API_KEY: process.env.VITE_SUPABASE_API_KEY,
+        VITE_AWS_API_KEY: process.env.VITE_AWS_API_KEY
       },
       // rawDefine: {}
       // ignorePublicFolder: true,
