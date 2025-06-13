@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Update Pkm List
+name: Update Pkm List (deprecated)
 
 on:
   # Allows you to run this workflow manually from the Actions tab
