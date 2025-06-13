@@ -34,27 +34,38 @@
     </div>
     <!-- 식재료 선택 -->
     <div v-if="showIngChoose" class="row justify-center q-gutter-x-md">
-      <q-btn fab color="ingCircle" :icon="firstIng" />
+      <div>
+        <q-btn v-if="pkmName == ''" fab color="ingCircle" :icon="firstIng" />
+        <q-fab v-else color="ingCircle" :icon="firstIng" direction="up">
+          <!-- 레벨 0 -->
+          <q-fab-action v-for="(ing, index) in allIngList[0]" :key="index" 
+            color="ingCircle" @click="chooseIng(1, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+          />          
+        </q-fab>
+      </div>      
       <div>
         <q-tooltip :hide-delay="tooltipMobile()">
           레벨 30
         </q-tooltip>
         <q-fab v-if="pkmLevel < 30" color="ingCircle" icon="lock" text-color="teal" :disable= true direction="up" />
-        <q-fab v-else color="ingCircle" :icon="secondIng" :disable="pkmLevel < 30" direction="up">
-          <q-fab-action color="ingCircle" @click="chooseIng(2, 1)" :icon="firstIng" />
-          <q-fab-action color="ingCircle" @click="chooseIng(2, 2)" :icon="fixedSecondIng" />
-        </q-fab>
+        <q-btn v-else-if="pkmName == ''" fab color="ingCircle" :icon="secondIng" />
+        <q-fab v-else color="ingCircle" :icon="secondIng" direction="up">          
+          <q-fab-action v-for="(ing, index) in allIngList[1]" :key="index"
+            color="ingCircle" @click="chooseIng(2, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+          />          
+        </q-fab>                
       </div>
       <div>
         <q-tooltip :hide-delay="tooltipMobile()">
           레벨 60
         </q-tooltip>
         <q-fab v-if="pkmLevel < 60" color="ingCircle" icon="lock" text-color="teal" :disable= true direction="up" />
-        <q-fab v-else color="ingCircle" :icon="thirdIng" :disable="pkmLevel < 60" direction="up">
-          <q-fab-action color="ingCircle" @click="chooseIng(3, 1)" :icon="firstIng" />
-          <q-fab-action color="ingCircle" @click="chooseIng(3, 2)" :icon="fixedSecondIng" />
-          <q-fab-action color="ingCircle" @click="chooseIng(3, 3)" :icon="fixedThirdIng" />
-        </q-fab>
+        <q-btn v-else-if="pkmName == ''" fab color="ingCircle" :icon="thirdIng" />
+        <q-fab v-else color="ingCircle" :icon="thirdIng" direction="up">          
+          <q-fab-action v-for="(ing, index) in allIngList[2]" :key="index"
+            color="ingCircle" @click="chooseIng(3, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+          />          
+        </q-fab>           
       </div>
     </div>
     <!-- 메인 스킬 렙 -->
@@ -124,7 +135,7 @@
         <q-checkbox v-else-if="showUseHealer" v-model="useHealer">
           <template v-slot:default>
             힐러 포켓몬 사용
-            <q-icon size="xl" name="img:images/sylveonLink.png" />
+            <q-icon size="xl" name="img:images/healerLink.webp" />
           </template>
         </q-checkbox>
         <!-- 이브이 수면시간 풀잠 이상인지 -->
@@ -228,7 +239,6 @@ defineOptions({
 })
 
 const myPkmDBStore = usePkmDBStore()
-myPkmDBStore.loadKorPkmName()
 
 // 컴포넌트를 현재 페이지에 따라 내용 바꾼다
 const route = useRoute()
@@ -280,13 +290,13 @@ onBeforeUnmount(()=>{
               hasErb = true
           }
       }
-      if(myPkmDBStore.searchPkmData('name', 'SYLVEON') !== undefined){
-        myHealerInputStore.mainSkillLevel = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill.maxLevel  
+      if(myPkmDBStore.searchPkmData('kor_name', '가디안') !== undefined){
+        myHealerInputStore.mainSkillLevel = myPkmDBStore.searchPkmData('kor_name', '가디안').main_skills.max_level  
       }  
       // store에 저장
       myInputStore.storeEverything(hbCount.value, erbCount.value, 
         pkmName.value, pkmLevel.value, subSkills.value, firstIngName.value,
-        secondIngName.value, thirdIngName.value, fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
+        secondIngName.value, thirdIngName.value, fixedFirstIngName.value, fixedSecondIngName.value, fixedThirdIngName.value, upNature.value, downNature.value,
         selectedPkmDex.value, mainSkillLevel.value, useGoodCamp.value, useRibbon.value, ribbonLev.value, leftEvo.value, hasErb)
     }
   }
@@ -326,26 +336,32 @@ const subSkills = ref(myInputStore.subSkills)
 const hbCount = ref(myInputStore.hbCount)
 // 사용자 입력 총 기력 회복 보너스 개수
 const erbCount = ref(myInputStore.erbCount)
+// 레벨별 모든 식재료
+const allIngList = ref([])
 // 선택한 포켓몬의 첫번째 식재료 (이미지 주소꼴)
-const firstIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.firstIng.replace(/\s/g, "").toLowerCase()))
+const firstIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.firstIng))
 // 선택한 포켓몬의 두번째 식재료
-const secondIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.secondIng.replace(/\s/g, "").toLowerCase()))
+const secondIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.secondIng))
 // 선택한 포켓몬의 세번째 식재료
-const thirdIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.thirdIng.replace(/\s/g, "").toLowerCase()))
+const thirdIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.thirdIng))
 // 선택한 포켓몬의 첫번째 식재료 이름만
 const firstIngName = ref(myInputStore.firstIng)
 // 선택한 포켓몬의 두번째 식재료 이름만
 const secondIngName = ref(myInputStore.secondIng)
 // 선택한 포켓몬의 세번째 식재료 이름만
 const thirdIngName = ref(myInputStore.thirdIng)
-// 선택한 포켓몬의 두번째 식재료 이름만
+// 고정- 선택한 포켓몬의 첫번째 식재료 이름만
+const fixedFirstIngName = ref(myInputStore.fixedFirstIng)
+// 고정- 선택한 포켓몬의 두번째 식재료 이름만
 const fixedSecondIngName = ref(myInputStore.fixedSecondIng)
-// 선택한 포켓몬의 세번째 식재료 이름만
+// 고정- 선택한 포켓몬의 세번째 식재료 이름만
 const fixedThirdIngName = ref(myInputStore.fixedThirdIng)
-// 두번째 식재료 (이미지 주소꼴)
-const fixedSecondIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedSecondIng.replace(/\s/g, "").toLowerCase()))
-// 세번째 식재료
-const fixedThirdIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedThirdIng.replace(/\s/g, "").toLowerCase()))
+// 고정 - 첫번째 식재료 이미지
+const fixedFirstIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedFirstIng))
+// 고정- 선택한 포켓몬의 두번째 식재료 이미지
+const fixedSecondIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedSecondIng))
+// 고정- 선택한 포켓몬의 세번째 식재료 이미지
+const fixedThirdIng = ref(myDownloadStore.fetchIcon('ing', myInputStore.fixedThirdIng))
 // 선택한 상승 성격
 const upNature = ref(myInputStore.upNature)
 // 선택한 하락 성격
@@ -421,26 +437,14 @@ const showRibbon = ref(false)
 const subSkillOptions = ref()
 
 // 포켓몬 선택시 식재료 목록 불러오기
-function chooseIng(location, ingNum){
-  let chosenIcon;
-  let chosenIconName;
-  switch(ingNum){
-    case 1:
-      chosenIcon = firstIng.value;
-      chosenIconName = firstIngName.value;
-      break;
-    case 2:
-      chosenIcon = fixedSecondIng.value;
-      chosenIconName = fixedSecondIngName.value;
-      break;
-    case 3:
-      chosenIcon = fixedThirdIng.value;
-      chosenIconName = fixedThirdIngName.value;
-      break;
-    default:
-      return 0
+function chooseIng(location, ingPlace){
+  const chosenIconName = myPkmDBStore.bringIng(pkmName.value, ingPlace);
+  const chosenIcon = myDownloadStore.fetchIcon('ing', chosenIconName);
+  if(location === 1){
+    firstIng.value = chosenIcon
+    firstIngName.value = chosenIconName
   }
-  if(location === 2){
+  else if(location === 2){
     secondIng.value = chosenIcon
     secondIngName.value = chosenIconName
   }
@@ -452,15 +456,21 @@ function chooseIng(location, ingNum){
 // 포켓몬을 선택하면 데이터 불러오기 + 식재료 목록 출력 + 이미지 불러오기
 async function fetchApiIng(){
   loadingCalc('불러오는 중...')
-  await myPkmDBStore.fetchPkmData(myPkmDBStore.convertKorEn(pkmName.value))
-  firstIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 0))
-  fixedSecondIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 1))
-  fixedThirdIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 2))
+  await myPkmDBStore.fetchPkmData(pkmName.value)
+  // 고정 식재료 이름 저장
+  fixedFirstIngName.value = myPkmDBStore.bringIng(pkmName.value, 1)
+  fixedSecondIngName.value = myPkmDBStore.bringIng(pkmName.value, 2)
+  fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 3)
+  // 고정 식재료 이미지 저장
+  fixedFirstIng.value = myDownloadStore.fetchIcon('ing', fixedFirstIngName.value)
+  fixedSecondIng.value = myDownloadStore.fetchIcon('ing', fixedSecondIngName.value)
+  fixedThirdIng.value = myDownloadStore.fetchIcon('ing', fixedThirdIngName.value)
+  // 선택 식재료 이미지 저장
+  firstIng.value = fixedFirstIng.value
   secondIng.value = fixedSecondIng.value
   thirdIng.value = fixedThirdIng.value
-  firstIngName.value = myPkmDBStore.bringIng(pkmName.value, 0, 'store')
-  fixedSecondIngName.value = myPkmDBStore.bringIng(pkmName.value, 1, 'store')
-  fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 2, 'store')
+  // 선택 식재료 이름 저장
+  firstIngName.value = fixedFirstIngName.value
   secondIngName.value = fixedSecondIngName.value
   thirdIngName.value = fixedThirdIngName.value
   // 연달아 2번 동일한 포켓몬 불러오면 로딩 화면 종료
@@ -468,20 +478,26 @@ async function fetchApiIng(){
   selectedPkmDex.value = myPkmDBStore.findDexNum(pkmName.value)
   if(originDex === selectedPkmDex.value){ stopLoading() }
   // 힐러 정보 미리 불러오기
-  await myPkmDBStore.fetchPkmData('SYLVEON')
+  await myPkmDBStore.fetchPkmData('가디안')
   
   selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)
   // 불러온 포켓몬의 모든 정보
-  const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
+  const allData = myPkmDBStore.searchPkmData('kor_name', pkmName.value)
+  allIngList.value = []  
+  allIngList.value.push(allData["ingredient0"])
+  allIngList.value.push(allData["ingredient30"])
+  allIngList.value.push(allData["ingredient60"])
   // 불러온 포켓몬의 남은 진화횟수
-  leftEvo.value = allData.remainingEvolutions
+  leftEvo.value = allData.remaining_evolutions
   // 굿나잇리본 효과 반영
   secondRibbonSpeed.value = myPkmDBStore.ribbonList[1]["speed"][leftEvo.value]
   thirdRibbonSpeed.value = myPkmDBStore.ribbonList[2]["speed"][leftEvo.value]
   fourthRibbonSpeed.value = myPkmDBStore.ribbonList[3]["speed"][leftEvo.value]
   // 메인 스킬 최대 레벨 반영
-  maxSkillLevel.value = allData.skill.maxLevel
+  maxSkillLevel.value = allData.main_skills.max_level
   mainSkillLevel.value = mainSkillLevel.value > maxSkillLevel.value ? maxSkillLevel.value : mainSkillLevel.value
+  // test
+  stopLoading();
 }
 function addLevel(){
   pkmLevel.value += 1
@@ -528,6 +544,7 @@ function updateRibbon(){
   }
 }
 onBeforeMount(()=>{
+  myPkmDBStore.loadKorPkmName()
   // 첫 로딩때 미리 저장해둔 이미지 불러와야 로딩 빠름  
   if(route.path !== 'eeveelution' && pkmName.value.length > 0){
     selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)

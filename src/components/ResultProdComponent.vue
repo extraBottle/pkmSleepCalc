@@ -34,44 +34,24 @@
             </q-card-section>
             <q-separator inset />
             <q-card-section class="column q-gutter-y-md">
-                <div class="col">
-                    <q-card>
+                <div v-for="(val, key) in finalIngList" class="col" :key="key">
+                    <q-card v-if="key !== 'all'">
                         <q-card-section class="row bg-sSkill">
-                            <q-avatar class="shadow-1" color="ingCircle" :icon="firstIng" />
+                            <q-avatar class="shadow-1" color="ingCircle" :icon="myDownloadStore.fetchIcon('ing', key)" />
                             <q-separator vertical class="q-mx-md"/>
-                            <div class="text-h5 q-py-sm">{{ amountFirstIng }} 개</div>
+                            <div class="text-h5 q-py-sm">{{ Math.round(chooseRange === "한끼" ? val / 3 : val) }} 개</div>
                         </q-card-section>
                     </q-card>
-                </div>
-                <div v-if="myProdCalcStore.checkSecondDisplay" class="col">
-                    <q-card>
-                        <q-card-section class="row bg-sSkill">
-                            <q-avatar class="shadow-1" color="ingCircle" :icon="secondIng" />
-                            <q-separator vertical class="q-mx-md"/>
-                            <span class="text-h5 q-py-sm">{{ amountSecondIng}} 개</span>
-                        </q-card-section>
-                    </q-card>
-                </div>
-                <div v-if="myProdCalcStore.checkThirdDisplay" class="col">
-                    <q-card>
-                        <q-card-section class="row bg-sSkill">
-                            <q-avatar class="shadow-1" color="ingCircle" :icon="thirdIng" />
-                            <q-separator vertical class="q-mx-md"/>
-                            <span class="text-h5 q-py-sm">{{ amountThirdIng }} 개</span>
-                        </q-card-section>
-                    </q-card>
-                </div>
-                <div v-if="myProdCalcStore.checkIngSkillDisplay" class="col">
-                    <q-card>
+                    <q-card v-else>
                         <q-card-section class="row bg-sSkill no-wrap">
                             <q-avatar class="shadow-1" color="ingCircle" icon="img:images/ingall.png" />
                             <q-separator vertical class="q-mx-md"/>
                             <div class="row q-py-sm">
-                                <div class="text-h5 no-wrap">{{ amountIngSkill }} 개&nbsp;</div>
+                                <div class="text-h5 no-wrap">{{ Math.round(chooseRange === "한끼" ? val / 3 : val) }} 개&nbsp;</div>
                                 <div class="text-subtitle1 no-wrap">(나머지 모든 식재료)</div>
                             </div>
                         </q-card-section>
-                    </q-card>
+                    </q-card>                    
                 </div>
             </q-card-section>
         </q-card>
@@ -127,7 +107,7 @@ const downMult = myPkmDBStore.downMult[downNature]
 const hBonus = myInputStore.hbCount
 const hbMult = myPkmDBStore.hbMult
 const mySub = myInputStore.subSkills
-const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
+const allData = myPkmDBStore.searchPkmData('kor_name', pkmName.value)
 const maxHS = myPkmDBStore.maxHS
 const firstIngName = myInputStore.firstIng
 const secondIngName = myInputStore.secondIng
@@ -136,13 +116,15 @@ const mainSkillLevel = myInputStore.mainSkillLevel
 const mealRecovery = myPkmDBStore.mealRecovery
 const hasErb = myInputStore.hasErb
 
+// 화면 출력 최종 식재료 결과 저장 (object)
+const finalIngList = ref(myProdCalcStore.totalIngCalc);
+
 const erbMaxEnergy = myPkmDBStore.erbMaxEnergy
 // 굿나잇리본 효과
 const ribbonSpeed = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["speed"][myInputStore.leftEvo] : 0
 const ribbonInv = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myInputStore.ribbonLev, 10) - 1]["inventory"] : 0
 
 const maxE = myPkmDBStore.maxE
-const totalMainSkill = myPkmDBStore.totalMainSkill
 const mainSkillLevelH = myHealerInputStore.mainSkillLevel
 const sleepTime = mySleepTimeInputStore.sleepTime
 const calcVer = myHealerInputStore.calcVer
@@ -153,7 +135,7 @@ const downNatureH = myHealerInputStore.downNature
 const pkmNameH = myHealerInputStore.pkmName
 const pkmLevelH = myHealerInputStore.pkmLevel
 const mySubH = myHealerInputStore.subSkills
-const allDataH = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmNameH))
+const allDataH = myPkmDBStore.searchPkmData('kor_name', pkmNameH)
 const erbCount = myInputStore.erbCount
 const erbMult = myPkmDBStore.erbMult
 const enerPerHour = myPkmDBStore.enerPerHour
@@ -168,14 +150,14 @@ const sleepLimit = allData.specialty == "skill" ? myPkmDBStore.collectSkillCount
 const options = ["한끼", "1일"]
 const chooseRange = ref(options[0])
 // 선택한 포켓몬의 첫번째 식재료
-const firstIng = ref(myDownloadStore.fetchIcon('ing', firstIngName.replace(/\s/g, "").toLowerCase()))
+const firstIng = ref(myDownloadStore.fetchIcon('ing', firstIngName))
 // 선택한 포켓몬의 두번째 식재료
-const secondIng = ref(myDownloadStore.fetchIcon('ing', secondIngName.replace(/\s/g, "").toLowerCase()))
+const secondIng = ref(myDownloadStore.fetchIcon('ing', secondIngName))
 // 선택한 포켓몬의 세번째 식재료
-const thirdIng = ref(myDownloadStore.fetchIcon('ing', thirdIngName.replace(/\s/g, "").toLowerCase()))
+const thirdIng = ref(myDownloadStore.fetchIcon('ing', thirdIngName))
 
 // 힐러 포켓몬의 첫번째 식재료
-// const firstIngH = ref(myDownloadStore.fetchIcon('ing', firstIngName.replace(/\s/g, "").toLowerCase()))
+const firstIngH = myHealerInputStore.firstIng
 // 힐러 포켓몬의 두번째 식재료
 const secondIngH = myHealerInputStore.secondIng
 // 힐러 포켓몬의 세번째 식재료
@@ -210,22 +192,7 @@ onMounted(()=>{
 })
 watchEffect(async()=>{
     try{
-        if(prop.startLoad){
-            let ingSkillData = {}
-            let selfHealSkillData = {}
-            let randHealSkillData = {}
-            let allHealSkillData = {}
-            if(allData.skill.name.includes('Metronome')){
-                // 손가락흔들기 포켓몬 선택했으면 자힐 & 랜덤힐 & 식재 스킬 정보도 저장한다        
-                await myPkmDBStore.fetchPkmData('LEAFEON')
-                await myPkmDBStore.fetchPkmData('UMBREON')
-                await myPkmDBStore.fetchPkmData('VAPOREON')
-                await myPkmDBStore.fetchPkmData('SYLVEON')
-                ingSkillData = myPkmDBStore.searchPkmData('name', 'VAPOREON').skill
-                selfHealSkillData = myPkmDBStore.searchPkmData('name', 'UMBREON').skill
-                randHealSkillData = myPkmDBStore.searchPkmData('name', 'LEAFEON').skill
-                allHealSkillData = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill
-            }            
+        if(prop.startLoad){      
             // 기력 제외 도우미 속도
             myProdCalcStore.onlyBaseSpeed = myProdCalcStore.calcBaseSpeed(ribbonSpeed, pkmLevel, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub, allData, maxHS, useGoodCamp.value)
             myProdCalcStore.finalSkillProc = myProdCalcStore.calcSkillProc(allData, upNature, downNature, upMult, downMult, mySub)
@@ -237,42 +204,29 @@ watchEffect(async()=>{
                 myProdCalcStore.finalSkillProcH = myProdCalcStore.calcSkillProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
                 // 힐러 식재료 확률
                 myProdCalcStore.finalIngProcH = myProdCalcStore.calcIngProc(allDataH, upNatureH, downNatureH, upMult, downMult, mySubH)
-                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-                allDataH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH, hasErbH)       
+                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, pkmLevel, mySub, firstIngName, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                allDataH, mySubH, pkmLevelH, firstIngH, secondIngH, thirdIngH, upNatureH, downNatureH, hasErbH)       
             }
-            else{
-                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, 
+            else{                
+                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, pkmLevel, mySub, firstIngName, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList, 
                 allDataH)           
             }
             // 기력 적용 도우미 속도
             myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)
-            if(calcVer !== 'proVer' && (allData.skill.name.includes('Charge Energy') || allData.skill.name.includes('Energizing Cheer') || allData.skill.name.includes("Energy For Everyone") || allData.skill.name.includes('Metronome'))){
+            if(calcVer !== 'proVer' && (allData.main_skills.name.includes('Charge Energy') || allData.main_skills.name.includes('Energizing Cheer') || allData.main_skills.name.includes("Energy For Everyone"))){
                 // 자힐 가능한 포켓몬은 2번 기력 계산한다
-                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, mySub, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-                allDataH, mySubH, pkmLevelH, secondIngH, thirdIngH, upNatureH, downNatureH)
+                myProdCalcStore.calcEnergyCurve(hasErb, erbMaxEnergy, ribbonInv, ribbonInvH, pkmLevel, mySub, firstIngName, secondIngName, thirdIngName, mainSkillLevel, allData, mealRecovery, useGoodCamp.value, maxE, mainSkillLevelH, sleepTime, calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+                allDataH, mySubH, pkmLevelH, firstIngH, secondIngH, thirdIngH, upNatureH, downNatureH)
                 myProdCalcStore.calcSpeedWithEner(speedEnerMultList, calcVer, enerPerHour, sleepLimit)              
             }          
             // 식재료 종류별 생산량
-            myProdCalcStore.calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, mySub, useGoodCamp.value, mainSkillLevel)    
+            myProdCalcStore.calcLeveLIng(calcVer, ribbonInv, sleepLimit, false, allData, pkmLevel, firstIngName, secondIngName, thirdIngName, sleepTime, enerPerHour, speedEnerMultList, mySub, useGoodCamp.value, mainSkillLevel)    
             myProdCalcStore.calcLoading = false
         }
     }
     catch(e){      
         console.log('ing production calc err', e)
     }
-})
-
-const amountFirstIng = computed(()=>{
-    return chooseRange.value === "한끼" ? Math.round(myProdCalcStore.totalIngCalc[firstIngName] / 3) : Math.round(myProdCalcStore.totalIngCalc[firstIngName])
-})
-const amountSecondIng = computed(()=>{
-    return chooseRange.value === "한끼" ? Math.round(myProdCalcStore.totalIngCalc[secondIngName] / 3) : Math.round(myProdCalcStore.totalIngCalc[secondIngName])
-})
-const amountThirdIng = computed(()=>{
-    return chooseRange.value === "한끼" ? Math.round(myProdCalcStore.totalIngCalc[thirdIngName] / 3) : Math.round(myProdCalcStore.totalIngCalc[thirdIngName])
-})
-const amountIngSkill = computed(()=>{
-    return chooseRange.value === "한끼" ? (myProdCalcStore.totalIngCalc['all'] / 3).toFixed(2) : (myProdCalcStore.totalIngCalc['all']).toFixed(2)
 })
 
 </script>

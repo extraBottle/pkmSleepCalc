@@ -85,7 +85,7 @@
                 </q-input>
                 <q-input v-model="resultCandy" label="사탕 개수" readonly>
                     <template v-slot:prepend>
-                    <q-avatar><img src="images/handycandym.png" /></q-avatar>
+                    <q-avatar><img src="images/pikachucandy.webp" /></q-avatar>
                     </template>
                 </q-input>
                 <q-input v-model="resultShard" label="꿈의 조각 개수" readonly>

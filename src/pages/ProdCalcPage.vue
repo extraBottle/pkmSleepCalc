@@ -15,30 +15,30 @@
         icon="edit"
         :done="step > 1"
       >
-      <ChoosePkmComponent ref="validateFirst" :name-valid="sendName" :down-valid="sendDown" :up-valid="sendUp" />
+      <ChoosePkmComponent ref="validateFirst" :name-valid="sendName" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
 
-      <q-step
+      <!-- <q-step
         :name="2"
         title="총 수면 시간"
         icon="alarm"
         :done="step > 2"
       >
       <ChooseSleepTimeComponent />
-      </q-step>
+      </q-step> -->
 
       <q-step
-        :name="3"
+        :name="2"
         title="Create an ad"
         icon="favorite"
-        :done="step > 3"
+        :done="step > 2"
       >
       <ChooseHealerComponent ref="validateThird" :name-valid="sendNameHealer" :down-valid="sendDownHealer" :up-valid="sendUpHealer"/>
       </q-step>
       <template v-slot:navigation>
         <q-stepper-navigation class="row justify-end">
           <q-btn v-if="step > 1" flat color="primary" @click="prev()" label="뒤로" class="q-ml-sm" />
-          <q-btn @click="gogo()" color="primary" :label="step === 3 ? '결과보기' : '다음'" />
+          <q-btn @click="gogo()" color="primary" :label="step === 2 ? '결과보기' : '다음'" />
         </q-stepper-navigation>
       </template>
     </q-stepper>
@@ -49,7 +49,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue'
-import ChooseSleepTimeComponent from 'src/components/ChooseSleepTimeComponent.vue'
+// import ChooseSleepTimeComponent from 'src/components/ChooseSleepTimeComponent.vue'
 import ChooseHealerComponent from'src/components/ChooseHealerComponent.vue'
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { popupFail } from 'src/utils/popup'
@@ -67,6 +67,7 @@ const validateFirst = ref()
 const sendName = ref(false)
 const sendDown = ref(false)
 const sendUp = ref(false)
+const sendSub = ref(false)
 //세번째 페이지 검사
 const validateThird = ref()
 const sendNameHealer = ref(false)
@@ -91,6 +92,8 @@ function gogo(){
         popupFail('포켓몬 이름을 입력해주세요')
       }
       else{ sendName.value = false }
+      // 서브 스킬 전부 선택했는지
+      sendSub.value = validateFirst.value.didSelectAllSub ? false : true
       if(upup.substring(0, 3) === downdown.substring(0, 3)){
         // 상승 하락 성격은 같을 수 없다
         if(upup !== "영향 없음 --"){
@@ -110,11 +113,11 @@ function gogo(){
         stepper.value.next()
       }
       break;
-    case 3:
+    case 2:
       if(validateThird.value.calcVer === "proVer"){
         const upup = validateThird.value.upNature
         const downdown = validateThird.value.downNature
-        if(myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(validateThird.value.pkmName)).skill.name !== "Energy For Everyone"){
+        if(myPkmDBStore.searchPkmData('kor_name', validateThird.value.pkmName).skill !== "Energy For Everyone"){
           // 포켓몬 선택했는지          
           sendNameHealer.value = true
         } 

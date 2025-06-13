@@ -35,29 +35,39 @@
     <div class="row items-center full-width">
       <q-chip color="secondary" text-color="white" style="width: 84px;"><span class="full-width row justify-center text-bold">식재료</span></q-chip>
       <div class="row">
-        <q-btn fab color="ingCircle" :icon="firstIng" >
-          <q-badge v-if="firstIngCount > 1" color="orange" floating class="text-bold">* {{ firstIngCount }}</q-badge></q-btn>
-        <div class="q-mx-md relative-position">     
+        <div class="relative-position">
+          <!-- 레벨 0 -->
           <q-badge v-if="ingCount[0] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[0] }}</q-badge>
-          <q-tooltip :hide-delay="tooltipMobile()">
-            레벨 30
-          </q-tooltip>      
-          <q-fab color="ingCircle" :icon="secondIng" direction="up">
-            <q-fab-action color="ingCircle" @click="chooseIng(2, 1)" :icon="firstIng" />
-            <q-fab-action color="ingCircle" @click="chooseIng(2, 2)" :icon="fixedSecondIng" />                
-          </q-fab>                  
-        </div>
-        <div class="relative-position" >
+          <q-fab color="ingCircle" :icon="firstIng" direction="up">          
+            <q-fab-action v-for="(ing, index) in allIngList[0]" :key="index"
+              color="ingCircle" @click="chooseIng(1, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+            />          
+          </q-fab>   
+        </div> 
+        <!-- <q-btn fab color="ingCircle" :icon="firstIng" >
+          <q-badge v-if="ingCount[0] > 1" color="orange" floating class="text-bold">* {{ firstIngCount }}</q-badge></q-btn> -->
+        <div class="q-mx-md relative-position">
           <q-badge v-if="ingCount[1] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[1] }}</q-badge>
           <q-tooltip :hide-delay="tooltipMobile()">
-            레벨 60
-          </q-tooltip>      
-          <q-fab color="ingCircle" :icon="thirdIng" direction="up">
-            <q-fab-action color="ingCircle" @click="chooseIng(3, 1)" :icon="firstIng" />
-            <q-fab-action color="ingCircle" @click="chooseIng(3, 2)" :icon="fixedSecondIng" />
-            <q-fab-action color="ingCircle" @click="chooseIng(3, 3)" :icon="fixedThirdIng" />
-          </q-fab>
+            레벨 30
+          </q-tooltip> 
+          <q-fab color="ingCircle" :icon="secondIng" direction="up">          
+            <q-fab-action v-for="(ing, index) in allIngList[1]" :key="index"
+              color="ingCircle" @click="chooseIng(2, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+            />          
+          </q-fab>   
         </div>
+        <div class="relative-position">
+          <q-badge v-if="ingCount[2] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[2] }}</q-badge>
+          <q-tooltip :hide-delay="tooltipMobile()">
+            레벨 60
+          </q-tooltip> 
+          <q-fab color="ingCircle" :icon="thirdIng" direction="up">          
+            <q-fab-action v-for="(ing, index) in allIngList[2]" :key="index"
+              color="ingCircle" @click="chooseIng(3, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+            />          
+          </q-fab>   
+        </div>  
       </div>
     </div>
     <q-input v-model="invenSize" class="full-width" readonly input-class="text-center text-bold text-subtitle1">
@@ -102,7 +112,6 @@ defineOptions({
 })
 
 const myPkmDBStore = usePkmDBStore()
-myPkmDBStore.loadKorPkmName()
 const myDownloadStore = useDownloadStore()
 
 // 선택 가능한 포켓몬 목록
@@ -124,13 +133,17 @@ const firstIngName = ref('')
 const secondIngName = ref('')
 // 선택한 포켓몬의 세번째 식재료 이름만
 const thirdIngName = ref('')
-// 선택한 포켓몬의 두번째 식재료 이름만
+// 고정= 선택한 포켓몬의 첫번째 식재료 이름만
+const fixedFirstIngName = ref('')
+// 고정= 선택한 포켓몬의 두번째 식재료 이름만
 const fixedSecondIngName = ref('')
-// 선택한 포켓몬의 세번째 식재료 이름만
+// 고정= 선택한 포켓몬의 세번째 식재료 이름만
 const fixedThirdIngName = ref('')
-// 두번째 식재료
+// 고정= 첫번째 식재료
+const fixedFirstIng = ref(firstIng.value)
+// 고정= 두번째 식재료
 const fixedSecondIng = ref(secondIng.value)
-// 세번째 식재료
+// 고정= 세번째 식재료
 const fixedThirdIng = ref(thirdIng.value)
 // 레벨별 모든 식재료
 const allIngList = ref([])
@@ -141,8 +154,8 @@ const selectPkmImage = ref()
 const nameSearchHint = ref('입력하고 엔터를 눌러서 검색')
 // 열매, 식재료 개수
 const berryNum = ref(1)
-const firstIngCount = ref(1)
-const ingCount = ref([0, 0])
+// const firstIngCount = ref(1)
+const ingCount = ref([0, 0, 0])
 // 각종 수치 데이터
 const invenSize = ref(0)
 const baseSpeed = ref('')
@@ -150,26 +163,14 @@ const ingProc = ref(0)
 const skillProc = ref(0)
 
 // 포켓몬 선택시 식재료 목록 불러오기
-function chooseIng(location, ingNum){
-  let chosenIcon;
-  let chosenIconName;
-  switch(ingNum){
-    case 1:
-      chosenIcon = firstIng.value;
-      chosenIconName = firstIngName.value;
-      break;
-    case 2:
-      chosenIcon = fixedSecondIng.value;
-      chosenIconName = fixedSecondIngName.value;
-      break;
-    case 3:
-      chosenIcon = fixedThirdIng.value;
-      chosenIconName = fixedThirdIngName.value;
-      break;
-    default:
-      return 0
+function chooseIng(location, ingPlace){
+  const chosenIconName = myPkmDBStore.bringIng(pkmName.value, ingPlace);
+  const chosenIcon = myDownloadStore.fetchIcon('ing', chosenIconName);
+  if(location === 1){
+    firstIng.value = chosenIcon
+    firstIngName.value = chosenIconName
   }
-  if(location === 2){
+  else if(location === 2){
     secondIng.value = chosenIcon
     secondIngName.value = chosenIconName
   }
@@ -177,29 +178,34 @@ function chooseIng(location, ingNum){
     thirdIng.value = chosenIcon
     thirdIngName.value = chosenIconName
   }
-  allIngList.value[location - 2].forEach((e)=>{
-    if(e.ingredient.longName === chosenIconName){
-      ingCount.value[location - 2] = e.amount
+  allIngList.value[location - 1].forEach((e)=>{
+    if(e.name === chosenIconName){
+      ingCount.value[location - 1] = e.amount
     }
   })
 }
 // 포켓몬을 선택하면 데이터 불러오기 + 식재료 목록 출력 + 이미지 불러오기
 async function fetchApiIng(){
   loadingCalc('불러오는 중...')
-  await myPkmDBStore.fetchPkmData(myPkmDBStore.convertKorEn(pkmName.value))
-  const fetchedData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
-  whatBerry.value = myDownloadStore.fetchIcon('berry', fetchedData.berry.name)
-  firstIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 0))
-  fixedSecondIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 1))
-  fixedThirdIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 2))
+  await myPkmDBStore.fetchPkmData(pkmName.value)
+  const fetchedData = myPkmDBStore.searchPkmData('kor_name', pkmName.value)  
+  whatBerry.value = myDownloadStore.fetchIcon('berry', fetchedData.berries.name);
+
+  fixedFirstIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 1))
+  fixedSecondIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 2))
+  fixedThirdIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 3))
+  firstIng.value = fixedFirstIng.value
   secondIng.value = fixedSecondIng.value
-  thirdIng.value = fixedThirdIng.value
-  firstIngName.value = myPkmDBStore.bringIng(pkmName.value, 0, 'store')
-  fixedSecondIngName.value = myPkmDBStore.bringIng(pkmName.value, 1, 'store')
-  fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 2, 'store')
+  thirdIng.value = fixedThirdIng.value  
+
+  fixedFirstIngName.value = myPkmDBStore.bringIng(pkmName.value, 1)
+  fixedSecondIngName.value = myPkmDBStore.bringIng(pkmName.value, 2)
+  fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 3)
+  firstIngName.value = fixedFirstIngName.value
   secondIngName.value = fixedSecondIngName.value
   thirdIngName.value = fixedThirdIngName.value  
-  invenSize.value = fetchedData.carrySize + fetchedData.previousEvolutions * 5
+
+  invenSize.value = fetchedData.carry_size + fetchedData.previous_evolutions * 5
   baseSpeed.value = ''
   let justSec = fetchedData.frequency
   if(Math.floor(justSec / Math.pow(60, 2)) > 0){
@@ -211,24 +217,27 @@ async function fetchApiIng(){
     justSec = justSec % 60
   }
   baseSpeed.value += ` ${justSec}초`
-  ingProc.value = fetchedData.ingredientPercentage + " %"
-  skillProc.value= fetchedData.skillPercentage + " %"
-  allIngList.value = []
-  const just = ["ingredient30", "ingredient60"]
-  for(let i in just){    
-    allIngList.value.push(fetchedData[just[i]])    
-  }
-  // 식재료 & 열매수 불러오기
-  firstIngCount.value = fetchedData["ingredient0"].amount
+  ingProc.value = fetchedData.ingredient_percentage + " %"
+  skillProc.value= fetchedData.skill_percentage + " %"
+  allIngList.value = []  
+  // 식재료 & 열매수 불러오기  
   berryNum.value = fetchedData.specialty === "berry" || fetchedData.specialty === "all" ? 2 : 1
-  allIngList.value[0].forEach((e)=>{
-    if(e.ingredient.longName === fixedSecondIngName.value){
+  allIngList.value.push(fetchedData["ingredient0"])
+  allIngList.value.push(fetchedData["ingredient30"])
+  allIngList.value.push(fetchedData["ingredient60"])
+  fetchedData["ingredient0"].forEach((e)=>{    
+    if(e.name === fixedFirstIngName.value){
       ingCount.value[0] = e.amount
     }
   })
-  allIngList.value[1].forEach((e)=>{
-    if(e.ingredient.longName === fixedThirdIngName.value){
+  fetchedData["ingredient30"].forEach((e)=>{
+    if(e.name === fixedSecondIngName.value){
       ingCount.value[1] = e.amount
+    }
+  })
+  fetchedData["ingredient60"].forEach((e)=>{
+    if(e.name === fixedThirdIngName.value){
+      ingCount.value[2] = e.amount
     }
   })
   // 연달아 2번 동일한 포켓몬 불러오면 로딩 화면 종료
@@ -251,6 +260,7 @@ function manageModel(val){
 }
 
 onBeforeMount(()=>{
+  myPkmDBStore.loadKorPkmName()
   // 첫 로딩때 미리 저장해둔 이미지 불러와야 로딩 빠름  
   selectPkmImage.value = 'images/pikachuStanding.png'
 })

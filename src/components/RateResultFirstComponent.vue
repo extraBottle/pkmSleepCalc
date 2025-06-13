@@ -139,8 +139,9 @@ const downNature = myInputStore.downNature
 const upMult = myPkmDBStore.upMult
 const downMult = myPkmDBStore.downMult
 const mySub = myInputStore.subSkills
-const allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmName.value))
+const allData = myPkmDBStore.searchPkmData('kor_name', pkmName.value)
 const maxHS = myPkmDBStore.maxHS
+const firstIngName = myInputStore.firstIng
 const secondIngName = myInputStore.secondIng
 const thirdIngName = myInputStore.thirdIng
 let mainSkillLevel = myInputStore.mainSkillLevel
@@ -151,12 +152,10 @@ const ribbonInv = myInputStore.useRibbon ? myPkmDBStore.ribbonList[parseInt(myIn
 const ribbonLev = ref(myInputStore.ribbonLev)
 
 const maxE = myPkmDBStore.maxE
-const totalMainSkill = myPkmDBStore.totalMainSkill
 const mainSkillLevelH = myHealerInputStore.mainSkillLevel
-// const calcVer = myHealerInputStore.calcVer
 const skillCount = myHealerInputStore.fixedHealSkillCount
 const pkmNameH = myHealerInputStore.pkmName
-const allDataH = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(pkmNameH))
+const allDataH = myPkmDBStore.searchPkmData('kor_name', pkmNameH)
 const enerPerHour = myPkmDBStore.enerPerHour
 const speedEnerMultList = myPkmDBStore.speedEnerMultList
 
@@ -173,7 +172,7 @@ const minOrderData = ref(myRateCalcStore.minOrderData)
 // 나 vs 1등
 const vsOutput = ref(myRateCalcStore.vsOutput)
 // 피검사 포켓몬이 힐러면 추가 힐러는 자동으로 체크해제
-const useHealer = (allData.specialty === "skill" && allData.skill.name === "Energy For Everyone") ? false : myRateCalcStore.useHealer
+const useHealer = (allData.specialty === "skill" && allData.skill === "Energy For Everyone") ? false : myRateCalcStore.useHealer
 // 도우미보너스 존재 유무
 let hasHb = false
 for(let i=0; i < mySub.length; i++){
@@ -183,7 +182,7 @@ for(let i=0; i < mySub.length; i++){
 }
 if(myRateCalcStore.pkmName !== pkmName.value){
   // 무엇 특화인지
-  myRateCalcStore.whatSpeciality = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(myInputStore.pkmName)).specialty
+  myRateCalcStore.whatSpeciality = myPkmDBStore.searchPkmData('kor_name', myInputStore.pkmName).specialty
 }
 // 기력 회복 보너스 반영
 const maxEnergy = myInputStore.hasErb ? myPkmDBStore.erbMaxEnergy : 100
@@ -209,7 +208,7 @@ onBeforeMount(async()=>{
             }            
           }) 
         }
-        else if(allData.skill.name === 'Metronome' || allData.skill.unit === 'energy'){
+        else if(allData.main_skills.unit === 'energy'){
           // 비스킬몬은 스킬 레벨업이 유효
           myPkmDBStore.allSubSkillList.forEach((e)=>{
             if(e.label === "도우미 보너스" || e.label === "기력 회복 보너스" || e.label === "스킬 레벨 업 M" || e.label === "스킬 레벨 업 s"){
@@ -228,19 +227,7 @@ onBeforeMount(async()=>{
           }
         })      
                  
-        // 기존에 검색한 포켓몬과 레벨이 다시 검색한 것과 동일하면 api 생략
-        let selfHealSkillData = {}
-        let randHealSkillData = {}
-        let allHealSkillData = {}
-        if(allData.skill.name.includes('Metronome')){
-          // 손가락흔들기 포켓몬 선택했으면 자힐 & 랜덤힐 & 식재 스킬 정보도 저장한다        
-          await myPkmDBStore.fetchPkmData('LEAFEON')
-          await myPkmDBStore.fetchPkmData('UMBREON')            
-          await myPkmDBStore.fetchPkmData('SYLVEON')            
-          selfHealSkillData = myPkmDBStore.searchPkmData('name', 'UMBREON').skill
-          randHealSkillData = myPkmDBStore.searchPkmData('name', 'LEAFEON').skill
-          allHealSkillData = myPkmDBStore.searchPkmData('name', 'SYLVEON').skill
-        }                  
+        // 기존에 검색한 포켓몬과 레벨이 다시 검색한 것과 동일하면 api 생략           
         const obj = {
           "upNature": upNature,
           "downNature": downNature,
@@ -253,11 +240,8 @@ onBeforeMount(async()=>{
           "upMult": upMult,
           "downMult": downMult,
           "allData": allData,
-          "maxHS": maxHS,
-          "allHealSkillData": allHealSkillData,
-          "selfHealSkillData": selfHealSkillData,
-          "randHealSkillData":randHealSkillData ,
-          "totalMainSkill": totalMainSkill,
+          "maxHS": maxHS,            
+          "firstIngName": firstIngName,      
           "secondIngName": secondIngName,
           "thirdIngName": thirdIngName,
           "mainSkillLevel": mainSkillLevel,

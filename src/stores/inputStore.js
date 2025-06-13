@@ -20,13 +20,14 @@ export const useInputStore = defineStore('manage-input', () => {
     // 사용자 선택 보유중인 서브 스킬들
     const subSkills= ref([])
     // 선택한 포켓몬의 첫번째 식재료
-    const firstIng= ref('Fancy Apple')
+    const firstIng= ref('fancyapple')
     // 선택한 포켓몬의 두번째 식재료
-    const secondIng= ref('Warming Ginger')
+    const secondIng= ref('warmingginger')
     // 선택한 포켓몬의 세번째 식재료
-    const thirdIng= ref('Fancy Egg')
-    const fixedSecondIng= ref('Warming Ginger')
-    const fixedThirdIng= ref('Fancy Egg')
+    const thirdIng= ref('fancyegg')
+    const fixedFirstIng= ref('fancyapple')
+    const fixedSecondIng= ref('warmingginger')
+    const fixedThirdIng= ref('fancyegg')
     // 선택한 상승 성격
     const upNature= ref('')
     // 선택한 하락 성격
@@ -45,7 +46,7 @@ export const useInputStore = defineStore('manage-input', () => {
     // 기력회복 보너스 보유 여부
     const hasErb = ref(false)
     // 전부 저장
-    function storeEverything(h, e, n, l, s, f, se, t, fs, ft, u, d, num, ms, gc, ur, rl, le, he) {
+    function storeEverything(h, e, n, l, s, f, se, t, ff, fs, ft, u, d, num, ms, gc, ur, rl, le, he) {
         hbCount.value = h;
         erbCount.value = e;
         
@@ -55,6 +56,7 @@ export const useInputStore = defineStore('manage-input', () => {
         firstIng.value = f;
         secondIng.value = se;
         thirdIng.value = t;
+        fixedFirstIng.value = ff;
         fixedSecondIng.value = fs;
         fixedThirdIng.value = ft;
         upNature.value = u;
@@ -86,6 +88,7 @@ export const useInputStore = defineStore('manage-input', () => {
         firstIng,
         secondIng,
         thirdIng,
+        fixedFirstIng,
         fixedSecondIng,
         fixedThirdIng,
         upNature,
@@ -126,25 +129,26 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
             이거는 일반 포켓몬이랑 공통인 정보
     */
     // 사용자 입력 포켓몬 이름
-    const pkmName= ref('님피아')
+    const pkmName= ref('가디안')
     // 사용자 입력 포켓몬 레벨
     const pkmLevel= ref(50)
     // 사용자 선택 보유중인 서브 스킬들
     const subSkills= ref([])
     // 선택한 포켓몬의 첫번째 식재료
-    const firstIng= ref('Moomoo Milk')
+    const firstIng= ref('fancyapple')
     // 선택한 포켓몬의 두번째 식재료
-    const secondIng= ref('Soothing Cacao')
+    const secondIng= ref('greengrasscorn')
     // 선택한 포켓몬의 세번째 식재료
-    const thirdIng= ref('Bean Sausage')
-    const fixedSecondIng= ref('Soothing Cacao')
-    const fixedThirdIng= ref('Bean Sausage')
+    const thirdIng= ref('largeleek')
+    const fixedFirstIng= ref('fancyapple')
+    const fixedSecondIng= ref('soothingcacao')
+    const fixedThirdIng= ref('largeleek')
     // 선택한 상승 성격
     const upNature= ref('')
     // 선택한 하락 성격
     const downNature= ref('')
     // 선택한 도감번호
-    const selectedPkmDex= ref('700')
+    const selectedPkmDex= ref('282')
     const mainSkillLevel = ref(6)
     // 굿나잇리본 적용 여부
     const useRibbon = ref(true)
@@ -156,7 +160,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
     const hasErb = ref(false)
 
     // 전부 저장
-    function storeEverything(ver, hc, n, l, s, f, se, t, fs, ft, u, d, num, ms, ur, rl, le, he) {
+    function storeEverything(ver, hc, n, l, s, f, se, t, ff, fs, ft, u, d, num, ms, ur, rl, le, he) {
         calcVer.value = ver;
         healSkillCount.value = hc;
 
@@ -166,6 +170,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
         firstIng.value = f;
         secondIng.value = se;
         thirdIng.value = t;
+        fixedFirstIng.value = ff;
         fixedSecondIng.value = fs;
         fixedThirdIng.value = ft;
         upNature.value = u;
@@ -197,6 +202,7 @@ export const useHealerInputStore = defineStore('healer-input', ()=> {
         firstIng,
         secondIng,
         thirdIng,
+        fixedFirstIng,
         fixedSecondIng,
         fixedThirdIng,
         upNature,

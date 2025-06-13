@@ -39,6 +39,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
+        env:
+           VITE_SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}      
         run: npm run build
       - name: Deploy to GitHub Pages
         id: deployment

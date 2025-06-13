@@ -19,7 +19,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
     // 상위 레벨 식재료가 하위 레벨이랑 동일하면 하나로 묶어서 계산한다. 동일한지 확인용
     const checkSecondDisplay = ref(false)
     const checkThirdDisplay = ref(false)
-    // 식재료 메인 스킬 보유했는지
+    // 식재표 magnet 전용 표시 화면
     const checkIngSkillDisplay = ref(false)
     // 종류별 식재료량 계산
     const totalIngCalc = ref({})
@@ -41,7 +41,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
     // 식재 확률 계산 return
     function calcIngProc(allData={}, upNature, downNature, upMult, downMult, mySub = []){
         
-        const baseProc = allData.ingredientPercentage
+        const baseProc = allData.ingredient_percentage
          // 보정 성격 확인
          let ingNature = 1.0 
          if(upNature === '식재료 도우미 확률 ▲▲'){
@@ -62,7 +62,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
     // 스킬 확률 계산 return
     function calcSkillProc(allData={}, upNature, downNature, upMult, downMult, mySub = []){
         
-        const baseProc = allData.skillPercentage
+        const baseProc = allData.skill_percentage
          // 보정 성격 확인
          const skillNature = (upNature === '메인 스킬 발동률 ▲▲' ? upMult : (downNature === '메인 스킬 발동률 ▽▽' ? downMult : 1.0))
          // 스킬 관련 서브 스킬 갖고 있는지
@@ -106,8 +106,8 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         return allData.frequency * multSpeed * convertS * goodCampBoost
     }
 
-    function calcEnergyCurve(hasErb = false, erbMaxEnergy = 100, ribbonInv, ribbonInvH, allHealSkillData, selfHealSkillData, randHealSkillData, totalMainSkill, pkmLevel, mySub, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
-        allDataH, mySubH = [], pkmLevelH = 0, secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = '', hasErbH = false){
+    function calcEnergyCurve(hasErb = false, erbMaxEnergy = 100, ribbonInv, ribbonInvH, pkmLevel, mySub, firstIng, secondIng, thirdIng, selfSkillLevel, allData, mealRecovery, useGoodCamp, maxE, mainSkillLevel, sleepTime = '', calcVer, skillCount, timeForFull, upNature, downNature, upMult, downMult, erbCount, erbMult, enerPerHour, speedEnerMultList,
+        allDataH, mySubH = [], pkmLevelH = 0, firstIngH = '', secondIngH = '', thirdIngH = '', upNatureH = '', downNatureH = '', hasErbH = false){
         // maxE = 150
         // mainSkillLevel = myHealerInputStore.mainSkillLevel
         // sleepTime = mySleepTimeInputStore.sleepTime
@@ -119,39 +119,25 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         // 혹시 몰라서 좌표값 초기화
         energyAxis.value = []
         // 힐러 스킬 당 타겟 포켓몬 회복량
-        let enerPerSkill = allDataH.skill.amount[mainSkillLevel - 1]
+        let enerPerSkill = allDataH.main_skills.amount[mainSkillLevel - 1]
         // 타겟 포켓몬 자체 스킬 당 자체 회복량
-        let selfPerSkill = allData.skill.amount[selfSkillLevel - 1]
+        let selfPerSkill = allData.main_skills.amount[selfSkillLevel - 1]
         // 자힐몬인지 여부
         let hasSelfHeal = false
         // 순수 자힐 아닌 확률적 자힐은 그만큼 감점
         let strangeHeal = 1
-        if(allData.skill.name.includes('Charge Energy')){
+        if(allData.main_skills.name.includes('Charge Energy')){
             hasSelfHeal = true
             strangeHeal = 1
         }
-        else if(allData.skill.name.includes('Energizing Cheer')){
+        else if(allData.main_skills.name.includes('Energizing Cheer')){
             hasSelfHeal = true
             strangeHeal = 5
         }
-        else if(allData.skill.name.includes("Energy For Everyone")){
+        else if(allData.main_skills.name.includes("Energy For Everyone")){
             hasSelfHeal = true
             strangeHeal = 1
         }
-        else if(allData.skill.name.includes('Metronome')){            
-            hasSelfHeal = true
-            strangeHeal = 1
-            // 자힐 & 랜덤힐으로 자힐하는 기댓값
-            if(calcVer !== 'proVer'){
-                selfPerSkill = (selfHealSkillData.amount[selfSkillLevel - 1] 
-                    + randHealSkillData.amount[selfSkillLevel - 1] / 5
-                    + allHealSkillData.amount[selfSkillLevel - 1]) / (totalMainSkill - 1)
-            }
-            else{
-                // 프로 버전은 각 힐 스킬 확률 직접 계산
-                selfPerSkill = 10000
-            }            
-        }        
         let splitSleep = sleepTime.split(':')
         const sleepH = parseInt(splitSleep[0], 10)
         const sleepM = parseInt(splitSleep[1], 10)
@@ -269,13 +255,13 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     }                    
                 }
             }
-            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
+            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, mySub, pkmLevel, firstIng, secondIng, thirdIng, enerPerHour, useGoodCamp)
         }
         else if(calcVer === 'proVer'){            
             // timeStaying.value = {}
 
             // 힐러 본인의 기력 회복량 구하기
-            let enerPerSkillH = allDataH.skill.amount[mainSkillLevel - 1]
+            let enerPerSkillH = allDataH.main_skills.amount[mainSkillLevel - 1]
             let recoverNatureH = 1.0
             if(upNatureH === '기력 회복량 ▲▲'){
                 recoverNatureH = upMult
@@ -340,48 +326,6 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 }                
                 return energyValue;
             }
-            // 손가락흔들기에서 힐스킬 나온 후 회복량 반환
-            function calcSelfHeal(){                
-                if(allData.skill.name.includes('Metronome')){
-                    // 손가락흔들기는 안에서 힐스킬 발동할 확률 추가로 계산
-                    let thisTimeHeal = 0
-                    const fingerShake = Math.random()
-                    if(fingerShake < 1/(totalMainSkill - 1)){
-                        // 자힐
-                        thisTimeHeal = selfPerSkill * selfHealSkillData.amount[selfSkillLevel - 1] / 10000
-                        
-                    }
-                    else if(fingerShake < 2/(totalMainSkill - 1)){
-                        // 랜덤힐
-                        const randHealRoll = Math.random()
-                        if(randHealRoll < 1 / 5){
-                            thisTimeHeal = selfPerSkill * randHealSkillData.amount[selfSkillLevel - 1] / 10000
-                             
-                        }
-                        else if(randHealRoll < 2 / 5){
-                            // 랜덤힐이 힐러에게
-                            healerEnerAxis += randHealSkillData.amount[selfSkillLevel - 1] * (enerPerSkillH / allDataH.skill.amount[mainSkillLevel - 1])
-                        }                                        
-                    }
-                    else if(fingerShake < 3/(totalMainSkill - 1)){
-                        // 전체힐
-                        thisTimeHeal = selfPerSkill * allHealSkillData.amount[selfSkillLevel - 1] / 10000
-                          
-                        healerEnerAxis += allHealSkillData.amount[selfSkillLevel - 1] * (enerPerSkillH / allDataH.skill.amount[mainSkillLevel - 1])
-                    }
-                    else{
-                        // 힐 안나옴
-                        thisTimeHeal = 0
-                    }
-                    thisTimeHeal = Math.floor(thisTimeHeal)
-                    healerEnerAxis = limitE(Math.floor(healerEnerAxis))                                      
-                    return thisTimeHeal               
-                }
-                else{
-                    // 손가락흔들기 보유몬이 아님
-                    return selfPerSkill
-                }
-            }
         
             for(let z = 0; z < simulationCount; z++){
                 // 기상 직후 스킬 발동 했는지 여부
@@ -401,10 +345,10 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     if(rollMorningS < morningProcS){
                         if(rollMorningS < morningDoubleProcS){
                             // 자힐몬인데 스킬형 포켓몬
-                            calcExpect(z, 0, limitE(morningEner + calcSelfHeal() * 2 + enerPerSkill * skillNumH))    
+                            calcExpect(z, 0, limitE(morningEner + selfPerSkill * 2 + enerPerSkill * skillNumH))    
                         }
                         else{
-                            calcExpect(z, 0, limitE(morningEner + calcSelfHeal() + enerPerSkill * skillNumH))
+                            calcExpect(z, 0, limitE(morningEner + selfPerSkill + enerPerSkill * skillNumH))
                         }                        
                     }   
                     else{
@@ -416,10 +360,10 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                     if(rollMorningS < morningProcS){
                         if(rollMorningS < morningDoubleProcS){
                             // 자힐몬인데 스킬형 포켓몬
-                            calcExpect(z, 0, limitE(morningEner + calcSelfHeal() * 2))    
+                            calcExpect(z, 0, limitE(morningEner + selfPerSkill * 2))    
                         }
                         else{
-                            calcExpect(z, 0, limitE(morningEner + calcSelfHeal()))
+                            calcExpect(z, 0, limitE(morningEner + selfPerSkill))
                         }                        
                     }   
                     else{
@@ -512,7 +456,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                             // 1 도우미 발동
                             if(Math.random() < selfProc){                                
                                 // 스킬 발동 적용한 기력량
-                                trySkillE += calcSelfHeal()
+                                trySkillE += selfPerSkill
                             }                           
                         }     
                     }             
@@ -554,7 +498,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         if(hasSelfHeal){
                             // 자힐 수면 중 전체 도우미
                             const totalCountHelpS = calcSleepSpeedCount('me', ribbonInv, sleepTime, trySkillE,
-                                speedEnerMultList, allData, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp)
+                                speedEnerMultList, allData, mySub, pkmLevel, firstIng, secondIng, thirdIng, enerPerHour, useGoodCamp)
                             // 기상 직후 스킬 발동률 업데이트
                             morningProcS = 1 - Math.pow((1 - finalSkillProc.value / strangeHeal), totalCountHelpS)
                             // 힐러 2번 스킬 발동 확률 (힐러가 스킬형일 경우에 한)
@@ -566,7 +510,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         // 힐러 수면 중 전체 도우미 횟수 기댓값
                         const totalCountHelpH = calcSleepSpeedCount('healer', ribbonInvH, sleepTime, beforeSleepH,
                             speedEnerMultList, allDataH,
-                            mySubH, pkmLevelH, secondIngH, thirdIngH, enerPerHour, useGoodCamp)
+                            mySubH, pkmLevelH, firstIngH, secondIngH, thirdIngH, enerPerHour, useGoodCamp)
                         // 기상 직후 스킬 발동률 업데이트
                         morningProc = 1 - Math.pow((1 - finalSkillProcH.value), totalCountHelpH)                       
                         // 힐러 2번 스킬 발동 확률 (힐러가 스킬형일 경우에 한)
@@ -656,21 +600,15 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         selfSkillCount.value = finalSpeedCount.value * finalSkillProc.value + sleepLimitCount
     }
     // 식재료 종류별 생산량 계산
-    function calcLeveLIng(calcVer, ribbonInv, ingSkillData, totalMainSkill, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, mySub, useGoodCamp, mainSkillLevel){
+    function calcLeveLIng(calcVer, ribbonInv, sleepLimit, inSleep = false, allData = {}, level, firstIng, secondIng, thirdIng, sleepTime, enerPerHour, speedEnerMultList, mySub, useGoodCamp, mainSkillLevel){
         
         if(calcVer === 'proVer'){
             // 수면 중에 물어오는 식재료 구하기용 수면 도우미 횟수 (최대 소지 수 안에서)
-            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, mySub, level, secondIng, thirdIng, enerPerHour, useGoodCamp)        
+            helpCountSleep.value = calcSleepSpeedCount('me', ribbonInv, sleepTime, energyAxis.value[energyAxis.value.length - 1].y, speedEnerMultList, allData, mySub, level, firstIng, secondIng, thirdIng, enerPerHour, useGoodCamp)        
         }
         // 특정 레벨 식재량 찾기 30렙 이상만
-        function findAmount(n, l){
-            let levAmount= 0
-            if(l < 30){
-                levAmount = allData[`ingredient${l}`].amount
-            }
-            else{
-                levAmount = allData[`ingredient${l}`].find(obj => obj.ingredient.longName === n).amount
-            }            
+        function findAmount(n, l){            
+            const levAmount= allData[`ingredient${l}`].find(obj => obj.name === n).amount;
             if(inSleep){
                 return (helpCountSleep.value * finalIngProc.value * levAmount)
             }
@@ -689,7 +627,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 
             }   
             else{
-                // 30렙 이상인데 1, 2
+                // 30렙 이상인데 1 != 2
                 totalIngCalc.value[firstIng] = (totalIngCalc.value[firstIng] / 2)
                 totalIngCalc.value[secondIng] = (findAmount(secondIng, 30) / 2)
                 checkSecondDisplay.value = true
@@ -730,38 +668,61 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             }
         }
         // 메인 스킬 식재 스킬일 경우 식재량에 추가
-        if(allData.skill.unit === 'ingredients' || allData.skill.name === "Metronome"){
-            // 총 식재료 종류
-            (async()=>{
-                try{
-                    const response = await fetch('https://api.sleepapi.net/api/ingredient')
-                    const json = await response.json() 
-                    // 손가락 흔들기 기댓값
-                    const divideExpect = allData.skill.name === "Metronome" ? (totalMainSkill - 1) : 1
-                    // 스킬 한번당 가져오는 종류당 식재료량                  
-                    const ingPerSkill = allData.skill.name === "Metronome" ? Math.ceil(ingSkillData.amount[mainSkillLevel - 1] / 3) : Math.ceil(allData.skill.amount[mainSkillLevel - 1] / 3)
-                    // 특정 식재료가 스킬 한번에 나올 확률
-                    const expectOne = 1 - (1 - 1/json.length) * (1 - 1/(json.length - 1)) * (1 - 1/(json.length - 2))
-                    const addIngSkill = (finalSpeedCount.value + helpCountSleep.value) * finalSkillProc.value * ingPerSkill * expectOne / divideExpect            
-                    checkIngSkillDisplay.value = true
-                    // 식재 메인 스킬 발동만큼 식재량 증가                    
-                    totalIngCalc.value[firstIng] += addIngSkill
-                    if(totalIngCalc.value.hasOwnProperty(secondIng)){
-                        totalIngCalc.value[secondIng] += addIngSkill
+        if(allData.main_skills.unit === 'ingredients'){             
+            // 수면 중 스킬 발동 기댓값
+            const sleepySkillCount = Math.min(helpCountSleep.value * finalSkillProc.value, sleepLimit);
+            // ingredient magnet
+            if(allData.main_skills.name.includes('Magnet')){  
+                (async()=>{
+                    try{
+                        const response = await fetch('https://rxgqybcxgapiftblwttl.supabase.co/rest/v1/ingredients?select=name&limit=1', {
+                            headers: {
+                                apikey: import.meta.env.VITE_SUPABASE_API_KEY,
+                                Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_API_KEY}`,
+                                Prefer: 'count=exact'
+                            }
+                        });                    
+                        const contentRange = response.headers.get('content-range'); // e.g., "0-9/100"
+                        // 총 식재료 종류
+                        const totalIngNum = contentRange ? parseInt(contentRange.split('/')[1]) : null;
+                        // 스킬 한번당 가져오는 종류당 식재료량 (ingredient magnet)                  
+                        const ingPerSkill = Math.ceil(allData.main_skills.amount[mainSkillLevel - 1] / 3)
+                        // 특정 식재료가 스킬 한번에 나올 확률
+                        const expectOne = 1 - (1 - 1/totalIngNum) * (1 - 1/(totalIngNum - 1)) * (1 - 1/(totalIngNum - 2))
+                        // 수면 중 스킬 발동 기댓값
+                        const addIngSkill = selfSkillCount.value * ingPerSkill * expectOne            
+                        checkIngSkillDisplay.value = true
+                        // 식재 메인 스킬 발동만큼 식재량 증가                    
+                        totalIngCalc.value[firstIng] += addIngSkill
+                        if(totalIngCalc.value.hasOwnProperty(secondIng)){
+                            totalIngCalc.value[secondIng] += addIngSkill
+                        }
+                        if(totalIngCalc.value.hasOwnProperty(thirdIng)){
+                            totalIngCalc.value[thirdIng] += addIngSkill
+                        }
+                        totalIngCalc.value['all'] = addIngSkill                  
                     }
-                    if(totalIngCalc.value.hasOwnProperty(thirdIng)){
-                        totalIngCalc.value[thirdIng] += addIngSkill
+                    catch(err){
+                        console.log('ing Fetch problem: ' + err.message)
                     }
-                    totalIngCalc.value['all'] = addIngSkill                  
-                }
-                catch(err){
-                    console.log('ing Fetch problem: ' + err.message)
-                }
-            })()
+                })()
+            }
+            // ingredient draw
+            else if(allData.main_skills.name.includes('Draw')){                
+                const totalIngFromSkill = selfSkillCount.value * allData.main_skills.avg_amount[mainSkillLevel - 1] / allData.main_skills.selection.length;
+                allData.main_skills.selection.forEach((i)=> {
+                    if(totalIngCalc.value.hasOwnProperty(i)){
+                        totalIngCalc.value[i] += totalIngFromSkill
+                    }
+                    else{
+                        totalIngCalc.value[i] = totalIngFromSkill
+                    }
+                })                 
+            }
         }        
     }
     // 잘때 도우미 횟수 return (단, 소지수 초과한 열매 only 도우미는 계산 X)
-    function calcSleepSpeedCount(target, ribbonInv, sleepTime, energyBeforeSleep, speedEnerMultList, allData, mySub, pkmLevel, secondIng, thirdIng, enerPerHour, useGoodCamp){
+    function calcSleepSpeedCount(target, ribbonInv, sleepTime, energyBeforeSleep, speedEnerMultList, allData, mySub, pkmLevel, firstIng, secondIng, thirdIng, enerPerHour, useGoodCamp){
         let splitSleep = sleepTime.split(':')
         const sleepH = parseInt(splitSleep[0], 10)
         const sleepM = parseInt(splitSleep[1], 10)
@@ -819,7 +780,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
 
         const goodCampBoost = useGoodCamp ? 1.2 : 1.0
         // 최대 소지 수 계산        
-        let inventorySize = (allData['carrySize'] + allData['previousEvolutions'] * 5) * goodCampBoost + ribbonInv
+        let inventorySize = (allData.carry_size + allData.previous_evolutions * 5) * goodCampBoost + ribbonInv
         for(let r = 0; r < mySub.length; r++){
             if(mySub[r].label === '최대 소지 수 업 L' || mySub[r].label === '최대 소지 수 업 M' || mySub[r].label === '최대 소지 수 업 s'){
                 inventorySize += mySub[r].mult
@@ -832,8 +793,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         // 식재료 별 개수랑 나무열매수 있는지 부터
         // 특정 레벨 식재량 찾기 30렙 이상만
         function findAmount(n, l){
-            let levAmount= allData[`ingredient${l}`].find(obj => obj.ingredient.longName === n).amount
-            return levAmount
+            return allData[`ingredient${l}`].find(obj => obj.name === n).amount;            
         }
         // 레벨 별 식재료 개수 / 비율
         let firstIngRatio = 0
@@ -844,24 +804,24 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             case pkmLevel >= 60:
                 levelCut = 3;
                 // 1 도우미 당 가져오는 식재료 기댓값
-                firstIngRatio = (allData['ingredient0'].amount * ingProc / levelCut)
+                firstIngRatio = (findAmount(firstIng, 0) * ingProc / levelCut)
                 secondIngRatio = (findAmount(secondIng, 30) * ingProc / levelCut)
                 thirdIngRatio = (findAmount(thirdIng, 60) * ingProc / levelCut)
                 break;
             case pkmLevel >= 30:
                 levelCut = 2;      
-                firstIngRatio = (allData['ingredient0'].amount * ingProc / levelCut)
+                firstIngRatio = (findAmount(firstIng, 0) * ingProc / levelCut)
                 secondIngRatio = (findAmount(secondIng, 30) * ingProc / levelCut)
                 break;          
             default:
                 levelCut = 1;
-                firstIngRatio = (allData['ingredient0'].amount * ingProc / levelCut)
+                firstIngRatio = (findAmount(firstIng, 0) * ingProc / levelCut)
         }
         // 식재료 기댓값 -> 식재 확률 * 한번에 가져오는 개수 / 레벨대 경쟁자
         // 문제는 이게 힐러라는거지
         // 그말인 즉슨 힐러도 식재료를 골라야한다
         let berryCount = 1
-        if(allData["specialty"] === 'berry'){
+        if(allData.specialty === 'berry'){
             // 열매 특화
             berryCount += 1
         }

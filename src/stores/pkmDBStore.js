@@ -184,8 +184,6 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     const erbMult = 0.14
     // 최대 적용 가능한 도우미 증가
     const maxHS = 0.35
-    // 현존하는 모든 메인 스킬 개수
-    const totalMainSkill = 14
     // 스킬형의 최대 축적 가능 스킬 횟수
     const collectSkillCount = {
         "skill": 2,
@@ -282,98 +280,122 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     ]
     // 1시간 당 기력 감소량
     const enerPerHour = 6
-    // 포켓몬 한글명 (포슬립에 존재하는)
-    const korPkmName = []    
-    // index 맞춘 영어명
-    const enPkmName = []
+
+    // api url
+    const apiUrl = "https://rxgqybcxgapiftblwttl.supabase.co/rest/v1/pokedex?"
+
+    // 포켓몬 한글명 (포슬립에 존재하는 모든)
+    const korPkmName = []
     // index 맞춘 도감번호
-    const pkmDexNum = []
+    const pkmDexNum = []  
+
+    // 삭제== index 맞춘 영어명
+    const enPkmName = []
 
     // 현재 접속한 사용자가 불러온 포켓몬 데이터 모음 (중복 api request 방지용)
     const lazyPkmData = []
-    // 영어 이름만 따로 모은 것
+    // 사용자가 불러온 포켓몬 이름만 따로 모은 것
     const lazyPkmName = []
 
-    // 포켓몬 데이터 불러오기 https://api.sleepapi.net/api/pokemon/{이름}
-    async function fetchPkmData(enName){
-        if(lazyPkmName.includes(enName)){
+    // 포켓몬 데이터 불러오기
+    async function fetchPkmData(korName){
+        if(lazyPkmName.includes(korName)){
             return
         }
         else{
             try {
-                const response = await fetch(`https://api.sleepapi.net/api/pokemon/${enName}`);
-                const json = await response.json();
-                lazyPkmData.push(json);
-                lazyPkmName.push(json.name);
-            } catch (error) {
-                console.error('pkm DB fetch error:', error);
+                const response = await fetch(`${apiUrl}select=*,main_skills(*),berries(name)&kor_name=eq.${korName}`, {
+                    headers: {                        
+                        apikey: import.meta.env.VITE_SUPABASE_API_KEY,
+                        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_API_KEY}`
+                    }
+                });
+                const json = await response.json();                                
+                lazyPkmData.push(json[0]);
+                lazyPkmName.push(json[0].kor_name);                              
+            } catch(e) {
+                console.error('pkm DB fetch error: ', e.message);
             }
         }
     }
 
-    // 포켓몬 한글명 목록 불러오기(페이지 로드시)
-    function loadKorPkmName(){
+    // 포켓몬 한글명 목록 & 도감번호 불러오기 (페이지 로드시)
+    async function loadKorPkmName(){
         if(korPkmName.length === 0){
-            fullDex.data.forEach(item => {
-                if (sleepDex.includes(item.en)) {
-                    korPkmName.push(item.kor);
-                    enPkmName.push(item.en);
-                    pkmDexNum.push(item.Ndex)
-                }
-            });
+            try {
+                const response = await fetch(`${apiUrl}select=kor_name,pokedex_number`, {
+                    headers: {
+                        apikey: import.meta.env.VITE_SUPABASE_API_KEY,
+                        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_API_KEY}`
+                    }
+                });
+                const json = await response.json();
+                json.forEach(ele => {
+                    korPkmName.push(ele.kor_name)
+                    pkmDexNum.push(ele.pokedex_number)
+                });
+                // korPkmName = json.map(row => row.kor_name);
+                // pkmDexNum = json.map(row => row.pokedex_number);          
+            } catch(e) {
+                console.error('pkm DB load error', e.message);
+            }
+            // fullDex.data.forEach(item => {
+            //     if (sleepDex.includes(item.en)) {
+            //         korPkmName.push(item.kor);
+            //         enPkmName.push(item.en);
+            //         pkmDexNum.push(item.Ndex)
+            //     }
+            // });
         }        
     }
 
-    // 저장한 포슬립 포켓몬 데이터에서 원하는 값 찾기
-    function searchPkmData(name, value){
-        return lazyPkmData.find(obj => obj[name] === value);
+    // 저장된 포슬립 포켓몬 데이터에서 원하는 값 찾기
+    function searchPkmData(key, value){        
+        return lazyPkmData.find(obj => obj[key] == value);
         // return object
     }
 
-    // 한글명으로 영어명 찾기
-    function convertKorEn(p){
-        return enPkmName[korPkmName.indexOf(p)]
-    }
     // 한글명으로 도감번호 찾기
-    function findDexNum(p){
-        return pkmDexNum[korPkmName.indexOf(p)]
+    async function findDexNum(p){  
+        return pkmDexNum[korPkmName.indexOf(p)]    
     }
-    // 선택한 포켓몬의 식재료 이름 찾기 (포켓몬 이름, 몇번째 식재료인지, 아이콘 용인가 이름 저장용인가)
-    function bringIng(name, place, purpose = 'icon'){
+    // 선택한 포켓몬의 식재료 이름 찾기 (포켓몬 이름, 몇번째 식재료인지)
+    function bringIng(name, place){
         let findIng = ''
         function allIngList(n){
-            return searchPkmData('name', convertKorEn(name))[`ingredient${n}`]
-        }
+            // array
+            return searchPkmData('kor_name', name)[`ingredient${n}`]
+        }        
         switch(place){
-            case 0:
-                findIng= allIngList(0)['ingredient']['longName'];
-                break;
             case 1:
-                if(allIngList(30).length < 2){
-                    findIng= allIngList(0)['ingredient']['longName'];
-                }
-                else{
-                    findIng= allIngList(30).find(obj => obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'];
-                }
+                findIng= allIngList(0)[0]['name'];
                 break;
             case 2:
-                if(allIngList(60).length < 2){
-                    findIng= allIngList(0)['ingredient']['longName'];
+                if(allIngList(30).length == 1){
+                    findIng= allIngList(0)[0]['name'];
                 }
-                else if(allIngList(60).length < 3){
-                    findIng= allIngList(30).find(obj => obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'];
+                else{
+                    findIng= allIngList(30).find(obj => obj['name'] !== allIngList(0)[0]['name'])['name'];
+                }
+                break;
+            case 3:
+                if(allIngList(60).length == 1){
+                    findIng= allIngList(0)[0]['name'];
+                }
+                else if(allIngList(60).length == 2){
+                    findIng= allIngList(30).find(obj => obj['name'] !== allIngList(0)[0]['name'])['name'];
                 }
                 else{
                     findIng= allIngList(60).find(obj =>
-                        obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'] &&
-                        obj['ingredient']['longName'] !== allIngList(30).find(obj => 
-                            obj['ingredient']['longName'] !== allIngList(0)['ingredient']['longName'])['ingredient']['longName'])['ingredient']['longName']
+                        obj['name'] !== allIngList(0)[0]['name'] &&
+                        obj['name'] !== allIngList(30).find(obj => 
+                            obj['name'] !== allIngList(0)[0]['name'])['name'])['name']
                 }
                 break;
             default:
                 return
         }
-        return purpose === "store" ? findIng : findIng.replace(/\s/g, "").toLowerCase()
+        return findIng
     }
 
     return {
@@ -396,15 +418,15 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
         enPkmName,
         pkmDexNum,
         lazyPkmData,
-        totalMainSkill,
+        lazyPkmName,        
         teamSubSkillList,
         ribbonList,
         collectSkillCount,
         fetchPkmData,
         loadKorPkmName,
-        searchPkmData,
-        convertKorEn,
+        searchPkmData,        
         findDexNum,
-        bringIng
+        bringIng,
+        apiUrl        
     }
 })

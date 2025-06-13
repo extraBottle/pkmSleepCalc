@@ -61,7 +61,10 @@ module.exports = configure(function () {
       publicPath: "/pkmSleepCalc/",
       // publicPath: 'https://extrabottle.github.io/pkmSleepCalc/',
       // analyze: true,
-      // env: {},
+      env: {
+        // Supabase api
+        VITE_SUPABASE_API_KEY: process.env.VITE_SUPABASE_API_KEY
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
