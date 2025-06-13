@@ -77,14 +77,12 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
 
     // 기본 스피드 계산 return
     function calcBaseSpeed(ribbonSpeed, level, upNature, downNature, upMult, downMult, hBonus, hbMult, mySub = [], allData={}, maxHS, useGoodCamp){
-        // enName = myPkmDBStore.convertKorEn(myInputStore.pkmName)
         // level = myInputStore.pkmLevel
         // upNature = myInputStore.upNature
         // upMult = myInputStore.upMult
         // hBonus = myInputStore.hbCount
         // mySub = myInputStore.subSkills
-        // ribbonSpeed = 굿나잇리본 적용 도우미 속도 변화량
-        // allData = myPkmDBStore.searchPkmData('name', myPkmDBStore.convertKorEn(myInputStore.pkmName))
+        // ribbonSpeed = 굿나잇리본 적용 도우미 속도 변화량        
 
         // 도우미 보정 성격 확인
         const speedNature = (upNature === '도우미 스피드 ▲▲' ? upMult : (downNature === '도우미 스피드 ▽▽' ? downMult : 1.0))

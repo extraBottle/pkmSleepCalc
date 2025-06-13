@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia';
-import fullDex from 'src/pkmJson/data.json'
-import sleepDex from 'src/pkmJson/sleepPkm/data.json'
 
 // 인게임 포켓몬 정보 관리
 export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
@@ -289,9 +287,6 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     // index 맞춘 도감번호
     const pkmDexNum = []  
 
-    // 삭제== index 맞춘 영어명
-    const enPkmName = []
-
     // 현재 접속한 사용자가 불러온 포켓몬 데이터 모음 (중복 api request 방지용)
     const lazyPkmData = []
     // 사용자가 불러온 포켓몬 이름만 따로 모은 것
@@ -333,19 +328,10 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
                 json.forEach(ele => {
                     korPkmName.push(ele.kor_name)
                     pkmDexNum.push(ele.pokedex_number)
-                });
-                // korPkmName = json.map(row => row.kor_name);
-                // pkmDexNum = json.map(row => row.pokedex_number);          
+                });        
             } catch(e) {
                 console.error('pkm DB load error', e.message);
             }
-            // fullDex.data.forEach(item => {
-            //     if (sleepDex.includes(item.en)) {
-            //         korPkmName.push(item.kor);
-            //         enPkmName.push(item.en);
-            //         pkmDexNum.push(item.Ndex)
-            //     }
-            // });
         }        
     }
 
@@ -415,7 +401,6 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
         mealRecovery,
         enerPerHour,
         korPkmName,
-        enPkmName,
         pkmDexNum,
         lazyPkmData,
         lazyPkmName,        
