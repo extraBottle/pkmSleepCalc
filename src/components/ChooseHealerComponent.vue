@@ -392,18 +392,7 @@ function chooseIng(location, ingNum){
 async function fetchApiIng(){
   loadingCalc('불러오는 중...')
   await myPkmDBStore.fetchPkmData(pkmName.value)
-  // firstIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 0))
-  // fixedSecondIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 1))
-  // fixedThirdIng.value = myDownloadStore.fetchIcon('ing', myPkmDBStore.bringIng(pkmName.value, 2))
-  // secondIng.value = fixedSecondIng.value
-  // thirdIng.value = fixedThirdIng.value
-  // firstIngName.value = myPkmDBStore.bringIng(pkmName.value, 0)
-  // fixedSecondIngName.value = myPkmDBStore.bringIng(pkmName.value, 1)
-  // fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 2)
-  // secondIngName.value = fixedSecondIngName.value
-  // thirdIngName.value = fixedThirdIngName.value
-
-    // 고정 식재료 이름 저장
+  // 고정 식재료 이름 저장
   fixedFirstIngName.value = myPkmDBStore.bringIng(pkmName.value, 1)
   fixedSecondIngName.value = myPkmDBStore.bringIng(pkmName.value, 2)
   fixedThirdIngName.value = myPkmDBStore.bringIng(pkmName.value, 3)

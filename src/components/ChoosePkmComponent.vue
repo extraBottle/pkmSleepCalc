@@ -478,9 +478,8 @@ async function fetchApiIng(){
   selectedPkmDex.value = myPkmDBStore.findDexNum(pkmName.value)
   if(originDex === selectedPkmDex.value){ stopLoading() }
   // 힐러 정보 미리 불러오기
-  await myPkmDBStore.fetchPkmData('가디안')
-  
-  selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)
+  await myPkmDBStore.fetchPkmData('가디안')  
+  selectPkmImage.value = myDownloadStore.fetchImage('pkm', selectedPkmDex.value)  
   // 불러온 포켓몬의 모든 정보
   const allData = myPkmDBStore.searchPkmData('kor_name', pkmName.value)
   allIngList.value = []  

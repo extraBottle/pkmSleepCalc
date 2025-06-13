@@ -342,7 +342,7 @@ export const usePkmDBStore = defineStore('pokemon-DB', ()=> {
     }
 
     // 한글명으로 도감번호 찾기
-    async function findDexNum(p){  
+    function findDexNum(p){  
         return pkmDexNum[korPkmName.indexOf(p)]    
     }
     // 선택한 포켓몬의 식재료 이름 찾기 (포켓몬 이름, 몇번째 식재료인지)
