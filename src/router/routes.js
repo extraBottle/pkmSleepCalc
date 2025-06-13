@@ -92,8 +92,9 @@ const routes = [
        }
     ],
   },
+
+  // 테스트용
   // {
-  //   // 테스트용
   //   path: '/test',
   //   component: () => import('layouts/MainLayout.vue'),
   //   children: [
@@ -109,6 +110,7 @@ const routes = [
   //   name: 'maintenance',
   //   component: () => import('pages/MaintenancePage.vue'),
   // },
+
   // Always leave this as last one,
   // but you can also remove it
   {
