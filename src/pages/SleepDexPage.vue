@@ -40,7 +40,7 @@
           <q-badge v-if="ingCount[0] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[0] }}</q-badge>
           <q-fab color="ingCircle" :icon="firstIng" direction="up">          
             <q-fab-action v-for="(ing, index) in allIngList[0]" :key="index"
-              color="ingCircle" @click="chooseIng(1, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+              color="ingCircle" @click="chooseIng(1, index + 1)" :icon="ing.url" 
             />          
           </q-fab>   
         </div> 
@@ -53,7 +53,7 @@
           </q-tooltip> 
           <q-fab color="ingCircle" :icon="secondIng" direction="up">          
             <q-fab-action v-for="(ing, index) in allIngList[1]" :key="index"
-              color="ingCircle" @click="chooseIng(2, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+              color="ingCircle" @click="chooseIng(2, index + 1)" :icon="ing.url" 
             />          
           </q-fab>   
         </div>
@@ -64,7 +64,7 @@
           </q-tooltip> 
           <q-fab color="ingCircle" :icon="thirdIng" direction="up">          
             <q-fab-action v-for="(ing, index) in allIngList[2]" :key="index"
-              color="ingCircle" @click="chooseIng(3, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+              color="ingCircle" @click="chooseIng(3, index + 1)" :icon="ing.url" 
             />          
           </q-fab>   
         </div>  
@@ -225,6 +225,11 @@ async function fetchApiIng(){
   allIngList.value.push(fetchedData["ingredient0"])
   allIngList.value.push(fetchedData["ingredient30"])
   allIngList.value.push(fetchedData["ingredient60"])
+  for (let z = 0; z < 3; z++){
+    allIngList.value[z].forEach(ele => {
+      ele['url'] = myDownloadStore.fetchIcon('ing', ele.name)
+    })
+  }  
   fetchedData["ingredient0"].forEach((e)=>{    
     if(e.name === fixedFirstIngName.value){
       ingCount.value[0] = e.amount

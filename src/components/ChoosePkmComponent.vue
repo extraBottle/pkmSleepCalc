@@ -39,7 +39,7 @@
         <q-fab v-else color="ingCircle" :icon="firstIng" direction="up">
           <!-- 레벨 0 -->
           <q-fab-action v-for="(ing, index) in allIngList[0]" :key="index" 
-            color="ingCircle" @click="chooseIng(1, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+            color="ingCircle" @click="chooseIng(1, index + 1)" :icon="ing.url" 
           />          
         </q-fab>
       </div>      
@@ -51,7 +51,7 @@
         <q-btn v-else-if="pkmName == ''" fab color="ingCircle" :icon="secondIng" />
         <q-fab v-else color="ingCircle" :icon="secondIng" direction="up">          
           <q-fab-action v-for="(ing, index) in allIngList[1]" :key="index"
-            color="ingCircle" @click="chooseIng(2, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+            color="ingCircle" @click="chooseIng(2, index + 1)" :icon="ing.url" 
           />          
         </q-fab>                
       </div>
@@ -63,7 +63,7 @@
         <q-btn v-else-if="pkmName == ''" fab color="ingCircle" :icon="thirdIng" />
         <q-fab v-else color="ingCircle" :icon="thirdIng" direction="up">          
           <q-fab-action v-for="(ing, index) in allIngList[2]" :key="index"
-            color="ingCircle" @click="chooseIng(3, index + 1)" :icon="myDownloadStore.fetchIcon('ing', ing.name)" 
+            color="ingCircle" @click="chooseIng(3, index + 1)" :icon="ing.url" 
           />          
         </q-fab>           
       </div>
@@ -486,6 +486,11 @@ async function fetchApiIng(){
   allIngList.value.push(allData["ingredient0"])
   allIngList.value.push(allData["ingredient30"])
   allIngList.value.push(allData["ingredient60"])
+  for (let z = 0; z < 3; z++){
+    allIngList.value[z].forEach(ele => {
+      ele['url'] = myDownloadStore.fetchIcon('ing', ele.name)
+    })
+  }
   // 불러온 포켓몬의 남은 진화횟수
   leftEvo.value = allData.remaining_evolutions
   // 굿나잇리본 효과 반영
