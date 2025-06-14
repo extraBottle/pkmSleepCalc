@@ -220,6 +220,8 @@
           </q-card-section>   
         </q-card>
       </q-dialog>
+      <!-- 하단 수평형 광고 -->
+      <AdsenseComponent ad-slot="4218885917"/>
   </div>
 </template>
 
@@ -233,6 +235,7 @@ import { useEeveeStore } from 'src/stores/eeveeStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore';
 import { loadingCalc, stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 defineOptions({
   name: 'ChoosePkmComponent'

@@ -73,8 +73,6 @@
             :icon="'img:' + link.children[0].meta.icon" 
             :label="link.children[0].meta.shortName" />
       </q-tabs>            
-      <!-- 하단 수평형 광고 -->
-      <AdsenseComponent ad-slot="4218885917"/>
     </q-footer>
     <q-page-container style="min-height: 100vh;">
       <router-view />
@@ -86,7 +84,6 @@
 import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import { useRoute } from 'vue-router';
-import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 import EssentialLink from 'components/EssentialLink.vue'
 import VersionInfo from '../../package.json'
 import routes from 'src/router/routes'

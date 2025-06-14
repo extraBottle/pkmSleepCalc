@@ -4,7 +4,7 @@
      style="display:block; width: 100%; min-height: 60px;"
      data-ad-client="ca-pub-5269959789341273"
      :data-ad-slot="props.adSlot"
-     data-ad-format="horizontal"
+     data-ad-format="auto"
      data-full-width-responsive="true"></ins>
   </div>
 </template>
