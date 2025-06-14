@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%; min-height: 50px;">  
+  <div style="width: 100%; max-height: 200px;">  
   <ins class="adsbygoogle"
      style="display:block;"
      data-ad-client="ca-pub-5269959789341273"
