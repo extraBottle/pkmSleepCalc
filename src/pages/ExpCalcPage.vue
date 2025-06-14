@@ -107,7 +107,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import AdsenseComponent from './AdsenseComponent.vue';
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 //레벨 당 경험치량
 const expPerLevel= [54, 71, 108, 128, 164, 202, 244, 274,

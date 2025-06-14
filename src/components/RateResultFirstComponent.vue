@@ -103,7 +103,7 @@ import { useInputStore, useHealerInputStore } from 'src/stores/inputStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore'
 import { stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
-import AdsenseComponent from './AdsenseComponent.vue';
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 defineOptions({
   name: 'RateResultFirstComponent'

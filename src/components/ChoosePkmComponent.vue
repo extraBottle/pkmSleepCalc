@@ -235,7 +235,7 @@ import { useEeveeStore } from 'src/stores/eeveeStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore';
 import { loadingCalc, stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
-import AdsenseComponent from './AdsenseComponent.vue';
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 defineOptions({
   name: 'ChoosePkmComponent'
