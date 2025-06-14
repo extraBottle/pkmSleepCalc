@@ -40,6 +40,8 @@
           <q-btn v-else-if="step === 2 && myRateCalcStore.whatSpeciality !== 'all'" @click="gogo()" color="primary" label="다음"/>
           <q-btn v-else @click="step = 1" color="primary" label="다시하기" icon="refresh" />
         </q-stepper-navigation>
+                <!-- Google adsense -->
+        <AdsenseComponent />  
       </template>
     </q-stepper>
   </q-page>
@@ -54,6 +56,7 @@ import { popupFail } from 'src/utils/popup';
 import { useRateCalcStore } from 'src/stores/rateCalcStore'
 import { useProdCalcStore } from 'src/stores/finalCalcStore'
 import { loadingCalc } from 'src/utils/loading';
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 defineOptions({
   name: 'RatePage'

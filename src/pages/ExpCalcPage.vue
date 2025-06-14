@@ -65,11 +65,11 @@
                 </template></q-input>                                    
         </q-card-section>
     </q-card>
-    <!-- Google adsense -->
-    <AdsenseComponent />  
     <div class="row justify-end full-width q-mb-md">
         <q-btn color="primary" @click="calcExp" label="필요 경험치량 계산하기"></q-btn>
     </div>  
+    <!-- Google adsense -->
+    <AdsenseComponent />  
     <q-dialog v-model="showResult">
         <q-card style="background-color: #d8bfd8; border: solid #b46856;">
           <q-bar>          

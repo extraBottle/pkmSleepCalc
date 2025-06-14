@@ -31,6 +31,8 @@
           <q-btn v-if="step > 1" flat color="primary" @click="prev()" label="뒤로" class="q-ml-sm" />
           <q-btn @click="gogo()" color="primary" :label="step === 2 ? '결과보기' : '다음'" />
         </q-stepper-navigation>
+                <!-- Google adsense -->
+        <AdsenseComponent />  
       </template>
     </q-stepper>
   </q-page>
@@ -43,6 +45,7 @@ import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue'
 import ChooseHealerComponent from'src/components/ChooseHealerComponent.vue'
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { popupFail } from 'src/utils/popup'
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 defineOptions({
   name: 'ProdCalcPage'

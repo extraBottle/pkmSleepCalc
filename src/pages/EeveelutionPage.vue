@@ -38,6 +38,8 @@
             <q-btn v-if="step > 1" flat color="primary" @click="prev()" label="뒤로" class="q-ml-sm" />
             <q-btn v-if="step < 3" @click="gogo()" color="primary" :label="step === 1 ? '결과보기' : '다음'" />            
         </q-stepper-navigation>
+        <!-- Google adsense -->
+        <AdsenseComponent />  
       </template>
     </q-stepper>
 </q-page>
@@ -48,6 +50,7 @@ import { ref } from 'vue'
 import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue';
 import EeveelutionResultComponent from 'src/components/EeveelutionResultComponent.vue';
 import RecommendCalcComponent from 'src/components/RecommendCalcComponent.vue';
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 defineOptions({
   name: 'RatePage'

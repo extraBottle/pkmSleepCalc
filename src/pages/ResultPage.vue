@@ -38,6 +38,8 @@
                         <q-btn v-if="step < 2" @click="stepper.next()" color="primary" label='다음' />
                     </div>
                 </q-stepper-navigation>
+                        <!-- Google adsense -->
+                <AdsenseComponent />  
             </template>
         </q-stepper>
     </q-page>
@@ -53,6 +55,7 @@ import { useRouter } from 'vue-router'
 import { popupFail } from 'src/utils/popup'
 import { loadingCalc, stopLoading } from 'src/utils/loading'
 import { useQuasar } from 'quasar'
+import AdsenseComponent from 'src/components/AdsenseComponent.vue'
 
 defineOptions({
     name: 'ResultPage'

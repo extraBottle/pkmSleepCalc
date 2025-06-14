@@ -90,8 +90,6 @@
         </q-card-section>   
       </q-card>
     </q-dialog>
-    <!-- Google adsense -->
-    <AdsenseComponent />
   </div>
 </template>
 
@@ -103,7 +101,6 @@ import { useInputStore, useHealerInputStore } from 'src/stores/inputStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore'
 import { stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
-import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 defineOptions({
   name: 'RateResultFirstComponent'
