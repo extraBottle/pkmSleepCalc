@@ -13,7 +13,9 @@
 
 <script setup>
 import { onMounted} from 'vue'
+import { useQuasar } from 'quasar'
 
+const $q = useQuasar()
 // const props = defineProps({
 //   platform: { type: String, required: true }
 // });
