@@ -17,26 +17,26 @@ const props = defineProps({
 });
 
 function loadAds() {
-  console.log("outside");
+  console.log("before load");
   if (window.adsbygoogle && Array.isArray(window.adsbygoogle)) {
     window.adsbygoogle.push({});
-    console.log("ads");
+    console.log("after load");
   }
 }
 
 onMounted(()=>{
-  loadAds();
   // Load Google AdSense script if not already present
-  // if (!window.adsbygoogle) {
-  //   const script = document.createElement('script');
-  //   script.async = true;
-  //   script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-  //   script.setAttribute('crossorigin', 'anonymous');
-  //   document.head.appendChild(script);
-  //   script.onload = loadAds;
-  // } else {
-  //   loadAds();
-  // }
+  if (!window.adsbygoogle) {
+    console.log("window.adsbygoogle does not exist")
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+    script.setAttribute('crossorigin', 'anonymous');
+    document.head.appendChild(script);
+    script.onload = loadAds;
+  } else {
+    loadAds();
+  }
 })
 
 </script>
