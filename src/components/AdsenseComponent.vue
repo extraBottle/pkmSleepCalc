@@ -1,9 +1,11 @@
 <template>
   <div>  
   <ins class="adsbygoogle"
-     style="display:block; max-height: 150px;"
+     style="display:block;"
      data-ad-client="ca-pub-5269959789341273"
      :data-ad-slot="props.adSlot"
+     data-ad-format="auto"
+     data-full-width-responsive="true"
      ></ins>
   </div>
 </template>
