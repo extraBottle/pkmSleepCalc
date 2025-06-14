@@ -1,6 +1,14 @@
 <template>
+  <!-- horizontal ads (for desktop) -->
+  <div v-if="$q.platform.is.desktop && props.platform === 'desktop'" class="row justify-center">  
+    <ins class="adsbygoogle"
+      style="display:inline-block;width:728px;height:90px;"
+      data-ad-client="ca-pub-5269959789341273"
+      data-ad-slot="8898165826"
+    ></ins>
+  </div>
   <!-- responsive ads -->
-  <div v-if="!$q.platform.is.desktop">
+  <div v-else-if="!$q.platform.is.desktop && props.platform !== 'desktop'">
     <ins class="adsbygoogle"
       style="display:block"
       data-ad-client="ca-pub-5269959789341273"
@@ -13,7 +21,9 @@
 
 <script setup>
 import { onMounted} from 'vue'
+import { useQuasar } from 'quasar'
 
+const $q = useQuasar()
 // const props = defineProps({
 //   platform: { type: String, required: true }
 // });

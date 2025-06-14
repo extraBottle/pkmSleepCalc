@@ -74,7 +74,7 @@
             :label="link.children[0].meta.shortName" />
       </q-tabs>  
       <!-- adsense -->
-      <AdsenseComponent platform="desktop" />          
+      <FixedAdsenseComponent v-if="$q.platform.is.desktop" />          
     </q-footer>
     <q-page-container style="min-height: 100vh;">
       <router-view />
@@ -89,7 +89,7 @@ import { useRoute } from 'vue-router';
 import EssentialLink from 'components/EssentialLink.vue'
 import VersionInfo from '../../package.json'
 import routes from 'src/router/routes'
-import AdsenseComponent from 'src/components/AdsenseComponent.vue';
+import FixedAdsenseComponent from 'src/components/FixedAdsenseComponent.vue';
 
 defineOptions({
   name: 'MainLayout'

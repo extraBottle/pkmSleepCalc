@@ -35,7 +35,7 @@
         </q-card-section>
     </q-card>
     <!-- Google adsense -->
-    <AdsenseComponent platform="mobile" />    
+    <AdsenseComponent />    
     <q-card class="column items-center full-width" style="background-color: #ffe4c4; border: solid #b46856;">
         <q-card-section class="full-width q-pt-sm">
             <div class="text-subtitle1 text-bold">여기에 입력하세요:</div>

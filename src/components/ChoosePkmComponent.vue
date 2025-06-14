@@ -84,7 +84,7 @@
       <q-slider color="secondary" v-model="erbCount" :min="0" :max="5"/>
     </div>
     <!-- Google adsense -->
-    <AdsenseComponent platform="mobile" />    
+    <AdsenseComponent />    
     <!-- 서브 스킬 선택 -->
     <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="subSkillOptions"
      :label= "limitSub" behavior="dialog" :max-values="watchLevel" clearable clear-icon="close"
