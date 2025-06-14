@@ -1,10 +1,10 @@
 <template>
   <div>  
   <ins class="adsbygoogle"
-     style="display:block; max-height: 200px;"
+     style="display:block; height: 108px;"
      data-ad-client="ca-pub-5269959789341273"
      :data-ad-slot="props.adSlot"
-     data-ad-format="horizontal"
+     data-ad-format="auto"
      data-full-width-responsive="true"></ins>
   </div>
 </template>
