@@ -4,7 +4,7 @@
      style="display:block;"
      data-ad-client="ca-pub-5269959789341273"
      :data-ad-slot="props.adSlot"
-     data-ad-format="auto"
+     data-ad-format="horizontal"
      data-full-width-responsive="true"></ins>
   </div>
 </template>
@@ -16,18 +16,15 @@ const props = defineProps({
   adSlot: { type: String, required: true }
 });
 
-function loadAds() {
-  console.log("before load");  
+function loadAds() {  
   if (window.adsbygoogle) {
     window.adsbygoogle.push({});
-    console.log("after load");
   }
 }
 
 onMounted(()=>{
   // Load Google AdSense script if not already present
-  if (!window.adsbygoogle) {
-    console.log("window.adsbygoogle does not exist")
+  if (!window.adsbygoogle) {    
     const script = document.createElement('script');
     script.async = true;
     script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
