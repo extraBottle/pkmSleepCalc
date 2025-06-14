@@ -1,5 +1,5 @@
 <template>
-  <div style="max-height: 150px;">  
+  <div class="row justify-center">  
   <ins class="adsbygoogle"
      style="display:inline-block;width:728px;height:90px;"
      data-ad-client="ca-pub-5269959789341273"
