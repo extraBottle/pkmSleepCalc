@@ -18,6 +18,7 @@ const props = defineProps({
 
 function loadAds() {
   console.log("before load");
+  console.log("window.adsbygoogle = ", window.adsbygoogle);
   if (window.adsbygoogle && Array.isArray(window.adsbygoogle)) {
     window.adsbygoogle.push({});
     console.log("after load");
