@@ -34,8 +34,7 @@
           </Carousel>    
           <q-btn class="absolute-left" icon="arrow_back_ios" @click="myCarousel.prev()" color="primary" size="lg" dense flat/>  
           <q-btn class="absolute-right" icon="arrow_forward_ios" @click="myCarousel.next()" color="primary" size="lg" dense flat/>  
-        </div>
-               
+        </div>         
         <!-- 도움말 팝업창 -->
         <q-dialog v-model="showHelp">
           <q-card style="width: 280px;">
