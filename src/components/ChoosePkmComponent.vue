@@ -83,8 +83,6 @@
       팀전체 <q-chip square class="bg-goldSkill">기력 회복 보너스</q-chip> 개수: {{ erbCount }}
       <q-slider color="secondary" v-model="erbCount" :min="0" :max="5"/>
     </div>
-    <!-- Google adsense -->
-    <AdsenseComponent />    
     <!-- 서브 스킬 선택 -->
     <q-select class="full-width" filled color="secondary" multiple v-model="subSkills" :options="subSkillOptions"
      :label= "limitSub" behavior="dialog" :max-values="watchLevel" clearable clear-icon="close"
@@ -222,6 +220,8 @@
           </q-card-section>   
         </q-card>
       </q-dialog>  
+    <!-- Google adsense -->
+    <AdsenseComponent />    
   </div>
 </template>
 

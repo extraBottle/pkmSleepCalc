@@ -28,9 +28,7 @@
         height="300"
         :options="chartOptions" 
         :series="series"></apexchart>
-    </q-card>
-        <!-- Google adsense -->
-    <AdsenseComponent />    
+    </q-card>        
     <q-card class="col-xs-12 col-sm-10 col-md-5">
       <q-card-section class="row justify-between items-center">
         <span class="text-subtitle1 text-bold">나무열매 수 비교</span>
@@ -92,6 +90,8 @@
         </q-card-section>   
       </q-card>
     </q-dialog>
+    <!-- Google adsense -->
+    <AdsenseComponent />
   </div>
 </template>
 

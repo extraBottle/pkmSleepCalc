@@ -34,8 +34,6 @@
             <q-radio color="accent" v-model="calcVer" val="pro" label="프로" />                        
         </q-card-section>
     </q-card>
-    <!-- Google adsense -->
-    <AdsenseComponent />    
     <q-card class="column items-center full-width" style="background-color: #ffe4c4; border: solid #b46856;">
         <q-card-section class="full-width q-pt-sm">
             <div class="text-subtitle1 text-bold">여기에 입력하세요:</div>
@@ -67,9 +65,11 @@
                 </template></q-input>                                    
         </q-card-section>
     </q-card>
+    <!-- Google adsense -->
+    <AdsenseComponent />  
     <div class="row justify-end full-width q-mb-md">
         <q-btn color="primary" @click="calcExp" label="필요 경험치량 계산하기"></q-btn>
-    </div>
+    </div>  
     <q-dialog v-model="showResult">
         <q-card style="background-color: #d8bfd8; border: solid #b46856;">
           <q-bar>          
