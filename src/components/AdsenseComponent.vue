@@ -21,8 +21,15 @@ const $q = useQuasar()
 // });
 
 function loadAds() {  
-  if (window.adsbygoogle) {
-    window.adsbygoogle.push({});
+  // 중복 호출 방지
+  if(!$q.platform.is.desktop){
+    document.querySelectorAll('ins.adsbygoogle').forEach(ins => {
+      if (ins.getAttribute('data-adsbygoogle-status') !== 'done') {
+        if (window.adsbygoogle) {
+          window.adsbygoogle.push({});
+        }
+      }
+    });
   }
 }
 
