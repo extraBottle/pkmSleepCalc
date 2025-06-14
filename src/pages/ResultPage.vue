@@ -14,6 +14,8 @@
                 title="생산량 보고서"
                 icon="assignment"
             >
+            <!-- Google adsense -->
+            <AdsenseComponent />  
             <ResultProdComponent :start-load="handleStartLoad" />
             </q-step>
             <q-step
@@ -38,8 +40,6 @@
                         <q-btn v-if="step < 2" @click="stepper.next()" color="primary" label='다음' />
                     </div>
                 </q-stepper-navigation>
-                        <!-- Google adsense -->
-                <AdsenseComponent />  
             </template>
         </q-stepper>
     </q-page>

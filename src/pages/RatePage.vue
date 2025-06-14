@@ -15,6 +15,8 @@
         icon="edit"
         :done="step > 1"
       >
+      <!-- Google adsense -->
+      <AdsenseComponent />  
       <ChoosePkmComponent ref="validateFirst" :name-valid="sendName" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
 
@@ -32,6 +34,8 @@
         icon="emoji_events"
       >
       <RateResultSecondComponent/>
+      <!-- Google adsense -->
+      <AdsenseComponent />  
       </q-step>
       <template v-slot:navigation>
         <q-stepper-navigation class="row justify-end">
@@ -40,8 +44,6 @@
           <q-btn v-else-if="step === 2 && myRateCalcStore.whatSpeciality !== 'all'" @click="gogo()" color="primary" label="다음"/>
           <q-btn v-else @click="step = 1" color="primary" label="다시하기" icon="refresh" />
         </q-stepper-navigation>
-                <!-- Google adsense -->
-        <AdsenseComponent />  
       </template>
     </q-stepper>
   </q-page>
