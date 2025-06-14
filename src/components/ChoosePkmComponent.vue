@@ -1,4 +1,5 @@
 <template>
+  <q-space />
   <q-toolbar class="bg-primary text-white text-center">
     <q-toolbar-title>포켓몬 정보 입력</q-toolbar-title>
   </q-toolbar>

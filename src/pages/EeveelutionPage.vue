@@ -15,6 +15,8 @@
         icon="edit"
         :done="step > 1"
       >
+      <!-- Google adsense -->
+      <AdsenseComponent />  
       <ChoosePkmComponent ref="validateFirst" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
       <q-step
@@ -38,8 +40,6 @@
             <q-btn v-if="step > 1" flat color="primary" @click="prev()" label="뒤로" class="q-ml-sm" />
             <q-btn v-if="step < 3" @click="gogo()" color="primary" :label="step === 1 ? '결과보기' : '다음'" />            
         </q-stepper-navigation>
-        <!-- Google adsense -->
-        <AdsenseComponent />  
       </template>
     </q-stepper>
 </q-page>
