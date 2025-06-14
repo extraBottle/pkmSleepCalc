@@ -16,7 +16,6 @@
             >
             <!-- Google adsense -->
             <AdsenseComponent />  
-            <q-space />
             <ResultProdComponent :start-load="handleStartLoad" />
             </q-step>
             <q-step

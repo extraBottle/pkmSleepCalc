@@ -1,6 +1,6 @@
 <template>
   <!-- responsive ads -->
-  <div v-if="!$q.platform.is.desktop" class="full-width">
+  <div v-if="!$q.platform.is.desktop" class="full-width q-py-sm">
     <ins class="adsbygoogle"
       style="display:block"
       data-ad-client="ca-pub-5269959789341273"

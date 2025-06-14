@@ -17,7 +17,6 @@
       >
       <!-- Google adsense -->
       <AdsenseComponent />  
-      <q-space />
       <ChoosePkmComponent ref="validateFirst" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
       <q-step

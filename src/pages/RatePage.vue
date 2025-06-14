@@ -17,7 +17,6 @@
       >
       <!-- Google adsense -->
       <AdsenseComponent />  
-      <q-space />
       <ChoosePkmComponent ref="validateFirst" :name-valid="sendName" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
 
@@ -35,7 +34,6 @@
         icon="emoji_events"
       >
       <RateResultSecondComponent/>
-      <q-space />
       <!-- Google adsense -->
       <AdsenseComponent />  
       </q-step>
