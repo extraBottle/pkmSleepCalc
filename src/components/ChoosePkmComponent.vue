@@ -221,7 +221,7 @@
         </q-card>
       </q-dialog>
       <!-- 하단 수평형 광고 -->
-      <AdsenseComponent ad-slot="4218885917"/>
+      <!-- <AdsenseComponent ad-slot="4218885917"/> -->
   </div>
 </template>
 
