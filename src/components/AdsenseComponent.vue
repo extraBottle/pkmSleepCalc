@@ -17,6 +17,7 @@ const props = defineProps({
 });
 
 function loadAds() {
+  console.log("outside");
   if (window.adsbygoogle && Array.isArray(window.adsbygoogle)) {
     window.adsbygoogle.push({});
     console.log("ads");
