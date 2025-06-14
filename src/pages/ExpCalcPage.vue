@@ -2,6 +2,8 @@
 <q-page class="row justify-center bg-googleDark">
 <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack">
 <div class="column items-center q-px-md q-gutter-y-md">
+        <!-- Google adsense -->
+    <AdsenseComponent /> 
     <q-space />
     <q-toolbar class="bg-primary text-white text-center">
         <q-toolbar-title>현재 레벨 {{ maxLevel }}까지만 계산 가능!</q-toolbar-title>
@@ -67,9 +69,7 @@
     </q-card>
     <div class="row justify-end full-width q-mb-md">
         <q-btn color="primary" @click="calcExp" label="필요 경험치량 계산하기"></q-btn>
-    </div>  
-    <!-- Google adsense -->
-    <AdsenseComponent />  
+    </div>   
     <q-dialog v-model="showResult">
         <q-card style="background-color: #d8bfd8; border: solid #b46856;">
           <q-bar>          
