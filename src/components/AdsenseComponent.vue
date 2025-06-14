@@ -1,18 +1,31 @@
 <template>
-  <div class="row justify-center">  
-  <ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px;"
-     data-ad-client="ca-pub-5269959789341273"
-     :data-ad-slot="props.adSlot"
-     ></ins>
+  <!-- horizontal ads (for desktop) -->
+  <div v-if="$q.platform.is.desktop && props.platform === 'desktop'" class="row justify-center">  
+    <ins class="adsbygoogle"
+      style="display:inline-block;width:728px;height:90px;"
+      data-ad-client="ca-pub-5269959789341273"
+      data-ad-slot="8898165826"
+    ></ins>
+  </div>
+  <!-- responsive ads -->
+  <div v-else-if="!$q.platform.is.desktop && props.platform !== 'desktop'">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-5269959789341273"
+      data-ad-slot="4218885917"
+      data-ad-format="auto"
+      data-full-width-responsive="true"     
+    ></ins>
   </div>
 </template>
 
 <script setup>
 import { onMounted} from 'vue'
+import { useQuasar } from 'quasar'
+
+const $q = useQuasar()
 const props = defineProps({
-  // 광고 모양 결정
-  adSlot: { type: String, required: true }
+  platform: { type: String, required: true }
 });
 
 function loadAds() {  

@@ -18,15 +18,6 @@
       <ChoosePkmComponent ref="validateFirst" :name-valid="sendName" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
 
-      <!-- <q-step
-        :name="2"
-        title="총 수면 시간"
-        icon="alarm"
-        :done="step > 2"
-      >
-      <ChooseSleepTimeComponent />
-      </q-step> -->
-
       <q-step
         :name="2"
         title="Create an ad"
@@ -49,7 +40,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue'
-// import ChooseSleepTimeComponent from 'src/components/ChooseSleepTimeComponent.vue'
 import ChooseHealerComponent from'src/components/ChooseHealerComponent.vue'
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { popupFail } from 'src/utils/popup'

@@ -73,8 +73,8 @@
             :icon="'img:' + link.children[0].meta.icon" 
             :label="link.children[0].meta.shortName" />
       </q-tabs>  
-      <!-- 하단 수평형 광고 -->
-      <AdsenseComponent v-if="$q.platform.is.desktop" ad-slot="8898165826" />          
+      <!-- adsense -->
+      <AdsenseComponent platform="desktop" />          
     </q-footer>
     <q-page-container style="min-height: 100vh;">
       <router-view />

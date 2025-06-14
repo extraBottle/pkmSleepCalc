@@ -29,6 +29,8 @@
         :options="chartOptions" 
         :series="series"></apexchart>
     </q-card>
+        <!-- Google adsense -->
+    <AdsenseComponent platform="mobile" />    
     <q-card class="col-xs-12 col-sm-10 col-md-5">
       <q-card-section class="row justify-between items-center">
         <span class="text-subtitle1 text-bold">나무열매 수 비교</span>
@@ -101,6 +103,7 @@ import { useInputStore, useHealerInputStore } from 'src/stores/inputStore'
 import { useRateCalcStore } from 'src/stores/rateCalcStore'
 import { stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
+import AdsenseComponent from './AdsenseComponent.vue';
 
 defineOptions({
   name: 'RateResultFirstComponent'
