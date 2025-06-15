@@ -15,7 +15,7 @@
                 icon="assignment"
             >
             <!-- Google adsense -->
-            <AdsenseComponent />  
+            <!-- <AdsenseComponent />   -->
             <ResultProdComponent :start-load="handleStartLoad" />
             </q-step>
             <q-step
@@ -40,7 +40,9 @@
                         <q-btn v-if="step < 2" @click="stepper.next()" color="primary" label='다음' />
                     </div>
                 </q-stepper-navigation>
-            </template>
+                            <!-- Google adsense -->
+                <AdsenseComponent />
+            </template> 
         </q-stepper>
     </q-page>
 </template>
