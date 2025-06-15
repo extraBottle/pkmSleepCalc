@@ -4,7 +4,6 @@
 <div class="column items-center q-px-md q-gutter-y-md">
         <!-- Google adsense -->
     <AdsenseComponent /> 
-    <q-space />
     <q-toolbar class="bg-primary text-white text-center">
         <q-toolbar-title>현재 레벨 {{ maxLevel }}까지만 계산 가능!</q-toolbar-title>
     </q-toolbar>

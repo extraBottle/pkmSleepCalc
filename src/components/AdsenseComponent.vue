@@ -1,12 +1,10 @@
 <template>
   <!-- responsive ads -->
-  <div v-if="!$q.platform.is.desktop" class="full-width q-py-sm">
+  <div v-if="!$q.platform.is.desktop" class="full-width q-py-sm row justify-center">
     <ins class="adsbygoogle"
-      style="display:block"
+      style="display:block; width: 100%; height:250px;"
       data-ad-client="ca-pub-5269959789341273"
-      data-ad-slot="4218885917"
-      data-ad-format="auto"
-      data-full-width-responsive="true"     
+      data-ad-slot="4218885917"  
     ></ins>
   </div>
 </template>

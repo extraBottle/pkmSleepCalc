@@ -33,9 +33,9 @@
         title="Create an ad"
         icon="emoji_events"
       >
-      <RateResultSecondComponent/>
       <!-- Google adsense -->
       <AdsenseComponent />  
+      <RateResultSecondComponent/>
       </q-step>
       <template v-slot:navigation>
         <q-stepper-navigation class="row justify-end">
