@@ -78,7 +78,7 @@
       <!-- adsense -->
       <AdsenseComponent v-if="$q.platform.is.desktop" class="lt-md row justify-center" 
         ad-style="display:inline-block;min-width:400px;max-width:728px;width:100%;height:90px;"
-        ad-slot="8898165826" 
+        ad-slot="6745595458" 
       />          
     </q-footer>
     <q-page-container style="min-height: 100vh;">

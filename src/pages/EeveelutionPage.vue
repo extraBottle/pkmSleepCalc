@@ -49,7 +49,7 @@
     <!-- vertical ad -->
     <AdsenseComponent v-if="$q.platform.is.desktop" class="gt-sm q-ml-md"         
       ad-style="display:inline-block;width:300px; height:600px; position: sticky; top: 60px;"
-      ad-slot="4218885917" 
+      ad-slot="9801335336" 
     />      
 </q-page>
 </template>
