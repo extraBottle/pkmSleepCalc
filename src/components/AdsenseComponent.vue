@@ -20,15 +20,13 @@ const props = defineProps({
 
 function loadAds() {  
   // 중복 호출 방지
-  if($q.platform.is.mobile){
-    document.querySelectorAll('ins.adsbygoogle').forEach(ins => {
-      if (ins.getAttribute('data-adsbygoogle-status') !== 'done') {
-        if (window.adsbygoogle) {
-          window.adsbygoogle.push({});
-        }
+  document.querySelectorAll('ins.adsbygoogle').forEach(ins => {
+    if (ins.getAttribute('data-adsbygoogle-status') !== 'done') {
+      if (window.adsbygoogle) {
+        window.adsbygoogle.push({});
       }
-    });
-  }
+    }
+  });
 }
 
 onMounted(()=>{
