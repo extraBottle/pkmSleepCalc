@@ -16,7 +16,11 @@
         :done="step > 1"
       >
       <!-- Google adsense -->
-      <AdsenseComponent />  
+      <AdsenseComponent v-if="$q.platform.is.mobile" class="full-width q-py-sm"
+        style="min-height: 50px;"
+        ad-style="display:block; width:100%;height:250px;"
+        ad-slot="4218885917" 
+      />  
       <ChoosePkmComponent ref="validateFirst" :name-valid="sendName" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
 
@@ -35,11 +39,18 @@
         </q-stepper-navigation>
       </template>
     </q-stepper>
+    <!-- vertical ad -->    
+    <AdsenseComponent v-if="$q.platform.is.desktop" class="gt-sm q-ml-md"   
+      style="position: sticky; top: 60px;"   
+      ad-style="display:inline-block;width:300px; height:600px; position: sticky; top: 60px;"
+      ad-slot="4218885917" 
+    />        
   </q-page>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
 import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue'
 import ChooseHealerComponent from'src/components/ChooseHealerComponent.vue'
@@ -51,6 +62,7 @@ defineOptions({
   name: 'ProdCalcPage'
 });
 
+const $q = useQuasar()
 const router = useRouter()
 // for q-stepper
 const step = ref(1)

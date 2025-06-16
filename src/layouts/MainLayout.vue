@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header bordered>
+    <q-header class="relative-position">
       <q-toolbar>
         <q-btn
           v-if="onlySmallWindow"
@@ -11,6 +11,15 @@
           aria-label="Menu"          
           @click="toggleLeftDrawer"
         />
+        <q-btn
+          v-if="toggleMini"
+          flat
+          dense
+          round
+          icon="home"
+          aria-label="Menu"          
+          to="/"
+        />
 
         <q-toolbar-title>
           {{ route.name }}
@@ -18,30 +27,23 @@
 
         <div>v{{ myVersion }}<br>@두번째유리병</div>
       </q-toolbar>
-      <q-tabs
-        v-if="notHomePage && $q.platform.is.desktop"
-        class="text-dark bg-googleBack lt-md"
-        active-color="primary"               
-        dense
-        align="justify"
-      >
-        <q-route-tab v-for="link in linksList" 
-          :key="link.children[0].meta.title" 
-          :to="link.path" class="q-px-xs" 
-          :icon="'img:' + link.children[0].meta.icon" 
-          :label="link.children[0].meta.shortName" />
-      </q-tabs>
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
+      :breakpoint="600"
+      :mini="toggleMini && shrinkMini"
+      :mini-to-overlay="toggleMini"
+      @mouseenter="shrinkMini = false"
+      @mouseleave="shrinkMini = true"
       bordered
       @on-layout="handleMenuBtn"
       style="background-color: bisque;"
     >
       <q-list>
         <q-item-label
+          v-if="!toggleMini"
           header
           class="q-py-sm row justify-between items-center"
           style="background-color: antiquewhite;"
@@ -60,7 +62,7 @@
     </q-drawer>
     <q-footer bordered class="bg-googleBack">
       <q-tabs    
-        v-if="$q.platform.is.mobile && notHomePage"     
+        v-if="notHomePage && $q.platform.is.mobile && $q.screen.width < 600"     
         class="text-dark"
         active-color="primary"
         active-bg-color="brown-1"        
@@ -74,7 +76,10 @@
             :label="link.children[0].meta.shortName" />
       </q-tabs>  
       <!-- adsense -->
-      <FixedAdsenseComponent v-if="$q.platform.is.desktop" />          
+      <AdsenseComponent v-if="$q.platform.is.desktop" class="lt-md row justify-center" 
+        ad-style="display:inline-block;min-width:400px;max-width:728px;width:100%;height:90px;"
+        ad-slot="8898165826" 
+      />          
     </q-footer>
     <q-page-container style="min-height: 100vh;">
       <router-view />
@@ -89,7 +94,7 @@ import { useRoute } from 'vue-router';
 import EssentialLink from 'components/EssentialLink.vue'
 import VersionInfo from '../../package.json'
 import routes from 'src/router/routes'
-import FixedAdsenseComponent from 'src/components/FixedAdsenseComponent.vue';
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
 defineOptions({
   name: 'MainLayout'
@@ -102,6 +107,7 @@ const linksList = routes.slice(1, routes.length - 1)
 
 const onlySmallWindow = ref(true)
 const leftDrawerOpen = ref(false)
+const shrinkMini = ref(true)
 
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
@@ -116,8 +122,12 @@ const notHomePage = computed(()=>{
         return true
     }
   })
+const toggleMini = computed(()=> {
+  if($q.screen.width < 1334 && $q.screen.width > 600){ return true }
+  else { return false }
+})
 // 좌측 메뉴바가 화면에 고정될 정도로 화면이 크면 메뉴 열고 닫는 버튼 삭제
-function handleMenuBtn(state){  
+function handleMenuBtn(state){    
   state ? onlySmallWindow.value = false : onlySmallWindow.value = true
 }
 </script>

@@ -16,7 +16,11 @@
         :done="step > 1"
       >
       <!-- Google adsense -->
-      <AdsenseComponent />  
+      <AdsenseComponent v-if="$q.platform.is.mobile" class="full-width q-py-sm"
+        style="min-height: 50px;"
+        ad-style="display:block; width:100%;height:250px;"
+        ad-slot="4218885917" 
+      />  
       <ChoosePkmComponent ref="validateFirst" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
       <q-step
@@ -42,11 +46,17 @@
         </q-stepper-navigation>
       </template>
     </q-stepper>
+    <!-- vertical ad -->
+    <AdsenseComponent v-if="$q.platform.is.desktop" class="gt-sm q-ml-md"         
+      ad-style="display:inline-block;width:300px; height:600px; position: sticky; top: 60px;"
+      ad-slot="4218885917" 
+    />      
 </q-page>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useQuasar } from 'quasar'
 import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue';
 import EeveelutionResultComponent from 'src/components/EeveelutionResultComponent.vue';
 import RecommendCalcComponent from 'src/components/RecommendCalcComponent.vue';
@@ -55,6 +65,7 @@ import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 defineOptions({
   name: 'RatePage'
 });
+const $q = useQuasar()
 // for q-stepper
 const step = ref(1)
 const stepper = ref()

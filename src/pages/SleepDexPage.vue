@@ -1,116 +1,125 @@
 <template>
 <q-page :class="showDex ? 'row justify-center bg-googleDark' : 'flex flex-center bg-googleDark'">
-<div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack q-px-md" :style="!showDex ? 'border: 2mm solid #b46856' : ''">
-  <q-toolbar class="bg-primary text-white text-center">
-      <q-toolbar-title>포켓몬을 검색하세요</q-toolbar-title>
-  </q-toolbar>    
-<div class="column items-center q-gutter-y-md">
-  <!-- 포켓몬 이미지 -->
-  <q-img
-      alt="Pokemon image"
-      :src="selectPkmImage"
-      fit="scale-down"
-      style="width: 300px;"
-      no-spinner
-      @load="stopLoading()"
-      >
-  </q-img>
-  <!-- 포켓몬 이름 -->
-  <q-select :class="!showDex ? 'q-mt-none' : 'full-width q-mt-none'" filled color="secondary" v-model="pkmName" :options="pkmNameList" 
-  label="포켓몬 이름"
-  @filter="searchName" @input-value="manageModel"
-  use-input hide-selected fill-input input-debounce="0" @update:model-value="fetchApiIng"
-  :hint="nameSearchHint" hide-bottom-space />
-  <q-space />
-</div>
-<div v-if="showDex" class="column items-center">
-  <div class="q-gutter-y-md full-width" style="max-width: 300px;">
-    <div class="row items-center">
-      <!-- 나무열매 -->
-      <q-chip color="secondary" text-color="white" style="width: 84px;"><span class="full-width row justify-center text-bold">나무열매</span></q-chip>
-      <q-btn fab color="ingCircle" :icon="whatBerry">
-        <q-badge v-if="berryNum > 1" color="orange" floating class="text-bold">* {{ berryNum }}</q-badge></q-btn>
+  <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack q-px-md" :style="!showDex ? 'border: 2mm solid #b46856' : ''">
+    <q-toolbar class="bg-primary text-white text-center">
+        <q-toolbar-title>포켓몬을 검색하세요</q-toolbar-title>
+    </q-toolbar>    
+    <div class="column items-center q-gutter-y-md">
+      <!-- 포켓몬 이미지 -->
+      <q-img
+          alt="Pokemon image"
+          :src="selectPkmImage"
+          fit="scale-down"
+          style="width: 300px;"
+          no-spinner
+          @load="stopLoading()"
+          >
+      </q-img>
+      <!-- 포켓몬 이름 -->
+      <q-select :class="!showDex ? 'q-mt-none' : 'full-width q-mt-none'" filled color="secondary" v-model="pkmName" :options="pkmNameList" 
+      label="포켓몬 이름"
+      @filter="searchName" @input-value="manageModel"
+      use-input hide-selected fill-input input-debounce="0" @update:model-value="fetchApiIng"
+      :hint="nameSearchHint" hide-bottom-space />
+      <q-space />
     </div>
-    <!-- 식재료 선택 -->
-    <div class="row items-center full-width">
-      <q-chip color="secondary" text-color="white" style="width: 84px;"><span class="full-width row justify-center text-bold">식재료</span></q-chip>
-      <div class="row">
-        <div class="relative-position">
-          <!-- 레벨 0 -->
-          <q-badge v-if="ingCount[0] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[0] }}</q-badge>
-          <q-fab color="ingCircle" :icon="firstIng" direction="up">          
-            <q-fab-action v-for="(ing, index) in allIngList[0]" :key="index"
-              color="ingCircle" @click="chooseIng(1, index + 1)" :icon="ing.url" 
-            />          
-          </q-fab>   
-        </div> 
-        <!-- <q-btn fab color="ingCircle" :icon="firstIng" >
-          <q-badge v-if="ingCount[0] > 1" color="orange" floating class="text-bold">* {{ firstIngCount }}</q-badge></q-btn> -->
-        <div class="q-mx-md relative-position">
-          <q-badge v-if="ingCount[1] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[1] }}</q-badge>
-          <q-tooltip :hide-delay="tooltipMobile()">
-            레벨 30
-          </q-tooltip> 
-          <q-fab color="ingCircle" :icon="secondIng" direction="up">          
-            <q-fab-action v-for="(ing, index) in allIngList[1]" :key="index"
-              color="ingCircle" @click="chooseIng(2, index + 1)" :icon="ing.url" 
-            />          
-          </q-fab>   
+    <div v-if="showDex" class="column items-center">
+      <div class="q-gutter-y-md full-width" style="max-width: 300px;">
+        <div class="row items-center">
+          <!-- 나무열매 -->
+          <q-chip color="secondary" text-color="white" style="width: 84px;"><span class="full-width row justify-center text-bold">나무열매</span></q-chip>
+          <q-btn fab color="ingCircle" :icon="whatBerry">
+            <q-badge v-if="berryNum > 1" color="orange" floating class="text-bold">* {{ berryNum }}</q-badge></q-btn>
         </div>
-        <div class="relative-position">
-          <q-badge v-if="ingCount[2] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[2] }}</q-badge>
-          <q-tooltip :hide-delay="tooltipMobile()">
-            레벨 60
-          </q-tooltip> 
-          <q-fab color="ingCircle" :icon="thirdIng" direction="up">          
-            <q-fab-action v-for="(ing, index) in allIngList[2]" :key="index"
-              color="ingCircle" @click="chooseIng(3, index + 1)" :icon="ing.url" 
-            />          
-          </q-fab>   
-        </div>  
+        <!-- 식재료 선택 -->
+        <div class="row items-center full-width">
+          <q-chip color="secondary" text-color="white" style="width: 84px;"><span class="full-width row justify-center text-bold">식재료</span></q-chip>
+          <div class="row">
+            <div class="relative-position">
+              <!-- 레벨 0 -->
+              <q-badge v-if="ingCount[0] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[0] }}</q-badge>
+              <q-fab color="ingCircle" :icon="firstIng" direction="up">          
+                <q-fab-action v-for="(ing, index) in allIngList[0]" :key="index"
+                  color="ingCircle" @click="chooseIng(1, index + 1)" :icon="ing.url" 
+                />          
+              </q-fab>   
+            </div> 
+            <!-- <q-btn fab color="ingCircle" :icon="firstIng" >
+              <q-badge v-if="ingCount[0] > 1" color="orange" floating class="text-bold">* {{ firstIngCount }}</q-badge></q-btn> -->
+            <div class="q-mx-md relative-position">
+              <q-badge v-if="ingCount[1] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[1] }}</q-badge>
+              <q-tooltip :hide-delay="tooltipMobile()">
+                레벨 30
+              </q-tooltip> 
+              <q-fab color="ingCircle" :icon="secondIng" direction="up">          
+                <q-fab-action v-for="(ing, index) in allIngList[1]" :key="index"
+                  color="ingCircle" @click="chooseIng(2, index + 1)" :icon="ing.url" 
+                />          
+              </q-fab>   
+            </div>
+            <div class="relative-position">
+              <q-badge v-if="ingCount[2] > 1" color="orange" floating class="text-bold" style="z-index: 1000 !important;">* {{ ingCount[2] }}</q-badge>
+              <q-tooltip :hide-delay="tooltipMobile()">
+                레벨 60
+              </q-tooltip> 
+              <q-fab color="ingCircle" :icon="thirdIng" direction="up">          
+                <q-fab-action v-for="(ing, index) in allIngList[2]" :key="index"
+                  color="ingCircle" @click="chooseIng(3, index + 1)" :icon="ing.url" 
+                />          
+              </q-fab>   
+            </div>  
+          </div>
+        </div>
+        <q-input v-model="invenSize" class="full-width" readonly input-class="text-center text-bold text-subtitle1">
+          <template v-slot:before>
+            <q-chip color="primary" text-color="white"><span class="full-width row justify-center text-bold">
+              기본 소지 수</span></q-chip>
+          </template>
+        </q-input>
+        <q-input v-model="baseSpeed" readonly input-class="text-center text-bold text-subtitle1">
+          <template v-slot:before>
+            <q-chip color="primary" text-color="white"><span class="full-width row justify-center text-bold">
+              기본 도우미 속도</span></q-chip>
+          </template>
+        </q-input>
+        <q-input v-model="ingProc" readonly input-class="text-center text-bold text-subtitle1">
+          <template v-slot:before>
+            <q-chip color="primary" text-color="white"><span class="full-width row justify-center text-bold">
+              식재료 확률</span></q-chip>
+          </template>
+        </q-input>
+        <q-input v-model="skillProc" readonly class="q-pb-md" input-class="text-center text-bold text-subtitle1">
+          <template v-slot:before>
+            <q-chip color="primary" text-color="white"><span class="full-width row justify-center text-bold">
+              스킬 발동 확률</span></q-chip>
+          </template>
+        </q-input>
       </div>
     </div>
-    <q-input v-model="invenSize" class="full-width" readonly input-class="text-center text-bold text-subtitle1">
-      <template v-slot:before>
-        <q-chip color="primary" text-color="white"><span class="full-width row justify-center text-bold">
-          기본 소지 수</span></q-chip>
-      </template>
-    </q-input>
-    <q-input v-model="baseSpeed" readonly input-class="text-center text-bold text-subtitle1">
-      <template v-slot:before>
-        <q-chip color="primary" text-color="white"><span class="full-width row justify-center text-bold">
-          기본 도우미 속도</span></q-chip>
-      </template>
-    </q-input>
-    <q-input v-model="ingProc" readonly input-class="text-center text-bold text-subtitle1">
-      <template v-slot:before>
-        <q-chip color="primary" text-color="white"><span class="full-width row justify-center text-bold">
-          식재료 확률</span></q-chip>
-      </template>
-    </q-input>
-    <q-input v-model="skillProc" readonly class="q-pb-md" input-class="text-center text-bold text-subtitle1">
-      <template v-slot:before>
-        <q-chip color="primary" text-color="white"><span class="full-width row justify-center text-bold">
-          스킬 발동 확률</span></q-chip>
-      </template>
-    </q-input>
   </div>
-</div>
-</div>
+  <!-- vertical ad -->    
+  <AdsenseComponent v-if="$q.platform.is.desktop" class="gt-sm q-ml-md"   
+    style="position: sticky; top: 60px;"   
+    ad-style="display:inline-block;width:300px; height:600px; position: sticky; top: 60px;"
+    ad-slot="4218885917" 
+  />        
 </q-page>
 </template>
 
 <script setup>
 import { ref, onBeforeMount } from 'vue'
+import { useQuasar } from 'quasar'
 import { usePkmDBStore } from 'src/stores/pkmDBStore';
 import { useDownloadStore } from 'src/stores/downloadStore'
 import { loadingCalc, stopLoading } from 'src/utils/loading';
 import { tooltipMobile } from 'src/utils/tooltip'
+import AdsenseComponent from 'src/components/AdsenseComponent.vue'
 
 defineOptions({
   name: 'ChoosePkmComponent'
 })
 
+const $q = useQuasar()
 const myPkmDBStore = usePkmDBStore()
 const myDownloadStore = useDownloadStore()
 

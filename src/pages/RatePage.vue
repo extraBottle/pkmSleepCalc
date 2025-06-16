@@ -16,7 +16,11 @@
         :done="step > 1"
       >
       <!-- Google adsense -->
-      <AdsenseComponent />  
+      <AdsenseComponent v-if="$q.platform.is.mobile" class="full-width q-py-sm"
+        style="min-height: 50px;"
+        ad-style="display:block; width:100%;height:250px;"
+        ad-slot="4218885917" 
+      />  
       <ChoosePkmComponent ref="validateFirst" :name-valid="sendName" :sub-valid="sendSub" :down-valid="sendDown" :up-valid="sendUp" />
       </q-step>
 
@@ -46,11 +50,18 @@
         </q-stepper-navigation>        
       </template>      
     </q-stepper>
+    <!-- vertical ad -->    
+    <AdsenseComponent v-if="$q.platform.is.desktop" class="gt-sm q-ml-md"   
+      style="position: sticky; top: 60px;"   
+      ad-style="display:inline-block;width:300px; height:600px; position: sticky; top: 60px;"
+      ad-slot="4218885917" 
+    />        
   </q-page>
 </template>
 
 <script setup>
 import { ref, onBeforeUnmount } from 'vue'
+import { useQuasar } from 'quasar'
 import ChoosePkmComponent from 'src/components/ChoosePkmComponent.vue';
 import RateResultFirstComponent from 'src/components/RateResultFirstComponent.vue'
 import RateResultSecondComponent from 'src/components/RateResultSecondComponent.vue'
@@ -67,6 +78,7 @@ onBeforeUnmount(()=>{
     myProdCalcStore.clearCalc()
 })
 
+const $q = useQuasar()
 const myProdCalcStore = useProdCalcStore()
 const myRateCalcStore = useRateCalcStore()
 // 이거 플래그가 켜지면 계산 시작

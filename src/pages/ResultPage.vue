@@ -15,7 +15,11 @@
                 icon="assignment"
             >
             <!-- Google adsense -->
-            <AdsenseComponent />  
+            <AdsenseComponent v-if="$q.platform.is.mobile" class="full-width q-py-sm"
+                style="min-height: 50px;"
+                ad-style="display:block; width:100%;height:250px;"
+                ad-slot="4218885917" 
+            />  
             <ResultProdComponent :start-load="handleStartLoad" />
             </q-step>
             <q-step
@@ -42,6 +46,12 @@
                 </q-stepper-navigation>                            
             </template> 
         </q-stepper>
+        <!-- vertical ad -->    
+        <AdsenseComponent v-if="$q.platform.is.desktop" class="gt-sm q-ml-md"   
+        style="position: sticky; top: 60px;"   
+        ad-style="display:inline-block;width:300px; height:600px; position: sticky; top: 60px;"
+        ad-slot="4218885917" 
+        />        
     </q-page>
 </template>
   

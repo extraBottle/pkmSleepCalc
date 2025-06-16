@@ -1,10 +1,9 @@
 <template>
-  <!-- responsive ads -->
-  <div v-if="!$q.platform.is.desktop" class="full-width q-py-sm" style="min-height: 50px;">    
-    <ins class="adsbygoogle"
-      style="display:block; width:100%;height:250px;"
+    <div>  
+    <ins class="adsbygoogle"      
+      :style="props.adStyle"
       data-ad-client="ca-pub-5269959789341273"
-      data-ad-slot="4218885917" 
+      :data-ad-slot="props.adSlot"
     ></ins>
   </div>
 </template>
@@ -14,13 +13,14 @@ import { onMounted} from 'vue'
 import { useQuasar } from 'quasar'
 
 const $q = useQuasar()
-// const props = defineProps({
-//   platform: { type: String, required: true }
-// });
+const props = defineProps({
+  adStyle: { type: String },
+  adSlot: { type: String, required: true }
+});
 
 function loadAds() {  
   // 중복 호출 방지
-  if(!$q.platform.is.desktop){
+  if($q.platform.is.mobile){
     document.querySelectorAll('ins.adsbygoogle').forEach(ins => {
       if (ins.getAttribute('data-adsbygoogle-status') !== 'done') {
         if (window.adsbygoogle) {

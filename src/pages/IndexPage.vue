@@ -1,7 +1,6 @@
 <template>
   <q-page class="row justify-center bg-googleDark">
-    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack column" style="max-height: 100vh;">
-      <div class="col"></div>
+    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack column" style="max-height: 100vh;">      
       <div class="col-auto q-pt-md full-width">
         <div class="row justify-center">
           <q-btn class="invisible" icon="help" round flat dense />
@@ -68,7 +67,13 @@
           style="max-height: 50vh;"
           fit="scale-down"
           :src="doorImage"></q-img> 
-    </div>
+    </div>    
+    <!-- vertical ad -->    
+    <AdsenseComponent v-if="$q.platform.is.desktop" class="gt-sm q-ml-md"   
+      style="position: sticky; top: 60px;"   
+      ad-style="display:inline-block;width:300px; height:600px; position: sticky; top: 60px;"
+      ad-slot="4218885917" 
+    />         
   </q-page>
 </template>
 
@@ -76,11 +81,14 @@
 import { useRouter } from 'vue-router'
 import { ref } from 'vue';
 import routes from 'src/router/routes'
+import { useQuasar } from 'quasar'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
+import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 import 'src/css/carousel.css'
 defineOptions({
   name: 'IndexPage'
 });
+const $q = useQuasar()
 const sliceRoute = routes.slice(1, routes.length - 1)
 const router = useRouter()
 const myCarousel = ref(null)

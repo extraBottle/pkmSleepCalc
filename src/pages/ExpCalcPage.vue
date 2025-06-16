@@ -2,8 +2,12 @@
 <q-page class="row justify-center bg-googleDark">
 <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 bg-googleBack">
 <div class="column items-center q-px-md q-gutter-y-md">
-            <!-- Google adsense -->
-    <AdsenseComponent /> 
+    <!-- Google adsense -->
+    <AdsenseComponent v-if="$q.platform.is.mobile" class="full-width q-py-sm"
+        style="min-height: 50px;"
+        ad-style="display:block; width:100%;height:250px;"
+        ad-slot="4218885917" 
+      />
     <q-toolbar class="bg-primary text-white text-center">
         <q-toolbar-title>현재 레벨 {{ maxLevel }}까지만 계산 가능!</q-toolbar-title>
     </q-toolbar>
@@ -101,13 +105,20 @@
     </q-dialog>      
 </div>
 </div>
+<!-- vertical ad -->
+    <AdsenseComponent v-if="$q.platform.is.desktop" class="gt-sm q-ml-md"         
+      ad-style="display:inline-block;width:300px; height:600px; position: sticky; top: 60px;"
+      ad-slot="4218885917" 
+    />      
 </q-page>
 </template>
 
 <script setup>
+import { useQuasar } from 'quasar'
 import { ref, computed } from 'vue';
 import AdsenseComponent from 'src/components/AdsenseComponent.vue';
 
+const $q = useQuasar()
 //레벨 당 경험치량
 const expPerLevel= [54, 71, 108, 128, 164, 202, 244, 274,
 315, 345,  376, 407, 419, 429, 440, 454, 469, 483, 497, 515,
