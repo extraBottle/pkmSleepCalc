@@ -139,7 +139,9 @@ const pkmSpeciesObj = {
     "준전설(1.8배)": 1.8,
     "전설/환상(2.2배)": 2.2
 };
-let candy= 25
+let candy = 25;
+let candy25 = 35;
+let candy30 = 30;
 
 // input
 const calcVer = ref('light')
@@ -201,35 +203,69 @@ function calcExp(){
             leftExp.value = expPerLevel[startLev.value - 1]
         }
         candy = 25
+        candy25 = 35
+        candy30 = 30
         if(nature.value === "EXP 획득량 ▲▲"){
             candy *= 1.2
+            candy25 = candy25 * 1.2 - 1
+            candy30 = candy30 * 1.2 - 1
         }
         else if(nature.value === "EXP 획득량 ▽▽"){
-            candy = 21
+            candy = candy * 0.8 + 1
+            candy25 = candy25 * 0.8 + 1
+            candy30 = candy30 * 0.8 + 1
         }
-        if(boost.value){ candy *= boostRate[whatBoost.value][0] }
+        if(boost.value){ 
+          candy *= boostRate[whatBoost.value][0] 
+          candy25 *= boostRate[whatBoost.value][0]
+          candy30 *= boostRate[whatBoost.value][0]
+        }
+        let finalCandy;
+        if(startLev.value < 25){
+          finalCandy = candy25
+        }
+        else if(startLev.value < 30){
+          finalCandy = candy30
+        }
+        else{
+          finalCandy = candy
+        }
         //현재 레벨에서 목표레벨까지 필요한 경험치량
         let totalExpRequired= leftExp.value;
         //사탕으로 렙업할 때 렙업하고도 초과하는 경험치량
-        let leftoverCandyExp= candy - leftExp.value % candy;
-        if(leftExp.value % candy === 0){
+        let leftoverCandyExp= finalCandy - leftExp.value % finalCandy;
+        if(leftExp.value % finalCandy === 0){
             leftoverCandyExp= 0;
         };
-        //현재 레벨에서 목표레벨까지 필요한 꿈의 조각 개수
-        let totalShardsRequired= Math.ceil(leftExp.value / candy) * shardPerLevel[startLev.value - 1];        
+        //현재 레벨에서 목표레벨까지 필요한 사탕 & 꿈의 조각 개수
+        let totalCandyRequired = Math.ceil(leftExp.value / finalCandy);
+        let totalShardsRequired= Math.ceil(leftExp.value / finalCandy) * shardPerLevel[startLev.value - 1];          
 
         for(let z= 0; z < (endLev.value - startLev.value - 1); z++){
+            if(z + startLev.value < 24){
+              finalCandy = candy25
+            }
+            else if(z + startLev.value < 29){
+              finalCandy = candy30
+            }
+            else{
+              finalCandy = candy
+            }
             let addExp = Math.round(expPerLevel[z + startLev.value] * pkmSpeciesObj[species.value]);
             totalExpRequired += addExp;
-            totalShardsRequired += Math.ceil((addExp - leftoverCandyExp) / candy) * shardPerLevel[z + startLev.value];
-            if((addExp - leftoverCandyExp) % candy === 0){
+            totalCandyRequired += Math.ceil((addExp - leftoverCandyExp) / finalCandy);
+            if(z + startLev.value === 19){
+                console.log("exp", addExp);
+                console.log("final", finalCandy);
+                console.log("leftover", leftoverCandyExp)
+            }
+            totalShardsRequired += Math.ceil((addExp - leftoverCandyExp) / finalCandy) * shardPerLevel[z + startLev.value];
+            if((addExp - leftoverCandyExp) % finalCandy === 0){
                 leftoverCandyExp= 0;
             }else{
-                leftoverCandyExp= candy - (addExp - leftoverCandyExp) % candy;
+                leftoverCandyExp= finalCandy - (addExp - leftoverCandyExp) % finalCandy;
             };
-        };
-        //현재 레벨에서 목표레벨까지 필요한 사탕 개수
-        let totalCandyRequired= Math.ceil(totalExpRequired / candy);        
+        };                      
         if(boost.value){
             totalShardsRequired *= boostRate[whatBoost.value][1]
         };
