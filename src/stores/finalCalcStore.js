@@ -123,7 +123,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             enerPerSkill = enerPerSkill / 5
         }
         // 타겟 포켓몬 자체 스킬 당 자체 회복량
-        let selfPerSkill = allData.main_skills.amount[selfSkillLevel - 1]
+        let selfPerSkill = allData.main_skills.amount ? allData.main_skills.amount[selfSkillLevel - 1] : 0
         // 자힐몬인지 여부
         let hasSelfHeal = false
         // 순수 자힐 아닌 확률적 자힐은 그만큼 감점
