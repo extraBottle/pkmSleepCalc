@@ -35,6 +35,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
     const simulationCount = 10000
     // 자체 스킬 사용 횟수
     const selfSkillCount = ref(0)
+    // selfSkillCount랑 동일하지만, 위는 계산하면서 1회씩 차감하기 때문에 이것은 변하지 않는 값
     const fixedSelfSkillCount = ref(0)
     // 수면 중 소지수 꽉차기전 도우미 횟수
     const helpCountSleep = ref(0)
@@ -60,10 +61,11 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         }
         return (baseProc * ingNature * ingSub / 100)
     }
-    // 스킬 확률 계산 return
+    // 스킬 확률 계산 return (천장 포함 기댓값)
     function calcSkillProc(allData={}, upNature, downNature, upMult, downMult, mySub = []){
         
         const baseProc = allData.skill_percentage
+        const pityCount = allData.pity_count
          // 보정 성격 확인
          const skillNature = (upNature === '메인 스킬 발동률 ▲▲' ? upMult : (downNature === '메인 스킬 발동률 ▽▽' ? downMult : 1.0))
          // 스킬 관련 서브 스킬 갖고 있는지
@@ -73,7 +75,14 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 skillSub += mySub[i].mult
             }
         }
-        return (baseProc * skillNature * skillSub / 100)
+        const proc = baseProc * skillNature * skillSub / 100
+        let E = 0
+        for (let k = 1; k < pityCount; k++) {
+            E += k * Math.pow(1 - proc, k - 1) * proc
+        }
+        E += pityCount * Math.pow(1 - proc, pityCount - 1)
+
+        return 1 / E
     }
 
     // 기본 스피드 계산 return
@@ -596,7 +605,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
             addAllTime += timeStaying.value[key] / parseFloat(key)
         }        
         // ingHelpCount.value = (finalSpeedCount.value + helpCountSleep.value) * finalIngProc.value
-        finalSpeedCount.value = Math.floor(addAllTime / onlyBaseSpeed.value)   
+        finalSpeedCount.value = Math.floor(addAllTime / onlyBaseSpeed.value)           
         // 수면 중 축적 스킬 횟수 제한     
         const sleepLimitCount = helpCountSleep.value * finalSkillProc.value > sleepLimit ? sleepLimit : helpCountSleep.value * finalSkillProc.value
         selfSkillCount.value = finalSpeedCount.value * finalSkillProc.value + sleepLimitCount

@@ -38,7 +38,11 @@
         icon="emoji_events"
       >
       <!-- Google adsense -->
-      <AdsenseComponent />  
+      <AdsenseComponent v-if="$q.platform.is.mobile" class="full-width q-py-sm"
+        style="min-height: 50px;"
+        ad-style="display:block; width:100%;height:250px;"
+        ad-slot="4218885917" 
+      />  
       <RateResultSecondComponent/>
       </q-step>
       <template v-slot:navigation>
