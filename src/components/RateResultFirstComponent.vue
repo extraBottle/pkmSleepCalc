@@ -221,7 +221,7 @@ onBeforeMount(async()=>{
           ...myPkmDBStore.subSkillList.slice()
         ]
         mySub.forEach((e)=>{
-          if(e.label.includes("스킬 레벨 업")){
+          if(e.label.includes("스킬 레벨 업") && allData.specialty !== "skill" && allData.specialty !== "all"){
             // 비스킬몬에게 스렙업 서브 가산점을 주기 위해서, 비교군은 스렙업 없는 만큼 스킬렙 감소한 상태로 시작
             mainSkillLevel -= e.mult
           }
