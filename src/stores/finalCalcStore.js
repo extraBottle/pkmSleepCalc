@@ -718,8 +718,17 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                 })()
             }
             // ingredient draw
-            else if(allData.main_skills.name.includes('Draw')){                
-                const totalIngFromSkill = fixedSelfSkillCount.value * allData.main_skills.avg_amount[mainSkillLevel - 1] / allData.main_skills.selection.length;
+            else if(allData.main_skills.name.includes('Draw')){
+                let expectedIng;
+                // 크리확률 있으면 기댓값을 가져와서 계산
+                switch(allData.main_skills.crit_chance){
+                    case 0:
+                        expectedIng = allData.main_skills.amount[mainSkillLevel - 1];
+                        break;
+                    default:
+                        expectedIng = allData.main_skills.avg_amount[mainSkillLevel - 1];
+                }               
+                const totalIngFromSkill = fixedSelfSkillCount.value * expectedIng / allData.main_skills.selection.length;
                 allData.main_skills.selection.forEach((i)=> {
                     if(totalIngCalc.value.hasOwnProperty(i)){
                         totalIngCalc.value[i] += totalIngFromSkill
