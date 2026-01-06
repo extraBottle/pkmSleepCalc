@@ -19,15 +19,22 @@ const props = defineProps({
 });
 
 function loadAds() {  
-  // 중복 호출 방지
-  document.querySelectorAll('ins.adsbygoogle').forEach(ins => {
-    if (ins.getAttribute('data-adsbygoogle-status') !== 'done') {
-      if (window.adsbygoogle) {
-        window.adsbygoogle.push({});
-      }
-    }
-  });
+  // Only push if the specific 'ins' inside THIS component isn't done
+  const ins = adContainer.value.querySelector('ins.adsbygoogle');
+  if (ins && ins.getAttribute('data-adsbygoogle-status') !== 'done') {
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  }
 }
+// function loadAds() {  
+//   // 중복 호출 방지
+//   document.querySelectorAll('ins.adsbygoogle').forEach(ins => {
+//     if (ins.getAttribute('data-adsbygoogle-status') !== 'done') {
+//       if (window.adsbygoogle) {
+//         window.adsbygoogle.push({});
+//       }
+//     }
+//   });
+// }
 
 onMounted(()=>{
   // Load Google AdSense script if not already present
