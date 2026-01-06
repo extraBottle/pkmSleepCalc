@@ -10,12 +10,11 @@
 
 <script setup>
 import { onMounted} from 'vue'
-import { useQuasar } from 'quasar'
 
-const $q = useQuasar()
 const props = defineProps({
   adStyle: { type: String },
-  adSlot: { type: String, required: true }
+  adSlot: { type: String, required: true },
+  delay: { type: Number, default: 0 }
 });
 
 function loadAds() {  
@@ -35,7 +34,7 @@ function loadAds() {
 }
 
 onMounted(()=>{
-  // wait 500ms to finish transition
+  // 화면 전환 끝난 이후에 애드센스 출력
   setTimeout(() => {
     // 애드센스 실행
     if (!window.adsbygoogle) {    
@@ -48,7 +47,7 @@ onMounted(()=>{
     } else {
       loadAds();
     }
-  }, 500);
+  }, props.delay);
 })
 
 </script>

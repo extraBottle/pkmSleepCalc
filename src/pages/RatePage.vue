@@ -42,6 +42,7 @@
         style="min-height: 50px;"
         ad-style="display:block; width:100%;height:250px;"
         ad-slot="4218885917" 
+        :delay="400"
       />  
       <RateResultSecondComponent/>
       </q-step>
