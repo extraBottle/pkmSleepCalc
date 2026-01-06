@@ -19,28 +19,36 @@ const props = defineProps({
 });
 
 function loadAds() {  
-  // 중복 호출 방지
-  document.querySelectorAll('ins.adsbygoogle').forEach(ins => {
-    if (ins.getAttribute('data-adsbygoogle-status') !== 'done') {
-      if (window.adsbygoogle) {
-        window.adsbygoogle.push({});
+  try {
+    // 중복 호출 방지 & 화면 구성이 끝나야 출력
+    const ads = document.querySelectorAll('ins.adsbygoogle');
+    ads.forEach(ins => {
+      if (ins.getAttribute('data-adsbygoogle-status') !== 'done' && ins.offsetWidth > 100) {
+        if (window.adsbygoogle) {
+          window.adsbygoogle.push({});
+        }
       }
-    }
-  });
+    });
+  } catch (e) {
+    console.warn("AdSense push failed, ignoring to prevent layout freeze:", e);
+  }
 }
 
 onMounted(()=>{
-  // Load Google AdSense script if not already present
-  if (!window.adsbygoogle) {    
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-    script.setAttribute('crossorigin', 'anonymous');
-    document.head.appendChild(script);
-    script.onload = loadAds;
-  } else {
-    loadAds();
-  }
+  // wait 500ms to finish transition
+  setTimeout(() => {
+    // 애드센스 실행
+    if (!window.adsbygoogle) {    
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+      script.setAttribute('crossorigin', 'anonymous');
+      document.head.appendChild(script);
+      script.onload = loadAds;
+    } else {
+      loadAds();
+    }
+  }, 500);
 })
 
 </script>

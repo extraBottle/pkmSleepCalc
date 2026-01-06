@@ -39,7 +39,7 @@
       >
       <!-- Google adsense -->
       <AdsenseComponent v-if="$q.platform.is.mobile" class="full-width q-py-sm"
-        style="min-height: 250px; min-width: 250px;"
+        style="min-height: 50px;"
         ad-style="display:block; width:100%;height:250px;"
         ad-slot="4218885917" 
       />  

@@ -26,7 +26,7 @@
 
       <q-step
         :name="2"
-        title="Create an ad"
+        title="힐러 선택"
         icon="favorite"
         :done="step > 2"
       >
