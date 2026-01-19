@@ -24,7 +24,7 @@
         <q-radio v-model="calcVer" val="noHealer" color="secondary" />
       </q-item-section>
       <q-item-section>
-        <q-item-label>힐러 없음</q-item-label>
+        <q-item-label>추가 힐러 없음</q-item-label>
       </q-item-section>
     </q-item>
   </q-list>

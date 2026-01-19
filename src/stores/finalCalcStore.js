@@ -138,17 +138,16 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         // 순수 자힐 아닌 확률적 자힐은 그만큼 감점
         let strangeHeal = 1
         if(allData.main_skills.name.includes('Charge Energy')){
-            hasSelfHeal = true
-            strangeHeal = 1
+            hasSelfHeal = true            
         }
         else if(allData.main_skills.name.includes('Energizing Cheer')){
             hasSelfHeal = true
             strangeHeal = 5
+            selfPerSkill = selfPerSkill / strangeHeal;
         }
         else if(allData.main_skills.name.includes("Energy For Everyone")){
             hasSelfHeal = true
-            strangeHeal = 1
-        }
+        }        
         let splitSleep = sleepTime.split(':')
         const sleepH = parseInt(splitSleep[0], 10)
         const sleepM = parseInt(splitSleep[1], 10)
@@ -462,7 +461,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                         }
 
                         // 근데 30분보다 짧은 도우미속도면 30분 안에 도우미 여러번 발동 가능!                                    
-                        const selfProc = (1 - Math.pow((1 - finalSkillProc.value / strangeHeal), helpActiveCountS))
+                        const selfProc = (1 - Math.pow((1 - finalSkillProc.value), helpActiveCountS))
                         if(helpActiveCountS > 0){
                             // 1 도우미 발동
                             if(Math.random() < selfProc){                                
@@ -511,7 +510,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
                             const totalCountHelpS = calcSleepSpeedCount('me', ribbonInv, sleepTime, trySkillE,
                                 speedEnerMultList, allData, mySub, pkmLevel, firstIng, secondIng, thirdIng, enerPerHour, useGoodCamp)
                             // 기상 직후 스킬 발동률 업데이트
-                            morningProcS = 1 - Math.pow((1 - finalSkillProc.value / strangeHeal), totalCountHelpS)
+                            morningProcS = 1 - Math.pow((1 - finalSkillProc.value), totalCountHelpS)
                             // 힐러 2번 스킬 발동 확률 (힐러가 스킬형일 경우에 한)
                             if(allData.specialty == "skill"){
                                 morningProcS = totalCountHelpS * finalSkillProc.value * Math.pow(1 - finalSkillProc.value, totalCountHelpS - 1)
