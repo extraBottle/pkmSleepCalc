@@ -18,44 +18,44 @@
 
 ### 1. 포켓몬 개체값 평가
 나무열매, 식재료 생산량 및 스킬 발동 횟수 등 다양한 분야의 점수를 평가하고, 사용 가능한 능력치인지 판단합니다.
-
+<br><br>
 
 1. 평가하고 싶은 포켓몬의 능력치를 입력합니다.
-![input](./public/images/1input.png)
-
+><img src="./public/images/1input.png" height="350" />
+<br><br>
 
 2. 동일 종 내에서 가능한 모든 경우의 수와 비교하여 개체값을 백분위로 계산합니다.
-![Overview of score](./public/images/1score.png)
-
+><img src="./public/images/1score.png" height="350" />
+<br><br>
 
 3. 나무열매, 식재료, 스킬 분야에서 1등 스펙과 비교합니다. 갈색 느낌표를 클릭하면 1등의 세부 능력치를 확인할 수 있습니다.
-![Compare score](./public/images/1compare.png)
-
+><img src="./public/images/1compare.png" height="350" />
+<br><br>
 
 4. 해당 포켓몬의 특기에 기반하여 종합 점수를 판단합니다.
-![Final grade](./public/images/1grade.png)
-
-
-
+><img src="./public/images/1grade.png" height="350" />
+<br><br>
 
 ### 2. 포켓몬 식재료 생산량 계산
-포켓몬의 하루/한끼 식재료 생산량을 계산합니다. 데이터 기반 하루의 요리 계획을 세워보세요.
-![ingredient](./public/images/2ing.png)
-
-
-
+- 포켓몬의 하루/한끼 식재료 생산량을 계산합니다. 데이터 기반 하루의 요리 계획을 세워보세요.
+><img src="./public/images/2ing.png" height="350" />
+<br><br>
 
 ### 3. 레벨업에 필요한 재화량 계산
-포켓몬의 레벨업에 필요한 꿈의 조각/사탕 개수를 계산합니다. 포슬립 통합 계산기는 여기서 시작했습니다.
-![exp](./public/images/3candy.png)
-
-
-
+포켓몬의 레벨업에 필요한 꿈의 조각/사탕 개수를 계산합니다. 
+<br>
+포슬립 통합 계산기는 여기서 시작했습니다.
+<br>
+><img src="./public/images/3candy.png" height="350" />
+<br><br>
 
 ### 4. 이브이 최적의 진화 찾기
-이브이의 다양한 진화루트 중 최적의 루트를 추천해줍니다. 레벨업 계산기 다음으로 만들어진 계산기입니다. 이 계산기가 인기를 얻으며 본격적인 개발을 시작했습니다. 
-![eevee](./public/images/4eevee.png)
-
+이브이의 다양한 진화루트 중 최적의 루트를 추천해줍니다. 
+<br>
+레벨업 계산기 다음으로 만들어진 계산기입니다. 이 계산기가 인기를 얻으며 본격적인 개발을 시작했습니다. 
+<br>
+><img src="./public/images/4eevee.png" height="350" />
+<br><br>
 
 ### 접속 방법
 1. 해당 URL 접속 <https://extrabottle.github.io/pkmSleepCalc>
