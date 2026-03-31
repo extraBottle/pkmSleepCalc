@@ -36,11 +36,13 @@
 4. 해당 포켓몬의 특기에 기반하여 종합 점수를 판단합니다.
 ><img src="./public/images/1grade.png" height="350" />
 <br><br>
+---
 
 ### 2. 포켓몬 식재료 생산량 계산
 - 포켓몬의 하루/한끼 식재료 생산량을 계산합니다. 데이터 기반 하루의 요리 계획을 세워보세요.
 ><img src="./public/images/2ing.png" height="350" />
 <br><br>
+---
 
 ### 3. 레벨업에 필요한 재화량 계산
 포켓몬의 레벨업에 필요한 꿈의 조각/사탕 개수를 계산합니다. 
@@ -49,6 +51,7 @@
 <br>
 ><img src="./public/images/3candy.png" height="350" />
 <br><br>
+---
 
 ### 4. 이브이 최적의 진화 찾기
 이브이의 다양한 진화루트 중 최적의 루트를 추천해줍니다. 
@@ -57,12 +60,14 @@
 <br>
 ><img src="./public/images/4eevee.png" height="350" />
 <br><br>
+---
 
 ### 5. 포켓몬 도감 데이터 열람
 게임 내에서 확인하기 힘든 수치 데이터를 열람할 수 있습니다.
 <br>
 ><img src="./public/images/5dex.png" height="350" />
 <br><br>
+---
 
 ### 접속 방법
 1. 해당 URL 접속 <https://extrabottle.github.io/pkmSleepCalc>
