@@ -129,7 +129,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         // 힐러 스킬 당 타겟 포켓몬 회복량
         let enerPerSkill = allDataH.main_skills.amount[mainSkillLevel - 1]
         if(allDataH.main_skills.name.includes('Energizing Cheer')){
-            enerPerSkill = enerPerSkill / 5
+            enerPerSkill = enerPerSkill * allDataH.main_skills.avg_amount[0]
         }
         // 타겟 포켓몬 자체 스킬 당 자체 회복량
         let selfPerSkill = allData.main_skills.amount ? allData.main_skills.amount[selfSkillLevel - 1] : 0
@@ -142,8 +142,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         }
         else if(allData.main_skills.name.includes('Energizing Cheer')){
             hasSelfHeal = true
-            strangeHeal = 5
-            selfPerSkill = selfPerSkill / strangeHeal;
+            selfPerSkill = selfPerSkill * allDataH.main_skills.avg_amount[0];
         }
         else if(allData.main_skills.name.includes("Energy For Everyone")){
             hasSelfHeal = true
