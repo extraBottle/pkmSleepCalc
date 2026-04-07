@@ -142,7 +142,7 @@ export const useProdCalcStore = defineStore('production-calc', ()=> {
         }
         else if(allData.main_skills.name.includes('Energizing Cheer')){
             hasSelfHeal = true
-            selfPerSkill = selfPerSkill * allDataH.main_skills.avg_amount[0];
+            selfPerSkill = selfPerSkill * allData.main_skills.avg_amount[0];
         }
         else if(allData.main_skills.name.includes("Energy For Everyone")){
             hasSelfHeal = true
