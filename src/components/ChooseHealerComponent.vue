@@ -358,9 +358,9 @@ const watchLevel = computed(()=>{
       return 1
     case pkmLevel.value < 50:
       return 2
-    case pkmLevel.value < 75:
+    case pkmLevel.value < 70:
       return 3
-    case pkmLevel.value < 100:
+    case pkmLevel.value < 80:
       return 4
     default:
       return 5

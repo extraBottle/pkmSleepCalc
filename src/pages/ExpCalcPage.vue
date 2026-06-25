@@ -140,8 +140,8 @@ const pkmSpeciesObj = {
     "전설/환상(2.2배)": 2.2
 };
 let candy = 25;
-let candy25 = 35;
-let candy30 = 30;
+let candy25 = 40;
+let candy30 = 35;
 
 // input
 const calcVer = ref('light')
@@ -203,8 +203,8 @@ function calcExp(){
             leftExp.value = expPerLevel[startLev.value - 1]
         }
         candy = 25
-        candy25 = 35
-        candy30 = 30
+        candy25 = 40
+        candy30 = 35
         if(nature.value === "EXP 획득량 ▲▲"){
             candy *= 1.2
             candy25 = candy25 * 1.2 - 1
